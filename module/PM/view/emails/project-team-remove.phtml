@@ -1,8 +1,0 @@
-Hello <?php echo $user_data['first_name']; ?><br />
-<br />
-You have been removed from the project team for: <?php echo $project_data['name']; ?><br /><br />
-
-<?php
-$options = array('project_data' => $project_data, 'user_data' => $user_data, 'project_id' => $project_id);
-echo $this->partial('partials/project-details', $options);
-echo $this->partial('partials/footer');

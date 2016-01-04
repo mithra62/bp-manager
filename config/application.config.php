@@ -13,8 +13,6 @@ return array(
     'modules' => array(
         'Base',
         'Application',
-        //'PM',
-        //'Api',
         'ZF\ApiProblem',
     	//'HostManager', //keep this as last at all times if being hosted
     	'BjyProfiler',

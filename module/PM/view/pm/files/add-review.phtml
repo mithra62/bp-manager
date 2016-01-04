@@ -1,7 +1,0 @@
-<div class="content_headers" style="padding-top:0px;">
-	<div class="file_peer_reviews_header">Add File Review: <?php echo $this->Truncate($this->file['name'], 30); ?></div>		
-</div>
-<?php 
-$options = array('form' => $this->form, 'file_revisions' => $this->file_revisions);
-echo $this->partial('files/partials/form-review.phtml', $options); 
-?>

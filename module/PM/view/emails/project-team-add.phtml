@@ -1,8 +1,0 @@
-Hello <?php echo $user_data['first_name']; ?><br />
-<br />
-You have been added to the project team for: <a href="<?php echo $this->ServerUrl($this->url('projects/view', array('project_id' => $project_data['id']))); ?>"><?php echo $project_data['name']; ?></a><br /><br />
-
-<?php
-$options = array('project_data' => $project_data, 'user_data' => $user_data, 'project_id' => $project_id);
-echo $this->partial('partials/project-details', $options);
-echo $this->partial('partials/footer');
