@@ -1,0 +1,70 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="docs_header">About 
+	<?php 
+	if($this->project_filter || $this->project_filter !== FALSE): ?>
+	<?php echo $this->ProjectStatus($this->project_filter); ?>
+	<?php endif; ?>	
+	Projects</div>
+</div>
+<p>
+<?php if($this->project_filter || $this->project_filter !== FALSE): 
+
+switch($this->project_filter)
+{
+	case '0':
+		echo "This page shows projects with a status type of \"Not Defined\". This status type could be used for brainstorm sessions or idea starters.";
+	break;
+	
+	case '1':
+		echo "This page shows all projects with a status type of \"Proposed\". This status type could be used for any potential work that has not been fully scoped out."; 
+	break;
+	
+	case '2':
+		echo "This page shows all projects with a status type of \"In Planning\". This status type could be used for any potential work that currently is being scoped for future work.";
+	break;
+	
+	case '3':
+		echo "This page shows all projects with a status type of \"In Progress\". This status type should be used for any projects currently being worked on.";
+	break;
+	
+	case '4':
+		echo "This page shows all projects with a status type of \"On Hold\". This status type should be used for any project where work has been put on hold for any reason.";
+	break;
+	
+	case '5':
+		echo "This page shows all projects with a status type of \"Complete\". Projects that appear here have been closed and all tasks associated with the project are completed.";
+	break;
+	
+	case '6':
+		echo "This page shows all projects with a status type of \"Archived\". Projects that appear here have been closed for over 30 days and can be referred to as needed";
+	break;	
+}
+else: ?>
+	<?php if($this->CheckPermission('manage_projects')):?>
+	This page lists all the projects in the system. 
+	<?php else: ?>
+	This page lists all the projects you're assigned to. 
+	<?php endif; ?>
+	
+<?php endif; ?>
+</p>
+
+<h4>Filtering</h4>
+<p>
+You can filter the columns by status type by using the submenu.
+</p>
+<h4>Actions</h4>
+<p>
+You can select the following actions on this page:<br /><br />
+</p>
+<p>
+	<?php if($this->CheckPermission('manage_projects')):?>
+		<?php echo $this->InteractIcon('add', 'Add Project');?> Add new projects
+		<br /><?php echo $this->InteractIcon('pencil', 'Edit');?> Edit projects
+		<br /><?php echo $this->InteractIcon('cross', 'Delete');?> Remove projects<br />
+	<?php endif; ?>
+	<?php echo $this->InteractIcon('user', 'Project Team');?> View Project Team<br />
+	<?php echo $this->InteractIcon('chart', 'View Gantt Charts');?> View Gantt Charts
+	<br /><?php echo $this->InteractIcon('folder', 'Project Files');?> View Project Files
+	
+</p>

@@ -1,0 +1,18 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="file_header">Add File</div>		
+</div>
+<?php 
+$options = array('company' => $this->company_data, 'project' => $this->project_data, 'task' => $this->task_data);
+echo $this->BackToLink($options); 
+
+$options = array(
+	'form' => $this->form, 
+	'company_data' => $this->company_data, 
+	'project_data' => $this->project_data, 
+	'task_data' => $this->task_data, 
+	'file_field' => TRUE,
+	'form_action' => $form_action,
+	'file_errors' => $file_errors
+);
+echo $this->partial('pm/files/partials/form.phtml', $options); 
+?>

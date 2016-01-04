@@ -1,0 +1,46 @@
+<div class="content_headers" style="padding-top:0px;">
+
+	<div class="project_header">
+	<?php 
+	if($this->project_filter || $this->project_filter !== FALSE): ?>
+	<?php echo $this->ProjectStatus($this->project_filter); ?>
+	<?php endif; ?>	
+	Projects
+	<?php if($this->company_id):?>
+	For <?php echo $this->company_data['name']; ?>
+	<?php endif; ?>
+	</div>
+		<?php if($this->CheckPermission('manage_projects')):?>
+		<div class="actions">
+			<a href="<?php echo $this->url('projects/add', array('company_id' => $this->company_data['id'])); ?>" title="Add Project">
+				<?php echo $this->InteractIcon('add', 'Add Project');?>
+				<div class="action_text">Add Project</div>
+			</a>
+		</div>
+		<?php endif; ?>
+</div>
+
+<?php 
+if($this->projects):
+	
+	if($this->company_id):
+		$options = array('company' => $this->company_data);
+		echo $this->BackToLink($options); 	
+	endif;
+	$options = array('projects' => $this->projects, 'enable_actions' => 'yes', 'facebox' => 'yes');
+	echo $this->partial('pm/projects/partials/projects', $options); 
+
+else: 
+?>
+
+<div class="information png_bg">There aren't any 
+	<?php 
+	if($this->project_filter || $this->project_filter !== FALSE): ?>
+	<?php echo $this->ProjectStatus($this->project_filter); ?>
+	<?php endif; ?>	
+	
+projects setup yet. <?php if($this->CheckPermission('manage_projects')): ?>Want to <a href="<?php echo $this->url('projects/add'); ?>">add</a> one?.<?php endif; ?></div>
+
+<?php 
+endif; ?>
+

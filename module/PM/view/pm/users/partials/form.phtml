@@ -1,0 +1,153 @@
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'user_form');
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+<input type="hidden" name="start_date_default" id="start_date_default" value="<?php echo date('Y-m-d'); ?>" />
+<input type="hidden" name="end_date_default" id="end_date_default" value="<?php echo date('Y-m-d'); ?>" />
+<?php 
+if($this->id > 0)
+	echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+?>
+<div id="form_tabs">
+	<ul>
+
+		<li><a href="#general">General</a></li>
+		<li><a href="#phone">Phone</a></li>
+		<?php if($this->CheckPermission('manage_users')):?>
+		<li><a href="#roles">Roles</a></li>
+		<?php endif; ?>
+	</ul>
+	<div id="general">
+		
+		<p>
+			<label for="first_name">First Name</label>
+			<?php $field = $form->get('first_name'); echo $this->formRow($field); ?>
+		</p>				
+		
+		<p>
+			<label for="last_name">Last Name</label>
+			<?php $field = $form->get('last_name'); echo $this->formRow($field); ?>
+		</p>			
+		
+		<p>
+			<label for="email">Email</label>
+			<?php $field = $form->get('email'); echo $this->formRow($field); ?>
+		</p>
+		
+		<?php if($this->addPassword): ?>
+		<p>
+			<label for="password">Password</label>
+			<?php $field = $form->get('password'); echo $this->formRow($field); ?>
+		</p>
+		
+		<p>
+			<label for="confirm_password">Confirm Password</label>
+			<?php $field = $form->get('confirm_password'); echo $this->formRow($field); ?>
+		</p>
+		<?php endif; ?>	
+		
+		<p>
+			<label for="job_title">Title</label>
+			<?php $field = $form->get('job_title'); echo $this->formRow($field); ?>
+		</p>
+		
+		<p>
+			<label for="description">Description</label>
+			<?php $field = $form->get('description'); echo $this->formRow($field); ?>
+		</p>		
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>				
+	</div>
+	<div id="phone">
+		<p>
+			<label for="phone_home">Home</label>
+			<?php $field = $form->get('phone_home'); echo $this->formRow($field); ?>
+		</p>
+			
+		<p>
+			<label for="phone_work">Work</label>
+			<?php $field = $form->get('phone_work'); echo $this->formRow($field); ?>
+		</p>
+		
+		<p>
+			<label for="phone_mobile">Mobile</label>
+			<?php $field = $form->get('phone_mobile'); echo $this->formRow($field); ?>
+		</p>
+		
+		<p>
+			<label for="phone_fax">Fax</label>
+			<?php $field = $form->get('phone_fax'); echo $this->formRow($field); ?>
+		</p>
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>			
+	</div>
+
+	<?php if($this->CheckPermission('manage_users')):?>
+	<div id="roles">
+		
+		<p class="user_role_boxes">
+		<?php $field = $form->get('user_roles'); echo $this->formRow($field); ?>		
+		</p>
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>			
+	</div>	
+	<?php endif; ?>		
+</div>	
+<?php echo $this->ConfirmPageUnload('#user_form')?>
+<?php echo $this->form()->closeTag() ?>
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	$("#user_form").validate({
+		rules: {
+			first_name: "required",
+			last_name: "required",
+			email: {
+				required: true,
+				email: true
+			},
+			password: {
+				required: true,
+				minlength: 5
+			},
+			confirm_password: {
+				required: true,
+				equalTo: "#password",
+				minlength: 5
+			},
+			user_roles: "required"
+		},
+		messages: {
+			first_name: "Please enter a first name",
+			last_name: "Please enter a last name",
+			email: {
+				required: "Please enter an email",
+				email: "Please enter a valid email address"
+			},
+			password: {
+				required: "Please enter a password",
+				minlength: "Your password must be at least 5 characters long"
+			},
+			confirm_password: {
+				required: "Please confirm your password",
+				equalTo: "Please enter the same password as above",
+				minlength: "Your password must be at least 5 characters long"
+			},
+			user_roles: "Please choose the roles for the user"
+		}
+	});	
+	$.validator.setDefaults({
+		submitHandler: function() { return confirm("submitted!"); }
+	});	
+});
+</script>

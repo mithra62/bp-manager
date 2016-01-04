@@ -1,0 +1,16 @@
+<ul>
+<li><a href="/pm/companies/" class="<?php echo (!is_numeric($this->active_sub) ? 'active' : ''); ?>">All</a></li>
+<?php 
+$count = count($this->sub_menu_options);
+for($i=0;$i<$count;$i++):
+
+	$class = ($i == ($count-1) ? 'last' : '');
+	$active = FALSE;
+	$active = (is_numeric($this->active_sub) && $i == $this->active_sub ? 'active' : FALSE);
+	
+?>
+	<li><a href="/pm/companies/index/view/<?php echo $i; ?>" class="<?php echo $class.' '.$active; ?>"><?php echo $this->sub_menu_options[$i]; ?></a></li>
+<?php 
+endfor;
+?>
+</ul>

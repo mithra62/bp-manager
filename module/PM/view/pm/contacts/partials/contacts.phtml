@@ -1,0 +1,67 @@
+<table cellpadding="0" cellspacing="0" class="<?php echo ($this->tableclass) ? $this->tableclass : 'tablesorter'; ?>" id="<?php echo ($this->tableid) ? $this->tableid : 'moji_contacts'; ?>">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<th>Added</th>
+			<th>Last Modified</th>
+			<?php if($this->enable_actions):?>
+			<th>Actions</th>
+			<?php endif; ?>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php 
+		$i = 0;
+		foreach($this->contacts as $contact)
+		{
+		?>
+		<tr>
+			<td>
+				<?php 
+				$gravatar_settings = array(
+					'img_size'    => 25,
+					'default_img' => \Zend\View\Helper\Gravatar::DEFAULT_MM,
+					'rating'      => \Zend\View\Helper\Gravatar::RATING_G,
+					'secure'      => null,
+				);
+				echo $this->gravatar($contact['email'], $gravatar_settings)->getImgTag(); 
+				?>
+			</td>
+			<td><a title="<?php echo $contact['first_name']; ?> <?php echo $contact['last_name']; ?>" <?php echo ($this->facebox == 'yes' ? 'rel="facebox"' : ''); ?> href="<?php echo $this->url('contacts/view', array('contact_id' => $contact['id'])); ?>"><?php echo $contact['first_name']; ?> <?php echo $contact['last_name']; ?></a></td>
+			<td><a title="<?php echo $contact['email']; ?>" href="mailto:<?php echo $contact['email']; ?>"><?php echo $contact['email']; ?></a></td>
+			<td><?php 
+			if($contact['mobile'] != '')
+			{
+				echo $contact['mobile'];
+			}
+			elseif($contact['phone_home'] != '')
+			{
+				echo $contact['phone_home'];
+			}
+			elseif($contact['phone2'] != '')
+			{
+				echo $contact['phone2'];
+			}			
+			else
+			{
+				echo 'N/A';
+			} 
+			?></td>
+			<td><?php echo $this->RelativeDate($contact['created_date']); ?></td>
+			<td><?php echo $this->RelativeDate($contact['last_modified']); ?></td>
+			<?php if($this->enable_actions):?>
+			<td>
+			<a href="<?php echo $this->url('contacts/edit', array('contact_id' => $contact['id'])); ?>" title="Edit"><?php echo $this->InteractIcon('pencil', 'Edit');?></a>
+			<a <?php echo ($this->facebox == 'yes' ? 'rel="facebox"' : ''); ?> href="<?php echo $this->url('contacts/remove', array('contact_id' => $contact['id'])); ?>" title="Delete"><?php echo $this->InteractIcon('cross', 'Delete');?></a>
+			</td>
+			<?php endif; ?>
+		</tr>
+		<?php 
+		}
+		?>
+	</tbody>
+</table>

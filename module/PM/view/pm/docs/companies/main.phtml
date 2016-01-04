@@ -1,0 +1,30 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="docs_header">About Companies</div>
+</div>
+<p>
+<?php if($this->CheckPermission('manage_companies')):?>
+Below are all the companies currently in the system. 
+<?php else: ?>
+Below are all the companies who have projects you're assigned to. 
+<?php endif; ?>
+</p>
+<h4>Filtering</h4>
+<p>
+You can filter by the company type by using the submenu. Depending on the company type attached to a given company MojiTrac behaves differently.
+
+<br />
+<br />
+For example, Internal companies can have projects but there isn't an address book or billing module available while 
+Client companies have the address book, project management and billing module.  
+</p>
+<h4>Actions</h4>
+<p>
+	<?php if($this->CheckPermission('manage_companies')):?>
+		<?php echo $this->InteractIcon('add', 'Add Company');?> Add new companies
+		<br /><?php echo $this->InteractIcon('pencil', 'Edit');?> Edit companies
+		<br /><?php echo $this->InteractIcon('cross', 'Delete');?> Remove companies<br />
+	<?php endif; ?>
+	<?php echo $this->InteractIcon('user', 'Project Team');?> View Address Book
+	<br /><?php echo $this->InteractIcon('folder', 'Project Files');?> View Files
+	
+</p>

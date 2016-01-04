@@ -1,0 +1,17 @@
+File: <a href="<?php echo $this->ServerUrl($this->url('files/view', array('file_id' => $file_data['id']))); ?>"><?php echo $file_data['name']; ?></a><br />
+
+<?php if($project_data): ?>
+Project: <a href="<?php echo $this->ServerUrl($this->url('projects/view', array('project_id' => $project_data['id']))); ?>"><?php echo $project_data['name']; ?></a><br />
+<?php endif; ?>
+
+<?php if($task_data): ?>
+Task: <a href="<?php echo $this->ServerUrl($this->url('tasks/view', array('task_id' => $task_data['id']))); ?>"><?php echo $task_data['name']; ?></a><br />
+<?php endif; ?>
+
+Status: <?php echo $this->FileStatus($file_data['status']); ?><br />
+File Type: <?php echo $revision_data['mime_type']; ?><br />
+Uploaded By: <?php echo $revision_data['uploader_first_name']; ?> <?php echo $revision_data['uploader_last_name']; ?>
+
+<?php if($file_data['description'] != ''): ?>
+<br /><br /><?php echo $this->FormatHtml($file_data['description']); ?><br />
+<?php endif; ?>

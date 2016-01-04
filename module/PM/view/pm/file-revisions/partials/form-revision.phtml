@@ -1,0 +1,62 @@
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'file_form');
+$form->setAttribute('action', $this->form_action);
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+
+if($file_errors)
+{
+	foreach($file_errors AS $key => $error)
+	{
+		$error = ($key == 'fileUploadErrorNoFile' ? 'A file is required' : $error);
+		echo '<div class="fail canhide png_bg">'.$error.'</div>';
+	}
+}
+
+echo $this->formRow($csrf);
+?>
+<?php 
+if($this->id > 0)
+	echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+?>
+<?php if($this->file_field): ?>
+<p>
+	<label for="file">File</label>
+	<?php $name = $form->get('file_upload'); echo $this->formRow($name); echo $this->formElementErrors($name); ?>
+</p>
+<?php endif; ?>
+
+<?php if($file_data['status'] != '3'): ?>
+<p>
+	<label for="status">Status</label>
+	<?php $name = $form->get('status'); echo $this->formRow($name); ?>
+</p>
+<?php else: ?>
+<input type="hidden" value="<?php echo $file_data['status']; ?>" name="status" />
+<?php endif; ?>
+<p>
+	<label for="description">Description</label>
+	<?php $name = $form->get('description'); echo $this->formRow($name); ?>
+</p>
+
+<p>
+	<input type="submit" class="submit" value="Submit" />
+</p>
+<?php echo $this->ConfirmPageUnload('#file_form')?>
+<?php echo $this->form()->closeTag() ?>
+
+<script type="text/javascript">
+
+jQuery(document).ready(function($){
+
+	$("input[type=file]").filestyle({ 
+	     image: "<?php echo $this->StaticUrl(); ?>/images/browse.gif",
+	     imageheight : 30,
+	     imagewidth : 83,
+	     width : 347
+	 });	
+
+});
+</script>

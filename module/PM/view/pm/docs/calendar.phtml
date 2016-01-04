@@ -1,0 +1,14 @@
+<?php 
+$options = array('project_filter' => $this->project_filter);
+switch($this->page)
+{
+	case 'view-day':
+		$page = $this->page.'.phtml';
+	break;	
+	
+	default:
+		$page = 'main.phtml';
+	break;
+}
+echo $this->partial('docs/calendar/'.$page, $options); 
+?>

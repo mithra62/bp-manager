@@ -1,0 +1,7 @@
+<ul>
+	<li><a href="<?php echo $this->url('times/view', array('type' => $this->type, 'id' => $this->id)); ?>" class="<?php echo ($this->active_sub == '' ? 'active' : ''); ?>">All</a></li>
+	<li><a href="<?php echo $this->url('times/view', array('type' => $this->type, 'id' => $this->id, 'status' => 'paid')); ?>" class="<?php echo ($this->active_sub == 'paid' ? 'active' : ''); ?>">Paid</a></li>
+	<li><a href="<?php echo $this->url('times/view', array('type' => $this->type, 'id' => $this->id, 'status' => 'unsent')); ?>" class="<?php echo ($this->active_sub == 'unsent' ? 'active' : ''); ?>">Unpaid</a></li>
+	<li><a href="<?php echo $this->url('times/view', array('type' => $this->type, 'id' => $this->id, 'status' => 'sent')); ?>" class="<?php echo ($this->active_sub == 'sent' ? 'active' : ''); ?>">Pending</a></li>
+	<li><a href="<?php echo $this->url('times/view', array('type' => $this->type, 'id' => $this->id, 'status' => 'unbillable')); ?>" class="<?php echo 'last '.($this->active_sub == 'unbillable' ? 'active' : ''); ?>">Unbillable</a></li>
+</ul>

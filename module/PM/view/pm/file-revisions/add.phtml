@@ -1,0 +1,17 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="file_version_header">Add File Revision: <?php echo $this->Truncate($this->file['name'], 30); ?></div>		
+</div>
+<?php 
+$options = array('id' => $this->id, 'file' => $this->file_data, 'name' => $this->file_data['name'], 'action' => 'view');
+echo $this->BackToLink($options); 
+
+
+$options = array(
+	'form' => $this->form, 
+	'file_field' => TRUE,
+	'form_action' => $form_action,
+	'file_errors' => $file_errors,
+	'file_data' => $file_data
+);
+echo $this->partial('pm/file-revisions/partials/form-revision.phtml', $options); 
+?>

@@ -1,0 +1,45 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="project_activity_header">Project Activity</div>	
+</div>
+<?php 
+$logs = $this->DashboardTimeline();
+if(count($logs) >= 1)
+{
+	$count = 0;
+	$project_name = FALSE;
+	foreach($logs AS $log)
+	{
+		if($log['title'] == '')
+		{
+			continue;
+		}
+		
+		if($project_name != $log['project_name'] && $log['project_id'] != '')
+		{
+			$url = $this->url('projects/view', array('project_id'=>$log['project_id']));
+			echo '<h3><a href="'.$url.'" class="project_dashboard" title="'.$log['project_name'].'">'.$log['project_name'].'</a></h3><ul style="padding-bottom:10px;">';
+			$project_name = $log['project_name'];
+		}
+		
+		$performed_by = array(
+						'id' => $log['performed_by'], 
+						'first_name' => $log['performed_by_first_name'], 
+						'last_name' => $log['performed_by_last_name']
+		);
+		?>
+			<li>
+				<img src="<?php echo $this->StaticUrl(); ?>/images/icons/<?php echo $log['image']; ?>" alt="<?php echo $log['action_title']; ?>" title="<?php echo $log['action_title']; ?>" width="32" height="32" class="png_bg" /> <a title="<?php echo $log['title']; ?>" href="<?php echo $log['href']; ?>" rel="<?php echo $log['rel']; ?>"><?php echo $log['title']; ?></a><br />
+				<p><?php echo $this->RelativeDate($log['date'], TRUE);?> by: <?php echo $this->MakeLink('user', $performed_by);?></p>
+			</li>
+		
+		<?php
+		$count++; 
+	}
+	
+	echo '</ul>';
+}
+else
+{
+	echo '<div class="information png_bg">There isn\'t any activity yet. </div>';
+}
+?>

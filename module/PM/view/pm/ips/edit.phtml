@@ -1,0 +1,15 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="admin_header">Edit Ip</div>			
+</div>
+<?php if(!$this->ajax_mode): ?>
+<div class="back_link_content">
+	<a href="<?php echo $this->url('ips/view', array('ip_id' => $this->ip_data['id'])); ?>" title="Back to Ip">
+		Back to Ip
+	</a><div><?php echo $this->InteractIcon('left-arrow', 'Back to Ip');?></div>
+</div>	
+<br clear="all" />
+<?php endif; ?>
+<?php 
+$options = array('form' => $this->form, 'id' => $this->id);
+echo $this->partial('pm/ips/partials/form', $options); 
+?>

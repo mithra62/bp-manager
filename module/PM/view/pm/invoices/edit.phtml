@@ -1,0 +1,13 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="invoice_header">Edit #<?php echo $this->invoice_data['invoice_number']; ?></div>
+</div>
+<div class="back_link_content">
+	<a href="<?php echo $this->url('invoices/view', array('invoice_id' => $this->invoice_data['id'])); ?>" title="Back to <?php echo $this->contact_data['first_name'].' '.$this->contact_data['last_name'] ?>">
+		Back to #<?php echo $this->invoice_data['invoice_number']; ?>
+	</a><div><?php echo $this->InteractIcon('left-arrow', 'Back to '.$this->contact_data['first_name'].' '.$this->contact_data['last_name']);?></div>
+</div>
+<br clear="all" />
+<?php 
+$options = array('form' => $this->form, 'id' => $this->id);
+echo $this->partial('pm/invoices/partials/form', $options); 
+?>

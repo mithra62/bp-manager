@@ -1,0 +1,9 @@
+Hello <?php echo $user_data['first_name']; ?><br />
+<br />
+The priority of the following task has changed:<br /><br />
+
+<?php 
+$options = array('task_data' => $task_data, 'task_data' => $task_data, 'project_data' => $project_data);
+echo $this->partial('partials/task-details', $options); 
+echo $this->partial('partials/footer');
+?>

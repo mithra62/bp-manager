@@ -1,0 +1,57 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="timers_header">
+	<?php if($this->company['name']): ?>
+	Company Timer For: <?php echo $this->company['name']; ?>
+	<?php elseif($this->project['name']):?>
+	Project Timer For: <?php echo $this->project['name']; ?>	
+	<?php elseif($this->task['name']):?>
+	Task Timer For: <?php echo $this->task['name']; ?>	
+	<?php else: ?>
+	Timer
+	<?php endif; ?>	
+	</div>
+</div>
+
+<?php if(!$this->ajax_mode): ?>
+	<?php if($type == 'company'): ?>
+	<div class="back_link_content">
+		<a href="<?php echo $this->url('companies/view', array('company_id' => $this->company['id'])); ?>" title="Back to <?php echo $this->company['name']; ?>">
+			Back to <?php echo $this->company['name']; ?>	
+		</a><div><?php echo $this->InteractIcon('left-arrow', 'Back to '.$this->company['name']);?></div>
+	</div>
+	<br clear="all" />
+	<?php endif;?>
+	
+	<?php if($type == 'project'): ?>
+	<div class="back_link_content">
+		<a href="<?php echo $this->url('projects/view', array('project_id'=>$this->project['id']), null, TRUE); ?>" title="Back to <?php echo $this->project['name']; ?>">
+			Back to <?php echo $this->project['name']; ?>	
+		</a><div><?php echo $this->InteractIcon('left-arrow', 'Back to '.$this->project['name']);?></div>
+	</div>
+	<br clear="all" />
+	<?php endif;?>
+	
+	<?php if($type == 'task'): ?>
+	<div class="back_link_content">
+		<a href="<?php echo $this->url('tasks/view', array('task_id'=>$this->task['id'])); ?>" title="Back to <?php echo $this->task['name']; ?>">
+			Back to <?php echo $this->task['name']; ?>	
+		</a><div><?php echo $this->InteractIcon('left-arrow', 'Back to '.$this->task['name']);?></div>
+	</div>
+	<br clear="all" />
+	<?php endif;?>
+<?php endif;?>	
+
+<?php if($this->running_timers): ?>
+
+<?php else: ?>
+<div class="information png_bg">There aren't any timers running yet.</div>
+
+<?php endif; ?>
+<p>
+
+<?php ?>
+<form action="<?php echo $this->url('timers/start', array('type' => $type, 'id'=> $id)); ?>" method="POST">
+	<input type="submit" class="submit" value="Start Timer" name="start" /> 
+	<!-- <input type="submit" class="submit" value="Stop" name="stop"/> -->
+</form>
+</p>

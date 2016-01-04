@@ -1,0 +1,8 @@
+<div class="content_headers" style="padding-top:0px;">
+
+	<div class="reports_header">Task Gantt</div>
+	<?php echo $this->ActionBlock('help', 'Help', $this->url(array('module' => 'pm','controller' => 'docs','action'=>'companies', 'page' => 'main'), null, TRUE), 'facebox'); ?>
+	<br clear="all" />		
+</div>
+
+<?php echo $this->FusionCharts('task_gantt', 'Gantt', 900, 500); ?>

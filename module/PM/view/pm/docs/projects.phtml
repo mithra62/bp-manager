@@ -1,0 +1,21 @@
+<?php 
+$options = array('project_filter' => $this->project_filter);
+switch($this->page)
+{
+	case 'view':
+	case 'your-projects':
+	case 'team':
+	case 'tasks':
+	case 'notes':
+	case 'files':
+	case 'bookmarks':
+	case 'times':
+		$page = $this->page.'.phtml';
+	break;	
+	
+	default:
+		$page = 'main.phtml';
+	break;
+}
+echo $this->partial('pm/docs/projects/'.$page, $options); 
+?>

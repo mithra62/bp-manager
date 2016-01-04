@@ -1,0 +1,35 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="timetracker_header">Delete Time</div>	
+</div>
+<div class="attention png_bg">
+Are you sure you want to remove <?php echo $this->time_data['hours']?> from 
+<?php 
+if(isset($this->time_data['task_name']))
+{
+	echo "the task ".$this->time_data['task_name'];
+}
+elseif(isset($this->time_data['project_name']))
+{
+	echo "the project ".$this->time_data['project_name'];
+}
+else
+{
+	echo "the company ".$this->time_data['company_name'];
+}
+?>
+? This can not be undone...
+</div>
+
+<p>
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'time_form');
+$form->setAttribute('action', $this->url('times/remove', array('time_id' => $this->id)));
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+	<?php $field = $form->get('confirm'); echo $this->formRow($field); ?> <?php $field = $form->get('fail'); echo $this->formRow($field); ?>
+<?php echo $this->form()->closeTag() ?>
+</p>

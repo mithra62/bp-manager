@@ -1,0 +1,45 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="timetracker_header">Existing Time For <?php echo $this->RelativeDate(date('Y-m-d', mktime(0, 0, 0, $this->month, $this->day, $this->year))); ?></div>
+</div>
+<?php 
+$next_day = date('j', mktime(0, 0, 0, $this->month, $this->day+1, $this->year));
+$next_year = date('Y', mktime(0, 0, 0, $this->month, $this->day+1, $this->year));
+$next_month = date('n', mktime(0, 0, 0, $this->month, $this->day+1, $this->year));
+$display_next_date = date('Y-m-d', mktime(0, 0, 0, $this->month, $this->day+1, $this->year));
+
+$prev_day = date('j', mktime(0, 0, 0, $this->month, $this->day-1, $this->year));
+$prev_year = date('Y', mktime(0, 0, 0, $this->month, $this->day-1, $this->year));
+$prev_month = date('n', mktime(0, 0, 0, $this->month, $this->day-1, $this->year));
+$display_prev_date = date('Y-m-d', mktime(0, 0, 0, $this->month, $this->day-1, $this->year));
+?>
+<div >
+	<div class="left">
+		<div class="back_link_content">
+			<a href="<?php echo $this->url('times/view-day', array('month' => $prev_month, 'day' => $prev_day, 'year' => $prev_year)); ?>" title="Back to <?php echo $this->user_data['first_name'].' '.$this->user_data['last_name']; ?>">
+				<?php echo $this->RelativeDate($display_prev_date); ?>	
+			</a><div><?php echo $this->InteractIcon('left-arrow', $this->RelativeDate($display_prev_date));?></div>
+		</div>
+	</div>	
+	<div class="right">
+		<div class="back_link_content">
+			<a href="<?php echo $this->url('times/view-day', array('month' => $next_month, 'day' => $next_day, 'year' => $next_year)); ?>">
+				<?php echo $this->RelativeDate($display_next_date); ?> 
+			</a><div style="float:right; padding-left:5px;"><?php echo $this->InteractIcon('right-arrow', $this->RelativeDate($display_next_date));?></div>
+		</div>	
+	</div>
+</div>
+<?php 
+if($this->times):
+	$options = array('times' => $this->times, 'enable_actions' => 'yes', 'enable_company' => 'yes', 'enable_project' => 'yes', 'enable_task' => 'yes');
+	echo $this->partial('pm/times/partials/times', $options);
+
+else: ?>
+<br clear="all" />
+<div class="information png_bg">There hasn't been any time added yet.</div>
+
+<?php 
+endif; 
+
+$options = array('form' => $this->form, 'month' => $this->month, 'day' => $this->day, 'year' => $this->year);
+echo $this->partial('pm/times/partials/form', $options);
+?>

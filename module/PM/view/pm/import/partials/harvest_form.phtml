@@ -1,0 +1,29 @@
+<form action="<?php echo $this->escape($this->form->getAction()); ?>" 
+method="<?php echo $this->escape($this->form->getMethod()) ?>" enctype="<?php echo $this->escape($this->form->getEnctype()); ?>">
+
+	<p>
+		<label for="harvest_email">Email</label>
+		<?php echo $this->form->harvest_email; ?>
+	</p>
+	
+	<p>
+		<label for="harvest_password">Password</label>
+		<?php echo $this->form->harvest_password; ?>
+	</p>
+	
+	<p>
+		<label for="harvest_account">Account</label>
+		<?php echo $this->form->harvest_account; ?>
+	</p>
+	
+	<p>
+		<label for="harvest_ssl">SSL</label>
+		<?php echo $this->form->harvest_ssl; ?>
+	</p>			
+	
+	
+	<p>
+		<input type="submit" class="submit" value="Submit" />
+	</p>		
+				
+</form>	

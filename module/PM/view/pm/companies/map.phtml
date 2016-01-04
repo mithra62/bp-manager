@@ -1,0 +1,27 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="company_header">Map to <?php echo $this->company['name']; ?></div>		
+</div>
+
+<?php 
+$url = 'http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=';
+if($this->company['address1'])
+{
+	$url .= $this->company['address1'];
+}
+
+if($this->company['city'])
+{
+	$url .= '+'.$this->company['city'];
+}
+
+if($this->company['state'])
+{
+	$url .= '+'.$this->company['state'];
+}
+
+if($this->company['zip'])
+{
+	$url .= '+'.$this->company['zip'];
+}
+?>
+<iframe frameborder="0" scrolling="no" width="650" height="400" marginheight="0" marginwidth="0" src="<?php echo $url; ?>&output=embed"></iframe>

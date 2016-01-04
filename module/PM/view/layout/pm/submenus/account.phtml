@@ -1,0 +1,5 @@
+<ul>
+	<li><a href="<?php echo $this->url('users/edit'); ?>" class=" <?php echo ($this->active_sub == 'account' ? 'active' : ''); ?>">Modify Account Info</a></li>
+	<li><a href="<?php echo $this->url('account/password'); ?>" class="<?php echo ($this->active_sub == 'password' ? 'active' : ''); ?>">Change Password</a></li>
+	<li><a href="<?php echo $this->url('account/prefs'); ?>" class="<?php echo ($this->active_sub == 'prefs' ? 'active' : ''); ?> last">Preferences</a></li>
+</ul>

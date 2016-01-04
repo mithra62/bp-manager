@@ -1,0 +1,57 @@
+<table cellpadding="0" cellspacing="0" class="<?php echo ($this->tableclass) ? $this->tableclass : 'tablesorter'; ?>" id="<?php echo ($this->tableid) ? $this->tableid : 'moji_projects'; ?>">
+	<thead>
+		<tr>
+			<th>Project Name</th>
+			<?php if($this->enable_company):?>
+			<th>Company Name</th>
+			<?php endif; ?>		
+			<th>Start Date</th>
+			<th>End Date</th>
+			<?php if($this->enable_tasks):?>
+			<th>Tasks</th>
+			<?php endif; ?>
+			<th>Status</th>
+			<th>Priority</th>
+			<?php if($this->enable_actions):?>
+			<th></th>
+			<?php endif; ?>	
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php 
+		$i = 0;
+		foreach($this->projects as $project)
+		{
+		?>
+		<tr>
+			<td>
+			<a title="<?php echo $project['name']; ?>" href="<?php echo $this->url('projects/view', array('project_id'=> $project['id'], 'company_id' => FALSE)); ?>"><?php echo $project['name']; ?></a>
+			<?php echo (!$this->enable_company && array_key_exists('company_name', $project) ? '('.$project['company_name'].')' : ''); ?>
+			</td>
+			<?php if($this->enable_company):?>
+			<td><?php echo $project['company_name']; ?></td>
+			<?php endif; ?>	
+			<td nowrap><?php echo $this->RelativeDate($project['start_date']); ?></td>
+			<td><?php echo $this->RelativeDate($project['end_date']); ?></td>
+			<?php if($this->enable_tasks):?>
+			<td><?php echo number_format($project['task_count']); ?></td>
+			<?php endif; ?>
+			<td nowrap><?php echo $this->ProjectStatus($project['status']); ?></td>
+			<td nowrap><?php echo $this->ProjectPriority($project['priority']); ?></td>
+			<?php if($this->enable_actions):?>
+			<td nowrap>
+			<a href="<?php echo $this->url('files', array('module' => 'pm','controller'=>'files','action'=>'index', 'project'=> $project['id']), null, TRUE); ?>" title="Files"><?php echo $this->InteractIcon('folder', 'Project Files');?></a>
+			<a href="<?php echo $this->url('projects/manage-team', array('company_id' => FALSe,'controller'=>'projects','action'=>'manage-team', 'project_id'=> $project['id']), null, TRUE); ?>" title="View Project Team"><?php echo $this->InteractIcon('user', 'Project Team');?></a>
+			<?php if($this->CheckPermission('manage_projects')):?>
+				<a href="<?php echo $this->url('projects/edit', array('company_id'=> FALSE, 'project_id'=> $project['id'])); ?>" title="Edit"><?php echo $this->InteractIcon('pencil', 'Edit');?></a>
+				<a href="<?php echo $this->url('projects/remove', array('company_id' => FALSE, 'project_id'=> $project['id'])); ?>" <?php echo ($this->facebox == 'yes' ? 'rel="facebox"' : ''); ?> title="Delete"><?php echo $this->InteractIcon('cross', 'Delete');?></a>
+			<?php endif; ?>
+			</td>
+			<?php endif; ?>	
+		</tr>
+		<?php 
+		}
+		?>
+	</tbody>
+</table>

@@ -1,0 +1,24 @@
+<div class="content_headers" style="padding-top:0px;">
+
+	<div class="reports_header">
+	<?php if($this->chart == 'date-history'): ?>
+	Time History
+	<?php else: ?>
+	Times Reports
+	<?php endif; ?>
+	</div>
+	<?php 
+	if(!$this->ajax_mode):
+		echo $this->ActionBlock('help', 'Help', $this->url(array('module' => 'pm','controller' => 'docs','action'=>'companies', 'page' => 'main'), null, TRUE), 'facebox'); 
+	endif;
+	?>
+	<br clear="all" />		
+</div>
+
+<?php 
+if($this->chart == 'date-history'): 
+	echo $this->FusionCharts('times_sum_date', 'Column3D', 900, 400);
+else: 
+	echo $this->FusionCharts('user_times', 'Column3D', 900, 400); 
+endif;
+?>

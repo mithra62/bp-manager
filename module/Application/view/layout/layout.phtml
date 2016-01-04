@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<link href="<?php echo $this->StaticUrl(); ?>/css/admin.css" rel="stylesheet" type="text/css" />
+<?php echo $this->headMeta(); ?>
+<?php echo $this->headTitle('MojiTrac'); ?>
+<?php //echo $this->headLink()->prependStylesheet('/css/site.css'); ?>
+<link rel="icon" href="<?php echo $this->StaticUrl(); ?>/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="<?php echo $this->StaticUrl(); ?>/favicon.ico" type="image/x-icon"> 
+<meta http-equiv="Content-Style-Type" content="text/css" />
+
+<!-- LOAD JQUERY -->
+<script type="text/javascript" src="<?php echo $this->StaticUrl(); ?>/js/scripts/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->StaticUrl(); ?>/js/scripts/jquery.validate.js"></script>   
+<script type="text/javascript" src="<?php echo $this->StaticUrl(); ?>/js/scripts/jquery.password_strength.js"></script>    
+<!--[if IE 6]>
+<script src="<?php echo $this->StaticUrl(); ?>/js/pngfix.js"></script>
+<script>
+    DD_belatedPNG.fix('.png_bg');
+</script>        
+<![endif]-->
+<script type='text/javascript'>
+(function (d, t) {
+  var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
+  bh.type = 'text/javascript';
+  bh.src = '//www.bugherd.com/sidebarv2.js?apikey=cyte1tx1dagijmm51volpw';
+  s.parentNode.insertBefore(bh, s);
+  })(document, 'script');
+</script>
+</head>
+<body>
+
+
+<div id="logo">
+	<a href="/"><img src="<?php echo $this->StaticUrl(); ?>/images/moji_logo_400.png" border="0" /></a>
+</div>
+<div id="admin_wrapper">
+<?php echo $this->layout()->content; ?>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="note_header">Remove Note: <?php echo $this->note['subject']?></div>		
+</div>
+<?php if(!$this->ajax_mode): 
+?>
+<div class="back_link_content">
+	<?php if($this->note['task_name']): ?>
+	<a href="<?php echo $this->url('tasks/view', array('task_id' => $this->note['task_id'])); ?>" title="Back to <?php echo $this->task['name']; ?>">
+		Back to <?php echo $this->note['task_name']; ?>
+	</a>
+	<?php elseif($this->note['project_name']): ?>
+	<a href="<?php echo $this->url('projects/view', array('project_id' => $this->note['project_id'])); ?>" title="Back to <?php echo $this->note['project_name']; ?>">
+		Back to <?php echo $this->note['project_name']; ?>
+	</a>	
+	<?php else: ?>
+	<a href="<?php echo $this->url('companies/view', array('company_id'=> $this->note['company_id'])); ?>" title="Back to <?php echo $this->note['company_name']; ?>">
+		Back to <?php echo $this->note['company_name']; ?>
+	</a>	
+	<?php endif; ?>
+	<div><?php echo $this->InteractIcon('left-arrow', 'Back');?></div>
+	
+</div>	
+<br clear="all" />
+<?php endif; ?>
+<div class="attention png_bg">
+Are you sure you want to remove "<?php echo $this->note['subject']?>"? This can not be undone...
+</div>
+
+<p>
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'note_form');
+$form->setAttribute('action', $this->url('notes/remove', array('note_id' => $this->note['id'])));
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+	<?php $field = $form->get('confirm'); echo $this->formRow($field); ?> <?php $field = $form->get('fail'); echo $this->formRow($field); ?>
+<?php echo $this->form()->closeTag() ?>
+</p>

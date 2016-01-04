@@ -1,0 +1,93 @@
+<style>
+#loading
+{
+	display:none;
+}
+</style>
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'time_form');
+$form->setAttribute('action', $this->url('times/view-day', array('month' => $this->month, 'day' => $this->day, 'year' => $this->year)));
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+<div class="content_headers">
+	<div class="timetracker_header">Add Time</div>	
+	<div class="actions" style="padding-top:0;">	
+		<label><?php $name = $form->get('billable'); echo $this->formRow($name); ?> <div style="padding-bottom:5px; float:right;">Billable</div></label>
+	</div>			
+</div>
+<input type="hidden" name="date_default" id="date_default" value="<?php echo ($this->date ? $this->date : date('Y-m-d')); ?>" />
+
+<table cellpadding="0" cellspacing="0" class="form_table">
+	<thead>
+		<tr>
+			<th style="width:60px; text-align:left">Date</th>			
+			<th style="width:30px; text-align:left">Hours</th>
+			<th style="text-align:left">Company</th>
+			<th style="padding-right:20px; text-align:left">Project</th>
+			<th style="padding-right:20px; text-align:left">Task</th>
+			<th style="text-align:left">Description</th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr>
+			<td style="padding-top:15px;"><?php $name = $form->get('date'); echo $this->formRow($name); ?></td>
+			<td style="padding-top:15px;"><?php $name = $form->get('hours'); echo $this->formRow($name); ?></td>
+			<td style="padding-top:15px;"><?php $name = $form->get('company_id'); echo $this->formRow($name); ?></td>
+			<td style="padding-top:15px;"><select name="project_id" id="project_id" class="select input timetracker"><option value="0">None</option></select></td>
+			<td style="padding-top:15px;"><select name="task_id" id="task_id" class="select input timetracker"><option></option></select></td>
+			<td style="padding-top:15px;"><?php $name = $form->get('description'); echo $this->formRow($name); ?></td>
+			<td><input type="submit" class="submit" value="Submit" /></td>
+		</tr>
+	</tbody>
+</table>
+
+<?php echo $this->form()->closeTag() ?>
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+
+	$.validator.addMethod(
+		"mysqlDate",
+		function(value, element) {
+			// put your own logic here, this is just a (crappy) example
+			return value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
+		},
+		"Please enter a date in the format dd/mm/yyyy"
+	);
+	
+	$("#time_form").validate({
+		rules: {
+			date: 
+			{
+				required: true,
+				dateISO: true
+			},
+	
+			hours: "required",
+			description: "required",
+			company_id: "required"
+		},
+		messages: {
+			date: "Required",
+			hours: "Required",
+			description: "Required",
+			company_id: "Required"
+		}
+	});	
+
+	$("#billable_copy").click(function(e){
+		e.preventDefault();
+
+		$('#billable').is(':checked');
+		return false;
+	});
+
+		
+});
+</script>

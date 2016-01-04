@@ -1,0 +1,35 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="project_activity_header">Project Activity</div>	
+</div>
+<?php 
+$logs = $this->DashboardTimeline();
+if(count($logs) >= 1)
+{
+	$count = 0;
+	foreach($logs AS $project_id => $data)
+	{
+		echo '<h3>'.$data['project_name'].'</h3>';
+		foreach($data['log_data'] AS $log)
+		{
+			$performed_by = array(
+							'id' => $log['performed_by'], 
+							'first_name' => $log['performed_by_first_name'], 
+							'last_name' => $log['performed_by_last_name']
+			);
+			?>
+			<ul>
+			<li>
+			<img src="<?php echo $this->StaticUrl(); ?>/images/icons/<?php echo $log['image']; ?>" alt="<?php echo $log['title']; ?>" title="<?php echo $log['title']; ?>" width="32" height="32" class="png_bg" /> <a title="<?php echo $log['title']; ?>" href="<?php echo $log['href']; ?>"><?php echo $log['title']; ?></a><br />
+			<p><?php echo $this->RelativeDate($log['date']);?> by: <?php echo $this->MakeLink('user', $performed_by);?></p>
+			</li>
+			</ul>
+			<?php
+			$count++; 
+		}
+	}
+}
+else
+{
+	echo '<div class="information png_bg">There isn\'t any activity yet. </div>';
+}
+?>

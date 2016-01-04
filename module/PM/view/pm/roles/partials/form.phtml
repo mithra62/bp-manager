@@ -1,0 +1,48 @@
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'user_form');
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+	if($this->id > 0)
+		echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+?>	
+<div id="form_tabs">
+	<ul>
+
+		<li><a href="#general">General</a></li>
+		<li><a href="#perms">Permissions</a></li>
+	</ul>
+	<div id="general">
+		
+		<p>
+			<label for="name">Name</label>
+			<?php $field = $form->get('name'); echo $this->formRow($field); ?>
+		</p>
+		
+		<p>
+			<label for="description">Description</label>
+			<?php $field = $form->get('description'); echo $this->formRow($field); ?>
+		</p>		
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>				
+	</div>
+	<div id="perms">
+	
+	<?php foreach($this->permissions AS $perm): ?>
+		<p>
+			<label for="<?php echo $perm['name']; ?>"><?php $field = $form->get($perm['name']); echo $this->formRow($field); ?> <?php echo $this->_('permission_'.$perm['name'], 'pm'); ?></label>
+			
+		</p>
+	<?php endforeach; ?>
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>			
+	</div>
+</div>	
+<?php echo $this->ConfirmPageUnload('#role_form')?>
+<?php echo $this->form()->closeTag() ?>

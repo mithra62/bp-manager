@@ -1,0 +1,75 @@
+<style>
+#loading
+{
+	display:none;
+}
+</style>
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'timers_form');
+$form->setAttribute('action', $this->form_action);
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+	<?php if($this->company): ?>
+	<p>
+		<label for="company_id" id="companies">Company</label>
+		<a href="<?php echo $this->url('companies/view', array('module' => 'pm','controller'=>'companies','action'=>'view', 'id' => $this->company['id']), null, TRUE); ?>"><?php echo $this->company['name']; ?></a>
+		<input type="hidden" name="company" value="<?php echo $this->company['id']; ?>" />
+	</p>
+	<?php endif; ?>
+	
+	<?php if($this->project): ?>
+	<p>
+		<label for="project_id">Project</label>
+		<a href="<?php echo $this->url('projects/view', array('project_id' => $this->project['id'])); ?>"><?php echo $this->project['name']; ?></a>
+		<input type="hidden" name="project" value="<?php echo $this->project['id']; ?>" />
+	</p>
+	<?php endif; ?>
+	
+	<?php if($this->task): ?>
+	<p>
+		<label for="task_id">Task</label>
+		<a href="<?php echo $this->url('tasks/view', array('task_id' => $this->task['id'])); ?>"><?php echo $this->task['name']; ?></a>
+		<input type="hidden" name="task" value="<?php echo $this->task['id']; ?>" />
+	</p>
+	<?php endif; ?>
+	<p>
+		<label for="billable">Billable: <?php $field = $form->get('billable'); echo $this->formRow($field); ?></label>
+	</p>	
+	<p>
+		<label for="hours">Hours</label>
+		<?php echo $this->timer_data['time_running']['hours']; ?>
+	</p>	
+	<p>
+		<label for="date">Date</label>
+		<?php echo $this->RelativeDate($this->timer_data['date']); ?>
+	</p>		
+	<p>
+		<label for="description">Description</label>
+		<?php $field = $form->get('description'); echo $this->formRow($field); ?>
+	</p>
+	
+	<p>
+		<input type="submit" class="submit" value="Stop Timer" />
+	</p>		
+				
+<?php echo $this->form()->closeTag() ?>
+
+<div id="loading"><img src="/images/loading.gif" /></div>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+		
+	$("#timers_form").validate({
+		rules: {
+			description: "required"
+		},
+		messages: {
+			description: "Please enter a description"			
+		}
+	});	
+	$('input:checkbox').checkbox();
+});
+</script>	

@@ -1,0 +1,13 @@
+<?php
+$msg_html .= 'Company: '.$project_data['company_name'].'<br />';
+//$msg_html .= 'Expected Duration: '.$project_data['duration'].' hours<br />';
+//$msg_html .= 'Due: '.Zend_View_Helper_RelativeDate::RelativeDate($project_data['end_date']).'<br />';
+$msg_html .= 'Type: '.$this->ProjectType($project_data['type']).'<br />';
+$msg_html .= 'Priority: '.$this->ProjectPriority($project_data['priority']).'<br />';
+$msg_html .= 'Status: '.$this->ProjectStatus($project_data['status']).'<br /><br />';
+
+if($project_data['description'])
+{
+	$msg_html .= 'Description<br />'.nl2br($project_data['description']).'<br />';
+}
+echo $msg_html;

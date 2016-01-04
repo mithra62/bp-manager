@@ -1,0 +1,152 @@
+<div class="content_headers" style="padding-top:0px;">
+
+	<div class="user_header"><?php echo $this->_('view_user', 'pm')?>: <?php echo $this->user['first_name'].' '.$this->user['last_name'];?></div>	
+		
+		<?php if($this->user['email']): ?>
+		<div class="actions">
+			<a href="mailto:<?php echo $this->user['email']; ?>" title="<?php echo $this->_('email', 'pm')?>">
+				<?php echo $this->InteractIcon('email', 'Email User');?>
+				<div class="action_text"><?php echo $this->_('email', 'pm')?></div>
+			</a>
+		</div>			
+		<?php endif; ?>		
+</div>
+
+<div class="item_details" style="width:100%">
+    <div class="items">
+    	<p>
+    		<span class="bold"><?php echo $this->_('email', 'pm')?>:</span> <a href="mailto:<?php echo $this->user['email']; ?>"><?php echo $this->Truncate($this->user['email'], '25'); ?></a><br />
+			<?php if($this->user['job_title']):?>
+			<span class="bold"><?php echo $this->_('title', 'pm')?>:</span> <?php echo $this->user['job_title']; ?><br />
+			<?php endif; ?> 
+			<span class="bold"><?php echo $this->_('last_modified', 'pm')?>:</span> <?php echo $this->RelativeDate($this->user['last_modified']); ?><br />
+			<span class="bold"><?php echo $this->_('created_date', 'pm')?>:</span> <?php echo $this->RelativeDate($this->user['created_date']); ?><br />
+    	</p>
+    </div>
+    <?php if($this->user['phone_home'] || $this->user['phone_mobile'] || $this->user['phone_work'] || $this->user['phone_fax']):?>
+    <div class="items" style="padding-left:10px;">
+    	<p>
+			<?php if($this->user['phone_home']):?>
+				<span class="bold"><?php echo $this->_('home_phone', 'pm')?>:</span> <?php echo $this->user['phone_home']; ?><br />
+			<?php endif; ?>
+			<?php if($this->user['phone_mobile']):?>
+				<span class="bold"><?php echo $this->_('mobile_phone', 'pm')?>:</span> <?php echo $this->user['phone_mobile']; ?><br />
+			<?php endif; ?>			
+			<?php if($this->user['phone_work']):?>
+				<span class="bold"><?php echo $this->_('work_phone', 'pm')?>:</span> <?php echo $this->user['phone_work']; ?><br />
+			<?php endif; ?>
+			<?php if($this->user['phone_fax']):?>
+				<span class="bold"><?php echo $this->_('fax', 'pm')?>:</span> <?php echo $this->user['phone_fax']; ?>  
+			<?php endif; ?>  	
+    	</p>
+    </div>
+    <?php endif; ?> 
+ 
+    <?php if($this->CheckPermission('view_time')): ?>
+    <div class="items" style="padding-left:10px;">
+		<?php 
+			$options = array('hours' => $this->hours, 'type' => 'user', 'id' => $this->id);
+			echo $this->partial('pm/times/partials/hour_status', $options); 		
+		?>
+    </div>
+    <?php endif; ?>
+    
+    <div class="items" style="float:right">
+    	<?php 
+    	$gravatar_settings = array(
+    			'img_size'    => 100,
+    			'default_img' => \Zend\View\Helper\Gravatar::DEFAULT_MM,
+    			'rating'      => \Zend\View\Helper\Gravatar::RATING_G,
+    			'secure'      => null,
+    	);
+    	echo $this->gravatar($this->user['email'], $gravatar_settings)->getImgTag(); 
+    	?>
+    </div>
+</div>
+
+<br clear="all" />
+
+<?php if($this->user['description'] != ''): ?>
+<h2><?php echo $this->_('description', 'pm')?>:</h2>
+<p><?php echo nl2br($this->user['description']); ?></p>
+<?php endif; ?>
+
+<?php 
+if($this->roles):
+?>
+<div class="content_headers">
+	<div class="user_role_header"><?php echo $this->_('user_roles', 'pm')?></div>			
+</div>
+<?php 
+	$options = array('roles' => $this->roles);
+	echo $this->partial('pm/roles/partials/roles', $options); 
+endif; ?>
+
+<div class="content_headers">
+	<div class="project_header"><?php echo $this->_('projects', 'pm')?></div>		
+</div>
+<?php 
+if($this->projects):
+	$options = array('projects' => $this->projects);
+	echo $this->partial('pm/projects/partials/projects', $options); 
+else: 
+?>
+<div class="information png_bg"><?php echo $this->user['first_name'].' '.$this->user['last_name'];?> isn't assigned to any projects yet.</div>
+<?php endif; ?>
+
+
+<?php 
+if($this->tasks): 
+?>
+<div class="content_headers">
+	<div class="task_header">Tasks</div>		
+</div>
+<?php 
+	$options = array('tasks' => $this->tasks, 'enable_due' => 'yes', 'enable_assigned' => 'yes', 'enable_completion' => 'yes');
+	echo $this->partial('pm/tasks/partials/tasks', $options); 
+endif; ?>
+
+<?php 
+if($this->files):
+?>
+<div class="content_headers">
+	<div class="file_header">Files</div>		
+</div>
+<?php 
+	$options = array('files' => $this->files);
+	echo $this->partial('pm/files/partials/files', $options); 
+endif;
+?>
+
+<?php 
+if($this->notes):
+?>
+<div class="content_headers">
+	<div class="note_header">Notes</div>		
+</div>
+<?php 
+	$options = array('notes' => $this->notes);
+	echo $this->partial('pm/notes/partials/notes', $options); 
+endif;
+?>
+
+
+<?php if($this->bookmarks):?>
+<div class="content_headers">
+	<div class="bookmark_header">Bookmarks</div>		
+</div>
+<?php 
+	$options = array('bookmarks' => $this->bookmarks);
+	echo $this->partial('pm/bookmarks/partials/bookmarks', $options); 
+endif; ?>
+
+<?php 
+if($this->times):
+?>
+<div class="content_headers">
+	<div class="timetracker_header">Timetracker</div>	
+</div>
+<?php 
+	$options = array('times' => $this->times, 'enable_project' => 'yes', 'enable_task' => 'yes', 'enable_company' => 'yes', 'enable_date' => 'yes');
+	echo $this->partial('pm/times/partials/times', $options); 
+endif; ?>

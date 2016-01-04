@@ -1,0 +1,8 @@
+Hello<br />
+<br />
+A new file revision was uploaded: <a href="<?php echo $this->ServerUrl($this->url('files/view', array('file_id' => $file_data['id']))); ?>"><?php echo $file_data['name']; ?></a><br /><br />
+
+<?php
+$options = array('project_data' => $project_data, 'file_data' => $file_data, 'task_data' => $task_data, 'revision_data' => $revision_data);
+echo $this->partial('partials/file-details', $options);
+echo $this->partial('partials/footer');

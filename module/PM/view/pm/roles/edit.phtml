@@ -1,0 +1,7 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="user_role_header">Edit User Role</div>	
+</div>
+<?php 
+$options = array('form' => $this->form, 'addPassword' => FALSE, 'id' => $this->id, 'permissions' => $this->permissions);
+echo $this->partial('pm/roles/partials/form', $options);
+?>

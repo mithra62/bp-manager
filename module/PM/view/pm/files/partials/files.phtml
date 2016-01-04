@@ -1,0 +1,63 @@
+<table cellpadding="0" cellspacing="0" class="<?php echo ($this->tableclass) ? $this->tableclass : 'tablesorter'; ?>" id="<?php echo ($this->tableid) ? $this->tableid : 'moji_files'; ?>">
+	<thead>
+		<tr>
+			<th>Name</th>
+			
+			<?php if($this->enable_project): ?>
+			<th>Project</th>
+			<?php endif;?>			
+			<?php if($this->enable_task): ?>
+			<th>Task</th>
+			<?php endif;?>	
+			<th>Status</th>
+			<th>Uploaded</th>
+			<th>Last Modified</th>
+			<?php if($this->enable_actions && $this->CheckPermission('manage_files')):?>
+			<th></th>
+			<?php endif; ?>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php 
+		$i = 0;
+		foreach($this->files as $file)
+		{			
+		?>		
+		<tr>
+			<td><a title="<?php echo $file['name']; ?>" href="<?php echo $this->url('files/view', array('file_id'=> $file['id'])); ?>"><?php echo $file['name']; ?></a></td>
+			
+			<?php if($this->enable_project): ?>
+			<td>
+				<?php if($file['project_name']):?>
+					<a title="<?php echo $file['project_name']; ?>" href="<?php echo $this->url('projects/view', array('project_id'=> $file['project_id'])); ?>" ><?php echo $file['project_name']; ?></a>
+				<?php else: ?>
+					N/A
+				<?php endif;?>
+			</td>
+			<?php endif;?>
+			
+			<?php if($this->enable_task): ?>
+			<td>
+				<?php if($file['task_name']):?>
+					<a title="<?php echo $file['task_name']; ?>" href="<?php echo $this->url('tasks/view', array('task_id'=> $file['task_id'])); ?>" ><?php echo $file['task_name']; ?></a>
+				<?php else: ?>
+					N/A
+				<?php endif;?>			
+			</td>	
+			<?php endif;?>	
+			<td><?php echo $this->FileStatus($file['status']); ?></td>			
+			<td><?php echo $this->RelativeDate($file['created_date']); ?></td>
+			<td><?php echo $this->RelativeDate($file['last_modified']); ?></td>
+			<?php if($this->enable_actions && $this->CheckPermission('manage_files')):?>
+			<td>
+				<a href="<?php echo $this->url('files/edit', array('file_id'=> $file['id'])); ?>" title="Edit"><?php echo $this->InteractIcon('pencil', 'Edit File');?></a>
+				<a href="<?php echo $this->url('files/remove', array('file_id'=> $file['id'])); ?>" title="Delete" rel="facebox"><?php echo $this->InteractIcon('cross', 'Remove File');?></a>
+			</td>
+			<?php endif; ?>
+		</tr>
+		<?php 
+		}
+		?>
+	</tbody>
+</table>

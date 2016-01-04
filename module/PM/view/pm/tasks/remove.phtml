@@ -1,0 +1,28 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="task_header">Delete Task: <?php echo $this->task['name']?></div>	
+</div>
+<div class="attention png_bg">
+Are you sure you want to remove "<?php echo $this->task['name']?>"? This can not be undone...
+</div>
+
+<p>
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'task_form');
+$form->setAttribute('action', $this->url('tasks/remove', array('task_id' => $this->task['id'])));
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+	<?php $field = $form->get('confirm'); echo $this->formRow($field); ?> <?php $field = $form->get('fail'); echo $this->formRow($field); ?>
+<?php echo $this->form()->closeTag() ?>
+</p>
+
+<h2>Task Details</h2>
+<p>
+<a href="/pm/tasks/view/id/<?php echo $this->id; ?>"><?php echo $this->task['name']?></a> contains:
+<br />
+<?php echo $this->file_count; ?> Files
+
+</p>

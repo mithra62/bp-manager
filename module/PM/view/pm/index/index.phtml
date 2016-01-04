@@ -1,0 +1,112 @@
+<?php 
+$created = new DateTime($this->user_data['created_date']);
+$now_date = new DateTime(date('Y-m-d H:i:s'));
+$interval = $created->diff($now_date);
+//echo $interval->format('%R%d');
+if($interval->days <= 30):
+?>
+
+<?php endif; ?>
+<?php if(count($this->tasks['overdue']) >= 1): ?>
+	<div class="fail png_bg">You have overdue tasks!</div>
+	<div class="content_headers" style="padding-top:0px;">
+		<div class="task_header">Your Overdue Tasks</div>
+		<?php echo $this->ActionBlock('help', 'Help', $this->url('docs', array('module' => 'pm','controller' => 'docs','action'=>'tasks', 'page' => 'your-overdue-tasks'), null, TRUE), 'facebox'); ?>
+	</div>
+	<form action="" method="POST">
+	<?php 
+		$options = array('tasks' => $this->tasks['overdue'], 'enable_checkbox' => 'yes', 'enable_due' => 'yes', 'enable_project' => 'yes', 'tableid' => 'tasks_overdue');
+		echo $this->partial('pm/tasks/partials/tasks', $options);
+	?>
+	<p>
+		<input type="submit" class="submit" value="Mark Completed" />
+	</p> 	
+	</form>
+<?php endif; ?>
+
+<?php if(count($this->tasks['today']) >= 1): ?>
+	<div class="fail png_bg">You have tasks due today!!</div>
+	<div class="content_headers" style="padding-top:0px;">
+		<div class="task_header">Your Tasks Due Today</div>	
+		<?php echo $this->ActionBlock('help', 'Help', $this->url('docs', array('module' => 'pm','controller' => 'docs','action'=>'tasks', 'page' => 'your-tasks-due-today'), null, TRUE), 'facebox'); ?>		
+	</div>
+	<form action="" method="POST">
+	<?php 
+		$options = array('tasks' => $this->tasks['today'], 'enable_checkbox' => 'yes', 'enable_due' => 'yes', 'enable_project' => 'yes', 'tableid' => 'tasks_due_today');
+		echo $this->partial('pm/tasks/partials/tasks', $options);
+	?>
+	<p>
+		<input type="submit" class="submit" value="Mark Completed" />
+	</p> 	
+	</form>
+<?php endif; ?>
+
+<?php if(count($this->tasks['tomorrow']) >= 1): ?>
+	<div class="attention canhide png_bg">You have tasks due tomorrow.</div>
+	<div class="content_headers" style="padding-top:0px;">
+		<div class="task_header">Your Tasks Due Tomorrow</div>	
+		<?php echo $this->ActionBlock('help', 'Help', $this->url('docs', array('module' => 'pm','controller' => 'docs','action'=>'tasks', 'page' => 'your-tasks-due-tomorrow'), null, TRUE), 'facebox'); ?>		
+	</div>
+	<form action="" method="POST">
+	<?php 
+		$options = array('tasks' => $this->tasks['tomorrow'], 'enable_checkbox' => 'yes', 'enable_due' => 'yes', 'enable_project' => 'yes', 'tableid' => 'tasks_due_tomorrow');
+		echo $this->partial('pm/tasks/partials/tasks', $options);
+	?>
+	<p>
+		<input type="submit" class="submit" value="Mark Completed" />
+	</p> 	
+	</form>
+<?php endif; ?>
+
+<?php if(count($this->tasks['within_week']) >= 1): ?>
+	<div class="content_headers" style="padding-top:0px;">
+		<div class="task_header">Your Tasks Due Within a Week</div>	
+		<?php echo $this->ActionBlock('help', 'Help', $this->url('docs', array('module' => 'pm','controller' => 'docs','action'=>'tasks', 'page' => 'your-tasks-due-week'), null, TRUE), 'facebox'); ?>	
+	</div>
+	<form action="" method="POST">
+	<?php 
+		$options = array('tasks' => $this->tasks['within_week'], 'enable_checkbox' => 'yes', 'enable_due' => 'yes', 'enable_project' => 'yes', 'tableid' => 'tasks_due_week');
+		echo $this->partial('pm/tasks/partials/tasks', $options);
+	?>
+	<p>
+		<input type="submit" class="submit" value="Mark Completed" />
+	</p> 	
+	</form>
+<?php endif; ?>
+
+<?php if($this->CheckPermission('view_projects')): ?>
+	<div class="content_headers" style="padding-top:0px;">
+		<div class="project_header">Your Projects</div>
+		<?php //echo $this->ActionBlock('help', 'Help', $this->url(array('module' => 'pm','controller' => 'docs','action'=>'projects', 'page' => 'your-projects'), null, TRUE), 'facebox'); ?>		
+	</div>
+	<?php 
+	if($this->projects):
+		$options = array('projects' => $this->projects);
+		echo $this->partial('pm/projects/partials/projects', $options); 
+	else: 
+	?>
+	<div class="information png_bg">There aren't any projects added yet. <?php if($this->CheckPermission('manage_projects')): ?>Want to <a href="<?php echo $this->url('projects/add'); ?>">add</a> one?.<?php endif; ?></div>
+	<?php endif; ?>
+<?php endif; ?>
+
+<?php if(count($this->tasks['upcoming']) >= 1): ?>
+	<div class="content_headers" style="padding-top:0px;">
+		<div class="task_header">Your Upcoming Tasks</div>	
+		<?php echo $this->ActionBlock('help', 'Help', $this->url('docs', array('module' => 'pm','controller' => 'docs','action'=>'tasks', 'page' => 'your-upcoming-tasks'), null, TRUE), 'facebox'); ?>		
+	</div>
+	<form action="" method="POST">
+	<?php 
+		$options = array('tasks' => $this->tasks['upcoming'], 'enable_checkbox' => 'yes', 'enable_due' => 'yes', 'enable_project' => 'yes', 'tableid' => 'tasks_upcoming');
+		echo $this->partial('pm/tasks/partials/tasks', $options);
+	?>
+	<p>
+		<input type="submit" class="submit" value="Mark Completed" />
+	</p> 	
+	</form>
+<?php endif; ?>
+
+<div class="content_headers">
+	<div class="timetracker_header">Last 30 Days of Time Recorded</div>
+	<?php //echo $this->ActionBlock('help', 'Help', $this->url(array('module' => 'pm','controller' => 'docs','action'=>'times', 'page' => 'your-latest'), null, TRUE), 'facebox'); ?>		
+</div>
+<?php echo $this->FusionCharts('times_sum_user', 'Line', 625, 400); ?>

@@ -1,0 +1,86 @@
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'bookmark_form');
+$form->setAttribute('action', $this->form_action);
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+
+	if($this->id > 0)
+		echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+?>	
+
+<style>
+#loading
+{
+	display:none;
+}
+</style>
+<div id="oputput"></div>
+<p>
+	<label for="url">URL</label>
+	<?php $name = $form->get('url'); echo $this->formRow($name); ?>
+</p>
+
+<p>
+	<label for="name">Name</label>
+	<?php $name = $form->get('name'); echo $this->formRow($name); ?>
+</p>
+
+<?php if($this->company): ?>
+<p>
+	<label for="company_id" id="companies">Company</label>
+	<a href="<?php echo $this->url('companies/view', array('company_id' => $this->company['id']), null, TRUE); ?>"><?php echo $this->company['name']; ?></a>
+	<input type="hidden" name="company" value="<?php echo $this->company['id']; ?>" />
+</p>
+<?php endif; ?>
+
+<?php if($this->project): ?>
+<p>
+	<label for="project_id">Project</label>
+	<a href="<?php echo $this->url('projects/view', array('project_id' => $this->project['id'])); ?>"><?php echo $this->project['name']; ?></a>
+	<input type="hidden" name="project" value="<?php echo $this->project['id']; ?>" />
+</p>
+<?php endif; ?>
+
+<?php if($this->task): ?>
+<p>
+	<label for="task_id">Task</label>
+	<a href="<?php echo $this->url('tasks/view', array('task_id' => $this->task['id'])); ?>"><?php echo $this->task['name']; ?></a>
+	<input type="hidden" name="task" value="<?php echo $this->task['id']; ?>" />
+</p>
+<?php endif; ?>
+<p>
+	<label for="description">Description</label>
+	<?php $name = $form->get('description'); echo $this->formRow($name); ?>
+		<label for="hashed"><?php $name = $form->get('hashed'); echo $this->formRow($name); ?>Encrypt*</label>
+		*If you're storing sensitive details, like login credentials, you should encrypt the data for storage.
+</p>
+
+<p>
+	<input type="submit" class="submit" value="Submit" />
+</p>
+<?php echo $this->ConfirmPageUnload('#bookmark_form')?>
+<?php echo $this->form()->closeTag() ?>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+
+	$("#bookmark_form").validate({
+		rules: {
+			name: "required",
+		    url: {
+			      required: true,
+			      url: true
+			}
+		},
+		messages: {
+			name: "Please enter a name",
+		    url: {
+			      required: "Please enter a valid URL",
+			      url: "Please enter a valid URL"
+			}			
+		}
+	});	
+});
+</script>

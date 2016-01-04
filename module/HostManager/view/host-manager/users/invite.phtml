@@ -1,0 +1,67 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="invites_header">Invite User</div>	
+</div>
+<p>
+<?php 
+$form = $this->form;
+$form->setAttribute('action', $this->url('users/invite'));
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+<style>
+#loading
+{
+	display:none;
+}
+</style>
+<div id="oputput"></div>
+<p>
+	<label for="first_name">First Name</label>
+	<?php $name = $form->get('first_name'); echo $this->formRow($name); ?>
+</p>
+
+<p>
+	<label for="last_name">Last Name</label>
+	<?php $name = $form->get('last_name'); echo $this->formRow($name); ?>
+</p>
+
+<p>
+	<label for="email">Email</label>
+	<?php $name = $form->get('email'); echo $this->formRow($name); ?>
+</p>
+
+<p class="user_role_boxes"><br /><label for="">Assigned Roles:</label>
+	<?php $field = $form->get('user_roles'); echo $this->formRow($field); ?>		
+</p>
+
+<p>
+	<input type="submit" class="submit" value="Submit" />
+</p>
+<?php echo $this->ConfirmPageUnload('#invite_form')?>
+<?php echo $this->form()->closeTag() ?>
+</p>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+
+	$("#invite_form").validate({
+		rules: {
+			email: {
+				required: true,
+				email: true
+			},
+			first_name: "required",
+			last_name: "required",
+		},
+		messages: {
+			email: {
+				required: "Please enter an email",
+				email: "Please enter a valid email address"
+			},	
+			first_name: "Please enter a first name",
+			last_name: "Please enter a last name",		
+		}
+	});	
+});
+</script>

@@ -1,0 +1,49 @@
+<div class="content_headers" style="padding-top:0px;">
+
+	<div class="note_header"><?php echo $this->note['subject']; ?></div>
+		
+		<div class="actions">
+			<a rel="facebox" href="<?php echo $this->url('notes/remove', array('note_id' => $this->note['id'])); ?>" title="Delete">
+				<?php echo $this->InteractIcon('cross', 'Delete');?>
+				<div class="action_text">Delete</div>
+			</a>
+		</div>		
+		<div class="actions">
+			<a href="<?php echo $this->url('notes/edit', array('note_id' => $this->note['id'])); ?>" title="Edit" rel="facebox">
+				<?php echo $this->InteractIcon('pencil', 'Edit');?>
+				<div class="action_text">Edit</div>
+			</a> 
+		</div>
+</div>
+
+<?php 
+$options = array('company' => $this->company, 'project' => $this->project, 'task' => $this->task);
+echo $this->BackToLink($options); 
+?>
+
+<div class="item_details">
+    <div class="items" style="padding-left:10px;">
+    	<p>
+			<span class="bold">Last Modified:</span> <?php echo $this->RelativeDate($this->note['last_modified']); ?><br />
+			<span class="bold">Created Date:</span> <?php echo $this->RelativeDate($this->note['created_date']); ?> 
+    	</p>
+    </div>
+    <div class="items" style="padding-left:10px;">
+    	<p>
+			<span class="bold">Company:</span> <a href="<?php echo $this->url('companies/view', array('company_id' => $this->note['company_id'])); ?>"><?php echo $this->note['company_name']; ?></a>
+			<?php if($this->note['project_name']): ?>
+				<br /><span class="bold">Project:</span> <a href="<?php echo $this->url('projects/view', array('project_id' => $this->note['project_id'])); ?>"><?php echo $this->note['project_name']; ?></a>
+			<?php endif; ?>
+			<?php if($this->note['task_name']): ?>
+				<br /><span class="bold">Task:</span> <a href="<?php echo $this->url('tasks/view', array('task_id' => $this->note['task_id'])); ?>"><?php echo $this->note['task_name']; ?></a>
+			<?php endif; ?> 	
+    	</p>
+    </div>   
+</div>
+
+<br clear="all" />
+
+<h2>Note:</h2>
+<p>
+<?php echo $this->FormatHtml($this->note['description']); ?>      	
+</p>

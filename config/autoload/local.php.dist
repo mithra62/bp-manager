@@ -1,0 +1,41 @@
+<?php
+/**
+ * mithra62 - MojiTrac
+ *
+ * @package        mithra62:Mojitrac
+ * @author         Eric Lamb
+ * @copyright      Copyright (c) 2013, mithra62, Eric Lamb.
+ * @link           http://mithra62.com/
+ * @version        2.0
+ * @filesource     ./config/autoload/global.php
+ */
+
+return array(
+
+
+	/**
+	 * Database
+	 */
+	'db'    => array(
+		'dsn'      => 'mysql:dbname=DATABASE_NAME;host=DATABASE_HOST',
+		'username' => '',
+		'password' => ''
+	),
+
+
+	/**
+	 * Email
+	 */
+	'email' => array(
+		'type' => '', //choose between `php` and `smtp`
+		'smtp_options' => array( //if `smtp` chosen above, this must be completed and accurate
+			'host' => '',
+            'connection_class' => 'login',
+            'port' => '',
+			'connection_config' => array(
+				'username' => '',
+				'password' => ''
+			)
+		)
+	)
+);

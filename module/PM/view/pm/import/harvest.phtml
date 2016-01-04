@@ -1,0 +1,13 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="import_header">Import From Harvest</div>
+</div>
+<div class="back_link_content">
+	<a href="<?php echo $this->url(array('module' => 'pm','controller'=>'import','action'=>'index'), null, TRUE); ?>" title="Back to Import Data">
+		Back to Import Data	
+	</a><div><?php echo $this->InteractIcon('left-arrow', 'Back to Import Data');?></div>
+</div>
+<br clear="all" />
+<?php 
+$options = array('form' => $this->form);
+echo $this->partial('import/partials/harvest_form.phtml', $options); 
+?>

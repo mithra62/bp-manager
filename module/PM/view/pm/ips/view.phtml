@@ -1,0 +1,40 @@
+<div class="content_headers" style="padding-top:0px;">
+
+	<div class="admin_header">Viewing Ip Address: <?php echo $this->ip['ip_raw']; ?></div>
+		
+		<div class="actions">
+			<a rel="facebox" href="<?php echo $this->url('ips/remove', array('ip_id' => $this->ip['id'])); ?>" title="Delete">
+				<?php echo $this->InteractIcon('cross', 'Delete');?>
+				<div class="action_text">Delete</div>
+			</a>
+		</div>		
+		<div class="actions">
+			<a href="<?php echo $this->url('ips/edit', array('ip_id' => $this->ip['id'])); ?>" title="Edit">
+				<?php echo $this->InteractIcon('pencil', 'Edit');?>
+				<div class="action_text">Edit</div>
+			</a> 
+		</div>
+</div>
+<?php if(!$this->ajax_mode): ?>
+<div class="back_link_content">
+	<a href="<?php echo $this->url('ips'); ?>" title="Back to Ips">
+		Back to Ips
+	</a><div><?php echo $this->InteractIcon('left-arrow', 'Back to Ips');?></div>
+</div>	
+<br clear="all" />
+<?php endif; ?>
+<div class="item_details">
+    <div class="items" style="padding-left:10px;">
+    	<p>
+			<span class="bold">Modified:</span> <?php echo $this->RelativeDate($this->ip['last_modified']); ?><br />
+			<span class="bold">Created:</span> <?php echo $this->RelativeDate($this->ip['created_date']); ?> 
+    	</p>
+    </div> 
+</div>
+
+<br clear="all" />
+
+<h2>Description:</h2>
+<p>
+<?php echo nl2br($this->ip['description']); ?>      	
+</p>

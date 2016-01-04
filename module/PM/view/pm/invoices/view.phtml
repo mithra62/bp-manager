@@ -1,0 +1,96 @@
+<div class="content_headers" style="padding-top:0px;">
+
+	<div class="invoice_header">#<?php echo $this->invoice_data['invoice_number']; ?> (<?php echo $this->invoice_data['status']; ?>)</div>
+		
+		<?php if($this->CheckPermission('manage_invoices')):?>
+		<div class="actions">
+			<a href="<?php echo $this->url('invoices/remove', array('invoice_id' => $this->id)); ?>" title="Delete" rel="facebox">
+				<?php echo $this->InteractIcon('cross', 'Delete');?>
+				<div class="action_text">Delete</div>
+			</a>
+		</div>		
+		<div class="actions">
+			<a href="<?php echo $this->url('invoices/edit', array('invoice_id' => $this->id)); ?>" title="Edit">
+				<?php echo $this->InteractIcon('pencil', 'Edit');?>
+				<div class="action_text">Edit</div>
+			</a> 
+		</div>
+		<?php endif; ?>		
+</div>
+
+<div class="item_details">
+    <div class="items" style="padding-left:10px;">
+    	<p>
+			<span class="bold">Company:</span> <a href="<?php echo $this->url('companies/view', array('company_id' => $this->invoice_data['company_id'])); ?>"><?php echo $this->invoice_data['company_name']; ?></a><br />   
+			<span class="bold">Last Modified:</span> <?php echo $this->RelativeDate($this->invoice_data['last_modified']); ?><br />
+			<span class="bold">Created Date:</span> <?php echo $this->RelativeDate($this->invoice_data['created_date']); ?> 				
+    	</p>
+    </div> 
+
+    <div class="items" style="padding-left:10px;">
+    	<p>
+			<span class="bold">Amount:</span> <?php echo $this->currencyFormat($this->invoice_data['amount'], $this->company_data['currency_code'], $this->company_data['client_language']); ?><br />
+			<?php if($this->invoice_data['po_number']):?>
+				<span class="bold">PO Number:</span> <?php echo $this->invoice_data['po_number']; ?><br />
+			<?php endif; ?> 
+			<?php if($this->invoice_data['discount']):?>
+				<span class="bold">Discount:</span> <?php echo $this->invoice_data['discount']; ?><br />
+			<?php endif; ?> 
+    	</p>
+    </div>
+     
+</div>
+
+<br clear="all" />
+
+<h2>Line Items</h2>
+<table cellpadding="0" cellspacing="0" class="<?php echo ($this->tableclass) ? $this->tableclass : 'tablesorter'; ?>" id="moji_invoice_line_items">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Item</th>
+			<th>Description</th>
+			<th>Unit Cost</th>
+			<th>Total Cost</th>
+			<th>Qty</th>
+		</tr>
+	</thead>
+
+	<tbody>
+	<?php $i = 0; foreach($this->invoice_data['line_items'] AS $item): ?>
+		<tr>
+			<td>#<!-- <?php echo '0'.$i; ?> --><?php echo $i+1; ?></td>
+			<td nowrap><?php echo $item['name']; ?></td>
+			<td><?php echo $item['description']; ?></td>
+			<td nowrap><?php echo $this->currencyFormat($item['unit_cost'], $this->company_data['currency_code'], $this->company_data['client_language']); ?></td>
+			<td nowrap><?php echo $this->currencyFormat($item['total_cost'], $this->company_data['currency_code'], $this->company_data['client_language']); ?></td>
+			<td nowrap><?php echo $item['quantity']; ?></td>
+		</tr>
+	<?php $i++; endforeach; ?>
+	</tbody>
+</table>
+
+
+<?php if($this->invoice_data['terms_conditions']): ?>
+	<h2>Terms:</h2>
+	<p><?php echo $this->FormatHtml($this->invoice_data['terms_conditions']); ?></p>
+<?php endif; ?>
+
+<?php if($this->invoice_data['notes']): ?>
+	<h2>Note:</h2>
+	<p><?php echo $this->FormatHtml($this->invoice_data['notes']); ?></p>
+<?php endif; ?>
+
+
+<script>
+$(document).ready(function() {
+
+	var t = $('#moji_invoice_line_items').dataTable({
+		"bJQueryUI": true,
+		"bStateSave": false,
+        "bLengthChange": false,
+        "bPaginate": false,
+		"aaSorting": [[ 0, "asc" ]]
+	}); 	
+} );
+</script>

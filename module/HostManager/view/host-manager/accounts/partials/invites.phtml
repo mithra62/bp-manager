@@ -1,0 +1,41 @@
+<table cellpadding="0" cellspacing="0" class="<?php echo ($this->tableclass) ? $this->tableclass : 'tablesorter'; ?>" id="<?php echo ($this->tableid) ? $this->tableid : 'moji_invites'; ?>">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<th>Last Invited</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php 
+		$i = 0;
+		foreach($this->invites as $invite)
+		{
+		?>
+		<tr>
+			<td>
+			<?php 
+			$gravatar_settings = array(
+				'img_size'    => 25,
+				'default_img' => \Zend\View\Helper\Gravatar::DEFAULT_MM,
+				'rating'      => \Zend\View\Helper\Gravatar::RATING_G,
+				'secure'      => null,
+			);
+			echo $this->gravatar($invite['email'], $gravatar_settings)->getImgTag(); 
+			?>	
+			</td>
+			<td><?php echo $invite['first_name']; ?> <?php echo $invite['last_name']; ?></td>
+			<td><a title="<?php echo $invite['email']; ?>" href="mailto:<?php echo $invite['email']; ?>"><?php echo $invite['email']; ?></a></td>
+			<td><?php echo ($invite['phone_home'] != '' ? $invite['phone_home'] : 'N/A'); ?></td>
+			<td><?php echo $this->RelativeDate($invite['last_sent']); ?></td>
+			<td><a href="<?php echo $this->url('users/remove-invite', array('user_id'=> $invite['user_id'])); ?>" title="Delete" rel="facebox"><?php echo $this->InteractIcon('cross', 'Delete');?></a></td>
+		</tr>
+		<?php 
+		}
+		?>
+	</tbody>
+</table>

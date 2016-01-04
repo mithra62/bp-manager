@@ -1,0 +1,12 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="file_peer_reviews_header">Remove File Review: <?php echo $this->Truncate($this->file['file_name'], 30); ?></div>		
+</div>
+<div class="attention png_bg">
+Are you sure you want to remove the review? This can not be undone...
+</div>
+
+<p>
+<form action="<?php echo $this->url(array('module' => 'pm','controller'=>'files','action'=>'remove-review', 'id' => $this->id), null, TRUE); ?>" method="POST">
+	<input type="submit" class="submit" value="Yes" name="confirm" /> <input type="submit" class="submit" value="No" name="fail"/>
+</form>
+</p>

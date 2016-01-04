@@ -1,0 +1,12 @@
+<div class="content_headers">
+	<div class="admin_header">Configure System</div>	
+</div>
+<dl>
+	<dt><a href="<?php echo $this->url('admin/settings'); ?>">Global Settings</a></dt>
+	<dd>Configure the system settings.</dd>
+	<dt><a href="<?php echo $this->url('ips'); ?>">IP Access</a></dt>
+	<dd>Set MojiTrac to only allow access from certain IP addresses.</dd>
+	<dt><a href="<?php echo $this->url('options', array('module' => 'pm','controller' => 'options','action'=>'index'), null, TRUE); ?>">Type Options</a></dt>
+	<dd>Configure the available options and types MojiTrac will use for classifying projects and tasks.</dd>	
+</dl>
+<br clear="all" />

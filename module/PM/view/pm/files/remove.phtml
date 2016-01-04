@@ -1,0 +1,25 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="file_header">Remove File: <?php echo $this->file_data['name']?></div>		
+</div>
+<?php 
+$options = array('id' => $this->file_data['id'], 'controller' => 'files', 'name' => $this->file_data['name'], 'action' => 'view');
+//echo $this->BackToLink($options);
+?>
+<div class="attention png_bg">
+Are you sure you want to remove "<?php echo $this->file_data['name']?>"? This can not be undone...
+</div>
+
+
+<p>
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'file_form');
+$form->setAttribute('action', $this->url('files/remove', array('file_id' => $this->file_data['id'])));
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+	<?php $field = $form->get('confirm'); echo $this->formRow($field); ?> <?php $field = $form->get('fail'); echo $this->formRow($field); ?>
+<?php echo $this->form()->closeTag() ?>
+</p>

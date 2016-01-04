@@ -1,0 +1,10 @@
+<div class="content_headers">
+	<div class="reports_header">Reports</div>	
+</div>
+<dl>
+	<dt><a href="<?php echo $this->url('pm', array('module' => 'pm','controller' => 'reports','action'=>'times', 'chart' => 'date-history'), null, TRUE); ?>" rel="facebox">Time History</a></dt>
+	<dd>Chart of all the times grouped by date.</dd>
+	<dt><a href="<?php echo $this->url('pm', array('module' => 'pm','controller' => 'reports','action'=>'times', 'chart' => 'user-history'), null, TRUE); ?>" rel="facebox">User Times</a></dt>
+	<dd>Chart of all the times grouped by user.</dd>
+</dl>
+<br clear="all" />

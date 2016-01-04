@@ -1,0 +1,136 @@
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'company_form');
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+<div id="form_tabs">
+	<ul>
+
+		<li><a href="#notifications">Notifications</a></li>
+		<li><a href="#date_time">Date/Time</a></li>
+		<li><a href="#misc">Misc</a></li>
+	</ul>
+	
+	<div id="notifications">
+		<p class="user_role_boxes">
+			Select the events that you want to receive E-mail notifications for:<br /><br />
+			<label for="noti_assigned_task"><?php $name = $form->get('noti_assigned_task'); echo $this->formRow($name); ?> When I am assigned to a new task.</label><br />
+			<label for="noti_status_task"><?php $name = $form->get('noti_status_task'); echo $this->formRow($name); ?> When the status of one of my tasks changes.</label><br />
+			<label for="noti_priority_task"><?php $name = $form->get('noti_priority_task'); echo $this->formRow($name); ?> When the priority of one of my tasks changes.</label><br />
+			<label for="noti_add_proj_team"><?php $name = $form->get('noti_add_proj_team'); echo $this->formRow($name); ?> When I am added to a project team.</label><br />
+			<label for="noti_remove_proj_team"><?php $name = $form->get('noti_remove_proj_team'); echo $this->formRow($name); ?> When I am removed from a project team.</label><br />
+			<label for="noti_file_uploaded"><?php $name = $form->get('noti_file_uploaded'); echo $this->formRow($name); ?> When a file is uploaded.</label><br />
+			<label for="noti_file_revision_uploaded"><?php $name = $form->get('noti_file_revision_uploaded'); echo $this->formRow($name); ?> When a file revision is uploaded.</label>	<br />				
+			
+			<label for="noti_daily_task_reminder"><?php $name = $form->get('noti_daily_task_reminder'); echo $this->formRow($name); ?> Daily task reminder.</label>
+					
+		</p>		
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>	
+	</div>	
+	
+	<div id="date_time">
+		
+		<p><label for="enable_rel_time"><?php $name = $form->get('enable_rel_time'); echo $this->formRow($name); ?> Enable relative time.</label></p>
+		
+		<p>
+			<label for="timezone">Timezone <a href="<?php echo $this->url('docs', array('module' => 'pm','controller' => 'docs','action'=>'settings', 'page' => 'allowed_file_formats'), null, TRUE); ?>" rel="facebox"><?php echo $this->InteractIcon('help', 'About Allowed File Formats');?></a></label>
+			<?php $field = $form->get('timezone'); echo $this->formRow($field); ?>
+		</p>		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>	
+	</div>
+	
+	<div id="misc">
+		
+		<p>
+			<label for="locale">Locale</label>
+			<?php $field = $form->get('locale'); echo $this->formRow($field); ?>
+		</p>	
+		
+		<p>
+			<label for="daily_reminder_schedule">Daily Task Reminder Schedule</label>
+			<?php $field = $form->get('daily_reminder_schedule'); echo $this->formRow($field); ?>
+		</p>		
+			
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>		
+	</div>
+
+</div>	
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+
+	if($("#time_format").val() == 'custom')
+	{
+		$("#time_format_custom_p").show();
+	}
+
+	if($("#date_format").val() == 'custom')
+	{
+		$("#date_format_custom_p").show();
+	}	
+		
+	$("#time_format").change(function(){
+		//$("#assignment_comment").show();
+		var time_format = $("#time_format").val();
+		if(time_format == 'custom')
+		{
+			$("#time_format_custom_p").show();
+		}
+		else
+		{
+			$("#time_format_custom_p").hide();
+		}
+	});
+
+	$("#date_format").change(function(){
+		//$("#assignment_comment").show();
+		var date_format = $("#date_format").val();
+		if(date_format == 'custom')
+		{
+			$("#date_format_custom_p").show();
+		}
+		else
+		{
+			$("#date_format_custom_p").hide();
+		}
+	});	
+
+	$.validator.addMethod( 'valDateFormatCustom', function(value,element) {
+		if($("#date_format").val() == 'custom' && $("#date_format_custom").val() == '')
+		{
+			return false;
+		}
+		return true;
+	});
+	$.validator.addMethod( 'valTimeFormatCustom', function(value,element) {
+		if($("#time_format").val() == 'custom' && $("#time_format_custom").val() == '')
+		{
+			return false;
+		}
+		return true;
+	});
+	
+	$('#form_settings').validate({
+			rules: {
+				date_format_custom: 'valDateFormatCustom',
+				time_format_custom: 'valTimeFormatCustom'
+			},
+			messages: {
+				date_format_custom: "required",
+				time_format_custom: "required"
+			}
+	});
+		
+});
+</script>		
+<?php echo $this->form()->closeTag() ?>

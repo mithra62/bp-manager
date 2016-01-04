@@ -1,0 +1,29 @@
+<div class="content_headers" style="padding-top:0px;">
+
+	<div class="users_header">Users</div>
+		<div class="actions">
+			<a href="<?php echo $this->url('docs', array('module' => 'pm','controller' => 'docs','action'=>'users', 'page' => 'main'), null, TRUE); ?>" rel="facebox" title="Add Project">
+				<?php echo $this->InteractIcon('help', 'About Users');?>
+				<div class="action_text">Help</div>
+			</a>
+		</div>			
+		<?php if($this->CheckPermission('manage_users')):?>
+		<div class="actions">
+			<a href="<?php echo $this->url('users/add', array('module' => 'pm','controller' => 'users','action'=>'add'), null, TRUE); ?>" title="Add User">
+				<?php echo $this->InteractIcon('add', 'Add User');?>
+				<div class="action_text">Add User</div>
+			</a>
+		</div>
+		<?php endif; ?>		
+</div>
+<?php 
+if($this->users): 
+
+	$options = array('users' => $this->users, 'enable_actions' => 'yes', 'user_status' => 'yes');
+	echo $this->partial('pm/users/partials/users', $options);
+
+else: ?>
+
+<div class="information png_bg">There aren't users added yet. Want to <a href="<?php echo $this->url('users/add', array('module' => 'pm','controller'=>'users','action'=>'add'), null, TRUE); ?>">add</a> one?.</div>
+
+<?php endif; ?>

@@ -1,0 +1,15 @@
+<?php 
+$options = array('form' => $this->form);
+
+echo $this->partial('times/partials/search_form.phtml', $options);
+
+if($this->times):
+	echo "<h2>Existing Time</h2>";
+	$options = array('times' => $this->times, 'enable_actions' => 'yes', 'enable_company' => 'yes');
+	echo $this->partial('times/partials/times.phtml', $options);
+
+else: ?>
+
+<div class="information png_bg">There aren't any times added yet. Want to <a href="/pm/times/add">add</a> one?.</div>
+
+<?php endif; ?>

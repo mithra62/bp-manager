@@ -1,0 +1,61 @@
+<table cellpadding="0" cellspacing="0" class="<?php echo ($this->tableclass) ? $this->tableclass : 'tablesorter'; ?>" id="<?php echo ($this->tableid) ? $this->tableid : 'moji_notes'; ?>">
+	<thead>
+		<tr>
+			<th>Subject</th>			
+			<th>Topic</th>
+			<?php if($this->enable_project): ?>
+			<th>Project</th>
+			<?php endif;?>			
+			<?php if($this->enable_task): ?>
+			<th>Task</th>
+			<?php endif;?>
+			<th>Last Modified</th>
+			<?php if($this->enable_actions):?>
+			<th class="{sorter: false}">Actions</th>
+			<?php endif; ?>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php 
+		$i = 0;
+		foreach($this->notes as $note)
+		{
+		?>
+		<tr>
+			<td><a title="<?php echo $note['subject']; ?>" href="<?php echo $this->url('notes/view', array('note_id'=> $note['id'])); ?>" <?php echo ($this->facebox == 'yes' ? 'rel="facebox"' : ''); ?>><?php echo $note['subject']; ?></a></td>
+			<td><?php echo $this->NoteTopic($note['topic']); ?></td>
+
+			<?php if($this->enable_project): ?>
+			<td>
+				<?php if($note['project_name']):?>
+					<a title="<?php echo $note['project_name']; ?>" href="<?php echo $this->url('projects/view', array('project_id'=> $note['project_id'])); ?>" ><?php echo $note['project_name']; ?></a>
+				<?php else: ?>
+					N/A
+				<?php endif;?>
+			</td>
+			<?php endif;?>
+			
+			<?php if($this->enable_task): ?>
+			<td>
+				<?php if($note['task_name']):?>
+					<a title="<?php echo $note['task_name']; ?>" href="<?php echo $this->url('tasks/view', array('task_id'=> $note['task_id'])); ?>" ><?php echo $note['task_name']; ?></a>
+				<?php else: ?>
+					N/A
+				<?php endif;?>			
+			</td>
+			<?php endif;?>
+				
+			<td><?php echo $this->RelativeDate($note['last_modified']); ?></td>
+			<?php if($this->enable_actions):?>
+			<td>
+			<a href="<?php echo $this->url('notes/edit', array('note_id' => $note['id']), null, TRUE); ?>" title="Edit"><img src="/images/pencil.png" width="16" height="16" class="png_bg" alt="Edit" /></a>
+			<a <?php echo ($this->facebox == 'yes' ? 'rel="facebox"' : ''); ?> href="<?php echo $this->url('pm', array('module' => 'pm','controller'=>'notes','action'=>'remove', 'id' => $note['id']), null, TRUE); ?>" title="Delete"><img src="/images/cross.png" width="16" height="16" class="png_bg" alt="Close" /></a>
+			</td>
+			<?php endif; ?>
+		</tr>
+		<?php 
+		}
+		?>
+	</tbody>
+</table>

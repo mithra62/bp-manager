@@ -1,0 +1,25 @@
+<?php 
+$options = array();
+
+echo $this->type;
+exit;
+switch($this->type)
+{
+	case 'view':
+	case 'projects':
+	case 'tasks':
+	case 'notes':
+	case 'files':
+	case 'bookmarks':
+	case 'times':
+	case 'contacts':
+	case 'type':
+		$page = $this->page.'.phtml';
+	break;	
+	
+	default:
+		$page = 'main.phtml';
+	break;
+}
+echo $this->partial('pm/docs/companies/'.$page, $options); 
+?>

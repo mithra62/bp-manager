@@ -1,0 +1,14 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="docs_header">About Viewing User</div>
+</div>
+<p>
+This page lists all a user's details and stuff. Pretty much anything to do with a particular user is listed here.
+</p>
+
+<?php if($this->CheckPermission('manage_users')):?>
+<h4>Actions</h4>
+<p>
+	<?php echo $this->InteractIcon('pencil', 'Edit');?> Edit User
+	<br /><?php echo $this->InteractIcon('cross', 'Delete');?> Remove User<br />
+</p>
+<?php endif; ?>

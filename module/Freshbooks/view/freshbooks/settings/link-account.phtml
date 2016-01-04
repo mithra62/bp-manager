@@ -1,0 +1,63 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="freshbooks_header">Link Freshbooks Account</div>				
+</div>
+
+<?php if(!$this->ajax_mode): ?>
+<div class="back_link_content">
+	<a href="<?php echo $this->url('freshbooks'); ?>" title="Back to Ips">
+		Back to Freshbooks
+	</a><div><?php echo $this->InteractIcon('left-arrow', 'Back to Freshbooks');?></div>
+</div>	
+<br clear="all" />
+<p><strong>Warning! Are you really sure you want to do this?!</strong>  Updating this will remove all associated Freshbooks data from MojiTrac and set you back to day one!</p>
+<?php endif; ?>
+<?php 
+$form = $this->form;
+$form->setAttribute('action', $this->form_action);
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+
+if($this->id > 0)
+	echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+?>
+	
+		<p>
+			<label for="freshbooks_account_url">Domain</label>
+			<?php $field = $form->get('freshbooks_account_url'); echo $this->formRow($field); ?>
+		</p>
+		<p>
+			<label for="freshbooks_auth_token">Token</label>
+			<?php $field = $form->get('freshbooks_auth_token'); echo $this->formRow($field); ?>
+		</p>
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>			
+
+<?php echo $this->ConfirmPageUnload('#freshbooks_credentials_form')?>
+<?php echo $this->form()->closeTag() ?>
+
+<script type="text/javascript">
+$.validator.setDefaults({
+	//submitHandler: function() { alert("submitted!"); }
+});
+
+$().ready(function() {
+
+	$("#freshbooks_account_url").focus();
+	$("#freshbooks_credentials_form").validate({
+		rules: {
+			freshbooks_account_url: "required",
+			freshbooks_auth_token: "required"
+		},
+		messages: {
+			freshbooks_account_url: "<?php echo $this->_('js_freshbooks_account_url_validation_message', 'freshbooks'); ?>",
+			freshbooks_auth_token: "<?php echo $this->_('js_freshbooks_auth_token_validation_message', 'freshbooks'); ?>"
+		}
+	});
+
+});
+
+</script>	

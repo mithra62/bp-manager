@@ -1,0 +1,98 @@
+<table cellpadding="0" cellspacing="0" class="<?php echo ($this->tableclass) ? $this->tableclass : 'tablesorter'; ?>" id="<?php echo ($this->tableid) ? $this->tableid : 'moji_times'; ?>">
+	<thead>
+		<tr>
+			<?php if($this->enable_checkbox):?>
+			<th></th>
+			<?php endif; ?>	
+			<?php if($this->enable_hour_rate_field):?>
+			<th>Rate/Hr</th>
+			<?php endif; ?>		
+			<?php if($this->enable_date):?>
+			<th>Date</th>
+			<?php endif; ?>		
+			<th>Hours</th>
+			<?php if($this->enable_company):?>
+			<th>Company</th>
+			<?php endif; ?>
+			<?php if($this->enable_project):?>
+			<th>Project</th>
+			<?php endif; ?>
+			<?php if($this->enable_task):?>	
+			<th>Task</th>
+			<?php endif; ?>
+			<th>Who</th>
+			<?php if(!$this->hide_desc): ?>
+			<th>Description</th>
+			<?php endif; ?>
+			<?php if($this->enable_actions && $this->CheckPermission('manage_time')):?>
+			<th></th>
+			<?php endif; ?>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php 
+		$i = 0;
+		foreach($this->times as $time)
+		{
+		?>
+		<tr>
+			<?php if($this->enable_checkbox):?>
+			<td><input type="checkbox" name="<?php echo ($this->field_name ? $this->field_name : 'time_update'); ?>[<?php echo $time['id']; ?>]" /></td>
+			<?php endif; ?>	
+			<?php if($this->enable_hour_rate_field):?>
+			<td nowrap>$<input type="text" title="<?php echo $this->escapehtml($time['description']); ?>" name="<?php echo ($this->hour_rate_field_name ? $this->hour_rate_field_name : 'hour_rate_field'); ?>[<?php echo $time['id']; ?>]" value="<?php echo (!empty($this->hour_rate_field_value) ? $this->hour_rate_field_value : '0'); ?>" size="4" /></td>
+			<?php endif; ?>		
+			<?php if($this->enable_date):?>
+			<td nowrap><!-- <?php echo strtotime($time['date']); ?> --><?php echo $this->RelativeDate($time['date']); ?></td>
+			<?php endif; ?>
+			
+			<td><?php echo $time['hours']; ?></td>
+			<?php if($this->enable_company):?>
+			<td nowrap><a title="<?php echo $time['company_name']; ?>" href="<?php echo $this->url('companies/view', array('type' => 'company', 'company_id'=>$time['company_id'])); ?>"><?php echo $time['company_name']; ?></a></td>
+			<?php endif; ?>
+			
+			<?php if($this->enable_project):?>
+				<td nowrap>
+				<?php if($time['project_name']):?>
+					<a title="<?php echo $time['project_name']; ?>" href="<?php echo $this->url('projects/view', array('type' => 'project', 'project_id'=>$time['project_id'])); ?>"><?php echo $this->Truncate($time['project_name'], 50); ?></a>
+				<?php else: ?>
+					N/A
+				<?php endif; ?>					
+				</td>
+			<?php endif; ?>
+			
+			<?php if($this->enable_task):?>	
+				<td nowrap>
+				<?php if($time['task_name']):?>
+					<a title="<?php echo $time['task_name']; ?>" href="<?php echo $this->url('tasks/view', array('type' => 'task', 'task_id'=>$time['task_id'])); ?>"><?php echo $this->Truncate($time['task_name'], '30'); ?></a>
+				<?php else: ?>
+					N/A
+				<?php endif; ?>
+				</td>
+			<?php endif; ?>
+			
+			<td nowrap>
+			<?php 
+			$user_data = array(
+							'id' => $time['creator'], 
+							'first_name' => $time['creator_first_name'], 
+							'last_name' => $time['creator_last_name']
+			);
+			echo $this->MakeLink('user', $user_data); 
+			?>
+			</td>
+			<?php if(!$this->hide_desc): ?>
+			<td><?php echo $time['description']; ?></td>
+			<?php endif; ?>
+			<?php if($this->enable_actions && $this->CheckPermission('manage_time')):?>
+			<td nowrap>
+			<a href="<?php echo $this->url('times/remove', array('time_id'=>$time['id'])); ?>" title="Delete" rel="facebox"><?php echo $this->InteractIcon('cross', 'Remove Time');?></a>
+			</td>
+			<?php endif; ?>
+		</tr>
+		<?php 
+		}
+		?>
+	</tbody>
+</table>

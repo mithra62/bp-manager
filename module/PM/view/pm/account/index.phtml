@@ -1,0 +1,14 @@
+<?php 
+$options = array('form' => $this->form, 'settings' => $this->settings);
+$partials = array(
+	'pm/account/index/default',
+);
+$partials = $this->DispatchRouteEvents($partials, $options);
+if(is_array($partials) && count($partials) >= 1)
+{
+	foreach($partials AS $partial)
+	{
+		echo $this->partial($partial, $options);	
+	}
+}
+?>

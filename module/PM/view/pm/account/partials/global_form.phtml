@@ -1,0 +1,21 @@
+
+<form action="<?php echo $this->escape($this->form->getAction()); ?>" 
+method="<?php echo $this->escape($this->form->getMethod()) ?>"> 
+<?php 
+if($this->id > 0)
+	echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+?>
+	
+		<p>
+			<label for="master_company">Master Company</label>
+			<?php echo $this->form->master_company; ?>
+		</p>
+		<p>
+			<label for="enable_ip">Enable Ip Locker</label>
+			<?php echo $this->form->enable_ip; ?>
+		</p>
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>			
+</form>	

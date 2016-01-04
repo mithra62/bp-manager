@@ -1,0 +1,30 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="projteam_header">Team Members For <?php echo $this->project['name']; ?></div>	
+</div>
+
+<div class="back_link_content">
+	<a href="<?php echo $this->url('projects/view', array('project_id'=>$this->project['id'])); ?>" title="Back to <?php echo $this->project['name']; ?>">
+		Back to <?php echo $this->project['name']; ?>	
+	</a><div><?php echo $this->InteractIcon('left-arrow', 'Back to '.$this->project['name']);?></div>
+</div>
+<br clear="all" />
+<div class="attention png_bg">Checked users are on the project team.</div>
+<?php 
+if($this->users):
+	$options = array('users' => $this->users, 'project_team' => TRUE, 'proj_team' => $this->proj_team, 'tableid' => 'project_team');
+?>
+ 
+<form action="" method="POST">
+	<?php echo $this->partial('pm/users/partials/users', $options); ?>
+	<p>
+		<input type="submit" class="submit" value="Modify Project Team" />
+	</p> 
+</form>
+<?php
+
+else: 
+?>
+<div class="information png_bg">There aren't any team members on this project yet.</div>
+<?php 
+endif;
+?>

@@ -1,0 +1,110 @@
+<table cellpadding="0" cellspacing="0" class="<?php echo ($this->tableclass) ? $this->tableclass : 'tablesorter'; ?>" id="<?php echo ($this->tableid) ? $this->tableid : 'moji_tasks'; ?>">
+	<thead>
+		<tr>
+			<?php if($this->enable_checkbox):?>
+			<th></th>
+			<?php endif; ?>
+			<th height="10">Task Name</th>
+			<?php if($this->enable_project):?>
+			<th>Project</th>
+			<?php endif; ?>
+			<th>Priority</th>
+			<?php if($this->enable_status):?>
+			<th>Status</th>
+			<?php endif; ?>
+			<?php if($this->enable_completion):?>
+			<th>Completion</th>
+			<?php endif; ?>
+			<?php if($this->enable_start):?>
+			<th>Start</th>
+			<?php endif; ?>			
+			<?php if($this->enable_due):?>
+			<th>Due</th>
+			<?php endif; ?>
+			<th>Creator</th>
+			<?php if($this->enable_assigned):?>
+			<th>Assigned</th>
+			<?php endif; ?>
+			<?php if($this->enable_actions):?>
+			<th></th>
+			<?php endif; ?>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php 
+		$i = 0;
+		foreach($this->tasks as $task)
+		{
+		?>
+		<?php if($this->enable_completion):?>
+		<script type="text/javascript">
+		jQuery(document).ready(function($){
+			$("#task_progress_<?php echo $task['id']; ?>").blur(function() {
+				$("#task_progress_<?php echo $task['id']; ?>").progressBar();
+			});
+			$("#task_progress_<?php echo $task['id']; ?>").progressBar();
+		});
+		</script>
+		<?php endif; ?>		
+		<tr>
+			<?php if($this->enable_checkbox):?>
+			<td><input type="checkbox" name="task_completed[<?php echo $task['id']; ?>]" /></td>
+			<?php endif; ?>
+			<td><a title="<?php echo $task['name']; ?>" href="<?php echo $this->url('tasks/view', array('task_id'=> $task['id'])); ?>"><?php echo $task['name']; ?></a></td>
+			<?php if($this->enable_project):?>
+			<td><a title="<?php echo $task['project_name']; ?>" href="<?php echo $this->url('projects/view', array('company_id' => false, 'project_id'=> $task['project_id']), null, TRUE); ?>"><?php echo $task['project_name']; ?></a></td>
+			<?php endif; ?>
+			<td><?php echo $this->TaskPriority($task['priority']); ?></td>
+			<?php if($this->enable_status):?>
+			<td><?php echo $this->TaskStatus($task['status']); ?></td>
+			<?php endif; ?>
+			<?php if($this->enable_completion):?>
+			<td nowrap><span class="progressBar" id="task_progress_<?php echo $task['id']; ?>"><?php echo $task['progress']; ?>%</span></td>
+			<?php endif; ?>
+			<?php if($this->enable_start):?>
+			<td><?php echo $this->RelativeDate($task['start_date']); ?></td>
+			<?php endif; ?>
+			<?php if($this->enable_due):?>
+			<td><?php echo $this->RelativeDate($task['end_date']); ?></td>
+			<?php endif; ?>
+			<td><?php 
+			$creator_data = array(
+							'id' => $task['creator'], 
+							'first_name' => $task['creator_first_name'], 
+							'last_name' => $task['creator_last_name']
+			);			
+			echo $this->MakeLink('user', $creator_data); ?>
+			</td>
+			<?php if($this->enable_assigned): ?>
+			<td>
+			<?php 
+				if($task['assigned_to']):	
+					$assigned_data = array(
+									'id' => $task['assigned_to'], 
+									'first_name' => $task['assigned_first_name'], 
+									'last_name' => $task['assigned_last_name']
+					);
+					echo $this->MakeLink('user', $assigned_data);
+				else:
+					echo "Unassigned";
+				endif;		
+			?>	
+			</td>
+			<?php endif; ?>	
+			<?php if($this->enable_actions):?>
+			<td>
+			<a href="<?php echo $this->url('pm', array('module' => 'pm','controller'=>'files','action'=>'index', 'task'=> $task['id']), null, TRUE); ?>" title="Files"><?php echo $this->InteractIcon('folder', 'Files');?></a>
+			
+			<?php if($this->CheckPermission('manage_tasks')):?>
+			<a href="<?php echo $this->url('tasks/edit', array('task_id'=> $task['id'])); ?>" title="Edit"><?php echo $this->InteractIcon('pencil', 'Edit');?></a>
+			<a href="<?php echo $this->url('tasks/remove', array('task_id'=> $task['id'])); ?>" title="Delete"><?php echo $this->InteractIcon('cross', 'Delete');?></a>
+			<?php endif; ?>
+			</td>
+			<?php endif; ?>
+		</tr>
+		<?php 
+		}
+		?>
+	</tbody>
+</table>

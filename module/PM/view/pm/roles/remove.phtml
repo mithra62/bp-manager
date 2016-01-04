@@ -1,0 +1,26 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="user_role_header"><?php echo $this->_('remove_user_role', 'pm'); ?></div>	
+</div>
+
+<?php if($this->deny_remove): ?>
+<div class="fail png_bg"><?php echo $this->_('cant_remove_role', 'pm'); ?></div>
+<?php else: ?>
+
+<div class="attention png_bg">
+Are you sure you want to remove the "<?php echo $this->role['name']?>" role? This can not be undone...
+</div>
+<p>
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'user_form');
+$form->setAttribute('action', $this->url('roles/remove', array('role_id' => $this->role['id'])));
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+	<?php $field = $form->get('confirm'); echo $this->formRow($field); ?> <?php $field = $form->get('fail'); echo $this->formRow($field); ?>
+<?php echo $this->form()->closeTag() ?>
+</p>
+
+<?php endif; ?>

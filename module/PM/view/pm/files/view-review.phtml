@@ -1,0 +1,32 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="file_peer_reviews_header">Viewing File Review: <?php echo $this->Truncate($this->file_data['name'], 30); ?></div>				
+</div>
+<?php 
+$reviewer_data = array(
+				'id' => $this->review_data['reviewer_id'], 
+				'first_name' => $this->review_data['reviewer_first_name'], 
+				'last_name' => $this->review_data['reviewer_last_name']
+);
+?>
+<div class="item_details">
+    <div class="items">
+    	<p>
+    		<span class="bold">Reviewer</span> <?php echo $this->MakeLink('user', $reviewer_data);?><br />
+			<span class="bold">Created Date:</span> <?php echo $this->RelativeDate($this->review_data['created_date']); ?> 
+    	</p>
+    </div>
+    <div class="items" style="padding-left:10px;">
+    <?php if(substr($this->revision_data['mime_type'], 0, 5) == 'image'):?>
+    	<p>
+			<img src="<?php echo $this->url(array('module' => 'pm','controller'=>'files','action'=>'preview-revision', 'id' => $this->review_data['revision_id'], 'view-type' => 'html', 'view-size' => 'tb'), null, TRUE); ?>" />	
+    	</p>
+    <?php endif; ?>
+    </div>       
+</div>
+
+<br clear="all" />
+
+<h2>Review:</h2>
+<p>
+<?php echo nl2br($this->review_data['review']); ?>      	
+</p>

@@ -1,0 +1,16 @@
+<?php 
+$options = array();
+switch($this->page)
+{
+	case 'time_format':
+	case 'date_format':
+	case 'allowed_file_formats':
+		$page = $this->page.'.phtml';
+	break;	
+	
+	default:
+		$page = 'main.phtml';
+	break;
+}
+echo $this->partial('docs/settings/'.$page, $options); 
+?>

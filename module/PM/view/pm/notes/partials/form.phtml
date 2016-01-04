@@ -1,0 +1,122 @@
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'notes_form');
+$form->setAttribute('action', $this->form_action);
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+
+	if($this->id > 0)
+		echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+?>	
+<style>
+#loading
+{
+	display:none;
+}
+</style>
+<input type="hidden" name="date_default" id="date_default" value="<?php echo date('Y-m-d'); ?>" />
+
+<?php 
+if($this->id > 0)
+	echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+?>
+
+	<p>
+		<label for="subject">Subject</label>
+		<?php $name = $form->get('subject'); echo $this->formRow($name); ?>
+	</p>
+	
+	<?php if($this->company): ?>
+	<p>
+		<label for="company_id" id="companies">Company</label>
+		<a href="<?php echo $this->url('companies/view', array('company_id' => $this->company['id'])); ?>"><?php echo $this->company['name']; ?></a>
+		<input type="hidden" name="company" value="<?php echo $this->company['id']; ?>" />
+	</p>
+	<?php endif; ?>
+	
+	<?php if($this->project): ?>
+	<p>
+		<label for="project_id">Project</label>
+		<a href="<?php echo $this->url('projects/view', array('project_id' => $this->project['id'])); ?>"><?php echo $this->project['name']; ?></a>
+		<input type="hidden" name="project" value="<?php echo $this->project['id']; ?>" />
+	</p>
+	<?php endif; ?>
+	
+	<?php if($this->task): ?>
+	<p>
+		<label for="task_id">Task</label>
+		<a href="<?php echo $this->url('tasks/view', array('task_id' => $this->task['id'])); ?>"><?php echo $this->task['name']; ?></a>
+		<input type="hidden" name="task" value="<?php echo $this->task['id']; ?>" />
+	</p>
+	<?php endif; ?>
+	
+	<p>
+		<label for="topic">Topic</label>
+		<?php $name = $form->get('topic'); echo $this->formRow($name); ?>
+	</p>
+		
+	<p>
+		<label for="description">Description</label>
+		<?php $name = $form->get('description'); echo $this->formRow($name); ?>
+		<label for="hashed"><?php $name = $form->get('hashed'); echo $this->formRow($name); ?>Encrypt*</label>
+		*If you're storing sensitive details, like login credentials, you should encrypt the data for storage.
+	</p>
+	
+	<p>
+		<input type="submit" class="submit" value="Submit" />
+	</p>		
+				
+<?php echo $this->ConfirmPageUnload('#notes_form')?>
+<?php echo $this->form()->closeTag() ?>
+
+<div id="loading"><img src="/images/loading.gif" /></div>
+<script type="text/javascript">
+var def_topic = '<?php echo ($this->task_data['topic'] ? $this->task_data['topic'] : 0); ?>';
+jQuery(document).ready(function($){
+
+
+	$('#date').DatePicker({
+		format:'Y-m-d',
+		date: $('#date').val(),
+		current: $('#date').val(),
+		starts: 1,
+		position: 'r',
+		eventName: 'click',
+		onBeforeShow: function(){
+		var default_end_date = ($('#date').val() != '' ? $('#date').val() : $('#date_default').val())
+			$('#date').DatePickerSetDate(default_end_date, true);
+		},
+		onChange: function(formated, dates){
+			$('#date').val(formated);
+			$('#date').DatePickerHide();
+			
+		}
+	});	
+		
+	$("#topic").change(function(){
+		//$("#assignment_comment").show();
+		var new_topic = $("#topic").val();
+		if(new_topic == def_topic || new_topic == 1)
+		{
+			//$("#date_topic").show();
+		}
+		else
+		{
+			$("#date_topic").hide();
+		}
+	});
+		
+	$("#notes_form").validate({
+		rules: {
+			subject: "required",
+			description: "required"
+		},
+		messages: {
+			subject: "Please enter a subject",
+			description: "Please enter a description"			
+		}
+	});	
+});
+</script>	

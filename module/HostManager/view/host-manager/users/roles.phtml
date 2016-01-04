@@ -1,0 +1,25 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="user_role_header">Manage Roles</div>
+</div>
+<?php 
+$options = array('id' => $this->id, 'controller' => 'notes', 'name' => 'Note', 'action' => 'view');
+//echo $this->BackToLink($options); 
+ 
+$form = $this->form;
+$form->setAttribute('id', 'roles_form');
+$form->setAttribute('action', $this->url('users/roles', array('user_id' => $this->user['id'])));
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+<p class="user_role_boxes"><br /><label for="">Assigned Roles:</label>
+	<?php $field = $form->get('user_roles'); echo $this->formRow($field); ?>		
+</p>
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>
+	
+<?php echo $this->ConfirmPageUnload('#roles_form')?>
+<?php echo $this->form()->closeTag() ?>

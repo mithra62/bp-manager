@@ -1,0 +1,25 @@
+{
+    "name": "mithra62/mojitrac",
+    "description": "Project Management System",
+    "license": "Don't Be a Dick License",
+    "keywords": [
+        "framework",
+        "zf2"
+    ],
+    "homepage": "https://mojitrac.com/",
+    "require": {
+        "php": ">=5.4.17",
+        "zendframework/zendframework": ">2.2.0rc1",
+        "zendframework/zftool": "dev-master",
+        "zendframework/zend-developer-tools": "dev-master",
+        "bjyoungblood/bjy-profiler": "dev-master",
+        "michelf/php-markdown": "1.3.*@dev",
+        "zfcampus/zf-api-problem": "~1.0-dev",
+        "zircote/hal": "dev-master",
+        "phpunit/phpunit": "4.1.*",
+        "rtconner/freshbooks-api": "dev-master",
+        "vgarvardt/zf-simple-migrations": "dev-master",
+        "mtdowling/cron-expression": "1.0.*",
+        "intervention/image": "2.*"
+    }
+}

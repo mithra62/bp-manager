@@ -1,0 +1,13 @@
+<div class="content_headers" style="padding-top:0px;">
+	<div class="user_header"><?php echo $this->_('edit_user', 'pm')?></div>
+</div>
+<div class="back_link_content">
+	<a href="<?php echo $this->url('users/view', array('id'=>$this->user_data['id']), null, TRUE); ?>" title="Back to <?php echo $this->user_data['first_name'].' '.$this->user_data['last_name']; ?>">
+		Back to <?php echo $this->user_data['first_name'].' '.$this->user_data['last_name']; ?>	
+	</a><div><?php echo $this->InteractIcon('left-arrow', 'Back to '.$this->user_data['first_name'].' '.$this->user_data['last_name']);?></div>
+</div>
+<br clear="all" />
+<?php 
+$options = array('form' => $this->form, 'addPassword' => FALSE, 'id' => $this->id);
+echo $this->partial('pm/users/partials/form', $options);
+?>

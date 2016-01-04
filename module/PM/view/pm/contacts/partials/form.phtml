@@ -1,0 +1,165 @@
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'contact_form');
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+
+	if($this->id > 0)
+		echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+?>	
+<div id="form_tabs">
+	<ul>
+
+		<li><a href="#general">General</a></li>
+		<li><a href="#address">Address</a></li>
+		<li><a href="#phone">Phone</a></li>
+		<li><a href="#im">IM</a></li>
+	</ul>
+	<div id="general">
+
+		<p>
+			<label for="first_name">First Name</label>
+			<?php $name = $form->get('first_name'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="last_name">Last Name</label>
+			<?php $name = $form->get('last_name'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="company_id">Company</label>
+			<?php 
+			if($this->addAction)
+			{
+				echo '<a href="'.$this->url('companies/view', array('company_id' => $this->company_data['id'])).'" title="'.$this->company_data['name'].'">'.$this->company_data['name'].'</a>';
+				echo '<input type="hidden" name="company_id" value="'.$this->company_data['id'].'" />';
+			} else {
+				$name = $form->get('company_id'); 
+				echo $this->formRow($name);
+			}
+			
+			?>
+		</p>			
+		
+		<p>
+			<label for="email">Email</label>
+			<?php $name = $form->get('email'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="email2">Secondary Email</label>
+			<?php $name = $form->get('email2'); echo $this->formRow($name); ?>
+		</p>	
+
+		<p>
+			<label for="url">Website</label>
+			<?php $name = $form->get('url'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="job_title">Title</label>
+			<?php $name = $form->get('job_title'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="description">Description</label>
+			<?php $name = $form->get('description'); echo $this->formRow($name); ?>
+		</p>		
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>				
+	</div>
+	<div id="address">
+		
+		<p>
+			<label for="address1">Address 1</label>
+			<?php $name = $form->get('address1'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="address2">Address 2</label>
+			<?php $name = $form->get('address2'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="city">City</label>
+			<?php $name = $form->get('city'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="zip">Zip</label>
+			<?php $name = $form->get('zip'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="state">State</label>
+			<?php $name = $form->get('state'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>		
+	
+	</div>
+	<div id="phone">
+		<p>
+			<label for="phone_home">Home</label>
+			<?php $name = $form->get('phone_home'); echo $this->formRow($name); ?>
+		</p>
+			
+		<p>
+			<label for="phone2">Work</label>
+			<?php $name = $form->get('phone2'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="mobile">Mobile</label>
+			<?php $name = $form->get('mobile'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="fax">Fax</label>
+			<?php $name = $form->get('fax'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>			
+	</div>
+	<div id="im">
+		<p>
+			<label for="jabber">Jabber</label>
+			<?php $name = $form->get('jabber'); echo $this->formRow($name); ?>
+		</p>
+			
+		<p>
+			<label for="aol">AIM</label>
+			<?php $name = $form->get('aol'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="yahoo">Yahoo!</label>
+			<?php $name = $form->get('yahoo'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="google_talk">Google Talk!</label>
+			<?php $name = $form->get('google_talk'); echo $this->formRow($name); ?>
+		</p>
+		
+		<p>
+			<label for="msn">MSN!</label>
+			<?php $name = $form->get('msn'); echo $this->formRow($name); ?>
+		</p>				
+		
+		<p>
+			<input type="submit" class="submit" value="Submit" />
+		</p>			
+	</div>	
+</div>	
+<?php echo $this->ConfirmPageUnload('#contact_form')?>
+<?php echo $this->form()->closeTag() ?>
