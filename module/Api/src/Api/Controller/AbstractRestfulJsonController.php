@@ -18,7 +18,6 @@ use ZF\ApiProblem\ApiProblemResponse;
 use Hal\Resource;
 use Hal\Link;
 use Base\Traits\Controller AS BaseControllerTrait;
-use PM\Traits\Controller AS PMControllerTrait;
 
 /**
  * Api - Abstract Controller
@@ -34,7 +33,7 @@ class AbstractRestfulJsonController extends AbstractRestfulController
 	/**
 	 * Setup the Traits we're using
 	 */
-	use BaseControllerTrait, PMControllerTrait;
+	use BaseControllerTrait;
 	
 	/**
 	 * Session

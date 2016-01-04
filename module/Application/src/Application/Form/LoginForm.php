@@ -38,14 +38,14 @@ class LoginForm extends BaseForm
 				'name' => 'email',
 				'type' => 'Text',
 				'attributes' => array(
-					'class' => 'input large',
+					'class' => 'form-control',
 				),
 		));
 		$this->add(array(
 				'name' => 'password',
 				'type' => 'Password',
 				'attributes' => array(
-					'class' => 'input large',
+					'class' => 'form-control',
 				),
 		));
 	

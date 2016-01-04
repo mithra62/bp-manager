@@ -71,7 +71,7 @@ class LoginController extends AbstractController
 						$this->getAuthService()->setStorage($this->getSessionStorage());	
 						$this->flashMessenger()->addMessage($this->translate('login_successful', 'app'));
 						
-						return $this->redirect()->toRoute('pm');
+						return $this->redirect()->toRoute('home');
 																
 					break;
 				

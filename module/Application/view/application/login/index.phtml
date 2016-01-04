@@ -1,4 +1,7 @@
-<h1><?php echo $this->_('login_welcome_message', 'app'); ?></h1>		
+<div class="container">
+
+<div class="panel panel-default" >
+<h2><?php echo $this->_('login_welcome_message', 'app'); ?></h2>		
 <?php 
 $form = $this->form;
 $form->setAttribute('id', 'sumbitForm');
@@ -19,25 +22,28 @@ echo $this->form()->openTag($form);
 $csrf = $form->get('_x');
 echo $this->formRow($csrf); 
 ?>
-<p><label><?php echo $this->_('email', 'app'); ?></label>
+
+
+<div class="input-group">
+<label><?php echo $this->_('email', 'app'); ?></label>
 <?php 
 $email = $form->get('email');
 echo $this->formRow($email); ?>
-</p>
+</div>
 
-<p><label><?php echo $this->_('password', 'app'); ?></label>
+<div class="input-group">
+<label><?php echo $this->_('password', 'app'); ?></label>
 <?php 
 $password = $form->get('password');
 echo $this->formRow($password); ?>
-</p>
+</div>
 
-<p>
-<input type="submit" name="Submit" id="button" value="Login"  class="button"/>
-<input type="reset" name="reset" id="reset" value="Reset" class="button" />
+<div class="input-group">
+<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
 <br />
 <a href="<?php echo $this->url('forgot-password'); ?>"><?php echo $this->_('forgot_password', 'app'); ?></a>
-</p>
+</div>
 		
 	<?php echo $this->form()->closeTag() ?>
 	
@@ -63,3 +69,6 @@ $().ready(function() {
 });
 
 </script>	
+
+</div>
+</div>

@@ -30,6 +30,6 @@ class IndexController extends AbstractController
 	 */
     public function indexAction()
     {
-        return $this->redirect()->toRoute('login');
+        //return $this->redirect()->toRoute('login');
     }   
 }
