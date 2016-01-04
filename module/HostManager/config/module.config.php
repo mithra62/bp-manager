@@ -11,7 +11,7 @@
 */
 
 return array(
-	'sub_primary_url' => '.mojitrac.com', 
+	'sub_primary_url' => '.bp-server.com', 
 	'master_host_account' => '1',
 	'router' => array(
         'routes' => array(

@@ -13,11 +13,10 @@ return array(
     'modules' => array(
         'Base',
         'Application',
-        'PM',
-        'Api',
+        //'PM',
+        //'Api',
         'ZF\ApiProblem',
-        //'Freshbooks',
-    	'HostManager', //keep this as last at all times if being hosted
+    	//'HostManager', //keep this as last at all times if being hosted
     	'BjyProfiler',
         'ZendDeveloperTools',
     	'ZfSimpleMigrations'
