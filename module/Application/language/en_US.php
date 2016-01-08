@@ -28,6 +28,7 @@ return array(
     'password' => 'Password',
     'sign_in' => 'Sign in',
     'register' => 'Register',
+    'login' => 'Login',
 		
 	//forgot password
     'forgot_password' => 'Forgot Password',

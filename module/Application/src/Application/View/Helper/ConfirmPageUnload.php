@@ -3,22 +3,22 @@
  * mithra62 - MojiTrac
  *
  * @author		Eric Lamb <eric@mithra62.com>
-* @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
+ * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
  * @link		http://mojitrac.com/
  * @version		2.0
- * @filesource 	./module/PM/View/Helper/ConfirmPageUnload.php
+ * @filesource 	./module/Application/View/Helper/ConfirmPageUnload.php
  */
 
-namespace PM\View\Helper;
+namespace Application\View\Helper;
 
 use Base\View\Helper\BaseViewHelper;
 
 /**
- * PM - Confirm Page Unload View Helper
+ * Application - Confirm Page Unload View Helper
  *
  * @package 	ViewHelpers\HTML
  * @author		Eric Lamb <eric@mithra62.com>
- * @filesource 	./module/PM/View/Helper/ConfirmPageUnload.php
+ * @filesource 	./module/Application/View/Helper/ConfirmPageUnload.php
  */
 class ConfirmPageUnload extends BaseViewHelper
 {

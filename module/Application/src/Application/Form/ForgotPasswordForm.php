@@ -36,7 +36,7 @@ class ForgotPasswordForm extends BaseForm
 			'name' => 'email',
 			'type' => 'Text',
 			'attributes' => array(
-				'class' => 'input large',
+				'class' => 'form-control',
 			),
 		));
 	
@@ -46,6 +46,7 @@ class ForgotPasswordForm extends BaseForm
 			'attributes' => array(
 				'value' => 'Go',
 				'id' => 'submitbutton',
+				'class' => 'form-control',
 			),
 		));
     }

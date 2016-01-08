@@ -4,50 +4,32 @@
 <?php 
 
 $form = $this->form;
-$form->setAttribute('id', 'sumbitForm');
+$form->setAttribute('id', 'forgotForm');
+$form->setAttribute('class', 'form-horizontal');
 $form->prepare();
 
-if(is_array($this->messages) && count($this->messages) >= 1)
-{
-	foreach($this->messages AS $message) 
-	{
-		echo '<div class="success large png_bg">'.$message.'</div>';
-	}
-} else {
-	
-	echo '<div class="information large png_bg">'.$this->_('forgot_password_instructions', 'app').'</div> ';
-}
-
 echo $this->form()->openTag($form); 
-		$csrf = $form->get('_x');
-		echo $this->formRow($csrf); ?>				  
-		<p><label>Email</label>
-		<?php 
-		$email = $form->get('email');
-		echo $this->formRow($email); ?>		
-	  </p>
-	  
-	  <p><input type="submit" name="Submit" id="button" value="Submit"  class="button"/></p>
-		<a href="<?php echo $this->url('login');?>" class="blueLink"><?php echo $this->_('back_to_login', 'app'); ?></a>
+$csrf = $form->get('_x');
+echo $this->formRow($csrf); 
+?>	
+<div class="form-group">
+    <label for="email" class="control-label col-xs-2"><?php echo $this->_('email', 'app'); ?></label>
+    <div class="col-xs-10">
+        <?php 
+        $email = $form->get('email');
+        echo $this->formRow($email); 
+        ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-xs-offset-2 col-xs-10">
+        <button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('sign_in', 'app'); ?></button>
+        
+        <br />
+        <a href="<?php echo $this->url('forgot-password'); ?>"><?php echo $this->_('forgot_password', 'app'); ?></a> | 
+        <a href="<?php echo $this->url('account/register'); ?>"><?php echo $this->_('register', 'app'); ?></a>
+    </div>
+</div>
+
 <?php echo $this->form()->closeTag() ?>
-	
-<script type="text/javascript">
-$.validator.setDefaults({
-	//submitHandler: function() { alert("submitted!"); }
-});
-
-$().ready(function() {
-
-	$("#email").focus();
-	$("#sumbitForm").validate({
-		rules: {
-			email: "<?php echo $this->_('required', 'app'); ?>"
-		},
-		messages: {
-			email: "<?php echo $this->_('js_email_validation_message', 'app'); ?>"
-		}
-	});
-
-});
-
-</script>

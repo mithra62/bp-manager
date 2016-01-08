@@ -187,6 +187,7 @@ return array(
 	    	'StaticUrl' => 'Application\View\Helper\StaticUrl',
 	    	'GetIdentity' => 'Application\View\Helper\GetIdentity',
 	    	'DispatchRouteEvents' => 'Application\View\Helper\DispatchRouteEvents',
+	    	'ConfirmPageUnload' => 'Application\View\Helper\ConfirmPageUnload',
 	    ),
     ),      
     'translator' => array(
