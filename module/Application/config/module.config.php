@@ -43,6 +43,40 @@ return array(
                     ),
                 ),
             ),
+        	'account' => array( //Login Routes
+        		'type' => 'segment',
+        		'options' => array(
+        			'route' => '/account',
+        			'constraints' => array(
+        				'id' => '[0-9]+'
+        			),
+        			'defaults' => array(
+        				'controller' => 'Application\Controller\Account',
+        				'action' => 'index'
+        			),
+        		),
+        		'may_terminate' => true,
+        		'child_routes' => array(
+        			'process' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/process',
+        					'defaults' => array(
+        						'action' => 'process'
+        					)
+        				)
+        			),
+        			'register' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/register',
+        					'defaults' => array(
+        						'action' => 'register'
+        					)
+        				)
+        			),
+        		)
+        	), //end Login Routes
         	'login' => array( //Login Routes
         		'type' => 'segment',
         		'options' => array(
@@ -118,6 +152,7 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Login' => 'Application\Controller\LoginController',
+            'Application\Controller\Account' => 'Application\Controller\AccountController',
             'Application\Controller\ForgotPassword' => 'Application\Controller\ForgotPasswordController'
         ),
     ),

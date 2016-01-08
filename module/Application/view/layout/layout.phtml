@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
-<link href="<?php echo $this->StaticUrl(); ?>/css/admin.css" rel="stylesheet" type="text/css" />
 <?php echo $this->headMeta(); ?>
 <?php echo $this->headTitle('MojiTrac'); ?>
 <?php //echo $this->headLink()->prependStylesheet('/css/site.css'); ?>
@@ -44,13 +43,13 @@
             <li class="active"><a href="<?php echo $this->url('home');?>">Home</a></li>
             <li><a href="<?php echo $this->url('about'); ?>">About</a></li>
             <?php if( $this->GetIdentity() ): ?>
-            <li><a href="">Account</a></li>
-            <li><a href="#about">Settings</a></li>
+            <li><a href="<?php echo $this->url('account'); ?>">Account</a></li>
+            <li><a href="<?php echo $this->url('about'); ?>">Admin</a></li>
             <li><a href="<?php echo $this->url('login/logout');?>">Logout</a></li>
             <?php else: ?>
             <li><a href="<?php echo $this->url('login');?>">Login</a></li>
             <?php endif; ?>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="<?php echo $this->url('about'); ?>">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -64,9 +63,10 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="<?php echo $this->StaticUrl(); ?>/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="<?php echo $this->StaticUrl(); ?>/js/jquery.min.js"><\/script>')</script>
     <script src="<?php echo $this->StaticUrl(); ?>/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="<?php echo $this->StaticUrl(); ?>/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="<?php echo $this->StaticUrl(); ?>/js/jquery.validate.js"></script>
 </body>
 </html>

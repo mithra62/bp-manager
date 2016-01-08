@@ -14,3 +14,4 @@ vendor/
 /bin
 /docs
 /module/HostManager/config/module.local.config.php
+/zftool.phar
