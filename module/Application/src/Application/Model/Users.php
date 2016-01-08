@@ -31,7 +31,7 @@ class Users extends AbstractModel
 	 * Contains all the permissions
 	 * @var array
 	 */
-	public static $permissions = FALSE;
+	public static $permissions = false;
 	
 	/**
 	 * The validation filter for the password form
@@ -199,24 +199,6 @@ class Users extends AbstractModel
 							'adapter' => $this->adapter
 						)
 					),
-				),
-			)));
-
-			$inputFilter->add($factory->createInput(array(
-				'name'     => 'first_name',
-				'required' => true,
-				'filters'  => array(
-					array('name' => 'StripTags'),
-					array('name' => 'StringTrim'),
-				),
-			)));
-
-			$inputFilter->add($factory->createInput(array(
-				'name'     => 'last_name',
-				'required' => true,
-				'filters'  => array(
-					array('name' => 'StripTags'),
-					array('name' => 'StringTrim'),
 				),
 			)));
 

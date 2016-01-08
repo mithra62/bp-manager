@@ -37,83 +37,8 @@ class UsersForm extends BaseForm
 			'name' => 'email',
 			'type' => 'Text',
 			'attributes' => array(
-				'class' => 'input large',
+					'class' => 'form-control',
 				'id' => 'email'
-			),
-		));		
-		$this->add(array(
-			'name' => 'first_name',
-			'type' => 'Text',
-			'attributes' => array(
-				'class' => 'input large',
-				'id' => 'first_name'
-			),
-		));		
-		$this->add(array(
-			'name' => 'last_name',
-			'type' => 'Text',
-			'attributes' => array(
-				'class' => 'input large',
-				'id' => 'last_name'
-			),
-		));		
-		$this->add(array(
-			'name' => 'job_title',
-			'type' => 'Text',
-			'attributes' => array(
-				'class' => 'input large',
-				'id' => 'job_title'
-			),
-		));		
-		$this->add(array(
-			'name' => 'phone_home',
-			'type' => 'Text',
-			'attributes' => array(
-				'class' => 'input large',
-				'id' => 'phone_home'
-			),
-		));		
-		$this->add(array(
-			'name' => 'phone_work',
-			'type' => 'Text',
-			'attributes' => array(
-				'class' => 'input large',
-				'id' => 'phone_work'
-			),
-		));		
-		$this->add(array(
-			'name' => 'phone_fax',
-			'type' => 'Text',
-			'attributes' => array(
-				'class' => 'input large',
-				'id' => 'phone_work'
-			),
-		));		
-		$this->add(array(
-			'name' => 'phone_mobile',
-			'type' => 'Text',
-			'attributes' => array(
-				'class' => 'input large',
-				'id' => 'phone_work'
-			),
-		));
-		
-		$this->add(array(
-			'name' => 'submit',
-			'type' => 'Submit',
-			'attributes' => array(
-				'value' => 'Go',
-				'id' => 'submitbutton',
-			),
-		));
-		
-		$this->add(array(
-			'type' => 'Textarea',
-			'name' => 'description',
-			'attributes' => array(
-				'class' => 'styled_textarea',
-				'rows' => '7',
-				'cols' => '40',
 			),
 		));		
     }
@@ -128,7 +53,7 @@ class UsersForm extends BaseForm
 			'name' => 'password',
 			'type' => 'Password',
 			'attributes' => array(
-				'class' => 'input large',
+                'class' => 'form-control',
 				'id' => 'password'
 			),
 		));
@@ -137,7 +62,7 @@ class UsersForm extends BaseForm
 			'name' => 'confirm_password',
 			'type' => 'Password',
 			'attributes' => array(
-				'class' => 'input large',
+                'class' => 'form-control',
 				'id' => 'confirm_password'
 			),
 		));		

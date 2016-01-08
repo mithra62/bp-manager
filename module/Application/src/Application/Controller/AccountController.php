@@ -34,7 +34,30 @@ class AccountController extends AbstractController
 
     public function registerAction()
     {
-        return new ViewModel();
+    	$form = $this->getServiceLocator()->get('Application\Form\UsersForm');
+    	$form = $form->registrationForm();
+    	$request = $this->getRequest();
+    	if ($request->isPost())
+    	{	
+    	    $formData = $request->getPost();
+    		$user = $this->getServiceLocator()->get('Application\Model\Users');
+            $hash = $this->getServiceLocator()->get('Application\Model\Hash');
+			$form->setInputFilter($user->getRegistrationInputFilter());
+			$form->setData($formData);
+			if ($form->isValid()) 
+			{
+                echo 'f';
+                exit;
+			}
+			else
+			{
+			    $form->setData($formData);
+			}
+    	}
+    	
+    	$view = array();
+        $view['form'] = $form;
+        return $view;
     }
     
     public function editAction()
