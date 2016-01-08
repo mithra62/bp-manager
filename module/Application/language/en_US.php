@@ -51,6 +51,7 @@ return array(
 	'back_to_login' => 'Back to Login',
 		
 	//change password
+	'rest_password' => 'Reset Password',
 	'old_password' => 'Old Password',
 	'new_password' => 'New Password',
 	'confirm_password' => 'Confirm Password',

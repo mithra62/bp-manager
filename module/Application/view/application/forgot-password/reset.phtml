@@ -1,90 +1,44 @@
-<h1>Password Reset</h1>
+<div class="page-header">
+    <h1><?php echo $this->_('rest_password', 'app'); ?></h1>	
+</div>
 
 
 <?php 
-
-if(is_array($this->messages) && count($this->messages) >= 1)
-{
-	foreach($this->messages AS $message)
-	{
-		echo '<div class="success large png_bg">'.$message.'</div>';
-	}
-} else {
-
-	echo '<div class="information large png_bg">'.$this->_('reset_password_instructions', 'app').'</div> ';
-}
-
 $form = $this->form;
-$form->setAttribute('id', 'password_form');
-$form->setAttribute('class', 'sumbitForm');
+$form->setAttribute('id', 'resetPasswordForm');
+$form->setAttribute('class', 'form-horizontal');
 $form->prepare();
 echo $this->form()->openTag($form);
 $csrf = $form->get('_x');
 echo $this->formRow($csrf);
 ?>			
-	
-	<p>
-		<label for="new_password"><?php echo $this->_('new_password', 'app'); ?></label>
-		<?php $field = $form->get('new_password'); echo $this->formRow($field); ?>
-	</p>			
-	
-	<p>
-		<label for="confirm_password"><?php echo $this->_('confirm_password', 'app'); ?></label>
-		<?php $field = $form->get('confirm_password'); echo $this->formRow($field); ?>
-	</p>
-			
-	
-	<p>
-		
- <input type="submit" name="Submit" id="button" value="<?php echo $this->_('submit', 'app'); ?>"  class="button"/>
-	</p>				
+<div class="form-group">
+    <label for="password" class="control-label col-xs-2"><?php echo $this->_('new_password', 'app'); ?></label>
+    <div class="col-xs-10">
+    <?php 
+    $password = $form->get('new_password');
+    echo $this->formRow($password); ?>
+    </div>
+</div>
 
-<?php echo $this->ConfirmPageUnload('#password_form')?>
+<div class="form-group">
+    <label for="password" class="control-label col-xs-2"><?php echo $this->_('confirm_password', 'app'); ?></label>
+    <div class="col-xs-10">
+    <?php 
+    $password = $form->get('confirm_password');
+    echo $this->formRow($password); ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-xs-offset-2 col-xs-10">
+        <button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('sign_in', 'app'); ?></button>
+        
+        <br />
+        <a href="<?php echo $this->url('forgot-password'); ?>"><?php echo $this->_('forgot_password', 'app'); ?></a> | 
+        <a href="<?php echo $this->url('account/register'); ?>"><?php echo $this->_('register', 'app'); ?></a>
+    </div>
+</div>				
+
+<?php //echo $this->ConfirmPageUnload('#password_form')?>
 <?php echo $this->form()->closeTag() ?>
-
-<script type="text/javascript">
-jQuery(document).ready(function($){
-	$("#password_form").validate({
-		rules: {
-			new_password: {
-				required: true,
-				minlength: 5
-			},
-			confirm_password: {
-				required: true,
-				equalTo: "#new_password",
-				minlength: 5
-			}
-		},
-		messages: {			
-			new_password: {
-				required: "Please enter a new password",
-				minlength: "Your password must be at least 5 characters long"
-			},
-			confirm_password: {
-				required: "Please confirm your new password",
-				equalTo: "Please enter the same password as above",
-				minlength: "Your password must be at least 5 characters long"
-			}
-					
-		}
-	});	
-});
-</script>
-<script type="text/javascript">
-jQuery(document).ready(function($){
-
-	$("#new_password").passStrength({
-		shortPass: 		"top_shortPass",
-		badPass:		"top_badPass",
-		goodPass:		"top_goodPass",
-		strongPass:		"top_strongPass",
-		baseStyle:		"top_testresult",
-		enableUcheck:	0,
-		userid:			"#confirm_password",
-		messageloc:		0
-	});	
-	
-	
-});
-</script>

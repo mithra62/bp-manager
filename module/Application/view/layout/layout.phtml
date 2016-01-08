@@ -25,7 +25,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -39,14 +38,14 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="<?php echo $this->url('home');?>">Home</a></li>
-            <li><a href="<?php echo $this->url('about'); ?>">About</a></li>
+            <li class="<?php echo ($this->active_nav == 'home' ? 'active' : ''); ?>"><a href="<?php echo $this->url('home');?>">Home</a></li>
+            <li class="<?php echo ($this->active_nav == 'about' ? 'active' : ''); ?>"><a href="<?php echo $this->url('about'); ?>">About</a></li>
             <?php if( $this->GetIdentity() ): ?>
-            <li><a href="<?php echo $this->url('account'); ?>">Account</a></li>
-            <li><a href="<?php echo $this->url('about'); ?>">Admin</a></li>
-            <li><a href="<?php echo $this->url('account/logout');?>">Logout</a></li>
+                <li class="<?php echo ($this->active_nav == 'account' ? 'active' : ''); ?>"><a href="<?php echo $this->url('account'); ?>">Account</a></li>
+                <li class="<?php echo ($this->active_nav == 'admin' ? 'active' : ''); ?>"><a href="<?php echo $this->url('about'); ?>">Admin</a></li>
+                <li ><a href="<?php echo $this->url('account/logout');?>">Logout</a></li>
             <?php else: ?>
-            <li><a href="<?php echo $this->url('login');?>">Login</a></li>
+                <li class="<?php echo ($this->active_nav == 'login' ? 'active' : ''); ?>"><a href="<?php echo $this->url('login');?>">Login</a></li>
             <?php endif; ?>
             <li><a href="<?php echo $this->url('about'); ?>">Contact</a></li>
           </ul>

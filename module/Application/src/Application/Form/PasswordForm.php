@@ -37,7 +37,7 @@ class PasswordForm extends BaseForm
 			'name' => 'new_password',
 			'type' => 'Password',
 			'attributes' => array(
-				'class' => 'input large',
+				'class' => 'form-control',
 				'id' => 'new_password'
 			),
 		));
@@ -46,7 +46,7 @@ class PasswordForm extends BaseForm
 			'name' => 'confirm_password',
 			'type' => 'Password',
 			'attributes' => array(
-				'class' => 'input large',
+				'class' => 'form-control',
 				'id' => 'confirm_password'
 			),
 		));	
@@ -62,7 +62,7 @@ class PasswordForm extends BaseForm
 			'name' => 'old_password',
 			'type' => 'Password',
 			'attributes' => array(
-				'class' => 'input large',
+				'class' => 'form-control',
 				'id' => 'old_password'
 			),
 		));
