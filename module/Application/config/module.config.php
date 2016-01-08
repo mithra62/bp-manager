@@ -43,7 +43,7 @@ return array(
                     ),
                 ),
             ),
-        	'account' => array( //Login Routes
+        	'account' => array( //Account Routes
         		'type' => 'segment',
         		'options' => array(
         			'route' => '/account',
@@ -57,12 +57,12 @@ return array(
         		),
         		'may_terminate' => true,
         		'child_routes' => array(
-        			'process' => array(
+        			'change-password' => array(
         				'type' => 'segment',
         				'options' => array(
-        					'route' => '/process',
+        					'route' => '/change-password',
         					'defaults' => array(
-        						'action' => 'process'
+        						'action' => 'changePassword'
         					)
         				)
         			),
@@ -75,12 +75,30 @@ return array(
         					)
         				)
         			),
+        			'edit' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/edit',
+        					'defaults' => array(
+        						'action' => 'edit'
+        					)
+        				)
+        			),
+        			'logout' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/logout',
+        					'defaults' => array(
+        						'action' => 'logout'
+        					)
+        				)
+        			),
         		)
         	), //end Login Routes
         	'login' => array( //Login Routes
         		'type' => 'segment',
         		'options' => array(
-        			'route' => '/login',
+        			'route' => '/account/login',
         			'constraints' => array(
         				'id' => '[0-9]+'
         			),
@@ -97,15 +115,6 @@ return array(
         					'route' => '/process',
         					'defaults' => array(
         						'action' => 'process'
-        					)
-        				)
-        			),
-        			'logout' => array(
-        				'type' => 'segment',
-        				'options' => array(
-        					'route' => '/logout',
-        					'defaults' => array(
-        						'action' => 'logout'
         					)
         				)
         			),

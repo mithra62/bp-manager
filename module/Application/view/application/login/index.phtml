@@ -1,4 +1,4 @@
-<div class="container">
+
 
 <h2><?php echo $this->_('login_welcome_message', 'app'); ?></h2>		
 <?php 
@@ -45,10 +45,11 @@ echo $this->formRow($csrf);
 
 <div class="form-group">
     <div class="col-xs-offset-2 col-xs-10">
-<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('sign_in', 'app'); ?></button>
 
 <br />
-<a href="<?php echo $this->url('forgot-password'); ?>"><?php echo $this->_('forgot_password', 'app'); ?></a>
+<a href="<?php echo $this->url('forgot-password'); ?>"><?php echo $this->_('forgot_password', 'app'); ?></a> | 
+<a href="<?php echo $this->url('account/register'); ?>"><?php echo $this->_('register', 'app'); ?></a>
 </div>
 </div>
 		
@@ -76,5 +77,3 @@ $().ready(function() {
 });
 
 </script>	
-
-</div>

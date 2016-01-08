@@ -26,7 +26,6 @@
 
 <body>
 
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -45,7 +44,7 @@
             <?php if( $this->GetIdentity() ): ?>
             <li><a href="<?php echo $this->url('account'); ?>">Account</a></li>
             <li><a href="<?php echo $this->url('about'); ?>">Admin</a></li>
-            <li><a href="<?php echo $this->url('login/logout');?>">Logout</a></li>
+            <li><a href="<?php echo $this->url('account/logout');?>">Logout</a></li>
             <?php else: ?>
             <li><a href="<?php echo $this->url('login');?>">Login</a></li>
             <?php endif; ?>
@@ -57,8 +56,24 @@
 
     <div class="container">
     
-<?php echo $this->layout()->content; ?>
-</div>
+        <?php 
+        $flash = $this->flashMessenger();
+        $flash->setMessageOpenFormat('<div%s>
+             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                 &times;
+             </button>
+             <ul><li>')
+             ->setMessageSeparatorString('</li><li>')
+             ->setMessageCloseString('</li></ul></div>');
+        
+        echo $flash->render('error',   array('alert', 'alert-dismissible', 'alert-danger'));
+        echo $flash->render('info',    array('alert', 'alert-dismissible', 'alert-info'));
+        echo $flash->render('default', array('alert', 'alert-dismissible', 'alert-warning'));
+        echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
+        ?>    
+        <?php echo $this->layout()->content; ?>
+    </div>
+    
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -68,5 +83,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="<?php echo $this->StaticUrl(); ?>/js/ie10-viewport-bug-workaround.js"></script>
     <script src="<?php echo $this->StaticUrl(); ?>/js/jquery.validate.js"></script>
+    <script src="<?php echo $this->StaticUrl(); ?>/js/form.js"></script>
+    
 </body>
 </html>

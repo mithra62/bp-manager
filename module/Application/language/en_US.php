@@ -26,6 +26,8 @@ return array(
 	'submit' => 'Submit',
     'email' => 'Email',
     'password' => 'Password',
+    'sign_in' => 'Sign in',
+    'register' => 'Register',
 		
 	//forgot password
     'forgot_password' => 'Forgot Password',

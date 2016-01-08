@@ -34,7 +34,17 @@ class AccountController extends AbstractController
 
     public function registerAction()
     {
-        
+        return new ViewModel();
+    }
+    
+    public function editAction()
+    {
+        return new ViewModel();
+    }
+    
+    public function changePasswordAction()
+    {
+        return new ViewModel();
     }
 }
 
