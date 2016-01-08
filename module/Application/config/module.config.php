@@ -33,7 +33,16 @@ return array(
                     ),
                 ),
             ),
-
+            'about' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/about',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'about',
+                    ),
+                ),
+            ),
         	'login' => array( //Login Routes
         		'type' => 'segment',
         		'options' => array(

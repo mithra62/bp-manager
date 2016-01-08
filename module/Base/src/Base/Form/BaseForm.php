@@ -50,4 +50,14 @@ abstract class BaseForm extends Form
 			)
 		));		
 	}	
+	
+	public function add($elementOrFieldset, array $flags = array())
+	{
+	    if( !isset($elementOrFieldset['attributes']['id']) && strtolower($elementOrFieldset['type']) != 'crsf')
+	    {
+	        $elementOrFieldset['attributes']['id'] = $elementOrFieldset['name'];
+	    }
+	    parent::add($elementOrFieldset, $flags);
+	    return $this;
+	}
 }
