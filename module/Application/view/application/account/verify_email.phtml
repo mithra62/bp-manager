@@ -1,0 +1,15 @@
+<div class="page-header">
+	<h1><?php echo $this->_('verify_email', 'app'); ?></h1>
+</div>
+
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'verify_email_form');
+$form->setAttribute('action', $this->url('account/verify_email'));
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+    <input type="submit" class="btn btn-primary" value="Confirm" />
+<?php echo $this->form()->closeTag() ?>

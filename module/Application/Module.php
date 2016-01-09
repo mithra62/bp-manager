@@ -18,6 +18,7 @@ use Zend\Db\Sql\Sql;
 use Zend\Authentication\AuthenticationService;
 use Zend\Session\Config\StandardConfig;
 use Intervention\Image\ImageManager;
+
 use Application\Model\Auth\AuthAdapter;
 use Application\Model\Users;
 use Application\Model\Roles;
@@ -30,6 +31,7 @@ use Application\Model\Hash;
 use Application\Model\Mail;
 use Application\Model\ViewEvents;
 use Application\Model\Image;
+
 use Application\Form\ForgotPasswordForm;
 use Application\Form\SettingsForm;
 use Application\Form\LoginForm;
@@ -38,6 +40,8 @@ use Application\Form\PrefsForm;
 use Application\Form\UsersForm;
 use Application\Form\RolesForm;
 use Application\Form\User\RolesForm as UserRolesForm;
+use Application\Form\ConfirmForm;
+
 use Application\Event\NotificationEvent;
 
 /**
@@ -256,6 +260,9 @@ class Module
                 'Application\Form\User\RolesForm' => function ($sm) {
                     return new UserRolesForm('roles', $sm->get('Application\Model\Roles'));
                 },
+				'Application\Form\ConfirmForm' => function($sm) {
+					return new ConfirmForm('confirm');
+				},
                 
                 // events
                 'Application\Event\NotificationEvent' => function ($sm) {

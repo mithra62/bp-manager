@@ -76,5 +76,27 @@ class AccountController extends AbstractController
     {
         return new ViewModel();
     }
+    
+    public function verifyEmailAction()
+    {
+        $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
+        $request = $this->getRequest();
+        if ($request->isPost())
+        {
+            $formData = $this->getRequest()->getPost();
+            $form->setData($request->getPost());
+            if ($form->isValid($formData))
+            {
+
+                echo 'f';
+                exit;
+            }
+        }
+        
+        $view = array();
+        $view['form'] = $form;
+        $this->layout()->setVariable('disable_email_verify_message', true);
+        return $view;
+    }
 }
 

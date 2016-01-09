@@ -65,6 +65,8 @@ return array(
     'reset_password_instructions' => 'Create your new password here',
     
     'user_registration_email_subject' => 'New Account Created!',
+    
+    'verify_email' => 'Verify Email',
     'verify_email_required_html' => 'You have to confirm your email address (<a href="%2$s">%1$s</a>) to access all the features.',
 )
 ;

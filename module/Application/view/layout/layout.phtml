@@ -75,7 +75,7 @@ body {
 	<div class="container">
     
         <?php
-        echo $this->GlobalAlerts();
+        echo $this->GlobalAlerts()->setCheckEmailVerify(!$this->disable_email_verify_message)->compile();
         echo $this->layout()->content;
         ?>
     </div>

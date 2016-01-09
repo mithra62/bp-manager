@@ -91,7 +91,16 @@ return array(
                                 'action' => 'logout'
                             )
                         )
-                    )
+                    ),
+                    'verify_email' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/verify_email',
+                            'defaults' => array(
+                                'action' => 'verify_email'
+                            )
+                        )
+                    ),
                 )
             ), // end Login Routes
             'login' => array( // Login Routes
