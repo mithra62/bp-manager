@@ -33,7 +33,7 @@ return array(
     'forgot_password' => 'Forgot Password',
     'forgot_password_email_subject' => 'Forgot Password',
     'check_your_emmail' => 'Please check your email',
-    'forgot_password_email' => 'Hello %1$s, <br /><br />
+    'forgot_password_email' => 'Hello, <br /><br />
 		
 			To reset your password for your account, click the link below:<br /><br />
 
@@ -64,6 +64,7 @@ return array(
     // reset password
     'reset_password_instructions' => 'Create your new password here',
     
-    'user_registration_email_subject' => 'New Account Created!'
+    'user_registration_email_subject' => 'New Account Created!',
+    'verify_email_required_html' => 'You have to confirm your email address (<a href="%2$s">%1$s</a>) to access all the features.',
 )
 ;

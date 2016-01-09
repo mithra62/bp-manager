@@ -192,7 +192,8 @@ return array(
             'DispatchRouteEvents' => 'Application\View\Helper\DispatchRouteEvents',
             'IsDatePast' => 'Application\View\Helper\IsDatePast',
             'Truncate' => 'Application\View\Helper\Truncate',
-            'UserInfo' => 'Application\View\Helper\UserInfo'
+            'UserInfo' => 'Application\View\Helper\UserInfo',
+            'GlobalAlerts' => 'Application\View\Helper\GlobalAlerts'
         )
     ),
     'translator' => array(
