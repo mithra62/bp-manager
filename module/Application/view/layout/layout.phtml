@@ -69,8 +69,8 @@
         echo $flash->render('info',    array('alert', 'alert-dismissible', 'alert-info'));
         echo $flash->render('default', array('alert', 'alert-dismissible', 'alert-warning'));
         echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
-        ?>    
-        <?php echo $this->layout()->content; ?>
+        echo $this->layout()->content; 
+        ?>
     </div>
     
     <!-- Bootstrap core JavaScript

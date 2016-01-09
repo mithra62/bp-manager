@@ -13,6 +13,7 @@ namespace Application;
 
 use DateTime;
 use Zend\Mvc\ModuleRouteListener;
+use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\MvcEvent;
 use Zend\Db\Sql\Sql;
 use Zend\Authentication\AuthenticationService;
@@ -42,6 +43,8 @@ use Application\Form\UsersForm;
 use Application\Form\RolesForm;
 use Application\Form\User\RolesForm AS UserRolesForm;
 
+use Application\Event\NotificationEvent;
+
 /**
  * Application - Module Loader
  *
@@ -51,14 +54,23 @@ use Application\Form\User\RolesForm AS UserRolesForm;
  */
 class Module
 {
+    /**
+     * Sets up the module layout
+     * @param ModuleManager $moduleManager
+     */
+    public function init(ModuleManager $moduleManager)
+    {
+        $this->sharedEvents = $moduleManager->getEventManager()->getSharedManager();
+    }
+    
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-        
-        $app = $e->getParam('application');
-        $app->getEventManager()->attach('render', array($this, 'setLayoutTitle'));        
+
+		$event = $e->getApplication()->getServiceManager()->get('Application\Event\NotificationEvent');
+		$event->register($this->sharedEvents); 
     }
 
     /**
@@ -238,6 +250,14 @@ class Module
 				'Application\Form\User\RolesForm' => function($sm) {
 					return new UserRolesForm('roles', $sm->get('Application\Model\Roles')); 
 				},
+				
+				//events
+				'Application\Event\NotificationEvent' => function($sm) {
+				    $auth = $sm->get('AuthService');
+				    $mail = $sm->get('Application\Model\Mail');
+				    $user = $sm->get('Application\Model\Users');
+					return new NotificationEvent($mail, $user, $auth->getIdentity());
+				},	
 			),
     	);
     }

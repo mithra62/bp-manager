@@ -79,14 +79,6 @@ class Users extends AbstractModel
 	public function getSQL($data){
 		return array(
 			'email' => (!empty($data['email']) ? $data['email'] : ''),
-			'first_name' => (!empty($data['first_name']) ? $data['first_name'] : ''),
-			'last_name' => (!empty($data['last_name']) ? $data['last_name'] : ''),
-			'phone_mobile' => (!empty($data['phone_mobile']) ? $data['phone_mobile'] : ''),
-			'phone_home' => (!empty($data['phone_home']) ? $data['phone_home'] : ''),
-			'phone_work' => (!empty($data['phone_work']) ? $data['phone_work'] : ''),
-			'phone_fax' => (!empty($data['phone_fax']) ? $data['phone_fax'] : ''),
-			'job_title' => (!empty($data['job_title']) ? $data['job_title'] : ''),
-			'description' => (!empty($data['description']) ? $data['description'] : ''),
 			'last_modified' => new \Zend\Db\Sql\Expression('NOW()')
 		);
 	}	
@@ -425,8 +417,8 @@ class Users extends AbstractModel
 		$sql['created_date'] = new \Zend\Db\Sql\Expression('NOW()');
 		$sql['hash'] = $hash->genSalt();
 		$sql['password'] = $hash->password($data['password'], $sql['hash']);
-		$user_id = $data['user_id'] = $this->insert('users', $sql);
 		
+		$user_id = $data['user_id'] = $this->insert('users', $sql);
 		if($user_id)
 		{
 			if(isset($data['user_roles']))

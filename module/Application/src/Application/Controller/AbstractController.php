@@ -28,6 +28,8 @@ abstract class AbstractController extends BaseController
 	 */
 	public function onDispatch(  \Zend\Mvc\MvcEvent $e )
 	{
+	    $settings = $this->getServiceLocator()->get('Application\Model\Settings');
+	    $this->settings = $settings->getSettings();
 		return parent::onDispatch( $e );
 	}
 	

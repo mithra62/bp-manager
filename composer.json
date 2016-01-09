@@ -20,6 +20,7 @@
         "rtconner/freshbooks-api": "dev-master",
         "vgarvardt/zf-simple-migrations": "dev-master",
         "mtdowling/cron-expression": "1.0.*",
-        "intervention/image": "2.*"
+        "intervention/image": "2.*",
+        "neilime/zf2-twb-bundle": "2.*@stable"
     }
 }

@@ -65,4 +65,7 @@ return array(
     //reset password
     'reset_password_instructions' => 'Create your new password here',
     
+
+    'user_registration_email_subject' => 'New Account Created!',
+    
 );

@@ -37,17 +37,31 @@ class AccountController extends AbstractController
     	$form = $this->getServiceLocator()->get('Application\Form\UsersForm');
     	$form = $form->registrationForm();
     	$request = $this->getRequest();
+    	
     	if ($request->isPost())
     	{	
     	    $formData = $request->getPost();
     		$user = $this->getServiceLocator()->get('Application\Model\Users');
             $hash = $this->getServiceLocator()->get('Application\Model\Hash');
+            $roles = $this->getServiceLocator()->get('Application\Model\Roles');
+            
 			$form->setInputFilter($user->getRegistrationInputFilter());
 			$form->setData($formData);
 			if ($form->isValid()) 
 			{
-                echo 'f';
-                exit;
+			    $data = $formData->toArray();
+			    $data['user_roles'] = $this->settings['default_user_groups'];
+				$user_id = $id = $user->addUser($data, $hash, $roles);
+				if($user_id)
+				{	
+					$this->flashMessenger()->addMessage($this->translate('user_added', 'pm'));
+					return $this->redirect()->toRoute('login');  
+				} 
+				else 
+				{
+					$view['errors'] = array($this->translate('something_went_wrong', 'pm'));
+					$this->layout()->setVariable('errors', $view['errors']);
+				}
 			}
 			else
 			{

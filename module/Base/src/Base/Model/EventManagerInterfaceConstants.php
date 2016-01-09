@@ -27,82 +27,6 @@ interface EventManagerInterfaceConstants extends EventManagerAwareInterface
 	const EventPasswordUpdatePre = 'password.update.pre';
 	const EventPasswordUpdatePost = 'password.update.post';
 	
-	//context ids (company.X, project.X)
-	const EventProjectUpdatePre = 'project.update.pre';
-	const EventProjectUpdatePost = 'project.update.post';
-	const EventProjectRemovePre = 'project.remove.pre';
-	const EventProjectRemovePost = 'project.remove.post';
-	const EventProjectAddPre = 'project.add.pre';
-	const EventProjectAddPost = 'project.add.post';
-	const EventProjectAddTeamPre = 'project.addteam.pre';
-	const EventProjectAddTeamPost = 'project.addteam.post';
-	const EventProjectRemoveTeamPre = 'project.removeteam.pre';
-	const EventProjectRemoveTeamPost = 'project.removeteam.post';
-	const EventProjectRemoveTeamMemberPre = 'project.removeteammember.pre';
-	const EventProjectRemoveTeamMemberPost = 'project.removeteammember.post';
-	
-	const EventTaskUpdatePre = 'task.update.pre';
-	const EventTaskUpdatePost = 'task.update.post';
-	const EventTaskAddPre = 'task.add.pre';
-	const EventTaskAddPost = 'task.add.post';
-	const EventTaskRemovePre = 'task.remove.pre';
-	const EventTaskRemovePost = 'task.remove.post';	
-	const EventTaskAssignPre = 'task.assign.pre';
-	const EventTaskAssignPost = 'task.assign.post';
-	
-	const EventCompanyUpdatePre = 'company.update.pre';
-	const EventCompanyUpdatePost = 'company.update.post';
-	const EventCompanyAddPre = 'company.add.pre';
-	const EventCompanyAddPost = 'company.add.post';
-	const EventCompanyRemovePre = 'company.remove.pre';
-	const EventCompanyRemovePost = 'company.remove.post';
-	
-	const EventContactUpdatePre = 'company.contact.update.pre';
-	const EventContactUpdatePost = 'company.contact.update.post';
-	const EventContactAddPre = 'company.contact.add.pre';
-	const EventContactAddPost = 'company.contact.add.post';
-	const EventContactRemovePre = 'company.contact.remove.pre';
-	const EventContactRemovePost = 'company.contact.remove.post';
-	
-	const EventInvoiceAddPre = 'company.invoice.add.pre';
-	const EventInvoiceAddPost = 'company.invoice.add.post';
-	const EventInvoiceUpdatePre = 'company.invoice.update.pre';
-	const EventInvoiceUpdatePost = 'company.invoice.update.post';
-	const EventInvoiceRemovePre = 'company.invoice.remove.pre';
-	const EventInvoiceRemovePost = 'company.invoice.remove.post';
-	
-	const EventInvoiceLineItemAddPre = 'company.invoice.lineitem.add.pre';
-	const EventInvoiceLineItemAddPost = 'company.invoice.lineitem.add.post';
-	const EventInvoiceLineItemUpdatePre = 'company.invoice.lineitem.update.pre';
-	const EventInvoiceLineItemUpdatePost = 'company.invoice.lineitem.update.post';
-	const EventInvoicesLineItemRemovePre = 'company.invoice.lineitem.remove.pre';
-	const EventInvoicesLineItemRemovePost = 'company.invoice.lineitem.remove.post';
-	
-	const EventFileUpdatePre = 'file.update.pre';
-	const EventFileUpdatePost = 'file.update.post';
-	const EventFileAddPre = 'file.add.pre';
-	const EventFileAddPost = 'file.add.post';
-	const EventFileRemovePre = 'file.remove.pre';
-	const EventFileRemovePost = 'file.remove.post';	
-	const EventFileRevisionAddPre = 'file.revision.add.pre';
-	const EventFileRevisionAddPost = 'file.revision.add.post';
-	const EventFileRevisionRemovePre = 'file.revision.remove.pre';
-	const EventFileRevisionRemovePost = 'file.revision.remove.post';
-	
-	const EventNoteUpdatePre = 'note.update.pre';
-	const EventNoteUpdatePost = 'note.update.post';
-	const EventNoteAddPre = 'note.add.pre';
-	const EventNoteAddPost = 'note.add.post';
-	const EventNoteRemovePre = 'note.remove.pre';
-	const EventNoteRemovePost = 'note.remove.post';		
-	
-	const EventBookmarkUpdatePre = 'bookmark.update.pre';
-	const EventBookmarkUpdatePost = 'bookmark.update.post';
-	const EventBookmarkAddPre = 'bookmark.add.pre';
-	const EventBookmarkAddPost = 'bookmark.add.post';
-	const EventBookmarkRemovePre = 'bookmark.remove.pre';
-	const EventBookmarkRemovePost = 'bookmark.remove.post';	
-	
 	const EventUserAddPre = 'user.add.pre';
 	const EventUserAddPost = 'user.add.post';
 	const EventUserUpdatePre = 'user.update.pre';
@@ -130,9 +54,6 @@ interface EventManagerInterfaceConstants extends EventManagerAwareInterface
 	
 	const EventUserDataDefaultsSetPre = 'user_data.defaults.set.pre';
 	const EventUserDataDefaultsSetPost = 'user_data.defaults.set.post'; //Nothing to exit or return or override!!
-	
-	const EventActivityLogAddPre = 'activitylog.add.pre';
-	const EventActivityLogAddPost = 'activitylog.add.post';
 	
 	//database events
 	const EventDbSelectPre = 'db.select.pre';

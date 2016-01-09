@@ -46,7 +46,8 @@ class Settings extends KeyValue
 		'date_format' => 'F j, Y',
 		'date_format_custom' => '',  
 		'time_format' => 'g:i A',  
-		'time_format_custom' => ''
+		'time_format_custom' => '',
+	    'default_user_groups' => array(2)
 	);	
 
 	/**
