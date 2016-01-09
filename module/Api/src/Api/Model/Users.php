@@ -11,7 +11,7 @@
 
 namespace Api\Model;
 
-use PM\Model\Users as PmUsers;
+use Application\Model\Users as AppUsers;
 
 /**
  * Api - Users Model
@@ -20,7 +20,7 @@ use PM\Model\Users as PmUsers;
  * @author		Eric Lamb <eric@mithra62.com>
  * @filesource 	./module/Api/src/Api/Model/Users.php
  */
-class Users extends PmUsers
+class Users extends AppUsers
 {
 	/**
 	 * Determines wheher we should filter results based on REST output

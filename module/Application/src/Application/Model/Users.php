@@ -423,7 +423,7 @@ class Users extends AbstractModel
 		
 		$sql = $this->getSQL($data);
 		$sql['created_date'] = new \Zend\Db\Sql\Expression('NOW()');
-		$sql['hash'] = $hash->gen_salt();
+		$sql['hash'] = $hash->genSalt();
 		$sql['password'] = $hash->password($data['password'], $sql['hash']);
 		$user_id = $data['user_id'] = $this->insert('users', $sql);
 		

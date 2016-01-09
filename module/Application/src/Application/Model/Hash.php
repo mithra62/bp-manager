@@ -38,7 +38,7 @@ class Hash
 	 * Creates a hash to use for salting
 	 * @return string
 	 */
-	public function gen_salt()
+	public function genSalt()
 	{
 		return md5(microtime());
 	}

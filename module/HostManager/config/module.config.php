@@ -195,7 +195,7 @@ return array(
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
         'template_map' => array(
-            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            //'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

@@ -9,11 +9,13 @@ return array(
     'modules' => array(
         'Base',
         'Application',
+        'Cp',
+        'Api',
+        //'HostManager',
         'ZF\\ApiProblem',
         'BjyProfiler',
         'ZendDeveloperTools',
         'ZfSimpleMigrations',
-        'Cp',
     ),
     'module_listener_options' => array(
         'module_paths' => array(
