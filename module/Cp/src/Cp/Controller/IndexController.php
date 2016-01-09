@@ -1,5 +1,4 @@
 <?php
-
 namespace Cp\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -12,7 +11,5 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
-
-
 }
 

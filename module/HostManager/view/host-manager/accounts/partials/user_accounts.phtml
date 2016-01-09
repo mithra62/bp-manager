@@ -1,32 +1,35 @@
 <br clear="all" />
 <div class="content_headers">
-	<div class="default_moji_header">Additional MojiTracs</div>	
+	<div class="default_moji_header">Additional MojiTracs</div>
 </div>
 
 <p>Below are the additional MojiTrac sites you're associated with.</p>
 <?php $mojitracs = $this->GetUserAccounts($this->getIdentity(), false); ?>
-<table cellpadding="0" cellspacing="0" class="<?php echo ($this->tableclass) ? $this->tableclass : 'tablesorter'; ?>" id="<?php echo ($this->tableid) ? $this->tableid : 'moji_invites'; ?>">
+<table cellpadding="0" cellspacing="0"
+	class="<?php echo ($this->tableclass) ? $this->tableclass : 'tablesorter'; ?>"
+	id="<?php echo ($this->tableid) ? $this->tableid : 'moji_invites'; ?>">
 	<thead>
 		<tr>
 			<th>Company</th>
 			<th>Account Contact</th>
 			<th>Joined</th>
+	
 	</thead>
 
 	<tbody>
-		<?php 
-		$i = 0;
-		foreach($mojitracs as $moji)
-		{
-		?>
+		<?php
+$i = 0;
+foreach ($mojitracs as $moji) {
+    ?>
 		<tr>
-			<td><a title="<?php echo $moji['company_name']; ?>" target="_blank" href="<?php echo $moji['url']; ?>"><?php echo $moji['company_name']; ?></a></td>
+			<td><a title="<?php echo $moji['company_name']; ?>" target="_blank"
+				href="<?php echo $moji['url']; ?>"><?php echo $moji['company_name']; ?></a></td>
 			<td><a href="mailto:<?php echo $moji['email']; ?>"><?php echo $moji['first_name']; ?> <?php echo $moji['last_name']; ?></a></td>
 			<td><?php echo $this->RelativeDate($moji['joined_date']); ?></td>
-			
+
 		</tr>
-		<?php 
-		}
-		?>
+		<?php
+}
+?>
 	</tbody>
 </table>

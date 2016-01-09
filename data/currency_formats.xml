@@ -986,8 +986,8 @@
 			<CcyMnrUnts>2</CcyMnrUnts>
 		</CcyNtry>
 		<CcyNtry>
-			<CtryNm>MACEDONIA, THE FORMER 
-YUGOSLAV REPUBLIC OF</CtryNm>
+			<CtryNm>MACEDONIA, THE FORMER
+				YUGOSLAV REPUBLIC OF</CtryNm>
 			<CcyNm>Denar</CcyNm>
 			<Ccy>MKD</Ccy>
 			<CcyNbr>807</CcyNbr>
@@ -1390,8 +1390,8 @@ YUGOSLAV REPUBLIC OF</CtryNm>
 			<CcyMnrUnts>2</CcyMnrUnts>
 		</CcyNtry>
 		<CcyNtry>
-			<CtryNm>SAINT HELENA, ASCENSION AND 
-TRISTAN DA CUNHA</CtryNm>
+			<CtryNm>SAINT HELENA, ASCENSION AND
+				TRISTAN DA CUNHA</CtryNm>
 			<CcyNm>Saint Helena Pound</CcyNm>
 			<Ccy>SHP</Ccy>
 			<CcyNbr>654</CcyNbr>
@@ -1907,7 +1907,8 @@ TRISTAN DA CUNHA</CtryNm>
 		</CcyNtry>
 		<CcyNtry>
 			<CtryNm>ZZ07_No_Currency</CtryNm>
-			<CcyNm>The codes assigned for transactions where no currency is involved</CcyNm>
+			<CcyNm>The codes assigned for transactions where no currency is
+				involved</CcyNm>
 			<Ccy>XXX</Ccy>
 			<CcyNbr>999</CcyNbr>
 			<CcyMnrUnts>N.A.</CcyMnrUnts>

@@ -1,8 +1,8 @@
-<div class="content_headers" style="padding-top:0px;">
-	<div class="invites_header">Invite User</div>	
+<div class="content_headers" style="padding-top: 0px;">
+	<div class="invites_header">Invite User</div>
 </div>
 <p>
-<?php 
+<?php
 $form = $this->form;
 $form->setAttribute('action', $this->url('users/invite'));
 $form->prepare();
@@ -11,9 +11,8 @@ $csrf = $form->get('_x');
 echo $this->formRow($csrf);
 ?>
 <style>
-#loading
-{
-	display:none;
+#loading {
+	display: none;
 }
 </style>
 <div id="oputput"></div>
@@ -32,7 +31,9 @@ echo $this->formRow($csrf);
 	<?php $name = $form->get('email'); echo $this->formRow($name); ?>
 </p>
 
-<p class="user_role_boxes"><br /><label for="">Assigned Roles:</label>
+<p class="user_role_boxes">
+	<br />
+	<label for="">Assigned Roles:</label>
 	<?php $field = $form->get('user_roles'); echo $this->formRow($field); ?>		
 </p>
 
@@ -40,7 +41,7 @@ echo $this->formRow($csrf);
 	<input type="submit" class="submit" value="Submit" />
 </p>
 <?php echo $this->ConfirmPageUnload('#invite_form')?>
-<?php echo $this->form()->closeTag() ?>
+<?php echo $this->form()->closeTag()?>
 </p>
 <script type="text/javascript">
 jQuery(document).ready(function($){

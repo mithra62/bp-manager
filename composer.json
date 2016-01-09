@@ -1,5 +1,5 @@
 {
-    "name": "mithra62/mojitrac",
+    "name": "mithra62/bp_server",
     "description": "Project Management System",
     "license": "Don't Be a Dick License",
     "keywords": [
@@ -17,7 +17,6 @@
         "zfcampus/zf-api-problem": "~1.0-dev",
         "zircote/hal": "dev-master",
         "phpunit/phpunit": "4.1.*",
-        "rtconner/freshbooks-api": "dev-master",
         "vgarvardt/zf-simple-migrations": "dev-master",
         "mtdowling/cron-expression": "1.0.*",
         "intervention/image": "2.*",

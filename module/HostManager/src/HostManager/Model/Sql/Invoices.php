@@ -7,7 +7,6 @@
  * @version		2.0
  * @filesource 	./module/HostManager/src/HostManager/Model/Sql/Invoices.php
  */
-
 namespace HostManager\Model\Sql;
 
 use HostManager\Model\Sql\SqlAbstract;
@@ -15,10 +14,10 @@ use HostManager\Model\Sql\SqlAbstract;
 /**
  * HostManager - Invoices table class
  *
- * @package 	HostManager\Sql
- * @author		Eric Lamb
- * @filesource 	./module/HostManager/src/HostManager/Model/Sql/Invoices.php
+ * @package HostManager\Sql
+ * @author Eric Lamb
+ * @filesource ./module/HostManager/src/HostManager/Model/Sql/Invoices.php
  */
-class Invoices extends SqlAbstract {
-	
+class Invoices extends SqlAbstract
+{
 }

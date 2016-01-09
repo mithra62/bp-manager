@@ -7,7 +7,6 @@
  * @version		2.0
  * @filesource 	./module/HostManager/src/HostManager/Model/Sql/Companies.php
  */
-
 namespace HostManager\Model\Sql;
 
 use HostManager\Model\Sql\SqlAbstract;
@@ -15,10 +14,10 @@ use HostManager\Model\Sql\SqlAbstract;
 /**
  * HostManager - bookmarks table class
  *
- * @package 	HostManager\Sql
- * @author		Eric Lamb <eric@mithra62.com>
- * @filesource 	./module/HostManager/src/HostManager/Model/Sql/Companies.php
+ * @package HostManager\Sql
+ * @author Eric Lamb <eric@mithra62.com>
+ * @filesource ./module/HostManager/src/HostManager/Model/Sql/Companies.php
  */
-class Companies extends SqlAbstract {
-	
+class Companies extends SqlAbstract
+{
 }

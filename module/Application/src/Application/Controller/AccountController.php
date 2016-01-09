@@ -8,7 +8,6 @@
  * @version		2.0
  * @filesource 	./module/Application/src/Accplication/Controller/AccountController.php
  */
-
 namespace Application\Controller;
 
 use Application\Controller\AbstractController;
@@ -17,13 +16,12 @@ use Zend\View\Model\ViewModel;
 /**
  * Application - Login Class
  *
- * Handles user account routing 
+ * Handles user account routing
  *
- * @package 	Users\Login
- * @author		Eric Lamb <eric@mithra62.com>
- * @filesource 	./module/Application/src/Accplication/Controller/AccountController.php
+ * @package Users\Login
+ * @author Eric Lamb <eric@mithra62.com>
+ * @filesource ./module/Application/src/Accplication/Controller/AccountController.php
  */
-
 class AccountController extends AbstractController
 {
 
@@ -34,51 +32,46 @@ class AccountController extends AbstractController
 
     public function registerAction()
     {
-    	$form = $this->getServiceLocator()->get('Application\Form\UsersForm');
-    	$form = $form->registrationForm();
-    	$request = $this->getRequest();
-    	
-    	if ($request->isPost())
-    	{	
-    	    $formData = $request->getPost();
-    		$user = $this->getServiceLocator()->get('Application\Model\Users');
+        $form = $this->getServiceLocator()->get('Application\Form\UsersForm');
+        $form = $form->registrationForm();
+        $request = $this->getRequest();
+        
+        if ($request->isPost()) {
+            $formData = $request->getPost();
+            $user = $this->getServiceLocator()->get('Application\Model\Users');
             $hash = $this->getServiceLocator()->get('Application\Model\Hash');
             $roles = $this->getServiceLocator()->get('Application\Model\Roles');
             
-			$form->setInputFilter($user->getRegistrationInputFilter());
-			$form->setData($formData);
-			if ($form->isValid()) 
-			{
-			    $data = $formData->toArray();
-			    $data['user_roles'] = $this->settings['default_user_groups'];
-				$user_id = $id = $user->addUser($data, $hash, $roles);
-				if($user_id)
-				{	
-					$this->flashMessenger()->addMessage($this->translate('user_added', 'pm'));
-					return $this->redirect()->toRoute('login');  
-				} 
-				else 
-				{
-					$view['errors'] = array($this->translate('something_went_wrong', 'pm'));
-					$this->layout()->setVariable('errors', $view['errors']);
-				}
-			}
-			else
-			{
-			    $form->setData($formData);
-			}
-    	}
-    	
-    	$view = array();
+            $form->setInputFilter($user->getRegistrationInputFilter());
+            $form->setData($formData);
+            if ($form->isValid()) {
+                $data = $formData->toArray();
+                $data['user_roles'] = $this->settings['default_user_groups'];
+                $user_id = $id = $user->addUser($data, $hash, $roles);
+                if ($user_id) {
+                    $this->flashMessenger()->addMessage($this->translate('user_added', 'pm'));
+                    return $this->redirect()->toRoute('login');
+                } else {
+                    $view['errors'] = array(
+                        $this->translate('something_went_wrong', 'pm')
+                    );
+                    $this->layout()->setVariable('errors', $view['errors']);
+                }
+            } else {
+                $form->setData($formData);
+            }
+        }
+        
+        $view = array();
         $view['form'] = $form;
         return $view;
     }
-    
+
     public function editAction()
     {
         return new ViewModel();
     }
-    
+
     public function changePasswordAction()
     {
         return new ViewModel();

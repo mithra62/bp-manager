@@ -7,7 +7,6 @@
  * @version		2.0
  * @filesource 	./module/HostManager/src/HostManager/Model/Sql/Projects.php
  */
-
 namespace HostManager\Model\Sql;
 
 use HostManager\Model\Sql\SqlAbstract;
@@ -15,10 +14,10 @@ use HostManager\Model\Sql\SqlAbstract;
 /**
  * HostManager - projects table class
  *
- * @package 	HostManager\Sql
- * @author		Eric Lamb <eric@mojitrac.com>
- * @filesource 	./module/HostManager/src/HostManager/Model/Sql/Projects.php
+ * @package HostManager\Sql
+ * @author Eric Lamb <eric@mojitrac.com>
+ * @filesource ./module/HostManager/src/HostManager/Model/Sql/Projects.php
  */
-class Projects extends SqlAbstract {
-
+class Projects extends SqlAbstract
+{
 }

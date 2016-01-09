@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * mithra62 - MojiTrac
  *
@@ -8,7 +8,6 @@
  * @version		2.0
  * @filesource 	./module/Application/src/Application/Model/Options/Timezones.php
  */
-
 namespace Application\Model\Options;
 
 use DateTimeZone;
@@ -16,21 +15,21 @@ use DateTimeZone;
 /**
  * Application - Timezones Options Model
  *
- * @package 	Localization\Options
- * @author		Eric Lamb <eric@mithra62.com>
- * @filesource 	./module/Application/src/Application/Model/Options/Timezones.php
+ * @package Localization\Options
+ * @author Eric Lamb <eric@mithra62.com>
+ * @filesource ./module/Application/src/Application/Model/Options/Timezones.php
  */
 class Timezones
 {
-	static public function tz()
-	{
-		$tz = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
-		$return = array();
-		
-		foreach($tz AS $key => $value)
-		{
-		    $return[$value] = $value;
-		}
-		return $return;
-	}
+
+    static public function tz()
+    {
+        $tz = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+        $return = array();
+        
+        foreach ($tz as $key => $value) {
+            $return[$value] = $value;
+        }
+        return $return;
+    }
 }

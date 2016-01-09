@@ -11,30 +11,29 @@
  * @version		2.0
  * @filesource 	./module/Application/language/en_US.php
  */
-
 return array(
-	//login
-	'login_instructions' => 'To log in please enter your credentials below.',
+    // login
+    'login_instructions' => 'To log in please enter your credentials below.',
     'login_welcome_message' => 'Welcome!',
-	'invalid_credials_try_again' => 'Invalid Credentials! Please Try Again',
-	'login_successful' => 'Login Successful!',
-		
-	//logout
-	'youve_been_logged_out' => 'You\'ve been logged out',
-		
-	//global
-	'submit' => 'Submit',
+    'invalid_credials_try_again' => 'Invalid Credentials! Please Try Again',
+    'login_successful' => 'Login Successful!',
+    
+    // logout
+    'youve_been_logged_out' => 'You\'ve been logged out',
+    
+    // global
+    'submit' => 'Submit',
     'email' => 'Email',
     'password' => 'Password',
     'sign_in' => 'Sign in',
     'register' => 'Register',
     'login' => 'Login',
-		
-	//forgot password
+    
+    // forgot password
     'forgot_password' => 'Forgot Password',
-	'forgot_password_email_subject' => 'Forgot Password',
-	'check_your_emmail' => 'Please check your email',
-	'forgot_password_email' => 'Hello %1$s, <br /><br />
+    'forgot_password_email_subject' => 'Forgot Password',
+    'check_your_emmail' => 'Please check your email',
+    'forgot_password_email' => 'Hello %1$s, <br /><br />
 		
 			To reset your password for your account, click the link below:<br /><br />
 
@@ -47,25 +46,24 @@ return array(
 			
 			Please don\'t respond to this email; all emails are automatically deleted.			
 	',
-	'forgot_password_instructions' => 'Enter your email to reset your password.',
-	'back_to_login' => 'Back to Login',
-		
-	//change password
-	'rest_password' => 'Reset Password',
-	'old_password' => 'Old Password',
-	'new_password' => 'New Password',
-	'confirm_password' => 'Confirm Password',
-	'password_has_reset' => 'Your password hass been reset!',
-	
-	//js validation messages
+    'forgot_password_instructions' => 'Enter your email to reset your password.',
+    'back_to_login' => 'Back to Login',
+    
+    // change password
+    'rest_password' => 'Reset Password',
+    'old_password' => 'Old Password',
+    'new_password' => 'New Password',
+    'confirm_password' => 'Confirm Password',
+    'password_has_reset' => 'Your password hass been reset!',
+    
+    // js validation messages
     'js_email_validation_message' => 'Please enter an email address',
     'js_password_validation_message' => 'Please enter a password',
     'required' => 'Required',
     
-    //reset password
+    // reset password
     'reset_password_instructions' => 'Create your new password here',
     
-
-    'user_registration_email_subject' => 'New Account Created!',
-    
-);
+    'user_registration_email_subject' => 'New Account Created!'
+)
+;

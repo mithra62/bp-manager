@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * mithra62 - MojiTrac
  *
@@ -8,7 +8,6 @@
  * @version		2.0
  * @filesource 	./module/Application/View/Helper/ConfirmPageUnload.php
  */
-
 namespace Application\View\Helper;
 
 use Base\View\Helper\BaseViewHelper;
@@ -16,16 +15,17 @@ use Base\View\Helper\BaseViewHelper;
 /**
  * Application - Confirm Page Unload View Helper
  *
- * @package 	ViewHelpers\HTML
- * @author		Eric Lamb <eric@mithra62.com>
- * @filesource 	./module/Application/View/Helper/ConfirmPageUnload.php
+ * @package ViewHelpers\HTML
+ * @author Eric Lamb <eric@mithra62.com>
+ * @filesource ./module/Application/View/Helper/ConfirmPageUnload.php
  */
 class ConfirmPageUnload extends BaseViewHelper
 {
-	public function __invoke($id)
-	{
-		$doc_id = 'document.'.str_replace('#', '', $id);
-		$data = <<<HTML
+
+    public function __invoke($id)
+    {
+        $doc_id = 'document.' . str_replace('#', '', $id);
+        $data = <<<HTML
 		
 <script type="text/javascript" charset="utf-8">
 function setConfirmUnload(on) {
@@ -47,8 +47,7 @@ jQuery(document).ready(function($){
 });
 </script>		
 HTML;
-	return $data;
-
-	}
+        return $data;
+    }
 }
 ?>

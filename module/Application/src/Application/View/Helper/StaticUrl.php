@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * mithra62 - MojiTrac
  *
@@ -8,22 +8,20 @@
  * @version		2.0
  * @filesource 	./module/Application/src/Application/View/Helper/Staticurl.php
  */
-
 namespace Application\View\Helper;
 
 use Base\View\Helper\BaseViewHelper;
 
- /**
- * View Helper - Static URL 
+/**
+ * View Helper - Static URL
  *
- * @package 	ViewHelpers\Routes
- * @author		Eric Lamb
- * @filesource 	./module/Application/src/Application/View/Helper/Staticurl.php
+ * @package ViewHelpers\Routes
+ * @author Eric Lamb
+ * @filesource ./module/Application/src/Application/View/Helper/Staticurl.php
  */
 class Staticurl extends BaseViewHelper
 {
-	public function __invoke()
-	{
 
-	}
+    public function __invoke()
+    {}
 }

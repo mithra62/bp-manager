@@ -7,8 +7,7 @@
  * @link		http://mojitrac.com/
  * @version		2.0
  * @filesource 	./module/Application/src/Application/Form/ForgotPasswordForm.php
-*/
-
+ */
 namespace Application\Form;
 
 use Base\Form\BaseForm;
@@ -18,36 +17,39 @@ use Base\Form\BaseForm;
  *
  * Generates the Forgot Password form
  *
- * @package 	Users\Login\ForgotPassword
- * @author		Eric Lamb <eric@mithra62.com>
- * @filesource 	./module/Application/src/Application/Form/ForgotPasswordForm.php
-*/
+ * @package Users\Login\ForgotPassword
+ * @author Eric Lamb <eric@mithra62.com>
+ * @filesource ./module/Application/src/Application/Form/ForgotPasswordForm.php
+ *            
+ */
 class ForgotPasswordForm extends BaseForm
 {
-	/**
-	 * Generates the Forgot Password form
-	 * @param string $options
-	 */
-	public function __construct($name = null)
-	{
-		parent::__construct($name);
-		$this->setAttribute('method', 'post');
-		$this->add(array(
-			'name' => 'email',
-			'type' => 'Text',
-			'attributes' => array(
-				'class' => 'form-control',
-			),
-		));
-	
-		$this->add(array(
-			'name' => 'submit',
-			'type' => 'Submit',
-			'attributes' => array(
-				'value' => 'Go',
-				'id' => 'submitbutton',
-				'class' => 'form-control',
-			),
-		));
+
+    /**
+     * Generates the Forgot Password form
+     * 
+     * @param string $options            
+     */
+    public function __construct($name = null)
+    {
+        parent::__construct($name);
+        $this->setAttribute('method', 'post');
+        $this->add(array(
+            'name' => 'email',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control'
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'submit',
+            'type' => 'Submit',
+            'attributes' => array(
+                'value' => 'Go',
+                'id' => 'submitbutton',
+                'class' => 'form-control'
+            )
+        ));
     }
 }

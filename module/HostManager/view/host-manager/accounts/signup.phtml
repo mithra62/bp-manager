@@ -1,75 +1,83 @@
-<h1><?php echo $this->_('signup_welcome_message', 'hm'); ?></h1>		
-<?php 
-if($status == 'complete')
-{
-	echo '<div class="information large png_bg">'.$this->_('signup_complete', 'hm').'</div>';
-	echo '<p>'.$this->_('signup_complete_instructions', 'hm').'</p>';
-}
-else
-{
-	$form = $this->form;
-	$form->setAttribute('id', 'sumbitForm');
-	$form->prepare();
-	
-	if(is_array($this->messages) && count($this->messages) >= 1)
-	{
-		foreach($this->messages AS $message) 
-		{
-			echo '<div class="fail large png_bg">'.$message.'</div>';
-		}
-	} else {
-		
-		echo '<div class="information large png_bg">'.$this->_('signup_instructions', 'hm').'</div> ';
-	}
-	
-	echo $this->form()->openTag($form); 
-	$csrf = $form->get('_x');
-	echo $this->formRow($csrf); 
-	?>
-	<p><label><?php echo $this->_('subdomain', 'hm'); ?></label>
-	<?php 
-	$subdomain = $form->get('subdomain');
-	echo $this->formRow($subdomain); ?>
+<h1><?php echo $this->_('signup_welcome_message', 'hm'); ?></h1>
+<?php
+if ($status == 'complete') {
+    echo '<div class="information large png_bg">' . $this->_('signup_complete', 'hm') . '</div>';
+    echo '<p>' . $this->_('signup_complete_instructions', 'hm') . '</p>';
+} else {
+    $form = $this->form;
+    $form->setAttribute('id', 'sumbitForm');
+    $form->prepare();
+    
+    if (is_array($this->messages) && count($this->messages) >= 1) {
+        foreach ($this->messages as $message) {
+            echo '<div class="fail large png_bg">' . $message . '</div>';
+        }
+    } else {
+        
+        echo '<div class="information large png_bg">' . $this->_('signup_instructions', 'hm') . '</div> ';
+    }
+    
+    echo $this->form()->openTag($form);
+    $csrf = $form->get('_x');
+    echo $this->formRow($csrf);
+    ?>
+<p>
+	<label><?php echo $this->_('subdomain', 'hm'); ?></label>
+	<?php
+    $subdomain = $form->get('subdomain');
+    echo $this->formRow($subdomain);
+    ?>
 	</p>
-	
-	<p><label><?php echo $this->_('company', 'hm'); ?></label>
-	<?php 
-	$organization = $form->get('organization');
-	echo $this->formRow($organization); ?>
+
+<p>
+	<label><?php echo $this->_('company', 'hm'); ?></label>
+	<?php
+    $organization = $form->get('organization');
+    echo $this->formRow($organization);
+    ?>
 	</p>
-	
-	<p><label><?php echo $this->_('first_name', 'hm'); ?></label>
-	<?php 
-	$first_name = $form->get('first_name');
-	echo $this->formRow($first_name); ?>
+
+<p>
+	<label><?php echo $this->_('first_name', 'hm'); ?></label>
+	<?php
+    $first_name = $form->get('first_name');
+    echo $this->formRow($first_name);
+    ?>
 	</p>
-	
-	<p><label><?php echo $this->_('last_name', 'hm'); ?></label>
-	<?php 
-	$last_name = $form->get('last_name');
-	echo $this->formRow($last_name); ?>
+
+<p>
+	<label><?php echo $this->_('last_name', 'hm'); ?></label>
+	<?php
+    $last_name = $form->get('last_name');
+    echo $this->formRow($last_name);
+    ?>
 	</p>
-	
-	<p><label><?php echo $this->_('email', 'app'); ?></label>
-	<?php 
-	$email = $form->get('email');
-	echo $this->formRow($email); ?>
+
+<p>
+	<label><?php echo $this->_('email', 'app'); ?></label>
+	<?php
+    $email = $form->get('email');
+    echo $this->formRow($email);
+    ?>
 	</p>
-	
-	<p><label><?php echo $this->_('password', 'app'); ?></label>
-	<?php 
-	$password = $form->get('password');
-	echo $this->formRow($password); ?>
+
+<p>
+	<label><?php echo $this->_('password', 'app'); ?></label>
+	<?php
+    $password = $form->get('password');
+    echo $this->formRow($password);
+    ?>
 	</p>
-	
-	<p>
-	<input type="submit" name="submit" id="button" value="Create Account"  class="button"/>
-	<input type="reset" name="reset" id="reset" value="Reset" class="button" />
-	</p>
-			
-		<?php echo $this->form()->closeTag() ?>
-		
-	<script type="text/javascript">
+
+<p>
+	<input type="submit" name="submit" id="button" value="Create Account"
+		class="button" /> <input type="reset" name="reset" id="reset"
+		value="Reset" class="button" />
+</p>
+
+<?php echo $this->form()->closeTag()?>
+
+<script type="text/javascript">
 	$.validator.setDefaults({
 		//submitHandler: function() { alert("submitted!"); }
 	});
@@ -98,5 +106,5 @@ else
 	
 	});
 	
-	</script>	
+	</script>
 <?php } ?>

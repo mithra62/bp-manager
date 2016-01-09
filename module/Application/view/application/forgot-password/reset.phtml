@@ -1,9 +1,9 @@
 <div class="page-header">
-    <h1><?php echo $this->_('rest_password', 'app'); ?></h1>	
+	<h1><?php echo $this->_('rest_password', 'app'); ?></h1>
 </div>
 
 
-<?php 
+<?php
 $form = $this->form;
 $form->setAttribute('id', 'resetPasswordForm');
 $form->setAttribute('class', 'form-horizontal');
@@ -11,34 +11,35 @@ $form->prepare();
 echo $this->form()->openTag($form);
 $csrf = $form->get('_x');
 echo $this->formRow($csrf);
-?>			
+?>
 <div class="form-group">
-    <label for="password" class="control-label col-xs-2"><?php echo $this->_('new_password', 'app'); ?></label>
-    <div class="col-xs-10">
-    <?php 
+	<label for="password" class="control-label col-xs-2"><?php echo $this->_('new_password', 'app'); ?></label>
+	<div class="col-xs-10">
+    <?php
     $password = $form->get('new_password');
-    echo $this->formRow($password); ?>
+    echo $this->formRow($password);
+    ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="password" class="control-label col-xs-2"><?php echo $this->_('confirm_password', 'app'); ?></label>
-    <div class="col-xs-10">
-    <?php 
+	<label for="password" class="control-label col-xs-2"><?php echo $this->_('confirm_password', 'app'); ?></label>
+	<div class="col-xs-10">
+    <?php
     $password = $form->get('confirm_password');
-    echo $this->formRow($password); ?>
+    echo $this->formRow($password);
+    ?>
     </div>
 </div>
 
 <div class="form-group">
-    <div class="col-xs-offset-2 col-xs-10">
-        <button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('sign_in', 'app'); ?></button>
-        
-        <br />
-        <a href="<?php echo $this->url('forgot-password'); ?>"><?php echo $this->_('forgot_password', 'app'); ?></a> | 
-        <a href="<?php echo $this->url('account/register'); ?>"><?php echo $this->_('register', 'app'); ?></a>
-    </div>
-</div>				
+	<div class="col-xs-offset-2 col-xs-10">
+		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('sign_in', 'app'); ?></button>
+
+		<br /> <a href="<?php echo $this->url('forgot-password'); ?>"><?php echo $this->_('forgot_password', 'app'); ?></a>
+		| <a href="<?php echo $this->url('account/register'); ?>"><?php echo $this->_('register', 'app'); ?></a>
+	</div>
+</div>
 
 <?php //echo $this->ConfirmPageUnload('#password_form')?>
 <?php echo $this->form()->closeTag() ?>

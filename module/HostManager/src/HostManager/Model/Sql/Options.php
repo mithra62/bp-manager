@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * mithra62 - MojiTrac
  *
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -7,7 +7,6 @@
  * @version		2.0
  * @filesource 	./module/HostManager/src/HostManager/Model/Sql/Options.php
  */
-
 namespace HostManager\Model\Sql;
 
 use HostManager\Model\Sql\SqlAbstract;
@@ -15,10 +14,10 @@ use HostManager\Model\Sql\SqlAbstract;
 /**
  * HostManager - options table class
  *
- * @package 	HostManager\Sql
- * @author		Eric Lamb <eric@mojitrac.com>
- * @filesource 	./module/HostManager/src/HostManager/Model/Sql/Options.php
+ * @package HostManager\Sql
+ * @author Eric Lamb <eric@mojitrac.com>
+ * @filesource ./module/HostManager/src/HostManager/Model/Sql/Options.php
  */
-class Options extends SqlAbstract {
-
+class Options extends SqlAbstract
+{
 }

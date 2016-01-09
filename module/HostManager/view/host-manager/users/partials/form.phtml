@@ -1,4 +1,4 @@
-<?php 
+<?php
 $form = $this->form;
 $form->setAttribute('id', 'user_form');
 $form->prepare();
@@ -6,11 +6,13 @@ echo $this->form()->openTag($form);
 $csrf = $form->get('_x');
 echo $this->formRow($csrf);
 ?>
-<input type="hidden" name="start_date_default" id="start_date_default" value="<?php echo date('Y-m-d'); ?>" />
-<input type="hidden" name="end_date_default" id="end_date_default" value="<?php echo date('Y-m-d'); ?>" />
-<?php 
-if($this->id > 0)
-	echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+<input type="hidden" name="start_date_default" id="start_date_default"
+	value="<?php echo date('Y-m-d'); ?>" />
+<input type="hidden" name="end_date_default" id="end_date_default"
+	value="<?php echo date('Y-m-d'); ?>" />
+<?php
+if ($this->id > 0)
+    echo '<input type="hidden" value="' . $this->id . '" name="id" />';
 ?>
 <div id="form_tabs">
 	<ul>
@@ -19,17 +21,17 @@ if($this->id > 0)
 		<li><a href="#phone">Phone</a></li>
 	</ul>
 	<div id="general">
-		
+
 		<p>
 			<label for="first_name">First Name</label>
 			<?php $field = $form->get('first_name'); echo $this->formRow($field); ?>
-		</p>				
-		
+		</p>
+
 		<p>
 			<label for="last_name">Last Name</label>
 			<?php $field = $form->get('last_name'); echo $this->formRow($field); ?>
-		</p>			
-		
+		</p>
+
 		<p>
 			<label for="email">Email</label>
 			<?php $field = $form->get('email'); echo $this->formRow($field); ?>
@@ -40,7 +42,7 @@ if($this->id > 0)
 			<label for="password">Password</label>
 			<?php $field = $form->get('password'); echo $this->formRow($field); ?>
 		</p>
-		
+
 		<p>
 			<label for="confirm_password">Confirm Password</label>
 			<?php $field = $form->get('confirm_password'); echo $this->formRow($field); ?>
@@ -51,44 +53,44 @@ if($this->id > 0)
 			<label for="job_title">Title</label>
 			<?php $field = $form->get('job_title'); echo $this->formRow($field); ?>
 		</p>
-		
+
 		<p>
 			<label for="description">Description</label>
 			<?php $field = $form->get('description'); echo $this->formRow($field); ?>
-		</p>		
-		
+		</p>
+
 		<p>
 			<input type="submit" class="submit" value="Submit" />
-		</p>				
+		</p>
 	</div>
 	<div id="phone">
 		<p>
 			<label for="phone_home">Home</label>
 			<?php $field = $form->get('phone_home'); echo $this->formRow($field); ?>
 		</p>
-			
+
 		<p>
 			<label for="phone_work">Work</label>
 			<?php $field = $form->get('phone_work'); echo $this->formRow($field); ?>
 		</p>
-		
+
 		<p>
 			<label for="phone_mobile">Mobile</label>
 			<?php $field = $form->get('phone_mobile'); echo $this->formRow($field); ?>
 		</p>
-		
+
 		<p>
 			<label for="phone_fax">Fax</label>
 			<?php $field = $form->get('phone_fax'); echo $this->formRow($field); ?>
 		</p>
-		
+
 		<p>
 			<input type="submit" class="submit" value="Submit" />
-		</p>			
-	</div>	
-</div>	
+		</p>
+	</div>
+</div>
 <?php echo $this->ConfirmPageUnload('#user_form')?>
-<?php echo $this->form()->closeTag() ?>
+<?php echo $this->form()->closeTag()?>
 
 <script type="text/javascript">
 jQuery(document).ready(function($){

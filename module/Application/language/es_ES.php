@@ -11,11 +11,12 @@
 
 /**
  * The ZendFramework2 language array
- * @package		Localization
+ * 
+ * @package Localization
  * @var array Contains a key => value pairing for translating copy
  */
 return array(
-	'login_instructions' => 'To log in please enter your credentials below.',
+    'login_instructions' => 'To log in please enter your credentials below.',
     'login_welcome_message' => 'Welcome tof MojiTrac!',
     'email' => 'Email',
     'password' => 'Password',

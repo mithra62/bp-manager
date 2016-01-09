@@ -1,7 +1,7 @@
-<div class="content_headers" style="padding-top:0px;">
-	<div class="users_header">Add User</div>	
+<div class="content_headers" style="padding-top: 0px;">
+	<div class="users_header">Add User</div>
 </div>
-<?php 
+<?php
 $form = $this->form;
 $form->setAttribute('id', 'user_form');
 $form->prepare();
@@ -10,33 +10,33 @@ $csrf = $form->get('_x');
 echo $this->formRow($csrf);
 ?>
 <div id="form_tabs">
-		
-		<p>
-			<label for="first_name">First Name</label>
+
+	<p>
+		<label for="first_name">First Name</label>
 			<?php $field = $form->get('first_name'); echo $this->formRow($field); ?>
-		</p>				
-		
-		<p>
-			<label for="last_name">Last Name</label>
+		</p>
+
+	<p>
+		<label for="last_name">Last Name</label>
 			<?php $field = $form->get('last_name'); echo $this->formRow($field); ?>
-		</p>			
-		
-		<p>
-			<label for="email">Email</label>
+		</p>
+
+	<p>
+		<label for="email">Email</label>
 			<?php $field = $form->get('email'); echo $this->formRow($field); ?>
 		</p>
-		
-		<p class="user_role_boxes">
-		<?php $field = $form->get('user_roles'); echo $this->formRow($field); ?>		
-		</p>		
-		
 
-		<p>
-			<input type="submit" class="submit" value="Submit" />
-		</p>				
-	</div>	
+	<p class="user_role_boxes">
+		<?php $field = $form->get('user_roles'); echo $this->formRow($field); ?>		
+		</p>
+
+
+	<p>
+		<input type="submit" class="submit" value="Submit" />
+	</p>
+</div>
 <?php echo $this->ConfirmPageUnload('#user_form')?>
-<?php echo $this->form()->closeTag() ?>
+<?php echo $this->form()->closeTag()?>
 
 <script type="text/javascript">
 jQuery(document).ready(function($){

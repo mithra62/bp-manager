@@ -7,7 +7,6 @@
  * @version		2.0
  * @filesource 	./module/HostManager/src/HostManager/Model/Sql/User2role.php
  */
-
 namespace HostManager\Model\Sql;
 
 use HostManager\Model\Sql\SqlAbstract;
@@ -15,10 +14,10 @@ use HostManager\Model\Sql\SqlAbstract;
 /**
  * HostManager - options table class
  *
- * @package 	HostManager\Sql
- * @author		Eric Lamb <eric@mojitrac.com>
- * @filesource 	./module/HostManager/src/HostManager/Model/Sql/User2role.php
+ * @package HostManager\Sql
+ * @author Eric Lamb <eric@mojitrac.com>
+ * @filesource ./module/HostManager/src/HostManager/Model/Sql/User2role.php
  */
-class User2role extends SqlAbstract {
-	
+class User2role extends SqlAbstract
+{
 }

@@ -8,8 +8,7 @@
  * @link			http://mithra62.com/
  * @version		2.0
  * @filesource 	./module/Application/src/Application/Validate/Password/Confirm.php
-*/
-
+ */
 namespace Application\Validate\Password;
 
 use Zend\Validator\AbstractValidator;
@@ -19,14 +18,16 @@ use Zend\Validator\AbstractValidator;
  *
  * Ensures password confirmation values match
  *
- * @package 		mithra62:Mojitrac
- * @author		Eric Lamb
- * @filesource 	./module/Application/src/Application/Validate/Password/Confirm.php
-*/
+ * @package mithra62:Mojitrac
+ * @author Eric Lamb
+ * @filesource ./module/Application/src/Application/Validate/Password/Confirm.php
+ *            
+ */
 class Confirm extends AbstractValidator
 {
+
     const NOT_MATCH = 'notMatch';
- 
+
     protected $_messageTemplates = array(
         self::NOT_MATCH => 'Password confirmation does not match'
     );
@@ -36,29 +37,19 @@ class Confirm extends AbstractValidator
         $value = (string) $value;
         $this->_setValue($value);
         
-        if (is_array($context) && array_key_exists('old_password', $context)) 
-        {
-            if (isset($context['new_password']) && ($value == $context['new_password']))
-            {
+        if (is_array($context) && array_key_exists('old_password', $context)) {
+            if (isset($context['new_password']) && ($value == $context['new_password'])) {
                 return true;
             }
-        } 
-        elseif (is_array($context) && !array_key_exists('old_password', $context) && array_key_exists('password', $context))
-        {
-            if (isset($context['password']) && ($value == $context['password']))
-            {
+        } elseif (is_array($context) && ! array_key_exists('old_password', $context) && array_key_exists('password', $context)) {
+            if (isset($context['password']) && ($value == $context['password'])) {
                 return true;
-            }        	
-        }
-        elseif(is_array($context) && array_key_exists('new_password', $context) && !array_key_exists('old_password', $context))
-        {
-            if (isset($context['new_password']) && ($value == $context['new_password']))
-            {
+            }
+        } elseif (is_array($context) && array_key_exists('new_password', $context) && ! array_key_exists('old_password', $context)) {
+            if (isset($context['new_password']) && ($value == $context['new_password'])) {
                 return true;
-            }        	
-        }
-        elseif (is_string($context) && ($value == $context)) 
-        {
+            }
+        } elseif (is_string($context) && ($value == $context)) {
             return true;
         }
         $this->_error(self::NOT_MATCH);

@@ -1,5 +1,5 @@
-<div class="content_headers" style="padding-top:0px;">
-	<div class="user_role_header">Remove Invite: <?php echo $this->invite_data['first_name']?> <?php echo $this->invite_data['last_name']?></div>	
+<div class="content_headers" style="padding-top: 0px;">
+	<div class="user_role_header">Remove Invite: <?php echo $this->invite_data['first_name']?> <?php echo $this->invite_data['last_name']?></div>
 </div>
 
 <div class="attention png_bg">
@@ -7,15 +7,17 @@ Are you sure you want to remove the invite for <?php echo $this->invite_data['fi
 </div>
 
 <p>
-<?php 
+<?php
 $form = $this->form;
 $form->setAttribute('id', 'remove_invite_form');
-$form->setAttribute('action', $this->url('users/remove-invite', array('user_id' => $this->invite_data['user_id'])));
+$form->setAttribute('action', $this->url('users/remove-invite', array(
+    'user_id' => $this->invite_data['user_id']
+)));
 $form->prepare();
 echo $this->form()->openTag($form);
 $csrf = $form->get('_x');
 echo $this->formRow($csrf);
 ?>
 	<?php $field = $form->get('confirm'); echo $this->formRow($field); ?> <?php $field = $form->get('fail'); echo $this->formRow($field); ?>
-<?php echo $this->form()->closeTag() ?>
+<?php echo $this->form()->closeTag()?>
 </p>

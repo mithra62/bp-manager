@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * mithra62 - MojiTrac
  *
@@ -8,7 +8,6 @@
  * @version		2.0
  * @filesource 	./module/Application/src/Application/Model/Options/Languages.php
  */
-
 namespace Application\Model\Options;
 
 use DateTimeZone;
@@ -16,16 +15,19 @@ use DateTimeZone;
 /**
  * Application - Languages Options Model
  *
- * @package 	Localization\Options
- * @author		Eric Lamb <eric@mithra62.com>
- * @filesource 	./module/Application/src/Application/Model/Options/Languages.php
+ * @package Localization\Options
+ * @author Eric Lamb <eric@mithra62.com>
+ * @filesource ./module/Application/src/Application/Model/Options/Languages.php
  */
 class Languages
 {
-	static public function langs()
-	{
-	    //$return = array('en_US' => 'English / US', 'es_ES' => 'Spanish');
-		$return = array('en_US' => 'English / US');
-		return $return;
-	}
+
+    static public function langs()
+    {
+        // $return = array('en_US' => 'English / US', 'es_ES' => 'Spanish');
+        $return = array(
+            'en_US' => 'English / US'
+        );
+        return $return;
+    }
 }

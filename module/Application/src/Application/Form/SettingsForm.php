@@ -7,8 +7,7 @@
  * @link		http://mojitrac.com/
  * @version		2.0
  * @filesource 	./module/Application/src/Application/Form/SettingsForm.php
-*/
-
+ */
 namespace Application\Form;
 
 use Base\Form\BaseForm;
@@ -18,18 +17,21 @@ use Base\Form\BaseForm;
  *
  * Generates the Password form
  *
- * @package 	Settings
- * @author		Eric Lamb <eric@mithra62.com>
- * @filesource 	./module/Application/src/Application/Form/SettingsForm.php
-*/
+ * @package Settings
+ * @author Eric Lamb <eric@mithra62.com>
+ * @filesource ./module/Application/src/Application/Form/SettingsForm.php
+ *            
+ */
 class SettingsForm extends BaseForm
-{	
-	/**
-	 * Returns the System Settings form
-	 * @param string $options
-	 */	
-	public function __construct($name) 
-	{
-		parent::__construct($name);
-	}
+{
+
+    /**
+     * Returns the System Settings form
+     * 
+     * @param string $options            
+     */
+    public function __construct($name)
+    {
+        parent::__construct($name);
+    }
 }
