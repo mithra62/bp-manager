@@ -100,5 +100,6 @@ return array(
 			
     ',
     'verify_email_email_subject' => 'Verify Email',
+    'verify_email_successful' => 'The email address %1s has been verified',
 )
 ;

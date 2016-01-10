@@ -3,7 +3,7 @@
  * mithra62 - MojiTrac
  *
  * @author		Eric Lamb <eric@mithra62.com>
- * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
+ * @copyright	Copyright (c) 2016, mithra62, Eric Lamb.
  * @link		http://mojitrac.com/
  * @version		2.0
  * @filesource 	./module/Application/src/Accplication/Controller/AccountController.php
@@ -131,8 +131,23 @@ class AccountController extends AbstractController
     
     public function verifyEmailConfirmAction()
     {
-        echo 'f';
-        exit;
+        $hash = $this->params()->fromRoute('hash');
+        if (! $hash) {
+            return $this->redirect()->toRoute('account');
+        }
+        
+        $user = $this->getServiceLocator()->get('Application\Model\Users');
+        $user_data = $user->getUserByVerifyHash($hash);
+        if (! $user_data) {
+            return $this->redirect()->toRoute('account');
+        }  
+        
+        if( $user->verifyEmailHash($hash) )
+        {
+            $this->flashMessenger()->addMessage(sprintf($this->translate('verify_email_successful', 'app'), $user_data['email']));
+        }
+        
+        return $this->redirect()->toRoute('account');
     }
 }
 

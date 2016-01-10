@@ -757,4 +757,48 @@ class Users extends AbstractModel
         );
         return $this->update('users', $sql, $where);
     }
+
+    /**
+     * Returns a user array by password hash
+     * 
+     * @param string $hash            
+     * @param bool $expired            
+     * @return array
+     */
+    public function getUserByVerifyHash($hash, $expired = true)
+    {
+        $sql = $this->db->select()
+            ->from(array(
+            'u' => 'users'
+        ))
+            ->where(array(
+            'verified_hash' => $hash
+        ));
+        if ($expired) {
+            $greater_than = date('Y-m-d H:i:s', mktime(date("H"), date("i"), date("s"), date("m"), date("d") - 1, date("Y")));
+            $where = $sql->where->greaterThan('verified_sent_date', $greater_than)
+                         ->where->lessThan('verified_sent_date', date('Y-m-d H:i:s'));
+            $sql = $sql->where($where);
+            $sql->where(array('verified' => '0'));
+        }
+        
+        return $this->getRow($sql);
+    }
+    
+    public function verifyEmailHash($hash)
+    {
+        $sql = array(
+            'verified_sent_date' => null,
+            'verified_hash' => null,
+            'verified' => '1',
+            'verified_date' => new \Zend\Db\Sql\Expression("NOW()"),
+            'last_modified' => new \Zend\Db\Sql\Expression("NOW()")
+        );
+        
+        $where = array(
+            'verified_hash' => $hash
+        );
+        
+        return $this->update('users', $sql, $where);
+    }
 }
