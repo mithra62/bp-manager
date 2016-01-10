@@ -142,9 +142,9 @@ class AccountController extends AbstractController
             $form->setInputFilter($user->getEmailInputFilter($this->identity, $hash));
             $form->setData($formData);
             if ($form->isValid($formData)) {
-                if($user->changeEmail($this->getIdentity(), $formData['email'])){
-                    $this->flashMessenger()->addMessage($this->translate('password_has_reset', 'app'));
-                    return $this->redirect()->toRoute('account/change_password');
+                if($user->changeEmail($this->getIdentity(), $formData['new_email'])){
+                    $this->flashMessenger()->addMessage($this->translate('email_has_changed', 'app'));
+                    return $this->redirect()->toRoute('account/email_settings');
                 }
             }
         }

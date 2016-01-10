@@ -106,5 +106,6 @@ return array(
     'current_email' => 'Current Email',
     'change_email' => 'Change Email',
     'new_email' => 'New Email',
+    'email_has_changed' => 'Your email address has been changed',
 )
 ;
