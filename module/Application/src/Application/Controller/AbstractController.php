@@ -11,6 +11,7 @@
 namespace Application\Controller;
 
 use Base\Controller\BaseController;
+use Application\Traits\Controller;
 
 /**
  * Application - AbstractController Controller
@@ -21,7 +22,8 @@ use Base\Controller\BaseController;
  */
 abstract class AbstractController extends BaseController
 {
-
+    use Controller;
+    
     /**
      * (non-PHPdoc)
      * 
@@ -29,9 +31,21 @@ abstract class AbstractController extends BaseController
      */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
+        //setup system settings
         $settings = $this->getServiceLocator()->get('Application\Model\Settings');
         $this->settings = $settings->getSettings();
         $this->layout()->setVariable('settings', $this->settings);
+        
+        //setup translations
+        $translator = $e->getApplication()->getServiceManager()->get('translator');
+        $translator->setLocale(\Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']))->setFallbackLocale('en_US');
+        
+        if( $this->getIdentity() )
+        {
+            $this->_initPrefs();
+        }
+        
+        $this->_initIpBlocker();
         return parent::onDispatch($e);
     }
 

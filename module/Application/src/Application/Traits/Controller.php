@@ -63,7 +63,7 @@ trait Controller
      */
     protected function _initPrefs()
     {
-        $user = $this->getServiceLocator()->get('PM\Model\Users');
+        $user = $this->getServiceLocator()->get('Application\Model\Users');
         $this->prefs = $user->user_data->getUsersData($this->identity);
         foreach ($this->settings as $key => $value) {
             if (isset($this->prefs[$key]) && $this->prefs[$key] != '') {
@@ -72,5 +72,6 @@ trait Controller
                 $this->prefs[$key] = $this->settings[$key];
             }
         }
+        
     }
 }

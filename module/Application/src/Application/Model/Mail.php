@@ -108,7 +108,7 @@ class Mail extends AbstractModel
         $this->message->addReplyTo($settings['mail_reply_to_email'], $settings['mail_reply_to_name']);
         $this->message->setSender($settings['mail_sender_email'], $settings['mail_sender_name']);
         $this->message->setFrom($settings['mail_from_email'], $settings['mail_from_name']);
-        $this->web_url = (isset($_SERVER['HTTP_HOST']) ? 'https://' . $_SERVER['HTTP_HOST'] : false);
+        $this->web_url = (isset($_SERVER['HTTP_HOST']) ? 'http://' . $_SERVER['HTTP_HOST'] : false);
     }
 
     /**

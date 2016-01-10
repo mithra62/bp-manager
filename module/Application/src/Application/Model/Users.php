@@ -55,6 +55,13 @@ class Users extends AbstractModel
     protected $registrationInputFilter;
 
     /**
+     * The validation filter for the user email form
+     * 
+     * @var object
+     */
+    protected $emailInputFilter;
+
+    /**
      * The Roles Model
      * 
      * @var \Application\Model\Roles
@@ -260,21 +267,15 @@ class Users extends AbstractModel
         
         return $this->registrationInputFilter;
     }
-
-    /**
-     * Sets the Input Filter for the registration form
-     * 
-     * @return object
-     */
-    public function getEditInputFilter()
+    
+    public function getEmailInputFilter($identity, \Application\Model\Hash $hash)
     {
-        if (! $this->registrationInputFilter) {
-            
+        if (! $this->emailInputFilter ) {
             $inputFilter = new InputFilter();
             $factory = new InputFactory();
             
             $inputFilter->add($factory->createInput(array(
-                'name' => 'first_name',
+                'name' => 'new_email',
                 'required' => true,
                 'filters' => array(
                     array(
@@ -282,12 +283,25 @@ class Users extends AbstractModel
                     ),
                     array(
                         'name' => 'StringTrim'
+                    )
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'EmailAddress'
+                    ),
+                    array(
+                        'name' => 'Db\NoRecordExists',
+                        'options' => array(
+                            'table' => 'users',
+                            'field' => 'email',
+                            'adapter' => $this->adapter
+                        )
                     )
                 )
             )));
             
             $inputFilter->add($factory->createInput(array(
-                'name' => 'last_name',
+                'name' => 'confirm_password',
                 'required' => true,
                 'filters' => array(
                     array(
@@ -296,13 +310,23 @@ class Users extends AbstractModel
                     array(
                         'name' => 'StringTrim'
                     )
+                ),
+                'validators' => array(
+                    array(
+                        'name' => '\Application\Validate\Password\Match',
+                        'options' => array(
+                            'identity' => $identity,
+                            'users' => $this,
+                            'hash' => $hash
+                        )
+                    )
                 )
-            )));
+            )));            
             
-            $this->registrationInputFilter = $inputFilter;
+            $this->emailInputFilter = $inputFilter;
         }
         
-        return $this->registrationInputFilter;
+        return $this->emailInputFilter;
     }
 
     /**
@@ -716,6 +740,13 @@ class Users extends AbstractModel
         $mail->send();
     }
     
+    /**
+     * Sends the email verification email
+     * @param unknown $user_id
+     * @param Mail $mail
+     * @param Hash $hash
+     * @return boolean
+     */
     public function sendVerifyEmail($user_id, Mail $mail, Hash $hash)
     {
         $guid = $hash->guidish();
@@ -725,7 +756,7 @@ class Users extends AbstractModel
         }
         
         if ($this->upateVerifyHash($user_id, $guid)) {
-            $change_url = $mail->web_url . '/account/verify/'.$guid;
+            $change_url = $mail->web_url . '/account/verify/email/'.$guid;
             $mail->addTo($user_data['email']);
             $mail->setViewDir($this->getModulePath(__DIR__) . '/view/emails');
             $mail->setEmailView('forgot-password', array(
@@ -785,6 +816,11 @@ class Users extends AbstractModel
         return $this->getRow($sql);
     }
     
+    /**
+     * Updates a user's verification status based on the provided $hash
+     * @param string $hash
+     * @return Ambigous <mixed, void>
+     */
     public function verifyEmailHash($hash)
     {
         $sql = array(
@@ -801,4 +837,23 @@ class Users extends AbstractModel
         
         return $this->update('users', $sql, $where);
     }
+
+    /**
+     * Changes a users email
+     *
+     * @param int $id
+     * @param string $email
+     * @return Ambigous <\Zend\Db\Adapter\Driver\StatementInterface, \Zend\Db\ResultSet\Zend\Db\ResultSet, \Zend\Db\Adapter\Driver\ResultInterface, \Zend\Db\ResultSet\Zend\Db\ResultSetInterface>
+     */
+    public function changeEmail($id, $email)
+    {
+        $sql = array(
+            'verified' => 0,
+            'email' => $email,
+            'verified_date' => null
+        );
+        return $this->update('users', $sql, array(
+            'id' => $id
+        ));
+    }    
 }

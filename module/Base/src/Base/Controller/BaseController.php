@@ -74,6 +74,11 @@ abstract class BaseController extends AbstractActionController
     
     public function getIdentity()
     {
+        if( $this->identity == '' )
+        {
+            $this->identity = $this->getServiceLocator()->get('AuthService')->getIdentity();
+        }
+        
         return $this->identity;
     }
 }

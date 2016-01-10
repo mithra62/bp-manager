@@ -41,6 +41,7 @@ use Application\Form\UsersForm;
 use Application\Form\RolesForm;
 use Application\Form\User\RolesForm as UserRolesForm;
 use Application\Form\ConfirmForm;
+use Application\Form\EmailForm;
 
 use Application\Event\NotificationEvent;
 
@@ -263,6 +264,9 @@ class Module
                 },
 				'Application\Form\ConfirmForm' => function($sm) {
 					return new ConfirmForm('confirm');
+				},
+				'Application\Form\EmailForm' => function($sm) {
+					return new EmailForm('email_change');
 				},
                 
                 // events

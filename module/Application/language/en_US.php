@@ -101,5 +101,10 @@ return array(
     ',
     'verify_email_email_subject' => 'Verify Email',
     'verify_email_successful' => 'The email address %1s has been verified',
+    
+    //email settings
+    'current_email' => 'Current Email',
+    'change_email' => 'Change Email',
+    'new_email' => 'New Email',
 )
 ;

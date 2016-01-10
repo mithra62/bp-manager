@@ -62,6 +62,7 @@ class Settings extends KeyValue
         'mail_sender_name' => 'mithra62',
         'mail_from_email' => 'no-reply@mithra62.com',
         'mail_from_name' => 'mithra62',
+        'enable_ip' => 0,
     );
 
     /**

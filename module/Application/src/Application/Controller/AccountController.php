@@ -82,7 +82,25 @@ class AccountController extends AbstractController
 
     public function changePasswordAction()
     {
-        $view = array();
+    	$user = $this->getServiceLocator()->get('Application\Model\Users');
+		$form = $this->getServiceLocator()->get('Application\Form\PasswordForm');
+		$hash = $this->getServiceLocator()->get('Application\Model\Hash');
+		$form = $form->confirmField();
+		$request = $this->getRequest();
+        if ($request->isPost()) {
+			$formData = $this->getRequest()->getPost();
+			$form->setInputFilter($user->getPasswordInputFilter($this->getIdentity(), $hash));
+			$form->setData($formData);
+			if ($form->isValid($formData)) {
+				if($user->changePassword($this->identity, $formData['new_password'])){
+			    	$this->flashMessenger()->addMessage($this->translate('password_has_reset', 'app'));
+					return $this->redirect()->toRoute('account/change_password');		
+				}
+			}   
+		} 
+		
+		$view = array();
+		$view['form'] = $form;
         $view['active_sidebar'] = 'password';
         return $view;
     }
@@ -91,12 +109,48 @@ class AccountController extends AbstractController
     {
         $view = array();
         $view['active_sidebar'] = 'preferences';
+        
+        $request = $this->getRequest();
+        $form = $this->getServiceLocator()->get('Application\Form\PrefsForm');
+        if ($request->isPost()) {
+            $ud = $this->getServiceLocator()->get('Application\Model\User\Data');
+            $formData = $this->getRequest()->getPost();
+            $form->setInputFilter($ud->getInputFilter());
+            $form->setData($formData);
+            if ($form->isValid($formData)) {
+                if($ud->updateUserData($formData->toArray(), $this->identity)) {
+                    $this->flashMessenger()->addMessage($this->translate('prefs_updated', 'pm'));
+                    return $this->redirect()->toRoute('account/prefs');
+                }
+            }
+        }
+        
+        $form->setData($this->prefs);
+        $view['form'] = $form;
         return $view;
     }
 
     public function emailSettingsAction()
     {
+        $user = $this->getServiceLocator()->get('Application\Model\Users');
+        $form = $this->getServiceLocator()->get('Application\Form\EmailForm');
+        $hash = $this->getServiceLocator()->get('Application\Model\Hash');
+        $form = $form->confirmPasswordField();
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            $form->setInputFilter($user->getEmailInputFilter($this->identity, $hash));
+            $form->setData($formData);
+            if ($form->isValid($formData)) {
+                if($user->changeEmail($this->getIdentity(), $formData['email'])){
+                    $this->flashMessenger()->addMessage($this->translate('password_has_reset', 'app'));
+                    return $this->redirect()->toRoute('account/change_password');
+                }
+            }
+        }
+        
         $view = array();
+        $view['form'] = $form;
         $view['active_sidebar'] = 'email';
         return $view;
     }
