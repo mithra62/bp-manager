@@ -32,6 +32,7 @@ return array(
     'email_settings' => 'Email Settings',
     'change_password' => 'Change Password',
     'preferences' => 'Preferences',
+    'account_created' => 'Account Created',
     
     // logout
     'youve_been_logged_out' => 'You\'ve been logged out',
@@ -78,10 +79,26 @@ return array(
     
     // reset password
     'reset_password_instructions' => 'Create your new password here',
-    
     'user_registration_email_subject' => 'New Account Created!',
     
+    // verify email
     'verify_email' => 'Verify Email',
+    'verify_send_conf_email' => 'Send Confirmation Email',
     'verify_email_required_html' => 'You have to confirm your email address (<a href="%2$s">%1$s</a>) to access all the features.',
+    'verify_email_sent' => 'An email has been sent to %1s to verify your account; you\'ll need to follow the instructions to continue. ',
+    'verify_email_instructions' => 'Once you click the below button an email will be sent to your registered email address (%1s) with instructions on how to proceed.',
+    'verify_email_email_html_body' => 'Hello, <br /><br />
+		
+			To reset your password for your account, click the link below:<br /><br />
+
+			%2$s<br /><br />
+			
+			Copy and paste the URL in a new browser window if you can\'t click on it. Please keep in mind that the link will only work for 24 hours; after that it will be inactive. 
+			If you didn\'t request to reset your password you don\'t need to take any further action and can safely disregard this email.<br /><br />
+			
+			:)<br /><br />
+			
+    ',
+    'verify_email_email_subject' => 'Verify Email',
 )
 ;

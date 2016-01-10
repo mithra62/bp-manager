@@ -123,7 +123,7 @@ class ForgotPassword extends AbstractModel
                 'change_url' => $change_url,
                 'user_data' => $user_data
             ));
-            $mail->addTo($user_data['email'], $user_data['first_name'] . ' ' . $user_data['last_name']);
+            $mail->addTo($user_data['email']);
             $mail->setSubject('forgot_password_email_subject');
             return $mail->send($mail->transport);
         }

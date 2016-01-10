@@ -62,7 +62,7 @@ class AccountController extends AbstractController
                 $data['user_roles'] = $this->settings['default_user_groups'];
                 $user_id = $id = $user->addUser($data, $hash, $roles);
                 if ($user_id) {
-                    $this->flashMessenger()->addMessage($this->translate('user_added', 'pm'));
+                    $this->flashMessenger()->addMessage($this->translate('account_created', 'app'));
                     return $this->redirect()->toRoute('login');
                 } else {
                     $view['errors'] = array(
@@ -111,9 +111,15 @@ class AccountController extends AbstractController
             $form->setData($request->getPost());
             if ($form->isValid($formData))
             {
-
-                echo 'f';
-                exit;
+                $user = $this->getServiceLocator()->get('Application\Model\Users');
+                $hash = $this->getServiceLocator()->get('Application\Model\Hash');   
+                $mail = $this->getServiceLocator()->get('Application\Model\Mail');   
+                $user->sendVerifyEmail($this->getIdentity(), $mail, $hash);
+                
+                $user_data = $user->getUserById($this->getIdentity());
+                $this->flashMessenger()->addMessage(sprintf($this->translate('verify_email_sent', 'app'), $user_data['email']));
+                return $this->redirect()->toRoute('account/verify_email');
+                
             }
         }
         
@@ -121,6 +127,12 @@ class AccountController extends AbstractController
         $view['form'] = $form;
         $this->layout()->setVariable('disable_email_verify_message', true);
         return $view;
+    }
+    
+    public function verifyEmailConfirmAction()
+    {
+        echo 'f';
+        exit;
     }
 }
 

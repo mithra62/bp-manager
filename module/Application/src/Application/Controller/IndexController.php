@@ -31,6 +31,7 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
+        $this->layout()->setVariable('active_nav', 'home');
         // return $this->redirect()->toRoute('login');
     }
 

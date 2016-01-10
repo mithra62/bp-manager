@@ -31,6 +31,7 @@ abstract class AbstractController extends BaseController
     {
         $settings = $this->getServiceLocator()->get('Application\Model\Settings');
         $this->settings = $settings->getSettings();
+        $this->layout()->setVariable('settings', $this->settings);
         return parent::onDispatch($e);
     }
 

@@ -96,18 +96,18 @@ class Mail extends AbstractModel
      * @param \Zend\Db\Sql\Sql $sql            
      * @param \Zend\Mail\Message $message            
      */
-    public function __construct(\Zend\Db\Adapter\Adapter $adapter, \Zend\Db\Sql\Sql $db, \Zend\Mail\Message $message)
+    public function __construct(\Zend\Db\Adapter\Adapter $adapter, \Zend\Db\Sql\Sql $db, \Zend\Mail\Message $message, array $settings)
     {
         parent::__construct($adapter, $db);
         
         $this->message = $message;
         $this->message->setEncoding("UTF-8");
-        $this->message->getHeaders()->addHeaderLine('X-MailGenerator', 'MojiTrac');
+        $this->message->getHeaders()->addHeaderLine('X-MailGenerator', $settings['site_name']);
         // $this->message->getHeaders()->addHeaderLine('content-type', 'multipart/alternative'); //so we can send both HTML and txt emails
         // $this
-        $this->message->addReplyTo("no-reply@mojitrac.com", "MojiTrac");
-        $this->message->setSender("no-reply@mojitrac.com", "MojiTrac");
-        $this->message->setFrom("no-reply@mojitrac.com", "MojiTrac");
+        $this->message->addReplyTo($settings['mail_reply_to_email'], $settings['mail_reply_to_name']);
+        $this->message->setSender($settings['mail_sender_email'], $settings['mail_sender_name']);
+        $this->message->setFrom($settings['mail_from_email'], $settings['mail_from_name']);
         $this->web_url = (isset($_SERVER['HTTP_HOST']) ? 'https://' . $_SERVER['HTTP_HOST'] : false);
     }
 

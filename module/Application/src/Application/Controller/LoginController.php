@@ -32,10 +32,12 @@ class LoginController extends AbstractController
      */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
+        $this->layout()->setVariable('active_nav', 'login');
         $response = parent::onDispatch($e);
         if ($this->identity && $this->params('action') != 'logout') {
             return $this->redirect()->toRoute('home');
         }
+        
         
         return $response;
     }
@@ -88,6 +90,6 @@ class LoginController extends AbstractController
         $view = array();
         $view['messages'] = $this->flashMessenger()->getMessages();
         $view['form'] = $form;
-        return $view;
+        return $this->ajaxOutput($view);
     }
 }

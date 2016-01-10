@@ -71,4 +71,9 @@ abstract class BaseController extends AbstractActionController
         
         return $view;
     }
+    
+    public function getIdentity()
+    {
+        return $this->identity;
+    }
 }

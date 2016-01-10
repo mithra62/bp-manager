@@ -169,8 +169,9 @@ class Module
                 'Application\Model\Mail' => function ($sm) {
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
+                    $settings = $sm->get('Application\Model\Settings');
                     $message = new \Zend\Mail\Message();
-                    $mailer = new Mail($adapter, $db, $message);
+                    $mailer = new Mail($adapter, $db, $message, $settings->getSettings());
                     
                     $config = $sm->get('Config');
                     $sendmail = new \Zend\Mail\Transport\Sendmail();

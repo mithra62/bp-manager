@@ -697,8 +697,15 @@ class Users extends AbstractModel
         }
     }
     
+    /**
+     * Sends the user welcome email
+     * @param int $user_id The user ID for the member we're contacting
+     * @param Mail $mail The Mail object
+     * @return void
+     */
     public function sendWelcomeEmail($user_id, Mail $mail)
     {
+        $data = $this->getUserById($user_id);
         $mail->addTo($data['email']);
         $mail->setEmailView('user-registration', array(
             'user_data' => $data,
@@ -707,5 +714,47 @@ class Users extends AbstractModel
         
         $mail->setSubject('user_registration_email_subject');
         $mail->send();
+    }
+    
+    public function sendVerifyEmail($user_id, Mail $mail, Hash $hash)
+    {
+        $guid = $hash->guidish();
+        $user_data = $this->getUserById($user_id);
+        if (! $user_data) {
+            return FALSE;
+        }
+        
+        if ($this->upateVerifyHash($user_id, $guid)) {
+            $change_url = $mail->web_url . '/account/verify/'.$guid;
+            $mail->addTo($user_data['email']);
+            $mail->setViewDir($this->getModulePath(__DIR__) . '/view/emails');
+            $mail->setEmailView('forgot-password', array(
+                'change_url' => $change_url,
+                'user_data' => $user_data
+            ));
+            $mail->addTo($user_data['email']);
+            $mail->setSubject('verify_email_email_subject');
+            return $mail->send($mail->transport);
+        }
+    }
+
+    /**
+     * Updates the verify hash for the user
+     * 
+     * @param int $id
+     * @param string $hash
+     */
+    public function upateVerifyHash($id, $hash)
+    {
+        $sql = array(
+            'verified_sent_date' => new \Zend\Db\Sql\Expression("NOW()"),
+            'verified_hash' => $hash,
+            'last_modified' => new \Zend\Db\Sql\Expression("NOW()")
+        );
+        
+        $where = array(
+            'id' => $id
+        );
+        return $this->update('users', $sql, $where);
     }
 }

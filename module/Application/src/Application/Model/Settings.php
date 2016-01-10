@@ -54,7 +54,14 @@ class Settings extends KeyValue
         'default_user_groups' => array(
             2
         ),
-        'site_name' => '',
+        'site_name' => 'mithra62 ZF2',
+        'site_url' => '',
+        'mail_reply_to_email' => 'no-reply@mithra62.com',
+        'mail_reply_to_name' => 'mithra62',
+        'mail_sender_email' => 'no-reply@mithra62.com',
+        'mail_sender_name' => 'mithra62',
+        'mail_from_email' => 'no-reply@mithra62.com',
+        'mail_from_name' => 'mithra62',
     );
 
     /**

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <?php echo $this->headMeta(); ?>
-<?php echo $this->headTitle('MojiTrac'); ?>
+<?php echo $this->headTitle($this->settings['site_name']); ?>
 <?php //echo $this->headLink()->prependStylesheet('/css/site.css'); ?>
 <link rel="icon" href="<?php echo $this->StaticUrl(); ?>/favicon.ico"
 		type="image/x-icon">
@@ -40,7 +40,7 @@ body {
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<?php echo $this->url('home');?>">mithra62</a>
+			<a class="navbar-brand" href="<?php echo $this->url('home');?>"><?php echo $this->settings['site_name']; ?></a>
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">

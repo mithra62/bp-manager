@@ -128,6 +128,15 @@ return array(
                             )
                         )
                     ),
+                    'verify_email_confirm' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/verify/email/:hash',
+                            'defaults' => array(
+                                'action' => 'verify_email_confirm'
+                            )
+                        )
+                    ),
                 )
             ), // end Login Routes
             'login' => array( // Login Routes

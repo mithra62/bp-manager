@@ -12,6 +12,10 @@
     $csrf = $form->get('_x');
     echo $this->formRow($csrf);
     ?>
-        <input type="submit" class="btn btn-primary" value="Confirm" />
+    <p>
+    <?php 
+    $user_data = $this->UserInfo($this->GetIdentity());
+    echo sprintf($this->_('verify_email_instructions', 'app'), $user_data['email']); ?></p>
+        <input type="submit" class="btn btn-primary" value="<?php echo $this->_('verify_send_conf_email', 'app'); ?>" />
     <?php echo $this->form()->closeTag() ?>
 </div>

@@ -31,6 +31,7 @@ class ForgotPasswordController extends AbstractController
      */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
+        $this->layout()->setVariable('active_nav', 'login');
         return parent::onDispatch($e);
     }
 
