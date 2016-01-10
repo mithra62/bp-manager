@@ -1,0 +1,5 @@
+<div class="list-group">
+    <a class="list-group-item <?php echo ($this->active_sidebar == 'email' ? 'active' : ''); ?>" href="<?php echo $this->url('account/email_settings'); ?>"><?php echo $this->_('email_settings', 'app'); ?></a>
+    <a class="list-group-item <?php echo ($this->active_sidebar == 'password' ? 'active' : ''); ?>" href="<?php echo $this->url('account/change_password'); ?>"><?php echo $this->_('change_password', 'app'); ?></a>
+    <a class="list-group-item <?php echo ($this->active_sidebar == 'preferences' ? 'active' : ''); ?>" href="<?php echo $this->url('account/preferences'); ?>"><?php echo $this->_('preferences', 'app'); ?></a>
+</div>

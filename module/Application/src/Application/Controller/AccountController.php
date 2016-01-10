@@ -24,7 +24,20 @@ use Zend\View\Model\ViewModel;
  */
 class AccountController extends AbstractController
 {
-
+    /**
+     * (non-PHPdoc)
+     * @see \Application\Controller\AbstractController::onDispatch()
+     */
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+    {
+        $this->layout()->setVariable('active_nav', 'account');
+        parent::onDispatch($e);
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \Zend\Mvc\Controller\AbstractActionController::indexAction()
+     */
     public function indexAction()
     {
         return new ViewModel();
@@ -67,14 +80,25 @@ class AccountController extends AbstractController
         return $view;
     }
 
-    public function editAction()
-    {
-        return new ViewModel();
-    }
-
     public function changePasswordAction()
     {
-        return new ViewModel();
+        $view = array();
+        $view['active_sidebar'] = 'password';
+        return $view;
+    }
+
+    public function preferencesAction()
+    {
+        $view = array();
+        $view['active_sidebar'] = 'preferences';
+        return $view;
+    }
+
+    public function emailSettingsAction()
+    {
+        $view = array();
+        $view['active_sidebar'] = 'email';
+        return $view;
     }
     
     public function verifyEmailAction()

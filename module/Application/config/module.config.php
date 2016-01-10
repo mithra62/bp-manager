@@ -95,9 +95,36 @@ return array(
                     'verify_email' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/verify_email',
+                            'route' => '/verify-email',
                             'defaults' => array(
                                 'action' => 'verify_email'
+                            )
+                        )
+                    ),
+                    'email_settings' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/email-settings',
+                            'defaults' => array(
+                                'action' => 'email_settings'
+                            )
+                        )
+                    ),
+                    'change_password' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/change-password',
+                            'defaults' => array(
+                                'action' => 'change_password'
+                            )
+                        )
+                    ),
+                    'preferences' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/preferences',
+                            'defaults' => array(
+                                'action' => 'preferences'
                             )
                         )
                     ),

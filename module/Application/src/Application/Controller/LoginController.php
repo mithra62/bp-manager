@@ -69,7 +69,7 @@ class LoginController extends AbstractController
                             ->getIdentity());
                         $this->getSessionStorage()->setRememberMe(1);
                         $this->getAuthService()->setStorage($this->getSessionStorage());
-                        $this->flashMessenger()->addMessage($this->translate('login_successful', 'app'));
+                        $this->flashMessenger()->addSuccessMessage($this->translate('login_successful', 'app'));
                         
                         return $this->redirect()->toRoute('home');
                         

@@ -697,8 +697,15 @@ class Users extends AbstractModel
         }
     }
     
-    public function sendConfirmEmail($user_id, Mail $mail)
+    public function sendWelcomeEmail($user_id, Mail $mail)
     {
+        $mail->addTo($data['email']);
+        $mail->setEmailView('user-registration', array(
+            'user_data' => $data,
+            'user_id' => $user_id
+        ));
         
+        $mail->setSubject('user_registration_email_subject');
+        $mail->send();
     }
 }

@@ -18,6 +18,21 @@ return array(
     'invalid_credials_try_again' => 'Invalid Credentials! Please Try Again',
     'login_successful' => 'Login Successful!',
     
+    //global header
+    'toggle_navigation' => 'Toggle navigation',
+    'home' => 'Home',
+    'about' => 'About',
+    'admin' => 'Admin',
+    'logout' => 'Logout',
+    'login' => 'Login',
+    'contact' => 'Contact',
+    
+    //user account
+    'account' => 'Account',
+    'email_settings' => 'Email Settings',
+    'change_password' => 'Change Password',
+    'preferences' => 'Preferences',
+    
     // logout
     'youve_been_logged_out' => 'You\'ve been logged out',
     

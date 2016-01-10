@@ -44,9 +44,7 @@ class NotificationEvent extends BaseEvent
      * The Notification Event
      * 
      * @param Mail $mail            
-     * @param Users $users            
-     * @param Projects $project            
-     * @param Tasks $task            
+     * @param Users $users             
      * @param string $identity            
      */
     public function __construct(Mail $mail, Users $users, $identity = null)
@@ -74,7 +72,7 @@ class NotificationEvent extends BaseEvent
     }
 
     /**
-     * Sends the user registration notification
+     * Sends the user welcome notification
      * 
      * @param \Zend\EventManager\Event $event            
      */
@@ -82,14 +80,7 @@ class NotificationEvent extends BaseEvent
     {
         $data = $event->getParam('data');
         $user_id = $event->getParam('user_id');
-        $this->mail->addTo($data['email']);
         $this->mail->setViewDir($this->email_view_path);
-        $this->mail->setEmailView('user-registration', array(
-            'user_data' => $data,
-            'user_id' => $user_id
-        ));
-        
-        $this->mail->setSubject('user_registration_email_subject');
-        $this->mail->send();
+        $this->user->sendWelcomeEmail($user_id, $this->mail);
     }
 }

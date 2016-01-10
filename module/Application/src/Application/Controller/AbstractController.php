@@ -47,7 +47,7 @@ abstract class AbstractController extends BaseController
         $translate = $this->getServiceLocator()
             ->get('viewhelpermanager')
             ->get('_');
-        $this->flashmessenger()->addMessage($translate('youve_been_logged_out', 'app'));
+        $this->flashmessenger()->addSuccessMessage($translate('youve_been_logged_out', 'app'));
         return $this->redirect()->toRoute('login');
     }
 }
