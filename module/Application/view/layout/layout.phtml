@@ -65,7 +65,7 @@ body {
 			</ul>
 			<?php if( $this->CheckPermission('admin_access') ): ?>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?php echo $this->url('cp');?>"><?php echo $this->_('admin', 'app'); ?></a></li>
+                <li class="<?php echo ($this->active_nav == 'admin' ? 'active' : ''); ?>"><a href="<?php echo $this->url('cp');?>"><?php echo $this->_('admin', 'app'); ?></a></li>
             </ul>
             <?php endif; ?>
 		</div>

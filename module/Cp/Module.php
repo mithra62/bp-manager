@@ -1,9 +1,20 @@
 <?php
 namespace Cp;
 
+use Zend\ModuleManager\ModuleManager;
+
 class Module
 {
-
+    /**
+     * Sets up the module layout
+     *
+     * @param ModuleManager $moduleManager
+     */
+    public function init(ModuleManager $moduleManager)
+    {
+        $this->sharedEvents = $moduleManager->getEventManager()->getSharedManager();
+    }
+    
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';

@@ -11,7 +11,57 @@ return array(
                         'action' => 'index'
                     )
                 )
-            )
+            ), // end Settings Routes
+            'system_settings' => array( // Settings Routes
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/cp/settings',
+                    'constraints' => array(
+                        'id' => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Cp\Controller\Settings',
+                        'action' => 'index'
+                    )
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'mail' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/mail',
+                            'defaults' => array(
+                                'action' => 'mail'
+                            )
+                        )
+                    )
+                )
+            ), // end Settings Routes
+            'manage_users' => array( // Settings Routes
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/cp/settings',
+                    'constraints' => array(
+                        'id' => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Cp\Controller\Settings',
+                        'action' => 'index'
+                    )
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'mail' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/mail',
+                            'defaults' => array(
+                                'action' => 'mail'
+                            )
+                        )
+                    )
+                )
+            ), // end Settings Routes
         )
     ),
     'service_manager' => array(
@@ -25,7 +75,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Cp\Controller\Index' => 'Cp\Controller\IndexController'
+            'Cp\Controller\Index' => 'Cp\Controller\IndexController',
+            'Cp\Controller\Settings' => 'Cp\Controller\SettingsController',
         )
     ),
     'view_manager' => array(
@@ -50,7 +101,7 @@ return array(
                 'type' => 'phparray',
                 'base_dir' => __DIR__ . '/../language',
                 'pattern' => '%s.php',
-                'text_domain' => 'app'
+                'text_domain' => 'cp'
             )
         )
     ),

@@ -22,16 +22,6 @@ return array(
                     )
                 )
             ),
-            'php-info' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/php-info',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action' => 'phpInfo'
-                    )
-                )
-            ),
             'about' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

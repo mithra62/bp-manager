@@ -23,4 +23,10 @@ abstract class AbstractCpController extends AbstractController
 {
 
     protected $admin_only = true;
+    
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+    {
+        $this->layout()->setVariable('active_nav', 'admin');
+        return parent::onDispatch($e);
+    }
 }
