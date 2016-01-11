@@ -54,11 +54,7 @@ body {
                 <li
 					class="<?php echo ($this->active_nav == 'account' ? 'active' : ''); ?>"><a
 					href="<?php echo $this->url('account'); ?>"><?php echo $this->_('account', 'app'); ?></a></li>
-			<?php if( $this->CheckPermission('admin_access') ): ?>	
-				<li
-					class="<?php echo ($this->active_nav == 'admin' ? 'active' : ''); ?>"><a
-					href="<?php echo $this->url('about'); ?>"><?php echo $this->_('admin', 'app'); ?></a></li>
-		    <?php endif; ?>
+		    
 				<li><a href="<?php echo $this->url('account/logout');?>"><?php echo $this->_('logout', 'app'); ?></a></li>
             <?php else: ?>
                 <li
@@ -67,6 +63,11 @@ body {
             <?php endif; ?>
             <li><a href="<?php echo $this->url('about'); ?>"><?php echo $this->_('contact', 'app'); ?></a></li>
 			</ul>
+			<?php if( $this->CheckPermission('admin_access') ): ?>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="<?php echo $this->url('cp');?>"><?php echo $this->_('admin', 'app'); ?></a></li>
+            </ul>
+            <?php endif; ?>
 		</div>
 		<!--/.nav-collapse -->
 	</div>

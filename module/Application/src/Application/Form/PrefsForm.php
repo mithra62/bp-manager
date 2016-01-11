@@ -74,19 +74,6 @@ class PrefsForm extends BaseForm
         ));
         
         $this->add(array(
-            'name' => 'enable_contextual_help',
-            'type' => 'Checkbox',
-            'attributes' => array(
-                'class' => '',
-                'id' => 'enable_contextual_help'
-            ),
-            'options' => array(
-                'checked_value' => '1',
-                'unchecked_value' => '0'
-            )
-        ));
-        
-        $this->add(array(
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(

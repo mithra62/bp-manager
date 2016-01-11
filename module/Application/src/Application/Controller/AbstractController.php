@@ -24,6 +24,8 @@ abstract class AbstractController extends BaseController
 {
     use Controller;
     
+    protected $admin_only = false;
+    
     /**
      * (non-PHPdoc)
      * 
@@ -42,7 +44,21 @@ abstract class AbstractController extends BaseController
         
         if( $this->getIdentity() )
         {
+            $user = $this->getServiceLocator()->get('Application\Model\Users');
+            $user_data = $user->user_data->getUsersData($this->identity);
+            $user->setTimezone($user_data['timezone']);
+            
+            $this->perm = $this->getServiceLocator()->get('Application\Model\Permissions');
+            
             $this->_initPrefs();
+        }
+        
+        if( $this->admin_only )
+        {
+            if( !$this->checkPermission('admin_access') )
+            {
+                return $this->redirect()->toRoute('home');
+            }
         }
         
         $this->_initIpBlocker();
@@ -64,5 +80,18 @@ abstract class AbstractController extends BaseController
             ->get('_');
         $this->flashmessenger()->addSuccessMessage($translate('youve_been_logged_out', 'app'));
         return $this->redirect()->toRoute('login');
+    }
+    
+    /**
+     * Provides oversight on permission dependant requsts
+     *
+     * @param string $permission
+     * @param string $url
+     */
+    public function checkPermission($permission, $url = FALSE)
+    {
+        if ($this->getIdentity() && $this->perm->check($this->identity, $permission)) {
+            return true;
+        }
     }
 }

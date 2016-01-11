@@ -7,8 +7,62 @@
             <?php echo $this->render('partials/_sidebar'); ?>
       </div>
       <div class="col-sm-9 col-md-9">
-        <p>fdsa</p>
+
+
+
+        <?php
+        $form = $this->form;
+        $form->setAttribute('id', 'registerForm');
+        $form->setAttribute('class', 'form-horizontal');
+        $form->prepare();
+        
+        echo $this->form()->openTag($form);
+        $csrf = $form->get('_x');
+        echo $this->formRow($csrf);
+        ?>   
+        
+        <div class="form-group">
+        	<label for="timezone" class="control-label col-xs-3"><?php echo $this->_('timezone', 'app'); ?></label>
+        	<div class="col-xs-9">
+                <?php
+                $email = $form->get('timezone');
+                echo $this->formRow($email);
+                
+                ?>
+            </div>
+        </div>   
+        
+        <div class="form-group">
+        	<label for="locale" class="control-label col-xs-3"><?php echo $this->_('locale', 'app'); ?></label>
+        	<div class="col-xs-9">
+                <?php
+                $email = $form->get('locale');
+                echo $this->formRow($email);
+                
+                ?>
+            </div>
+        </div>  
+        
+        <div class="form-group">
+        	<label for="enable_rel_time" class="control-label col-xs-3"><?php echo $this->_('enable_rel_time', 'app'); ?></label>
+        	<div class="col-xs-9">
+                <?php
+                $email = $form->get('enable_rel_time');
+                echo $this->formRow($email);
+                
+                ?>
+            </div>
+        </div> 
+        
+        <div class="form-group">
+        	<div class="col-xs-offset-2 col-xs-10">
+        		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('update_preferences', 'app'); ?></button>
+        	</div>
+        </div>      
+      
+      
       </div>
+      
 
     </div>
 </div>    

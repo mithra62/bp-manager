@@ -107,5 +107,12 @@ return array(
     'change_email' => 'Change Email',
     'new_email' => 'New Email',
     'email_has_changed' => 'Your email address has been changed',
+    
+    //preferences
+    'timezone' => 'Timezone',
+    'locale' => 'Locale',
+    'enable_rel_time' => 'Enable Relative Time',
+    'update_preferences' => 'Update Preferences',
+    'preferences_updated' => 'Preferences Updated',
 )
 ;

@@ -30,6 +30,10 @@ class AccountController extends AbstractController
      */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
+        if (!$this->getIdentity()) {
+            return $this->redirect()->toRoute('login');
+        }
+        
         $this->layout()->setVariable('active_nav', 'account');
         parent::onDispatch($e);
     }
@@ -118,9 +122,9 @@ class AccountController extends AbstractController
             $form->setInputFilter($ud->getInputFilter());
             $form->setData($formData);
             if ($form->isValid($formData)) {
-                if($ud->updateUserData($formData->toArray(), $this->identity)) {
-                    $this->flashMessenger()->addMessage($this->translate('prefs_updated', 'pm'));
-                    return $this->redirect()->toRoute('account/prefs');
+                if($ud->updateUserData($formData->toArray(), $this->getIdentity())) {
+                    $this->flashMessenger()->addMessage($this->translate('preferences_updated', 'app'));
+                    return $this->redirect()->toRoute('account/preferences');
                 }
             }
         }
