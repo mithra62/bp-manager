@@ -34,4 +34,25 @@ class SettingsForm extends BaseForm
     {
         parent::__construct($name);
     }
+    
+    public function getGeneralForm()
+    {
+        $this->add(array(
+            'name' => 'site_name',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'site_name'
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'site_url',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'site_url'
+            )
+        ));
+        
+        return $this;
+    }
 }

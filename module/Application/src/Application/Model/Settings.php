@@ -137,14 +137,14 @@ class Settings extends KeyValue
      * 
      * @return object
      */
-    public function getInputFilter()
+    public function getGeneralInputFilter()
     {
         if (! $this->inputFilter) {
             $inputFilter = new InputFilter();
             $factory = new InputFactory();
             
             $inputFilter->add($factory->createInput(array(
-                'name' => 'email',
+                'name' => 'site_name',
                 'required' => true,
                 'filters' => array(
                     array(
@@ -153,18 +153,18 @@ class Settings extends KeyValue
                     array(
                         'name' => 'StringTrim'
                     )
-                ),
-                'validators' => array(
+                )
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'site_url',
+                'required' => true,
+                'filters' => array(
                     array(
-                        'name' => 'EmailAddress'
+                        'name' => 'StripTags'
                     ),
                     array(
-                        'name' => 'Db\RecordExists',
-                        'options' => array(
-                            'table' => 'users',
-                            'field' => 'email',
-                            'adapter' => $this->authAdapter
-                        )
+                        'name' => 'StringTrim'
                     )
                 )
             )));

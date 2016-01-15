@@ -15,53 +15,174 @@ return array(
             'system_settings' => array( // Settings Routes
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/cp/settings',
+                    'route' => '/cp/settings[/:section]',
                     'constraints' => array(
-                        'id' => '[0-9]+'
+                        'section' => '[a-zA-Z][a-zA-Z0-9_-]*'
                     ),
                     'defaults' => array(
                         'controller' => 'Cp\Controller\Settings',
                         'action' => 'index'
                     )
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'mail' => array(
-                        'type' => 'segment',
-                        'options' => array(
-                            'route' => '/mail',
-                            'defaults' => array(
-                                'action' => 'mail'
-                            )
-                        )
-                    )
                 )
             ), // end Settings Routes
-            'manage_users' => array( // Settings Routes
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/cp/settings',
-                    'constraints' => array(
-                        'id' => '[0-9]+'
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Cp\Controller\Settings',
-                        'action' => 'index'
-                    )
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'mail' => array(
-                        'type' => 'segment',
-                        'options' => array(
-                            'route' => '/mail',
-                            'defaults' => array(
-                                'action' => 'mail'
-                            )
-                        )
-                    )
-                )
-            ), // end Settings Routes
+            'manage_users' => array( //User Routes
+        		'type' => 'segment',
+        		'options' => array(
+        			'route' => '/cp/users',
+        			'defaults' => array(
+        				'controller' => 'Cp\Controller\Users',
+        				'action' => 'index'
+        			),
+        		),
+        		'may_terminate' => true,
+        		'child_routes' => array(
+        			'view' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/[:user_id]',
+        					'constraints' => array(
+        						'user_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'view'
+        					)
+        				)
+        			),
+        			'remove' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/remove/:user_id',
+        					'constraints' => array(
+        						'user_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'remove'
+        					)
+        				)
+        			),
+        			'add' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/add',
+        					'defaults' => array(
+        						'action' => 'add'
+        					)
+        				)
+        			),
+        			'edit' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/edit[/:user_id]',
+        					'constraints' => array(
+        						'user_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'edit'
+        					)
+        				)
+        			)
+        		)
+        	), //End User Routes 
+
+        	'ips' => array( //Ips Routes
+        		'type' => 'segment',
+        		'options' => array(
+        			'route' => '/pm/ip-locker',
+        			'defaults' => array(
+        				'controller' => 'PM\Controller\Ips',
+        				'action' => 'index'
+        			),
+        		),
+        		'may_terminate' => true,
+        		'child_routes' => array(
+        			'remove' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/remove/:ip_id',
+        					'constraints' => array(
+        						'file_id' => '[0-9]+'
+        					),
+        					'defaults' => array( 
+        						'controller' => 'PM\Controller\Ips',
+        						'action' => 'remove'
+        					)
+        				)
+        			),
+        			'add' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/add',
+        					'defaults' => array(
+        						'action' => 'add'
+        					)
+        				)
+        			),        			
+        			'edit' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/edit/:ip_id',
+        					'constraints' => array(
+        						'ip_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'edit'
+        					)
+        				)
+        			),      			
+        			'view' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/:ip_id',
+        					'constraints' => array(
+        						'ip_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'view'
+        					)
+        				)
+        			),    			
+        			'enable' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/enable',
+        					'defaults' => array(
+        						'action' => 'enable'
+        					)
+        				)
+        			), 			
+        			'self-allow' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/allow-self',
+        					'defaults' => array(
+        						'action' => 'allowSelf'
+        					)
+        				)
+        			), 			
+        			'blocked' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/blocked',
+        					'defaults' => array(
+        						'action' => 'blocked'
+        					)
+        				)
+        			),		
+        			'verify-allow' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/v/:verify_code',
+        					'defaults' => array(
+        						'action' => 'verifyCode'
+        					),
+        					'constraints' => array(
+        						'verify_code' => '([a-z0-9]{8})-([a-z0-9]{4})-([a-z0-9]{4})-([a-z0-9]{4})-([a-z0-9]{12})'
+        					),
+        				)
+        			),
+        			
+        		)
+        	), //end IP Routes
         )
     ),
     'service_manager' => array(
@@ -77,6 +198,8 @@ return array(
         'invokables' => array(
             'Cp\Controller\Index' => 'Cp\Controller\IndexController',
             'Cp\Controller\Settings' => 'Cp\Controller\SettingsController',
+            'Cp\Controller\Users' => 'Cp\Controller\UsersController',
+            'Cp\Controller\Roles' => 'Cp\Controller\RolesController',
         )
     ),
     'view_manager' => array(

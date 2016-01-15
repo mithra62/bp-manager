@@ -114,5 +114,10 @@ return array(
     'enable_rel_time' => 'Enable Relative Time',
     'update_preferences' => 'Update Preferences',
     'preferences_updated' => 'Preferences Updated',
+    
+    //general settings
+    'site_name' => 'Site Name',
+    'site_url' => 'Site URL',
+    'settings_updated' => 'Settings Updated',
 )
 ;
