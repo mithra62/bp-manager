@@ -167,9 +167,12 @@ abstract class BaseModel implements EventManagerInterfaceConstants
         elseif ($ext->last())
             $sql = $ext->last();
         
+        $this->total_results = 0;
+        $this->total_pages = 0;
         $selectString = $this->db->getSqlStringForSqlObject($sql);
         $result = $this->query($selectString, 'execute')->toArray();
-        
+        $this->total_results = $this->getTotalResults();
+        $this->total_pages = (!is_null($this->getLimit()) ? ceil($this->total_results / $this->getLimit()) : false );
         $ext = $this->trigger(self::EventDbSelectPost, $this, compact('result'), array());
         if ($ext->stopped())
             return $ext->last();

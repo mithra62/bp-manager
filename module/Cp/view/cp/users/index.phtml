@@ -1,1 +1,64 @@
-<?php
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('admin', 'cp'); ?> <small><?php echo $this->_('users', 'cp'); ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('cp/global/_sidebar'); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+      <?php echo $this->render('partials/_tabs'); ?>   
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Joined</th>
+                <th>Last Login</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($users AS $user):?>
+            <tr class="<?php echo ($user['verified'] == '0' ? 'warning' : ''); ?>">
+                <td><?php echo $user['id']; ?></td>
+                <td><a href="mailto:<?php echo $user['email']; ?>"><?php echo $user['email']; ?></a></td>
+                <td><?php echo $user['created_date']; ?></td>
+                <td><?php echo $user['last_login']; ?></td>
+                <td>
+                    <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu<?php echo $user['id']; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu<?php echo $user['id']; ?>">
+                        <li><a href="<?php echo $this->url('manage_users/edit', array('user_id' => $user['id'])); ?>"><?php echo $this->glyphicon('pencil'); ?> Edit User</a></li>
+                        <li><a href="<?php echo $this->url('manage_users/view', array('user_id' => $user['id'])); ?>"><?php echo $this->glyphicon('eye-open'); ?> View User</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="<?php echo $this->url('manage_users/remove', array('user_id' => $user['id'])); ?>"><?php echo $this->glyphicon('remove'); ?> Delete User</a></li>
+                      </ul>
+                    </div>                
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>      
+            
+
+    <ul class="pagination pull-right">
+    <?php for($i=1;$i<=$this->total_pages;$i++):?>
+        <?php if($i === 1):?>
+        <li class="disabled"><a href="<?php echo $this->url('manage_users'); ?>">&laquo;</a></li>
+        <?php endif; ?>
+        <li class="<?php if($i == $this->page):?>active<?php endif; ?>"><a href="<?php echo $this->url('manage_users'); ?>"><?php echo $i; ?></a></li>
+        
+        <?php if($i == $this->total_pages):?>
+        <li><a href="<?php echo $this->url('manage_users'); ?>">&raquo;</a></li>
+        <?php endif; ?>
+    <?php endfor; ?>        
+    </ul>                
+      </div>
+
+    </div>
+</div>    

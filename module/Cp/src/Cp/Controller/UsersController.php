@@ -13,7 +13,7 @@ namespace Cp\Controller;
 use Cp\Controller\AbstractCpController;
 
 /**
- * PM - Users Controller
+ * CP - Users Controller
  *
  * Routes the Users requests
  *
@@ -31,11 +31,29 @@ class UsersController extends AbstractCpController
     public function indexAction()
     {
         if (! $this->perm->check($this->identity, 'view_users_data')) {
-            return $this->redirect()->toRoute('pm');
+            return $this->redirect()->toRoute('cp');
         }
         
+        $order = $this->getRequest()->getQuery('order', false);
+        $order_dir = $this->getRequest()->getQuery('order_dir', false);
+        $limit = $this->getRequest()->getQuery('limit', 10);
+        $page = $this->getRequest()->getQuery('page', 1);
+        
         $users = $this->getServiceLocator()->get('Application\Model\Users');
-        $view['users'] = $users->getAllUsers();
+        
+        $users_data = $users->setLimit($limit)->setOrderDir($order_dir)->setOrder($order)->setPage($page)->getAllUsers();
+        
+        $view = array(
+            'section' => 'view_users',
+            'active_sidebar' => 'manage_users',
+            'users' => $users_data,
+            'order' => $order,
+            'order_dir' => $order_dir,
+            'limit' => $limit,
+            'page' => $page,
+            'total_pages' => $users->total_pages,
+            'total_results' => $users->total_results
+        );
         return $view;
     }
 
@@ -47,36 +65,17 @@ class UsersController extends AbstractCpController
     public function viewAction()
     {
         $id = $this->params()->fromRoute('user_id');
-        if (! $id) {
-            $this->layout()->setVariable('active_nav', '');
-            $this->layout()->setVariable('sub_menu', 'settings');
-            $id = $this->identity;
-        }
-        
         if (! $this->perm->check($this->identity, 'view_users_data')) {
-            $this->layout()->setVariable('active_nav', '');
-            $this->layout()->setVariable('sub_menu', 'settings');
-            $id = $this->identity;
+            return $this->redirect()->toRoute('cp');
         }
         
-        $user = $this->getServiceLocator()->get('Pm\Model\Users');
+        $user = $this->getServiceLocator()->get('Application\Model\Users');
         $view['user'] = $user->getUserById($id);
         if (! $view['user']) {
             return $this->redirect()->toRoute('pm');
         }
         
         $view['roles'] = $user->getUserRoles($id);
-        $view['projects'] = $user->getAssignedProjects($id);
-        
-        $task = $this->getServiceLocator()->get('PM\Model\Tasks');
-        $view['tasks'] = $task->getTasksByUserId($id, TRUE, TRUE, TRUE);
-        
-        $file = $this->getServiceLocator()->get('PM\Model\Files');
-        $view['files'] = $file->getFilesByUserId($id);
-        
-        $times = $this->getServiceLocator()->get('PM\Model\Times');
-        $view['times'] = $times->getTimesByUserId($id);
-        $view['hours'] = $times->getTotalTimesByUserId($id);
         $view['id'] = $id;
         return $view;
     }
