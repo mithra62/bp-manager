@@ -7,8 +7,10 @@
             <?php echo $this->render('cp/global/_sidebar'); ?>
       </div>
       <div class="col-sm-9 col-md-9">
-      <?php echo $this->render('partials/_tabs'); ?>   
-        <a class="btn btn-primary  pull-right" href="<?php echo $this->url('manage_users/add'); ?>" role="button"><?php echo $this->glyphicon('plus'); ?> Add User</a>
+       
+      <h2><?php echo $this->_('view_users', 'app'); ?></h2>
+        <a class="btn btn-primary  pull-right" href="<?php echo $this->url('manage_users/add'); ?>" role="button"><?php echo $this->glyphicon('plus'); ?> <?php echo $this->_('add_user', 'app'); ?></a>
+      <?php echo $this->render('partials/_tabs'); ?>  
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
@@ -33,10 +35,10 @@
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu<?php echo $user['id']; ?>">
-                            <li><a href="<?php echo $this->url('manage_users/edit', array('user_id' => $user['id'])); ?>"><?php echo $this->glyphicon('pencil'); ?> Edit User</a></li>
-                            <li><a href="<?php echo $this->url('manage_users/view', array('user_id' => $user['id'])); ?>"><?php echo $this->glyphicon('eye-open'); ?> View User</a></li>
+                            <li><a href="<?php echo $this->url('manage_users/edit', array('user_id' => $user['id'])); ?>"><?php echo $this->glyphicon('pencil'); ?> <?php echo $this->_('edit_user', 'app'); ?></a></li>
+                            <li><a href="<?php echo $this->url('manage_users/view', array('user_id' => $user['id'])); ?>"><?php echo $this->glyphicon('eye-open'); ?> <?php echo $this->_('view_user', 'app'); ?></a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="<?php echo $this->url('manage_users/remove', array('user_id' => $user['id'])); ?>"><?php echo $this->glyphicon('remove'); ?> Delete User</a></li>
+                            <li><a href="<?php echo $this->url('manage_users/remove', array('user_id' => $user['id'])); ?>"><?php echo $this->glyphicon('remove'); ?> <?php echo $this->_('delete_user', 'app'); ?></a></li>
                           </ul>
                         </div>                
                     </td>

@@ -7,8 +7,59 @@
             <?php echo $this->render('cp/global/_sidebar'); ?>
       </div>
       <div class="col-sm-9 col-md-9">
-      <?php echo $this->render('partials/_tabs'); ?>   
+      <h2><?php echo $this->_('add_user', 'app'); ?></h2>
+      <?php echo $this->render('partials/_tabs'); ?>  
 
+    <?php
+    $form = $this->form;
+    $form->setAttribute('id', 'registerForm');
+    $form->setAttribute('class', 'form-horizontal');
+    $form->prepare();
+    
+    echo $this->form()->openTag($form);
+    $csrf = $form->get('_x');
+    echo $this->formRow($csrf);
+    ?>
+    
+    
+    <div class="form-group">
+    	<label for="email" class="control-label col-xs-3"><?php echo $this->_('email', 'app'); ?></label>
+    	<div class="col-xs-9">
+            <?php
+            $email = $form->get('email');
+            echo $this->formRow($email);
+            
+            ?>
+        </div>
+    </div>
+    
+    <div class="form-group">
+    	<label for="password" class="control-label col-xs-3"><?php echo $this->_('password', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $password = $form->get('password');
+        echo $this->formRow($password);
+        ?>
+        </div>
+    </div>
+    
+    <div class="form-group">
+    	<label for="confirm_password" class="control-label col-xs-3"><?php echo $this->_('confirm_password', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $password = $form->get('confirm_password');
+        echo $this->formRow($password);
+        ?>
+        </div>
+    </div>
+    
+    <div class="form-group">
+    	<div class="col-xs-offset-2 col-xs-10">
+    		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('add_user', 'app'); ?></button>
+    	</div>
+    </div>
+    
+    <?php echo $this->form()->closeTag() ?>      
       
       </div>
 

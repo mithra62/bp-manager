@@ -30,7 +30,7 @@ class AccountController extends AbstractController
      */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
-        if (!$this->getIdentity()) {
+        if (!$this->getIdentity() && $this->params()->fromRoute('action') != 'register') {
             return $this->redirect()->toRoute('login');
         }
         

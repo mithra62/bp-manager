@@ -131,4 +131,11 @@ return array(
     
     //user manage
     'manage_users' => 'Manage Users',
+    'add_user' => 'Add User',
+    'users' => 'Users',
+    'roles' => 'Roles',
+    'view_users' => 'View Users',
+    'edit_user' => 'Edit User',
+    'view_user' => 'View User',
+    'delete_user' => 'Delete User',
 );

@@ -59,7 +59,7 @@ class FormatDate extends BaseViewHelper
 
 			if ( ($time_diff > 0 && $time_diff < (24*60*60)*7) || ($time_diff < 0 && $time_diff < (24*60*60)*7))
 			{
-				$return = $this->c($str_date).$this->relativeDateTime($date, false); 
+				$return = $this->c($str_date).$this->relativeDateTime($date); 
 			}
 			else
 			{			
