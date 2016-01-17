@@ -77,6 +77,8 @@ class UsersController extends AbstractCpController
         
         $view['roles'] = $user->getUserRoles($id);
         $view['id'] = $id;
+        $view['section'] = 'view_users';
+        $view['active_sidebar'] = 'manage_users';
         return $view;
     }
 
@@ -144,7 +146,8 @@ class UsersController extends AbstractCpController
         }
         
         $view['user_data'] = $user_data;
-        $this->layout()->setVariable('layout_style', 'left');
+        $view['section'] = 'view_users';
+        $view['active_sidebar'] = 'manage_users';
         return $view;
     }
 
@@ -197,7 +200,8 @@ class UsersController extends AbstractCpController
                 $user_form->setData($formData);
             }
         }
-        $this->layout()->setVariable('layout_style', 'left');
+        $view['section'] = 'view_users';
+        $view['active_sidebar'] = 'manage_users';
         return $view;
     }
 
@@ -255,6 +259,8 @@ class UsersController extends AbstractCpController
         $view['tasks_owned_count'] = count($user->getOpenAssignedTasks($id));
         $view['id'] = $id;
         $view['form'] = $form;
+        $view['section'] = 'view_users';
+        $view['active_sidebar'] = 'manage_users';
         return $this->ajaxOutput($view);
     }
 }
