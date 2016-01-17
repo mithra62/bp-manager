@@ -478,6 +478,7 @@ class Users extends AbstractModel
         $sql = $sql->where(array(
             'u.id' => $id
         ));
+        
         return $this->getRow($sql);
     }
 
@@ -648,6 +649,7 @@ class Users extends AbstractModel
             $ext = $this->trigger(self::EventUserRemovePost, $this, compact('user_id'), array());
             if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $user_id = $ext->last();
             
+            $this->roles->removeUsersRoles($user_id);
             return $user_id;
         }
         

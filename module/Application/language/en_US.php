@@ -138,4 +138,7 @@ return array(
     'edit_user' => 'Edit User',
     'view_user' => 'View User',
     'delete_user' => 'Delete User',
+    'user_cant_remove_self' => 'You can\'t remove yourself',
+    'remove_user_question' => 'Are you sure you want to remove <a href="%2$s">%1$s</a>? This can not be undone...',
+    'user_removed' => 'User Removed',
 );

@@ -125,20 +125,20 @@ class UsersController extends AbstractCpController
             if ($user_form->isValid($formData)) {
                 $formData = $formData->toArray();
                 if ($user->updateUser($formData, $formData['id'])) {
-                    $this->flashMessenger()->addMessage($this->translate('user_updated', 'pm'));
+                    $this->flashMessenger()->addMessage($this->translate('user_updated', 'app'));
                     return $this->redirect()->toRoute('users/view', array(
                         'user_id' => $id
                     ));
                 } else {
                     $view['errors'] = array(
-                        $this->translate('something_went_wrong', 'pm')
+                        $this->translate('something_went_wrong', 'app')
                     );
                     $this->layout()->setVariable('errors', $view['errors']);
                     $user_form->setData($formData);
                 }
             } else {
                 $view['errors'] = array(
-                    $this->translate('please_fix_the_errors_below', 'pm')
+                    $this->translate('please_fix_the_errors_below', 'app')
                 );
                 $this->layout()->setVariable('errors', $view['errors']);
                 $user_form->setData($formData);
@@ -182,19 +182,19 @@ class UsersController extends AbstractCpController
             if ($user_form->isValid($formData)) {
                 $user_id = $id = $user->addUser($formData->toArray(), $hash, $roles);
                 if ($user_id) {
-                    $this->flashMessenger()->addMessage($this->translate('user_added', 'pm'));
+                    $this->flashMessenger()->addMessage($this->translate('user_added', 'app'));
                     return $this->redirect()->toRoute('users/view', array(
                         'user_id' => $id
                     ));
                 } else {
                     $view['errors'] = array(
-                        $this->translate('something_went_wrong', 'pm')
+                        $this->translate('something_went_wrong', 'app')
                     );
                     $this->layout()->setVariable('errors', $view['errors']);
                 }
             } else {
                 $view['errors'] = array(
-                    $this->translate('please_fix_the_errors_below', 'pm')
+                    $this->translate('please_fix_the_errors_below', 'app')
                 );
                 $this->layout()->setVariable('errors', $view['errors']);
                 $user_form->setData($formData);
@@ -213,27 +213,28 @@ class UsersController extends AbstractCpController
     public function removeAction()
     {
         if (! $this->perm->check($this->identity, 'manage_users')) {
-            return $this->redirect()->toRoute('users');
+            return $this->redirect()->toRoute('manage_users');
         }
         
         $view = array();
         $user = $this->getServiceLocator()->get('Application\Model\Users');
-        $form = $this->getServiceLocator()->get('PM\Form\ConfirmForm');
+        $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
         $id = $this->params()->fromRoute('user_id');
         if (! $id) {
-            return $this->redirect()->toRoute('users');
+            return $this->redirect()->toRoute('manage_users');
         }
         
         if ($this->identity == $id) {
-            $this->flashMessenger()->addMessage($this->translate('user_cant_remove_self', 'pm'));
-            return $this->redirect()->toRoute('users/view', array(
+            $this->flashMessenger()->addErrorMessage($this->translate('user_cant_remove_self', 'app'));
+            return $this->redirect()->toRoute('manage_users/view', array(
                 'user_id' => $id
             ));
         }
         
-        $view['user'] = $user->getUserById($id . 'f');
+        $view['user'] = $user->getUserById($id);
+        
         if (! $view['user']) {
-            return $this->redirect()->toRoute('users');
+            return $this->redirect()->toRoute('manage_users');
         }
         
         $request = $this->getRequest();
@@ -242,21 +243,13 @@ class UsersController extends AbstractCpController
             $form->setData($request->getPost());
             if ($form->isValid($formData)) {
                 $formData = $formData->toArray();
-                if (! empty($formData['fail'])) {
-                    return $this->redirect()->toRoute('users/view', array(
-                        'user_id' => $id
-                    ));
-                }
-                
                 if ($user->removeUser($id)) {
-                    $this->flashMessenger()->addMessage($this->translate('user_removed', 'pm'));
-                    return $this->redirect()->toRoute('users');
+                    $this->flashMessenger()->addSuccessMessage($this->translate('user_removed', 'app'));
+                    return $this->redirect()->toRoute('manage_users');
                 }
             }
         }
         
-        $view['projects_owned_count'] = count($user->getAssignedProjectIds($id));
-        $view['tasks_owned_count'] = count($user->getOpenAssignedTasks($id));
         $view['id'] = $id;
         $view['form'] = $form;
         $view['section'] = 'view_users';
