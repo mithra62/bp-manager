@@ -44,6 +44,7 @@ return array(
     'sign_in' => 'Sign in',
     'register' => 'Register',
     'login' => 'Login',
+    'settings' => 'Settings',
     
     // forgot password
     'forgot_password' => 'Forgot Password',
@@ -127,5 +128,7 @@ return array(
     'mail_sender_name' => 'Sender Name',
     'mail_from_email' => 'From Email',
     'mail_from_name' => 'From Name',
-)
-;
+    
+    //user manage
+    'manage_users' => 'Manage Users',
+);

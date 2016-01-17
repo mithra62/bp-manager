@@ -224,11 +224,12 @@ return array(
             'DispatchRouteEvents' => 'Application\View\Helper\DispatchRouteEvents',
             'ConfirmPageUnload' => 'Application\View\Helper\ConfirmPageUnload',
             'CheckPermission' => 'Application\View\Helper\CheckPermission',
-            'DispatchRouteEvents' => 'Application\View\Helper\DispatchRouteEvents',
             'IsDatePast' => 'Application\View\Helper\IsDatePast',
             'Truncate' => 'Application\View\Helper\Truncate',
             'UserInfo' => 'Application\View\Helper\UserInfo',
-            'GlobalAlerts' => 'Application\View\Helper\GlobalAlerts'
+            'Pagination' => 'Application\View\Helper\Pagination',
+            'GlobalAlerts' => 'Application\View\Helper\GlobalAlerts',
+            'FormatDate' => 'Application\View\Helper\FormatDate',
         )
     ),
     'translator' => array(
