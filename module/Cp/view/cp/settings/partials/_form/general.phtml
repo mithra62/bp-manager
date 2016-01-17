@@ -1,0 +1,19 @@
+<div class="form-group">
+	<label for="site_name" class="control-label col-xs-2"><?php echo $this->_('site_name', 'app'); ?></label>
+	<div class="col-xs-10">
+        <?php
+        $email = $form->get('site_name');
+        echo $this->formRow($email);
+        ?>
+    </div>
+</div>
+
+<div class="form-group">
+	<label for="site_url" class="control-label col-xs-2"><?php echo $this->_('site_url', 'app'); ?></label>
+	<div class="col-xs-10">
+    <?php
+    $password = $form->get('site_url');
+    echo $this->formRow($password);
+    ?>
+    </div>
+</div>

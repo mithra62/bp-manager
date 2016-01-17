@@ -176,6 +176,49 @@ class Settings extends KeyValue
     }
 
     /**
+     * Returns an instance of the Input Filter
+     * 
+     * @return object
+     */
+    public function getMailInputFilter()
+    {
+        if (! $this->inputFilter) {
+            $inputFilter = new InputFilter();
+            $factory = new InputFactory();
+            
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'mail_reply_to_email',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StripTags'
+                    ),
+                    array(
+                        'name' => 'StringTrim'
+                    )
+                )
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'mail_reply_to_name',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StripTags'
+                    ),
+                    array(
+                        'name' => 'StringTrim'
+                    )
+                )
+            )));
+            
+            $this->inputFilter = $inputFilter;
+        }
+        
+        return $this->inputFilter;
+    }
+
+    /**
      * Handles updating a setting
      * 
      * @param array $settings            

@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs">
-    <li class="active"><a href="<?php echo $this->url('system_settings', array('section' => 'general')); ?>">General</a></li>
-    <li><a href="<?php echo $this->url('system_settings', array('section' => 'mail')); ?>">Mail</a></li>
+    <li class="<?php echo ($this->section == 'general' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('system_settings', array('section' => 'general')); ?>">General</a></li>
+    <li class="<?php echo ($this->section == 'mail' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('system_settings', array('section' => 'mail')); ?>">Mail</a></li>
     <li><a href="#">IP Locker</a></li>
 </ul>  
 

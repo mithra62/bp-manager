@@ -119,5 +119,13 @@ return array(
     'site_name' => 'Site Name',
     'site_url' => 'Site URL',
     'settings_updated' => 'Settings Updated',
+    
+    //mail settings
+    'mail_reply_to_email' => 'Reply to Email',
+    'mail_reply_to_name' => 'Reply to Name',
+    'mail_sender_email' => 'Sender Email',
+    'mail_sender_name' => 'Sender Name',
+    'mail_from_email' => 'From Email',
+    'mail_from_name' => 'From Name',
 )
 ;

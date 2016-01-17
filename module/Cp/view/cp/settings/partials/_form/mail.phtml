@@ -1,0 +1,59 @@
+<div class="form-group">
+	<label for="site_name" class="control-label col-xs-2"><?php echo $this->_('mail_reply_to_email', 'app'); ?></label>
+	<div class="col-xs-10">
+        <?php
+        $field = $form->get('mail_reply_to_email');
+        echo $this->formRow($field);
+        ?>
+    </div>
+</div>
+
+<div class="form-group">
+	<label for="site_url" class="control-label col-xs-2"><?php echo $this->_('mail_reply_to_name', 'app'); ?></label>
+	<div class="col-xs-10">
+    <?php
+    $field = $form->get('mail_reply_to_name');
+    echo $this->formRow($field);
+    ?>
+    </div>
+</div>
+
+<div class="form-group">
+	<label for="mail_sender_email" class="control-label col-xs-2"><?php echo $this->_('mail_sender_email', 'app'); ?></label>
+	<div class="col-xs-10">
+        <?php
+        $field = $form->get('mail_sender_email');
+        echo $this->formRow($field);
+        ?>
+    </div>
+</div>
+
+<div class="form-group">
+	<label for="mail_sender_name" class="control-label col-xs-2"><?php echo $this->_('mail_sender_name', 'app'); ?></label>
+	<div class="col-xs-10">
+    <?php
+    $field = $form->get('mail_sender_name');
+    echo $this->formRow($field);
+    ?>
+    </div>
+</div>
+
+<div class="form-group">
+	<label for="mail_from_email" class="control-label col-xs-2"><?php echo $this->_('mail_from_email', 'app'); ?></label>
+	<div class="col-xs-10">
+        <?php
+        $field = $form->get('mail_from_email');
+        echo $this->formRow($field);
+        ?>
+    </div>
+</div>
+
+<div class="form-group">
+	<label for="mail_from_name" class="control-label col-xs-2"><?php echo $this->_('mail_from_name', 'app'); ?></label>
+	<div class="col-xs-10">
+    <?php
+    $field = $form->get('mail_from_name');
+    echo $this->formRow($field);
+    ?>
+    </div>
+</div>

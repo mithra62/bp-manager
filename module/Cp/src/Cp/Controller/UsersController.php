@@ -6,11 +6,11 @@
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
  * @link		http://mojitrac.com/
  * @version		2.0
- * @filesource 	./module/PM/src/PM/Controller/UsersController.php
+ * @filesource 	./module/Cp/src/Cp/Controller/UsersController.php
  */
-namespace PM\Controller;
+namespace Cp\Controller;
 
-use PM\Controller\AbstractPmController;
+use Cp\Controller\AbstractCpController;
 
 /**
  * PM - Users Controller
@@ -21,30 +21,8 @@ use PM\Controller\AbstractPmController;
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/PM/src/PM/Controller/UsersController.php
  */
-class UsersController extends AbstractPmController
+class UsersController extends AbstractCpController
 {
-
-    /**
-     * (non-PHPdoc)
-     * 
-     * @see \PM\Controller\AbstractPmController::onDispatch()
-     */
-    public function onDispatch(\Zend\Mvc\MvcEvent $e)
-    {
-        $e = parent::onDispatch($e);
-        // $this->layout()->setVariable('layout_style', 'single');
-        $this->layout()->setVariable('sidebar', 'dashboard');
-        $this->layout()->setVariable('active_nav', 'users');
-        $this->layout()->setVariable('sub_menu_options', \PM\Model\Options\Projects::status());
-        $this->layout()->setVariable('uri', $this->getRequest()
-            ->getRequestUri());
-        $this->layout()->setVariable('active_sub', 'users');
-        
-        $this->layout()->setVariable('sub_menu', 'admin');
-        $this->layout()->setVariable('active_nav', 'admin');
-        return $e;
-    }
-
     /**
      * Main Page
      * 

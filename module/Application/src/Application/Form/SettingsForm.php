@@ -55,4 +55,57 @@ class SettingsForm extends BaseForm
         
         return $this;
     }
+    
+    public function getMailForm()
+    {
+        $this->add(array(
+            'name' => 'mail_reply_to_email',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'mail_reply_to_email'
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'mail_reply_to_name',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'mail_reply_to_name'
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'mail_sender_email',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'mail_sender_email'
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'mail_sender_name',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'mail_sender_name'
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'mail_from_email',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'mail_from_email'
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'mail_from_name',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'mail_from_name'
+            )
+        ));
+        
+        return $this;
+    }
 }
