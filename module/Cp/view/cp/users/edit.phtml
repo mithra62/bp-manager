@@ -7,8 +7,58 @@
             <?php echo $this->render('cp/global/_sidebar'); ?>
       </div>
       <div class="col-sm-9 col-md-9">
+      <h2><?php echo $this->_('edit_user', 'app'); ?></h2>
       <?php echo $this->render('partials/_tabs'); ?>   
-
+    <?php
+    $form = $this->form;
+    $form->setAttribute('id', 'registerForm');
+    $form->setAttribute('class', 'form-horizontal');
+    $form->prepare();
+    
+    echo $this->form()->openTag($form);
+    $csrf = $form->get('_x');
+    echo $this->formRow($csrf);
+    ?>
+    
+    <div class="form-group">
+    	<label for="new_email" class="control-label col-xs-3"><?php echo $this->_('email', 'app'); ?></label>
+    	<div class="col-xs-9">
+            <?php
+            $email = $form->get('email');
+            echo $this->formRow($email);
+            
+            ?>
+        </div>
+    </div>   
+    
+    <div class="form-group">
+    	<label for="user_roles" class="control-label col-xs-3"><?php echo $this->_('user_roles', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $field = $form->get('user_roles');
+        echo $this->formRow($field);
+        ?>
+        </div>
+    </div>  
+    
+    <div class="form-group">
+    	<label for="verified" class="control-label col-xs-3"><?php echo $this->_('verified', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $field = $form->get('verified');
+        echo $this->formRow($field);
+        ?>
+        </div>
+    </div>  
+    
+    <div class="form-group">
+    	<div class="col-xs-offset-2 col-xs-10">
+    		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('edit_user', 'app'); ?></button>
+    	</div>
+    </div>    
+    
+    
+    <?php echo $this->form()->closeTag() ?>
       
       </div>
 

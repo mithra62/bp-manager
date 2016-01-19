@@ -145,4 +145,5 @@ return array(
     'user_roles' => 'User Roles',
     'auto_verify' => 'Auto Verify Email',
     'user_added' => 'User Added',
+    'user_updated' => 'User Updated',
 );

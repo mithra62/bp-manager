@@ -60,6 +60,13 @@ class Users extends AbstractModel
      * @var object
      */
     protected $emailInputFilter;
+    
+    /**
+     * The validation filter for the edit user form
+     *
+     * @var object
+     */
+    protected $editInputFilter;
 
     /**
      * The Roles Model
@@ -268,6 +275,12 @@ class Users extends AbstractModel
         return $this->registrationInputFilter;
     }
     
+    /**
+     * Returns the Email change input filter
+     * @param int $identity
+     * @param \Application\Model\Hash $hash
+     * @return object
+     */
     public function getEmailInputFilter($identity, \Application\Model\Hash $hash)
     {
         if (! $this->emailInputFilter ) {
@@ -359,6 +372,51 @@ class Users extends AbstractModel
         
         return $this->rolesInputFilter;
     }
+
+    /**
+     * Sets the Input Filter for the registration form
+     * @return object
+     */
+    public function getEditInputFilter($user_id)
+    {
+        if (!$this->editInputFilter) {
+    
+            $inputFilter = new InputFilter();
+            $factory = new InputFactory();
+            
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'email',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StripTags'
+                    ),
+                    array(
+                        'name' => 'StringTrim'
+                    )
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'EmailAddress'
+                    ),
+                    array(
+                        'name' => 'Application\Validate\User\ChangeEmail',
+                        'options' => array(
+                            'table' => 'users',
+                            'field' => 'email',
+                            'adapter' => $this->adapter,
+                            'users' => $this,
+                            'identity' => $user_id
+                        )
+                    )
+                )
+            )));            
+    
+            $this->editInputFilter = $inputFilter;
+        }
+    
+        return $this->editInputFilter;
+    }    
 
     /**
      * Changes a users password
@@ -560,25 +618,21 @@ class Users extends AbstractModel
      */
     public function updateUser($data, $user_id)
     {
+        
         $ext = $this->trigger(self::EventUserUpdatePre, $this, compact('data', 'user_id'), $this->setXhooks($data));
-        if ($ext->stopped())
-            return $ext->last();
-        elseif ($ext->last())
-            $data = $ext->last();
+        if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $data = $ext->last();
         
         $sql = $this->getSQL($data);
-        if ($this->update('users', $sql, array(
-            'id' => $user_id
-        ))) {
+        if(isset($data['verified'])) {
+            $sql['verified'] = $data['verified'];
+        }
+        if ($this->update('users', $sql, array('id' => $user_id))) {
             if (isset($data['user_roles'])) {
                 $this->roles->updateUsersRoles($user_id, $data['user_roles']);
             }
             
             $ext = $this->trigger(self::EventUserUpdatePost, $this, compact('user_id', 'data'), $this->setXhooks($data));
-            if ($ext->stopped())
-                return $ext->last();
-            elseif ($ext->last())
-                $user_id = $ext->last();
+            if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $user_id = $ext->last();
             
             return $user_id;
         }

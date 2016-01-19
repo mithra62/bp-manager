@@ -102,6 +102,24 @@ class UsersForm extends BaseForm
         return $this;
     }
     
+    public function verificationField()
+    {	
+		$this->add(array(
+			'name' => 'verified',
+			'type' => 'Checkbox',
+			'attributes' => array(
+				'class' => 'checkbox',
+				'id' => 'verified',
+			),
+			'options' => array(
+				'checked_value' => '1',
+				'unchecked_value' => '0'
+			)
+		));
+		
+		return $this;
+    }
+    
     public function verificationFields()
     {
 		

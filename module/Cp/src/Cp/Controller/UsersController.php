@@ -75,11 +75,11 @@ class UsersController extends AbstractCpController
             return $this->redirect()->toRoute('manage_users');
         }
         
+        $view['user']['data'] = $user->user_data->getUsersData($id);
         $view['roles'] = $user->getUserRoles($id);
         $view['id'] = $id;
         $view['section'] = 'view_users';
         $view['active_sidebar'] = 'manage_users';
-        
         return $view;
     }
 
@@ -112,21 +112,19 @@ class UsersController extends AbstractCpController
         $user_data = $user->getUserById($id);
         $user_data['user_roles'] = $view['user_roles'] = $user->getUserRolesArr($id);
         
-        $user_form->rolesFields($roles);
+        $user_form->rolesFields($roles)->verificationField();
         $user_form->setData($user_data);
-        
-        $view['form'] = $user_form;
         
         $request = $this->getRequest();
         if ($request->isPost()) {
             $formData = $request->getPost();
-            $user_form->setInputFilter($user->getEditInputFilter());
+            $user_form->setInputFilter($user->getEditInputFilter($id));
             $user_form->setData($request->getPost());
             if ($user_form->isValid($formData)) {
                 $formData = $formData->toArray();
-                if ($user->updateUser($formData, $formData['id'])) {
-                    $this->flashMessenger()->addMessage($this->translate('user_updated', 'app'));
-                    return $this->redirect()->toRoute('users/view', array(
+                if ($user->updateUser($formData, $id)) {
+                    $this->flashMessenger()->addSuccessMessage($this->translate('user_updated', 'app'));
+                    return $this->redirect()->toRoute('manage_users/view', array(
                         'user_id' => $id
                     ));
                 } else {
@@ -147,6 +145,8 @@ class UsersController extends AbstractCpController
         
         $view['user_data'] = $user_data;
         $view['section'] = 'view_users';
+        
+        $view['form'] = $user_form;
         $view['active_sidebar'] = 'manage_users';
         return $view;
     }
@@ -159,7 +159,7 @@ class UsersController extends AbstractCpController
     public function addAction()
     {
         if (! $this->perm->check($this->identity, 'manage_users')) {
-            return $this->redirect()->toRoute('users');
+            return $this->redirect()->toRoute('manage_users');
         }
         
         $user = $this->getServiceLocator()->get('Cp\Model\Users');
