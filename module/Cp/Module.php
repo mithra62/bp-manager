@@ -3,6 +3,8 @@ namespace Cp;
 
 use Zend\ModuleManager\ModuleManager;
 
+use Cp\Model\Users;
+
 class Module
 {
     /**
@@ -30,4 +32,21 @@ class Module
             )
         );
     }
+    
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+    
+                // setting up the Authentication stuff
+                'Cp\Model\Users' => function ($sm) {
+                    $adapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $db = $sm->get('SqlObject');
+                    $roles = $sm->get('Application\Model\User\Roles');
+                    $ud = $sm->get('Application\Model\User\Data');
+                    return new Users($adapter, $db, $roles, $ud);
+                },
+            )
+        );
+    }    
 }

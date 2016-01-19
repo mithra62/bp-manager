@@ -8,7 +8,7 @@
  * @version		2.0
  * @filesource 	./moji/Application/src/Application/Model/Permissions.php
  */
-namespace Application\Model;
+namespace Application\Model\User;
 
 use Zend\Db\Sql\Sql;
 use Application\Model\AbstractModel;

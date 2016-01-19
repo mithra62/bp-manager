@@ -8,9 +8,9 @@
  * @version		2.0
  * @filesource 	./module/Api/src/Api/Model/Roles.php
  */
-namespace Api\Model;
+namespace Api\Model\User;
 
-use Application\Model\Roles as PmRoles;
+use Application\Model\User\Roles as PmRoles;
 
 /**
  * Api - User Roles Model

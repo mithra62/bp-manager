@@ -21,14 +21,14 @@ use Base\View\Helper\BaseViewHelper;
  */
 class Pagination extends BaseViewHelper
 {
-
     /**
-     * Abstracts pagination for HTML
-     * 
-     * @param string $date            
-     * @return void|boolean
+     * Creates the HTML pagination string
+     * @param string $route_key The route key name to use for the links (MUST be in the config)
+     * @param number $total_pages The total number of pages we're paginating through
+     * @param number $current_page The page we're currently on
+     * @return string
      */
-    public function __invoke($route_key, $total_pages = 1, $current_page = 1, array $options = array())
+    public function __invoke($route_key, $total_pages = 1, $current_page = 1)
     {
         $return = '';
         if( $total_pages > $current_page )

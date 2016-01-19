@@ -141,4 +141,8 @@ return array(
     'user_cant_remove_self' => 'You can\'t remove yourself',
     'remove_user_question' => 'Are you sure you want to remove <a href="%2$s">%1$s</a>? This can not be undone...',
     'user_removed' => 'User Removed',
+    'send_verification_email' => 'Send Verification Email',
+    'user_roles' => 'User Roles',
+    'auto_verify' => 'Auto Verify Email',
+    'user_added' => 'User Added',
 );

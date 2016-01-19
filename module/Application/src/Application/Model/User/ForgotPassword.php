@@ -8,11 +8,12 @@
  * @version		2.0
  * @filesource 	./module/Application/src/Application/Model/ForgotPassword.php
  */
-namespace Application\Model;
+namespace Application\Model\User;
 
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
+use Application\Model\AbstractModel;
 
 /**
  * Forgot Password Model
@@ -118,7 +119,7 @@ class ForgotPassword extends AbstractModel
         if ($this->users->upatePasswordHash($user_data['id'], $guid)) {
             $change_url = $mail->web_url . $this->changePasswordUrl($guid);
             $mail->addTo($email_address);
-            $mail->setViewDir($this->getModulePath(__DIR__) . '/view/emails');
+            $mail->setViewDir($this->getModulePath(__DIR__) . '/../view/emails');
             $mail->setEmailView('forgot-password', array(
                 'change_url' => $change_url,
                 'user_data' => $user_data

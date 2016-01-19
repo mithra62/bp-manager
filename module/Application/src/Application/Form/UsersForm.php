@@ -79,7 +79,7 @@ class UsersForm extends BaseForm
      * @param \Application\Model\Roles $roles            
      * @return \Application\Form\UsersForm
      */
-    public function rolesFields(\Application\Model\Roles $roles)
+    public function rolesFields(\Application\Model\User\Roles $roles)
     {
         $roles = $roles->getAllRoleNames();
         $role_fields = array();
@@ -100,5 +100,37 @@ class UsersForm extends BaseForm
         ));
         
         return $this;
+    }
+    
+    public function verificationFields()
+    {
+		
+		$this->add(array(
+			'name' => 'send_verification_email',
+			'type' => 'Checkbox',
+			'attributes' => array(
+				'class' => 'checkbox',
+				'id' => 'send_verification_email',
+			),
+			'options' => array(
+				'checked_value' => '1',
+				'unchecked_value' => '0'
+			)
+		));
+		
+		$this->add(array(
+			'name' => 'auto_verify',
+			'type' => 'Checkbox',
+			'attributes' => array(
+				'class' => 'checkbox',
+				'id' => 'auto_verify',
+			),
+			'options' => array(
+				'checked_value' => '1',
+				'unchecked_value' => '0'
+			)
+		));
+		
+		return $this;
     }
 }

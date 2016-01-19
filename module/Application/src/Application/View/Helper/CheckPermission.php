@@ -49,7 +49,7 @@ class CheckPermission extends BaseViewHelper
         if (! $this->permissions) {
             $helperPluginManager = $this->getServiceLocator();
             $serviceManager = $helperPluginManager->getServiceLocator();
-            $this->permissions = $serviceManager->get('Application\Model\Permissions');
+            $this->permissions = $serviceManager->get('Application\Model\User\Permissions');
         }
         return $this->permissions;
     }

@@ -21,7 +21,7 @@ use Api\Model\Tasks;
 use Api\Model\Users;
 use Api\Model\Companies;
 use Api\Model\Options;
-use Api\Model\Roles;
+use Api\Model\User\Roles;
 use Api\Event\UserDataEvent;
 use Api\Event\ViewEvent;
 
@@ -112,7 +112,7 @@ class Module implements Feature\BootstrapListenerInterface
                 'Api\Model\Users' => function ($sm) {
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
-                    $role = $sm->get('Api\Model\Roles');
+                    $role = $sm->get('Api\Model\User\Roles');
                     $ud = $sm->get('Application\Model\User\Data');
                     return new Users($adapter, $db, $role, $ud);
                 },
@@ -126,10 +126,10 @@ class Module implements Feature\BootstrapListenerInterface
                     $db = $sm->get('SqlObject');
                     return new Options($adapter, $db);
                 },
-                'Api\Model\Roles' => function ($sm) {
+                'Api\Model\User\Roles' => function ($sm) {
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
-                    $permission = $sm->get('Application\Model\Permissions');
+                    $permission = $sm->get('Application\Model\User\Permissions');
                     return new Roles($adapter, $db, $permission);
                 },
                 

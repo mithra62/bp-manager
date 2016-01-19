@@ -7,7 +7,7 @@
  * @version		2.0
  * @filesource 	./module/Application/src/Application/Model/Roles.php
  */
-namespace Application\Model;
+namespace Application\Model\User;
 
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
@@ -53,7 +53,7 @@ class Roles extends AbstractModel
      * @param \Zend\Db\Sql\Sql $db            
      * @param \Application\Model\Permissions $permissions            
      */
-    public function __construct(\Zend\Db\Adapter\Adapter $adapter, \Zend\Db\Sql\Sql $db, \Application\Model\Permissions $permissions)
+    public function __construct(\Zend\Db\Adapter\Adapter $adapter, \Zend\Db\Sql\Sql $db, \Application\Model\User\Permissions $permissions)
     {
         parent::__construct($adapter, $db);
         $this->perm = $permissions;

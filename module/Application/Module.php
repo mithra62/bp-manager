@@ -21,11 +21,11 @@ use Intervention\Image\ImageManager;
 
 use Application\Model\Auth\AuthAdapter;
 use Application\Model\Users;
-use Application\Model\Roles;
+use Application\Model\User\Roles;
 use Application\Model\User\UserData;
-use Application\Model\Permissions;
-use Application\Model\Login;
-use Application\Model\ForgotPassword;
+use Application\Model\User\Permissions;
+use Application\Model\User\Login;
+use Application\Model\User\ForgotPassword;
 use Application\Model\Settings;
 use Application\Model\Hash;
 use Application\Model\Mail;
@@ -163,7 +163,7 @@ class Module
                 'Application\Model\Users' => function ($sm) {
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
-                    $roles = $sm->get('Application\Model\Roles');
+                    $roles = $sm->get('Application\Model\User\Roles');
                     $ud = $sm->get('Application\Model\User\Data');
                     return new Users($adapter, $db, $roles, $ud);
                 },
@@ -190,23 +190,23 @@ class Module
                         ->getTranslator());
                     return $mailer;
                 },
-                'Application\Model\Roles' => function ($sm) {
+                'Application\Model\User\Roles' => function ($sm) {
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
-                    $permissions = $sm->get('Application\Model\Permissions');
+                    $permissions = $sm->get('Application\Model\User\Permissions');
                     return new Roles($adapter, $db, $permissions);
                 },
-                'Application\Model\Permissions' => function ($sm) {
+                'Application\Model\User\Permissions' => function ($sm) {
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
                     return new Permissions($adapter, $db);
                 },
-                'Application\Model\Login' => function ($sm) {
+                'Application\Model\User\Login' => function ($sm) {
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
                     return new Login($adapter, $db);
                 },
-                'Application\Model\ForgotPassword' => function ($sm) {
+                'Application\Model\User\ForgotPassword' => function ($sm) {
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
                     $users = $sm->get('Application\Model\Users');

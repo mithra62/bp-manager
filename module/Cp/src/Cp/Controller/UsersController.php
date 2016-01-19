@@ -72,13 +72,14 @@ class UsersController extends AbstractCpController
         $user = $this->getServiceLocator()->get('Application\Model\Users');
         $view['user'] = $user->getUserById($id);
         if (! $view['user']) {
-            return $this->redirect()->toRoute('pm');
+            return $this->redirect()->toRoute('manage_users');
         }
         
         $view['roles'] = $user->getUserRoles($id);
         $view['id'] = $id;
         $view['section'] = 'view_users';
         $view['active_sidebar'] = 'manage_users';
+        
         return $view;
     }
 
@@ -90,21 +91,20 @@ class UsersController extends AbstractCpController
     public function editAction()
     {
         $id = $this->params()->fromRoute('user_id');
-        if (! $id) {
-            $this->layout()->setVariable('active_nav', '');
-            $this->layout()->setVariable('sub_menu', 'settings');
-            $id = $this->identity;
-        }
-        
+
         if (! $this->perm->check($this->identity, 'view_users_data')) {
-            $this->layout()->setVariable('active_nav', '');
-            $this->layout()->setVariable('sub_menu', 'settings');
-            $id = $this->identity;
+            return $this->redirect()->toRoute('cp');
         }
         
         $user = $this->getServiceLocator()->get('Application\Model\Users');
+        $view['user'] = $user->getUserById($id);
+        if (! $view['user']) {
+            return $this->redirect()->toRoute('manage_users');
+        }        
+        
+        $user = $this->getServiceLocator()->get('Application\Model\Users');
         $user_form = $this->getServiceLocator()->get('Application\Form\UsersForm');
-        $roles = $this->getServiceLocator()->get('Application\Model\Roles');
+        $roles = $this->getServiceLocator()->get('Application\Model\User\Roles');
         
         $view['id'] = $id;
         $view['add_groups'] = $this->perm->check($this->identity, 'manage_users');
@@ -162,12 +162,12 @@ class UsersController extends AbstractCpController
             return $this->redirect()->toRoute('users');
         }
         
-        $user = $this->getServiceLocator()->get('Application\Model\Users');
+        $user = $this->getServiceLocator()->get('Cp\Model\Users');
         $user_form = $this->getServiceLocator()->get('Application\Form\UsersForm');
-        $roles = $this->getServiceLocator()->get('Application\Model\Roles');
+        $roles = $this->getServiceLocator()->get('Application\Model\User\Roles');
         $hash = $this->getServiceLocator()->get('Application\Model\Hash');
         
-        $view['form'] = $user_form->registrationForm()->rolesFields($roles);
+        $view['form'] = $user_form->registrationForm()->rolesFields($roles)->verificationFields();
         $view['addPassword'] = TRUE;
         $view['user_roles'] = $roles->getAllRoleNames();
         $view['layout_style'] = 'right';
@@ -180,10 +180,10 @@ class UsersController extends AbstractCpController
             $user_form->setInputFilter($user->getRegistrationInputFilter());
             $user_form->setData($request->getPost());
             if ($user_form->isValid($formData)) {
-                $user_id = $id = $user->addUser($formData->toArray(), $hash, $roles);
+                $user_id = $id = $user->addCpUser($formData->toArray(), $hash, $this->getServiceLocator()->get('Application\Model\Mail'));
                 if ($user_id) {
-                    $this->flashMessenger()->addMessage($this->translate('user_added', 'app'));
-                    return $this->redirect()->toRoute('users/view', array(
+                    $this->flashMessenger()->addSuccessMessage($this->translate('user_added', 'app'));
+                    return $this->redirect()->toRoute('manage_users/view', array(
                         'user_id' => $id
                     ));
                 } else {
@@ -200,6 +200,7 @@ class UsersController extends AbstractCpController
                 $user_form->setData($formData);
             }
         }
+        
         $view['section'] = 'view_users';
         $view['active_sidebar'] = 'manage_users';
         return $view;

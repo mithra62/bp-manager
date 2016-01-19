@@ -57,7 +57,7 @@ class AccountController extends AbstractController
             $formData = $request->getPost();
             $user = $this->getServiceLocator()->get('Application\Model\Users');
             $hash = $this->getServiceLocator()->get('Application\Model\Hash');
-            $roles = $this->getServiceLocator()->get('Application\Model\Roles');
+            $roles = $this->getServiceLocator()->get('Application\Model\User\Roles');
             
             $form->setInputFilter($user->getRegistrationInputFilter());
             $form->setData($formData);

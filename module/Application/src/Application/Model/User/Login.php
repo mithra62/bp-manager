@@ -8,13 +8,14 @@
  * @version		2.0
  * @filesource 	./module/Application/src/Application/Model/Login.php
  */
-namespace Application\Model;
+namespace Application\Model\User;
 
 use Zend\Db\Sql\Sql;
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Authentication\Result as AuthenticationResult;
+use Application\Model\AbstractModel;
 
 /**
  * Application - Login Model

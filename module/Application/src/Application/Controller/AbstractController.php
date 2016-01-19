@@ -48,7 +48,7 @@ abstract class AbstractController extends BaseController
             $user_data = $user->user_data->getUsersData($this->identity);
             $user->setTimezone($user_data['timezone']);
             
-            $this->perm = $this->getServiceLocator()->get('Application\Model\Permissions');
+            $this->perm = $this->getServiceLocator()->get('Application\Model\User\Permissions');
             
             $this->_initPrefs();
         }
@@ -72,7 +72,7 @@ abstract class AbstractController extends BaseController
      */
     public function logoutAction()
     {
-        $login = $this->getServiceLocator()->get('Application\Model\Login');
+        $login = $this->getServiceLocator()->get('Application\Model\User\Login');
         $login->logout($this->getSessionStorage(), $this->getAuthService());
         
         $translate = $this->getServiceLocator()

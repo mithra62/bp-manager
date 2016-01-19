@@ -7,8 +7,11 @@
             <?php echo $this->render('cp/global/_sidebar'); ?>
       </div>
       <div class="col-sm-9 col-md-9">
+      <h2><?php echo $this->_('view_user', 'app'); ?></h2>
+        <a class="btn btn-primary  pull-right" href="<?php echo $this->url('manage_users/add'); ?>" role="button"><?php echo $this->glyphicon('plus'); ?> <?php echo $this->_('add_user', 'app'); ?></a>
       <?php echo $this->render('partials/_tabs'); ?>   
-
+      
+      <h3>fdsa</h3>
       
       </div>
 

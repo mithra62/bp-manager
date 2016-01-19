@@ -76,7 +76,7 @@ class Users extends AbstractModel
      * @param \Application\Model\Roles $roles            
      * @param \Application\Model\User\UserData $user_data            
      */
-    public function __construct(\Zend\Db\Adapter\Adapter $adapter, Sql $db, \Application\Model\Roles $roles, \Application\Model\User\UserData $user_data)
+    public function __construct(\Zend\Db\Adapter\Adapter $adapter, Sql $db, \Application\Model\User\Roles $roles, \Application\Model\User\UserData $user_data)
     {
         parent::__construct($adapter, $db);
         $this->roles = $roles;
@@ -744,7 +744,7 @@ class Users extends AbstractModel
     
     /**
      * Sends the email verification email
-     * @param unknown $user_id
+     * @param int $user_id
      * @param Mail $mail
      * @param Hash $hash
      * @return boolean
@@ -819,25 +819,35 @@ class Users extends AbstractModel
     }
     
     /**
+     * Returns an array for the verification SQL update
+     * @param number $verified
+     * @param string $verified_hash
+     * @param string $verified_sent_date
+     * @return array
+     */
+    public function getVerifySql($verified = 1, $verified_hash = null, $verified_sent_date = null)
+    {
+        return array(
+            'verified_sent_date' => $verified_sent_date,
+            'verified_hash' => $verified_hash,
+            'verified' => $verified,
+            'verified_date' => new \Zend\Db\Sql\Expression("NOW()"),
+            'last_modified' => new \Zend\Db\Sql\Expression("NOW()")
+        );
+    }
+    
+    /**
      * Updates a user's verification status based on the provided $hash
      * @param string $hash
      * @return Ambigous <mixed, void>
      */
     public function verifyEmailHash($hash)
     {
-        $sql = array(
-            'verified_sent_date' => null,
-            'verified_hash' => null,
-            'verified' => '1',
-            'verified_date' => new \Zend\Db\Sql\Expression("NOW()"),
-            'last_modified' => new \Zend\Db\Sql\Expression("NOW()")
-        );
-        
         $where = array(
             'verified_hash' => $hash
         );
         
-        return $this->update('users', $sql, $where);
+        return $this->update('users', $this->getVerifySql(), $where);
     }
 
     /**

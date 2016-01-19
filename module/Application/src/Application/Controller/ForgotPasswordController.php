@@ -42,7 +42,7 @@ class ForgotPasswordController extends AbstractController
      */
     public function indexAction()
     {
-        $fp = $this->getServiceLocator()->get('Application\Model\ForgotPassword');
+        $fp = $this->getServiceLocator()->get('Application\Model\User\ForgotPassword');
         $form = $this->getServiceLocator()->get('Application\Model\ForgotPasswordForm');
         $request = $this->getRequest();
         
@@ -80,7 +80,7 @@ class ForgotPasswordController extends AbstractController
             return $this->redirect()->toRoute('forgot-password');
         }
         
-        $fp = $this->getServiceLocator()->get('Application\Model\ForgotPassword');
+        $fp = $this->getServiceLocator()->get('Application\Model\User\ForgotPassword');
         $user_data = $fp->users->getUserByPwHash($hash);
         if (! $user_data) {
             return $this->redirect()->toRoute('forgot-password');

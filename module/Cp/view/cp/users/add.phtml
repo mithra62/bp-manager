@@ -25,11 +25,10 @@
     <div class="form-group">
     	<label for="email" class="control-label col-xs-3"><?php echo $this->_('email', 'app'); ?></label>
     	<div class="col-xs-9">
-            <?php
-            $email = $form->get('email');
-            echo $this->formRow($email);
-            
-            ?>
+        <?php
+        $field = $form->get('email');
+        echo $this->formRow($field);
+        ?>
         </div>
     </div>
     
@@ -37,8 +36,8 @@
     	<label for="password" class="control-label col-xs-3"><?php echo $this->_('password', 'app'); ?></label>
     	<div class="col-xs-9">
         <?php
-        $password = $form->get('password');
-        echo $this->formRow($password);
+        $field = $form->get('password');
+        echo $this->formRow($field);
         ?>
         </div>
     </div>
@@ -47,8 +46,38 @@
     	<label for="confirm_password" class="control-label col-xs-3"><?php echo $this->_('confirm_password', 'app'); ?></label>
     	<div class="col-xs-9">
         <?php
-        $password = $form->get('confirm_password');
-        echo $this->formRow($password);
+        $field = $form->get('confirm_password');
+        echo $this->formRow($field);
+        ?>
+        </div>
+    </div>
+    
+    <div class="form-group">
+    	<label for="user_roles" class="control-label col-xs-3"><?php echo $this->_('user_roles', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $field = $form->get('user_roles');
+        echo $this->formRow($field);
+        ?>
+        </div>
+    </div>
+    
+    <div class="form-group">
+    	<label for="send_verification_email" class="control-label col-xs-3"><?php echo $this->_('send_verification_email', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $field = $form->get('send_verification_email');
+        echo $this->formRow($field);
+        ?>
+        </div>
+    </div>
+    
+    <div class="form-group">
+    	<label for="auto_verify" class="control-label col-xs-3"><?php echo $this->_('auto_verify', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $field = $form->get('auto_verify');
+        echo $this->formRow($field);
         ?>
         </div>
     </div>
