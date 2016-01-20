@@ -31,6 +31,7 @@ use Application\Model\Hash;
 use Application\Model\Mail;
 use Application\Model\ViewEvents;
 use Application\Model\Image;
+use Application\Model\Ips;
 
 use Application\Form\ForgotPasswordForm;
 use Application\Form\SettingsForm;
@@ -42,6 +43,7 @@ use Application\Form\RolesForm;
 use Application\Form\User\RolesForm as UserRolesForm;
 use Application\Form\ConfirmForm;
 use Application\Form\EmailForm;
+use Application\Form\IpForm;
 
 use Application\Event\NotificationEvent;
 
@@ -239,6 +241,11 @@ class Module
                     $db = $sm->get('SqlObject');
                     return new ViewEvents($adapter, $db);
                 },
+				'Application\Model\Ips' => function($sm) {
+					$adapter = $sm->get('Zend\Db\Adapter\Adapter');
+					$db = $sm->get('SqlObject');
+					return new Ips($adapter, $db);
+				},
                 
                 // forms
                 'Application\Form\SettingsForm' => function ($sm) {
@@ -267,6 +274,9 @@ class Module
 				},
 				'Application\Form\EmailForm' => function($sm) {
 					return new EmailForm('email_change');
+				},
+				'Application\Form\IpForm' => function($sm) {
+					return new IpForm('ip');
 				},
                 
                 // events

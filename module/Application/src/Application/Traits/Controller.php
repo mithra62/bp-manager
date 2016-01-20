@@ -28,9 +28,9 @@ trait Controller
     protected function _initIpBlocker()
     {
         if (! empty($this->settings['enable_ip']) && $this->settings['enable_ip'] == '1') {
-            $ip = $this->getServiceLocator()->get('PM\Model\Ips');
+            $ip = $this->getServiceLocator()->get('Application\Model\Ips');
             if (! $ip->isAllowed($this->getRequest()->getServer()->get('REMOTE_ADDR')) ) {
-                $good_controller = 'PM\Controller\Ips';
+                $good_controller = 'Application\Controller\Ips';
                 $good_actions = array(
                     'blocked',
                     'allowSelf'

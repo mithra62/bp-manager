@@ -84,12 +84,12 @@ return array(
         		)
         	), //End User Routes 
 
-        	'ips' => array( //Ips Routes
+        	'manage_ips' => array( //Ips Routes
         		'type' => 'segment',
         		'options' => array(
-        			'route' => '/pm/ip-locker',
+        			'route' => '/cp/ip-locker',
         			'defaults' => array(
-        				'controller' => 'PM\Controller\Ips',
+        				'controller' => 'Cp\Controller\Ips',
         				'action' => 'index'
         			),
         		),
@@ -103,7 +103,6 @@ return array(
         						'file_id' => '[0-9]+'
         					),
         					'defaults' => array( 
-        						'controller' => 'PM\Controller\Ips',
         						'action' => 'remove'
         					)
         				)
@@ -183,6 +182,66 @@ return array(
         			
         		)
         	), //end IP Routes
+        	'manage_roles' => array( //Roles Routes
+        		'type' => 'segment',
+        		'options' => array(
+        			'route' => '/cp/roles',
+        			'defaults' => array(
+        				'controller' => 'Cp\Controller\Roles',
+        				'action' => 'index'
+        			),
+        		),
+        		'may_terminate' => true,
+        		'child_routes' => array(
+        			'remove' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/remove/:role_id',
+        					'constraints' => array(
+        						'note_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'remove'
+        					)
+        				)
+        			),    			
+        			'edit' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/edit/:role_id',
+        					'constraints' => array(
+        						'note_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'edit'
+        					)
+        				)
+        			),       			
+        			'view' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/:role_id',
+        					'constraints' => array(
+        						'note_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'view'
+        					)
+        				)
+        			),
+        			'add' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/add',
+        					'defaults' => array(
+        						'action' => 'add'
+        					)
+        				)
+        			),    
+        		)
+        	), //end Roles Routes
+        	
+            
         )
     ),
     'service_manager' => array(
@@ -200,6 +259,7 @@ return array(
             'Cp\Controller\Settings' => 'Cp\Controller\SettingsController',
             'Cp\Controller\Users' => 'Cp\Controller\UsersController',
             'Cp\Controller\Roles' => 'Cp\Controller\RolesController',
+            'Cp\Controller\Ips' => 'Cp\Controller\IpsController',
         )
     ),
     'view_manager' => array(

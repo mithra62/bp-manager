@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('admin', 'cp'); ?> <small><?php echo $this->_('settings', 'cp'); ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('cp/global/_sidebar'); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+       <?php echo $this->render('cp/settings/partials/_tabs'); ?>
+       <?php if($this->ip_block_enabled != '1'):?>
+      <h2><?php echo $this->_('enable_ip_locker', 'app'); ?></h2>
+        <?php else: ?>
+        <h2><?php echo $this->_('disable_ip_locker', 'app'); ?></h2>
+        <?php endif;?>
+
+	<?php if($this->ip_block_enabled != '1'):?>
+	<div class="attention png_bg">
+		<?php echo $this->_('enable_ip_locker_question', 'app'); ?>
+	</div>
+	<?php else: ?>
+	<div class="fail png_bg">
+	   <?php echo $this->_('disable_ip_locker_question', 'app'); ?>
+	</div>
+	<?php endif;?>
+<p>
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'ip_form');
+$form->setAttribute('action', $this->url('manage_ips/enable'));
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+<?php if($this->ip_block_enabled != '1'):?>
+<input type="submit" class="btn btn-primary" value="<?php echo $this->_('enable_ip_locker', 'app'); ?>" />
+<?php else: ?>
+<input type="submit" class="btn btn-primary" value="<?php echo $this->_('disable_ip_locker', 'app'); ?>" />
+<?php endif;?>
+<?php echo $this->form()->closeTag() ?>
+</p>
+
+      </div>
+
+</div> 

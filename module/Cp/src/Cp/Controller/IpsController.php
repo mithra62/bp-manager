@@ -8,9 +8,9 @@
  * @version		2.0
  * @filesource 	./module/PM/src/PM/Controller/IpsController.php
  */
-namespace PM\Controller;
+namespace Cp\Controller;
 
-use PM\Controller\AbstractPmController;
+use Cp\Controller\AbstractCpController;
 
 /**
  * PM - Ips Controller
@@ -21,7 +21,7 @@ use PM\Controller\AbstractPmController;
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/PM/src/PM/Controller/IpsController.php
  */
-class IpsController extends AbstractPmController
+class IpsController extends AbstractCpController
 {
 
     /**
@@ -42,12 +42,8 @@ class IpsController extends AbstractPmController
      */
     public function enableAction()
     {
-        $this->layout()->setVariable('active_nav', 'admin');
-        $this->layout()->setVariable('sub_menu', 'admin');
-        $this->layout()->setVariable('active_sub', 'ips');
-        
-        $form = $this->getServiceLocator()->get('PM\Form\ConfirmForm');
-        $ip = $this->getServiceLocator()->get('PM\Model\Ips');
+        $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
+        $ip = $this->getServiceLocator()->get('Application\Model\Ips');
         $request = $this->getRequest();
         if ($request->isPost()) {
             $formData = $this->getRequest()->getPost();
@@ -55,7 +51,7 @@ class IpsController extends AbstractPmController
             if ($form->isValid($formData)) {
                 $formData = $formData->toArray();
                 if (! empty($formData['fail'])) {
-                    return $this->redirect()->toRoute('ips');
+                    return $this->redirect()->toRoute('manage_ips');
                 }
                 
                 $ip->addIp(array(
@@ -68,8 +64,8 @@ class IpsController extends AbstractPmController
                     'enable_ip' => ($this->settings['enable_ip'] == '1' ? '0' : '1')
                 );
                 if ($settings->updateSettings($data)) {
-                    $this->flashMessenger()->addMessage($this->settings['enable_ip'] == '1' ? $this->translate('ip_locker_disabled', 'pm') : $this->translate('ip_locker_enabled', 'pm'));
-                    return $this->redirect()->toRoute('ips');
+                    $this->flashMessenger()->addMessage($this->settings['enable_ip'] == '1' ? $this->translate('ip_locker_disabled', 'app') : $this->translate('ip_locker_enabled', 'app'));
+                    return $this->redirect()->toRoute('manage_ips');
                 }
             }
         }
@@ -77,14 +73,19 @@ class IpsController extends AbstractPmController
         $view = array();
         $view['form'] = $form;
         $view['ip_block_enabled'] = $this->settings['enable_ip'];
+        $view['active_sidebar'] = 'system_settings';
+        $view['section'] = 'ips';
+        
         return $this->ajaxOutput($view);
     }
 
     public function indexAction()
     {
-        $ips = $this->getServiceLocator()->get('PM\Model\Ips');
+        $ips = $this->getServiceLocator()->get('Application\Model\Ips');
         $view['ip_block_enabled'] = $this->settings['enable_ip'];
         $view['ips'] = $ips->getAllIps();
+        $view['active_sidebar'] = 'system_settings';
+        $view['section'] = 'ips';
         return $view;
     }
 
@@ -96,15 +97,17 @@ class IpsController extends AbstractPmController
         
         $id = $this->params()->fromRoute('ip_id');
         if (! $id) {
-            return $this->redirect()->toRoute('ips');
+            return $this->redirect()->toRoute('manage_ips');
         }
         
-        $ips = $this->getServiceLocator()->get('PM\Model\Ips');
+        $ips = $this->getServiceLocator()->get('Application\Model\Ips');
         $view['ip'] = $ips->getIpById($id);
         if (! $view['ip']) {
-            return $this->redirect()->toRoute('ips');
+            return $this->redirect()->toRoute('manage_ips');
         }
-        
+
+        $view['active_sidebar'] = 'system_settings';
+        $view['section'] = 'ips';
         return $this->ajaxOutput($view);
     }
 
@@ -119,8 +122,8 @@ class IpsController extends AbstractPmController
         $this->layout()->setVariable('sub_menu', 'admin');
         $this->layout()->setVariable('active_sub', 'ips');
         
-        $ip = $this->getServiceLocator()->get('PM\Model\Ips');
-        $form = $this->getServiceLocator()->get('PM\Form\IpForm');
+        $ip = $this->getServiceLocator()->get('Application\Model\Ips');
+        $form = $this->getServiceLocator()->get('Application\Form\IpForm');
         $request = $this->getRequest();
         if ($request->isPost()) {
             $formData = $this->getRequest()->getPost();
@@ -130,8 +133,8 @@ class IpsController extends AbstractPmController
             if ($form->isValid($formData)) {
                 $ip_id = $ip->addIp($formData->toArray(), $this->identity);
                 if ($ip_id) {
-                    $this->flashMessenger()->addMessage($this->translate('ip_address_added', 'pm'));
-                    return $this->redirect()->toRoute('ips/view', array(
+                    $this->flashMessenger()->addSuccessMessage($this->translate('ip_address_added', 'app'));
+                    return $this->redirect()->toRoute('manage_ips/view', array(
                         'ip_id' => $ip_id
                     ));
                 }
@@ -139,7 +142,8 @@ class IpsController extends AbstractPmController
         }
         
         $view['form'] = $form;
-        $this->layout()->setVariable('layout_style', 'left');
+        $view['active_sidebar'] = 'system_settings';
+        $view['section'] = 'ips';
         return $this->ajaxOutput($view);
     }
 
@@ -156,15 +160,15 @@ class IpsController extends AbstractPmController
         
         $id = $this->params()->fromRoute('ip_id');
         if (! $id) {
-            return $this->redirect()->toRoute('ips');
+            return $this->redirect()->toRoute('manage_ips');
         }
         
-        $ip = $this->getServiceLocator()->get('PM\Model\Ips');
-        $form = $this->getServiceLocator()->get('PM\Form\IpForm');
+        $ip = $this->getServiceLocator()->get('Application\Model\Ips');
+        $form = $this->getServiceLocator()->get('Application\Form\IpForm');
         
         $ip_data = $ip->getIpById($id);
         if (! $ip_data) {
-            return $this->redirect()->toRoute('ips');
+            return $this->redirect()->toRoute('manage_ips');
         }
         
         $view = array();
@@ -182,8 +186,8 @@ class IpsController extends AbstractPmController
             
             if ($form->isValid($formData)) {
                 if ($ip->updateIp($formData->toArray(), $formData['id'])) {
-                    $this->flashMessenger()->addMessage($this->translate('ip_address_updated', 'pm'));
-                    return $this->redirect()->toRoute('ips/view', array(
+                    $this->flashMessenger()->addSuccessMessage($this->translate('ip_address_updated', 'pm'));
+                    return $this->redirect()->toRoute('manage_ips/view', array(
                         'ip_id' => $id
                     ));
                 } else {
@@ -204,6 +208,8 @@ class IpsController extends AbstractPmController
         
         $this->layout()->setVariable('layout_style', 'left');
         $view['ip_data'] = $ip_data;
+        $view['active_sidebar'] = 'system_settings';
+        $view['section'] = 'ips';
         return $this->ajaxOutput($view);
     }
 
@@ -212,17 +218,17 @@ class IpsController extends AbstractPmController
         $this->layout()->setVariable('active_nav', 'admin');
         $this->layout()->setVariable('sub_menu', 'admin');
         $this->layout()->setVariable('active_sub', 'ips');
-        $ips = $this->getServiceLocator()->get('PM\Model\Ips');
-        $form = $this->getServiceLocator()->get('PM\Form\ConfirmForm');
+        $ips = $this->getServiceLocator()->get('Application\Model\Ips');
+        $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
         
         $id = $this->params()->fromRoute('ip_id');
         if (! $id) {
-            return $this->redirect()->toRoute('ips');
+            return $this->redirect()->toRoute('manage_ips');
         }
         
         $ip = $ips->getIpById($id);
         if (! $ip) {
-            return $this->redirect()->toRoute('ips');
+            return $this->redirect()->toRoute('manage_ips');
         }
         
         $view = array();
@@ -230,7 +236,7 @@ class IpsController extends AbstractPmController
         $request = $this->getRequest();
         if ($this->settings['enable_ip'] && $ip['ip_raw'] == $request->getServer()->get('REMOTE_ADDR')) {
             $this->flashMessenger()->addErrorMessage($this->translate('cant_remove_own_ip'));
-            return $this->redirect()->toRoute('ips/view', array(
+            return $this->redirect()->toRoute('manage_ips/view', array(
                 'ip_id' => $id
             ));
         }
@@ -241,71 +247,19 @@ class IpsController extends AbstractPmController
             if ($form->isValid($formData)) {
                 $formData = $formData->toArray();
                 if (! empty($formData['fail'])) {
-                    return $this->redirect()->toRoute('ips/view', array(
+                    return $this->redirect()->toRoute('manage_ips/view', array(
                         'ip_id' => $id
                     ));
                 }
                 
                 if ($ips->removeIp($id)) {
-                    $this->flashMessenger()->addErrorMessage($this->translate('ip_removed', 'pm'));
-                    return $this->redirect()->toRoute('ips');
+                    $this->flashMessenger()->addSuccessMessage($this->translate('ip_removed', 'pm'));
+                    return $this->redirect()->toRoute('manage_ips');
                 }
             }
         }
         
         $view['form'] = $form;
         return $this->ajaxOutput($view);
-    }
-
-    public function blockedAction()
-    {}
-
-    public function allowSelfAction()
-    {
-        $ip = $this->getServiceLocator()->get('PM\Model\Ips');
-        $form = $this->getServiceLocator()->get('PM\Form\ConfirmForm');
-        
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $formData = $this->getRequest()->getPost();
-            $form->setData($request->getPost());
-            if ($form->isValid($formData)) {
-                $user = $this->getServiceLocator()->get('PM\Model\Users');
-                $mail = $this->getServiceLocator()->get('Application\Model\Mail');
-                $form = $this->getServiceLocator()->get('PM\Form\ConfirmForm');
-                $hash = $this->getServiceLocator()->get('Application\Model\Hash');
-                $user_data = $user->getUserById($this->identity);
-                if ($ip->allowSelf($request->getServer()
-                    ->get('REMOTE_ADDR'), $user_data, $mail, $hash)) {
-                    $this->flashMessenger()->addMessage($this->translate('ip_allow_verify_sent', 'pm'));
-                    return $this->redirect()->toRoute('ips/self-allow');
-                }
-            }
-        }
-        $view = array();
-        $view['form'] = $form;
-        return $view;
-    }
-
-    public function verifyCodeAction()
-    {
-        $code = $this->params()->fromRoute('verify_code');
-        $ip = $this->getServiceLocator()->get('PM\Model\Ips');
-        
-        $ip_data = $ip->getIp(array(
-            'confirm_key' => $code
-        ));
-        if (! $ip_data) {
-            $this->flashMessenger()->addErrorMessage($this->translate('ip_allow_bad_code', 'pm'));
-            return $this->redirect()->toRoute('ips/self-allow');
-        }
-        
-        if ($ip->allowCodeAccess($code)) {
-            $this->flashMessenger()->addMessage($this->translate('ip_allow_code_access_sucess', 'pm'));
-            return $this->redirect()->toRoute('pm');
-        }
-        
-        $this->flashMessenger()->addMessage($this->translate('ip_allow_code_access_fail', 'pm'));
-        return $this->redirect()->toRoute('ips/self-allow');
     }
 }

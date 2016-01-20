@@ -1,0 +1,24 @@
+
+
+<?php if($this->deny): ?>
+<div class="fail png_bg">
+You can't delete your Ip address while ip blocking is enabled.
+</div>
+
+<?php else: ?>
+<div class="attention png_bg">
+Are you sure you want to remove the Ip Address <?php echo $this->ip['ip_raw']?>? This can not be undone...
+</div>
+<p>
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'ip_form');
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+	<?php $field = $form->get('confirm'); echo $this->formRow($field); ?> <?php $field = $form->get('fail'); echo $this->formRow($field); ?>
+<?php echo $this->form()->closeTag() ?>
+</p>
+<?php endif; ?>

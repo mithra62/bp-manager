@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs">
     <li class="<?php echo ($this->section == 'general' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('system_settings', array('section' => 'general')); ?>">General</a></li>
     <li class="<?php echo ($this->section == 'mail' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('system_settings', array('section' => 'mail')); ?>">Mail</a></li>
-    <li><a href="#">IP Locker</a></li>
+    <li class="<?php echo ($this->section == 'ips' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('manage_ips'); ?>">IP Locker</a></li>
 </ul>  
 
 <br />

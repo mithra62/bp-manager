@@ -6,11 +6,11 @@
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
  * @link		http://mojitrac.com/
  * @version		2.0
- * @filesource 	./module/PM/src/PM/Controller/RolesController.php
+ * @filesource 	./module/Cp/src/Cp/Controller/RolesController.php
  */
-namespace PM\Controller;
+namespace Cp\Controller;
 
-use PM\Controller\AbstractPmController;
+use Cp\Controller\AbstractCpController;
 
 /**
  * PM - Roles Controller
@@ -22,28 +22,8 @@ use PM\Controller\AbstractPmController;
  * @filesource ./module/PM/src/PM/Controller/RolesController.php
  *            
  */
-class RolesController extends AbstractPmController
+class RolesController extends AbstractCpController
 {
-
-    /**
-     * (non-PHPdoc)
-     * 
-     * @see \PM\Controller\AbstractPmController::onDispatch()
-     */
-    public function onDispatch(\Zend\Mvc\MvcEvent $e)
-    {
-        $e = parent::onDispatch($e);
-        parent::check_permission('manage_roles');
-        $this->layout()->setVariable('sidebar', 'dashboard');
-        $this->layout()->setVariable('active_nav', 'admin');
-        $this->layout()->setVariable('sub_menu', 'admin');
-        $this->layout()->setVariable('sub_menu_options', \PM\Model\Options\Projects::status());
-        $this->layout()->setVariable('uri', $this->getRequest()
-            ->getRequestUri());
-        $this->layout()->setVariable('active_sub', 'roles');
-        return $e;
-    }
-
     /**
      * Main Page
      * 
@@ -51,7 +31,7 @@ class RolesController extends AbstractPmController
      */
     public function indexAction()
     {
-        $roles = $this->getServiceLocator()->get('Application\Model\Roles');
+        $roles = $this->getServiceLocator()->get('Application\Model\User\Roles');
         $view['roles'] = $roles->getAllRoles();
         $this->layout()->setVariable('sub_menu', 'admin');
         $this->layout()->setVariable('active_nav', 'admin');

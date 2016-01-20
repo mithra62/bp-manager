@@ -117,11 +117,13 @@ return array(
     'preferences_updated' => 'Preferences Updated',
     
     //general settings
+    'general_settings_header' => 'General Settings',
     'site_name' => 'Site Name',
     'site_url' => 'Site URL',
     'settings_updated' => 'Settings Updated',
     
     //mail settings
+    'mail_settings_header' => 'Mail Settings',
     'mail_reply_to_email' => 'Reply to Email',
     'mail_reply_to_name' => 'Reply to Name',
     'mail_sender_email' => 'Sender Email',
@@ -146,4 +148,28 @@ return array(
     'auto_verify' => 'Auto Verify Email',
     'user_added' => 'User Added',
     'user_updated' => 'User Updated',
+    
+    //ip locker
+	'ip_locker_disabled' => 'Ip Blocking Disabled!',
+    'enable_ip_locker_question' => 'Are you sure you want to enable the Ip Locker?',
+    'disable_ip_locker_question' => 'Are you sure you want to disable the Ip Locker?',
+	'ip_locker_enabled' => 'Ip Blocking Enabled!',
+	'ip_address_added' => 'IP Address Added!',
+	'ip_address_updated' => 'IP Address Updated!',
+	'cant_update_ip_address' => 'Couldn\'t update Ip Address...', 
+	'ip_locker_enabled_message' => 'The MojiTrac administrator has enabled IP restrictions, so only authorized people can access the site. In order to continue you\'ll need to contact the Administrator and have them allow your IP address.',
+	'ip_locker_enabled_allow_self_message' => 'The MojiTrac administrator has enabled IP restrictions, so only authorized people can access the site. In order to continue you\'ll need to verify your account ownership to allow requests from your location.',	
+	'ip_allow_verify_sent' => 'Email Sent! Check your email to continue.',
+	'ip_allow_bad_code' => 'Woops! Invalid code ya got there...',	
+	'ip_allow_code_access_sucess' => 'Your IP Address has been whitelisted!',
+	'cant_remove_own_ip' => 'You can\'t remove your current IP Address.',
+    'add_ip_address' => 'Add IP Address',
+    'view_ips' => 'View IP Addresses',
+    'ip_address' => 'IP Address',
+    'description' => 'Description',
+    'enable_ip_locker' => 'Enable IP Locker',
+    'disable_ip_locker' => 'Disable IP Locker',
+    'edit_ip_address' => 'Edit IP Address',
+    'view_ip_address' => 'View IP Address',
+    
 );

@@ -36,7 +36,7 @@ class ConfirmForm extends BaseForm
 			'name' => 'confirm',
 			'type' => 'Submit',
 			'attributes' => array(
-				'class' => 'submit',
+				'class' => 'btn btn-primary',
 				'id' => 'confirm',
 				'value' => 'Yes'
 			),
@@ -46,7 +46,7 @@ class ConfirmForm extends BaseForm
 			'name' => 'fail',
 			'type' => 'Submit',
 			'attributes' => array(
-				'class' => 'submit',
+				'class' => 'btn btn-primary',
 				'id' => 'fail',
 				'value' => 'No'
 			),

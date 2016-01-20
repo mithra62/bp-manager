@@ -197,7 +197,8 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Login' => 'Application\Controller\LoginController',
             'Application\Controller\Account' => 'Application\Controller\AccountController',
-            'Application\Controller\ForgotPassword' => 'Application\Controller\ForgotPasswordController'
+            'Application\Controller\ForgotPassword' => 'Application\Controller\ForgotPasswordController',
+            'Application\Controller\Ips' => 'Application\Controller\IpsController'
         )
     ),
     'view_manager' => array(

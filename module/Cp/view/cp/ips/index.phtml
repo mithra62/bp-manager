@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('admin', 'cp'); ?> <small><?php echo $this->_('settings', 'cp'); ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('cp/global/_sidebar'); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+       <?php echo $this->render('cp/settings/partials/_tabs'); ?>
+      <h2><?php echo $this->_('view_ips', 'app'); ?></h2>
+      
+	<?php if($this->ip_block_enabled != '1'):?>
+	<div class="alert alert-warning" role="alert">
+		IP Blocking isn't enabled. Click <a href="<?php echo $this->url('manage_ips/enable'); ?>" rel="facebox">here</a> to enable.
+	</div>
+	<?php else: ?>
+	<div class="alert alert-info" role="alert">
+		IP Blocking is enabled. Click <a href="<?php echo $this->url('manage_ips/enable'); ?>" rel="facebox">here</a> to disable.
+	</div>
+	<?php endif;?>      
+        <a class="btn btn-primary  pull-right" href="<?php echo $this->url('manage_ips/add'); ?>" role="button"><?php echo $this->glyphicon('plus'); ?> <?php echo $this->_('add_ip_address', 'app'); ?></a>
+        <br clear="all" />
+
+       
+<?php 
+
+if($this->ips):
+	$options = array('ips' => $this->ips, 'enable_actions' => 'yes', 'facebox' => 'yes');
+	echo $this->partial('partials/ips', $options); 
+
+else: 
+?>
+There aren't any ip addresses setup yet. Want to <a href="<?php echo $this->url('manage_ips/add'); ?>" rel="facebox">add</a> one?</div>
+
+<?php 
+endif; ?>        
+   
+        <?php echo $this->Pagination('manage_users', $this->total_pages, $this->page); ?>        
+
+              
+      </div>
+
+</div> 

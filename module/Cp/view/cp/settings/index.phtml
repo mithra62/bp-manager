@@ -7,7 +7,9 @@
             <?php echo $this->render('cp/global/_sidebar'); ?>
       </div>
       <div class="col-sm-9 col-md-9">
+      
         <?php echo $this->render('partials/_tabs'); ?>    
+        <h2><?php echo $this->_($section.'_settings_header', 'app'); ?></h2>
             
         <?php
         $form = $this->form;

@@ -1,0 +1,44 @@
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'ip_form');
+$form->setAttribute('action', $this->form_action);
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+<?php 
+if($this->id > 0)
+	echo '<input type="hidden" value="'.$this->id.'" name="id" />';
+?>
+    <div class="form-group">
+    	<label for="ip" class="control-label col-xs-3"><?php echo $this->_('ip_address', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $field = $form->get('ip');
+        echo $this->formRow($field);
+        ?>
+        </div>
+    </div>
+    
+    <div class="form-group">
+    	<label for="description" class="control-label col-xs-3"><?php echo $this->_('description', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $field = $form->get('description');
+        echo $this->formRow($field);
+        ?>
+        </div>
+    </div>    
+    <div class="form-group">
+    	<div class="col-xs-offset-2 col-xs-10">
+    	<?php if($this->id > 0): ?>
+    		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('edit_ip_address', 'app'); ?></button>
+        <?php else: ?>
+    		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('add_ip_address', 'app'); ?></button>
+        <?php endif; ?>
+    	</div>
+    </div>			
+
+<?php echo $this->ConfirmPageUnload('#ip_form')?>
+<?php echo $this->form()->closeTag() ?>

@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('admin', 'cp'); ?> <small><?php echo $this->_('settings', 'cp'); ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('cp/global/_sidebar'); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+       <?php echo $this->render('cp/settings/partials/_tabs'); ?>
+      <h2><?php echo $this->_('view_ip_address', 'app'); ?></h2>
+      
+      
+<div class="item_details">
+    <div class="items" style="padding-left:10px;">
+    	<p>
+    	   
+			<span class="bold">IP:</span> <?php echo $this->ip['ip_raw']; ?><br />
+			<span class="bold">Modified:</span> <?php echo $this->FormatDate($this->ip['last_modified']); ?><br />
+			<span class="bold">Created:</span> <?php echo $this->FormatDate($this->ip['created_date']); ?> 
+    	</p>
+    </div> 
+</div>
+
+<?php if( $this->ip['description'] != ''): ?>
+<br clear="all" />
+
+<h2>Description:</h2>
+<p>
+<?php echo nl2br($this->ip['description']); ?>      	
+</p>
+<?php endif;; ?>
+
+
+      </div>
+
+</div> 
+
+</div>

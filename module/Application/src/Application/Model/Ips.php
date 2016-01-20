@@ -7,10 +7,10 @@
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
  * @link		http://mojitrac.com/
  * @version		2.0
- * @filesource 	./module/PM/src/PM/Model/Ips.php
+ * @filesource 	./module/Application/src/Application/Model/Ips.php
  */
 
-namespace PM\Model;
+namespace Application\Model;
 
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
@@ -137,7 +137,6 @@ class Ips extends AbstractModel
 	public function getIpById($id)
 	{
 		$sql = $this->db->select()->from(array('ip'=>'ips'));
-		$sql = $sql->join(array('u' => 'users'), 'u.id = ip.creator', array('first_name', 'last_name'), 'left');
 		$sql = $sql->where(array('ip.id' => $id));
 		return $this->getRow($sql);
 	}
@@ -148,7 +147,7 @@ class Ips extends AbstractModel
 	 */
 	public function isAllowed($ip)
 	{
-		$sql = $this->db->select()->from(array('ip' => 'ips'))->columns( array('id'))->where(array('ip' => ip2long($ip), 'confirm_key' => ''));
+		$sql = $this->db->select()->from(array('ip' => 'ips'))->columns( array('id'))->where(array('ip' => ip2long($ip), 'confirm_key' => null));
 		$data = $this->getRow($sql);
 		return $data;
 	}
