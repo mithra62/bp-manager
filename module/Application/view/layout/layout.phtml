@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <?php echo $this->headMeta(); ?>
-<?php echo $this->headTitle($this->settings['site_name']); ?>
+<?php echo $this->headTitle($this->settings['site_name'])->setSeparator(' - '); ?>
 <?php //echo $this->headLink()->prependStylesheet('/css/site.css'); ?>
 <link rel="icon" href="<?php echo $this->StaticUrl(); ?>/favicon.ico"
 		type="image/x-icon">

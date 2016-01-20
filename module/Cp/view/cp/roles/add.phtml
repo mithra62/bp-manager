@@ -1,0 +1,25 @@
+<?php $this->headTitle()->append( $this->_('add_user_role', 'app') ); ?>
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('admin', 'cp'); ?> <small><?php echo $this->_('users', 'cp'); ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('cp/global/_sidebar'); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+       
+      <h2><?php echo $this->_('add_user_role', 'app'); ?></h2>
+
+      <?php echo $this->render('cp/users/partials/_tabs'); ?>  
+      
+      
+        <?php 
+        $options = array('form' => $this->form, 'addPassword' => FALSE, 'id' => $this->id, 'permissions' => $this->permissions);
+        echo $this->partial('partials/form', $options);
+        ?>
+
+      </div>
+
+    </div>
+</div>  

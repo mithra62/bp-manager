@@ -1,0 +1,41 @@
+<table class="table table-hover table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Added</th>
+			<th>Last Modified</th>
+			<?php if($this->enable_actions && $this->CheckPermission('manage_roles')):?>
+			<th>Actions</th>
+			<?php endif; ?>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php 
+		$i = 0;
+		foreach($this->roles as $role)
+		{
+ 
+			$role_link = array(
+							'id' => $role['id'], 
+							'name' => $role['name']
+			);		
+		?>
+		<tr>
+			<td><?php echo $role['name']; ?></td>
+			<td><?php echo ($role['description'] != '' ? $role['description'] : 'N/A'); ?></td>
+			<td><?php echo $this->FormatDate($role['created_date']); ?></td>
+			<td><?php echo $this->FormatDate($role['last_modified']); ?></td>
+			<?php if($this->enable_actions && $this->CheckPermission('manage_roles')):?>
+			<td>
+			<a href="<?php echo $this->url('manage_roles/edit', array('role_id'=>$role['id']), null, TRUE); ?>" title="Edit"><?php echo $this->glyphicon('pencil');?></a>
+			<a href="<?php echo $this->url('manage_roles/remove', array('role_id'=>$role['id']), null, TRUE); ?>" title="Delete" <?php echo ($this->facebox == 'yes' ? 'rel="facebox"' : ''); ?>><?php echo $this->glyphicon('remove');?></a>
+			</td>
+			<?php endif; ?>
+		</tr>
+		<?php 
+		}
+		?>
+	</tbody>
+</table>

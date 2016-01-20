@@ -264,10 +264,10 @@ class Module
                     return new UsersForm('user');
                 },
                 'Application\Form\RolesForm' => function ($sm) {
-                    return new RolesForm('roles', $sm->get('Application\Model\Roles'));
+                    return new RolesForm('roles', $sm->get('Application\Model\User\Roles'));
                 },
                 'Application\Form\User\RolesForm' => function ($sm) {
-                    return new UserRolesForm('roles', $sm->get('Application\Model\Roles'));
+                    return new UserRolesForm('roles', $sm->get('Application\Model\User\Roles'));
                 },
 				'Application\Form\ConfirmForm' => function($sm) {
 					return new ConfirmForm('confirm');

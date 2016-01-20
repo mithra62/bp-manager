@@ -33,8 +33,8 @@ class RolesController extends AbstractCpController
     {
         $roles = $this->getServiceLocator()->get('Application\Model\User\Roles');
         $view['roles'] = $roles->getAllRoles();
-        $this->layout()->setVariable('sub_menu', 'admin');
-        $this->layout()->setVariable('active_nav', 'admin');
+        $view['section'] = 'manage_roles';
+        $view['active_sidebar'] = 'manage_users';
         return $view;
     }
 
@@ -60,8 +60,8 @@ class RolesController extends AbstractCpController
         $view['role_permissions'] = $roles->getRolePermissions($id);
         $view['permissions'] = $roles->getAllPermissions();
         $view['id'] = $id;
-        $this->layout()->setVariable('sub_menu', 'admin');
-        $this->layout()->setVariable('active_nav', 'admin');
+        $view['section'] = 'manage_roles';
+        $view['active_sidebar'] = 'manage_users';
         return $view;
     }
 
@@ -115,9 +115,8 @@ class RolesController extends AbstractCpController
         }
         
         $view['form'] = $form;
-        $this->layout()->setVariable('layout_style', 'left');
-        $this->layout()->setVariable('sub_menu', 'admin');
-        $this->layout()->setVariable('active_nav', 'admin');
+        $view['section'] = 'manage_roles';
+        $view['active_sidebar'] = 'manage_users';
         return $view;
     }
 
@@ -128,7 +127,7 @@ class RolesController extends AbstractCpController
      */
     public function addAction()
     {
-        $role = $this->getServiceLocator()->get('Application\Model\Roles');
+        $role = $this->getServiceLocator()->get('Application\Model\User\Roles');
         $form = $this->getServiceLocator()->get('Application\Form\RolesForm');
         
         $view['permissions'] = $role->getAllPermissions();
@@ -160,9 +159,8 @@ class RolesController extends AbstractCpController
         }
         
         $view['form'] = $form;
-        $this->layout()->setVariable('layout_style', 'left');
-        $this->layout()->setVariable('sub_menu', 'admin');
-        $this->layout()->setVariable('active_nav', 'admin');
+        $view['section'] = 'manage_roles';
+        $view['active_sidebar'] = 'manage_users';
         
         return $view;
     }
@@ -209,6 +207,8 @@ class RolesController extends AbstractCpController
         
         $view['id'] = $id;
         $view['form'] = $form;
+        $view['section'] = 'manage_roles';
+        $view['active_sidebar'] = 'manage_users';
         return $this->ajaxOutput($view);
     }
 }

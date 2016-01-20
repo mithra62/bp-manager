@@ -149,6 +149,10 @@ return array(
     'user_added' => 'User Added',
     'user_updated' => 'User Updated',
     
+    //user role manage
+    'view_user_roles' => 'View User Roles',
+    'add_user_role' => 'Add User Role',
+    
     //ip locker
 	'ip_locker_disabled' => 'Ip Blocking Disabled!',
     'enable_ip_locker_question' => 'Are you sure you want to enable the Ip Locker?',

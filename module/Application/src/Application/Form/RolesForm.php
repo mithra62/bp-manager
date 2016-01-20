@@ -30,7 +30,7 @@ class RolesForm extends BaseForm
      * 
      * @param string $options            
      */
-    public function __construct($name, \Application\Model\Roles $roles)
+    public function __construct($name, \Application\Model\User\Roles $roles)
     {
         parent::__construct($name);
         

@@ -1,0 +1,37 @@
+<?php $this->headTitle()->append( $this->_('view_user_roles', 'app') ); ?>
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('admin', 'cp'); ?> <small><?php echo $this->_('users', 'cp'); ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('cp/global/_sidebar'); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+       
+      <h2><?php echo $this->_('view_user_roles', 'app'); ?></h2>
+      
+      <?php if($this->CheckPermission('manage_roles')):?>
+        <a class="btn btn-primary  pull-right" href="<?php echo $this->url('manage_roles/add'); ?>" role="button"><?php echo $this->glyphicon('plus'); ?> <?php echo $this->_('add_user_role', 'app'); ?></a>
+      <?php endif; ?>
+      <?php echo $this->render('cp/users/partials/_tabs'); ?>  
+		
+	
+<?php 
+if($this->roles):
+
+	$options = array('roles' => $this->roles, 'enable_actions' => 'yes', 'facebox' => 'yes');
+	echo $this->partial('partials/roles', $options);
+
+else: ?>
+
+<div class="information png_bg">There aren't roles added yet. Want to <a href="<?php echo $this->url('manage_roles', array('module' => 'pm','controller' => 'roles','action'=>'add'), null, TRUE); ?>">add</a> one?.</div>
+
+<?php endif; ?>
+
+
+              
+      </div>
+
+    </div>
+</div>  
