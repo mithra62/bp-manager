@@ -124,7 +124,7 @@ class Users extends AbstractModel
      * @param bool $confirm            
      * @return object
      */
-    public function getPasswordInputFilter($identity, \Application\Model\Hash $hash, $confirm = TRUE)
+    public function getPasswordInputFilter($identity, \Application\Model\Hash $hash, $confirm = TRUE, $translator)
     {
         if (! $this->passwordInputFilter) {
             $inputFilter = new InputFilter();
@@ -143,6 +143,15 @@ class Users extends AbstractModel
                         )
                     ),
                     'validators' => array(
+                        array(
+                            'name' =>'NotEmpty',
+                            'break_chain_on_failure' => true,
+                            'options' => array(
+                                'messages' => array(
+                                    'isEmpty' => $translator('required', 'app')
+                                ),
+                            ),
+                        ),  
                         array(
                             'name' => '\Application\Validate\Password\Match',
                             'options' => array(
@@ -168,10 +177,22 @@ class Users extends AbstractModel
                 ),
                 'validators' => array(
                     array(
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
+                    ),  
+                    array(
                         'name' => 'Identical',
                         'options' => array(
                             'token' => 'confirm_password',
-                            'strict' => FALSE
+                            'strict' => FALSE,
+                            'messages' => array(
+                                'notSame' => $translator('passwords_must_match', 'app')
+                            ),
                         )
                     )
                 )
@@ -187,6 +208,17 @@ class Users extends AbstractModel
                     array(
                         'name' => 'StringTrim'
                     )
+                ),
+                'validators' => array(
+                    array(
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
+                    )
                 )
             )));
             
@@ -201,7 +233,7 @@ class Users extends AbstractModel
      * 
      * @return object
      */
-    public function getRegistrationInputFilter()
+    public function getRegistrationInputFilter($translator)
     {
         if (! $this->registrationInputFilter) {
             
@@ -221,14 +253,32 @@ class Users extends AbstractModel
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'EmailAddress'
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
+                    ),                    
+                    array(
+                        'name' => 'EmailAddress',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'emailAddressInvalidFormat' => $translator('invalid_email_address', 'app')
+                            ),
+                        ),
                     ),
                     array(
                         'name' => 'Db\NoRecordExists',
                         'options' => array(
                             'table' => 'users',
                             'field' => 'email',
-                            'adapter' => $this->adapter
+                            'adapter' => $this->adapter,
+                            'messages' => array(
+                                'recordFound' => $translator('register_email_found', 'app')
+                            )
                         )
                     )
                 )
@@ -244,6 +294,17 @@ class Users extends AbstractModel
                     array(
                         'name' => 'StringTrim'
                     )
+                ),
+                'validators' => array(
+                    array(
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
+                    ),
                 )
             )));
             
@@ -260,10 +321,22 @@ class Users extends AbstractModel
                 ),
                 'validators' => array(
                     array(
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
+                    ),                    
+                    array(
                         'name' => 'Identical',
                         'options' => array(
                             'token' => 'password',
-                            'strict' => FALSE
+                            'strict' => FALSE,
+                            'messages' => array(
+                                'notSame' => $translator('passwords_must_match', 'app')
+                            ),
                         )
                     )
                 )
@@ -281,7 +354,7 @@ class Users extends AbstractModel
      * @param \Application\Model\Hash $hash
      * @return object
      */
-    public function getEmailInputFilter($identity, \Application\Model\Hash $hash)
+    public function getEmailInputFilter($identity, \Application\Model\Hash $hash, $translator)
     {
         if (! $this->emailInputFilter ) {
             $inputFilter = new InputFilter();
@@ -300,14 +373,32 @@ class Users extends AbstractModel
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'EmailAddress'
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
+                    ),                
+                    array(
+                        'name' => 'EmailAddress',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'emailAddressInvalidFormat' => $translator('invalid_email_address', 'app')
+                            ),
+                        ),
                     ),
                     array(
                         'name' => 'Db\NoRecordExists',
                         'options' => array(
                             'table' => 'users',
                             'field' => 'email',
-                            'adapter' => $this->adapter
+                            'adapter' => $this->adapter,
+                            'messages' => array(
+                                'recordFound' => $translator('register_email_found', 'app')
+                            )
                         )
                     )
                 )
@@ -325,6 +416,15 @@ class Users extends AbstractModel
                     )
                 ),
                 'validators' => array(
+                    array(
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
+                    ),  
                     array(
                         'name' => '\Application\Validate\Password\Match',
                         'options' => array(

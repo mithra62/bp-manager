@@ -54,8 +54,10 @@ class LoginController extends AbstractController
         if ($request->isPost()) {
             $user = $this->getServiceLocator()->get('Application\Model\Users');
             $login = $this->getServiceLocator()->get('Application\Model\User\Login');
+            $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('_');
+            
             $login->setAuthAdapter($this->getAdapter());
-            $form->setInputFilter($login->getInputFilter());
+            $form->setInputFilter($login->getInputFilter($translate));
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $data = $form->getData();

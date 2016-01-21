@@ -59,7 +59,7 @@ class ForgotPassword extends AbstractModel
      * @uses \Zend\InputFilter\InputFilter::add()
      * @return \Zend\InputFilter\InputFilter
      */
-    public function getInputFilter()
+    public function getInputFilter($translator)
     {
         if (! $this->inputFilter) {
             $inputFilter = new InputFilter();
@@ -77,15 +77,34 @@ class ForgotPassword extends AbstractModel
                     )
                 ),
                 'validators' => array(
+                    
                     array(
-                        'name' => 'EmailAddress'
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
+                    ),  
+                    array(
+                        'name' => 'EmailAddress',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'emailAddressInvalidFormat' => $translator('invalid_email_address', 'app')
+                            ),
+                        ),                        
                     ),
                     array(
                         'name' => 'Db\RecordExists',
                         'options' => array(
                             'table' => 'users',
                             'field' => 'email',
-                            'adapter' => $this->adapter
+                            'adapter' => $this->adapter,
+                            'messages' => array(
+                                'noRecordFound' => $translator('enter_registered_email', 'app')
+                            )                            
                         )
                     )
                 )

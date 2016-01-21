@@ -58,8 +58,9 @@ class AccountController extends AbstractController
             $user = $this->getServiceLocator()->get('Application\Model\Users');
             $hash = $this->getServiceLocator()->get('Application\Model\Hash');
             $roles = $this->getServiceLocator()->get('Application\Model\User\Roles');
+            $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('_');
             
-            $form->setInputFilter($user->getRegistrationInputFilter());
+            $form->setInputFilter($user->getRegistrationInputFilter($translate));
             $form->setData($formData);
             if ($form->isValid()) {
                 $data = $formData->toArray();
@@ -92,8 +93,9 @@ class AccountController extends AbstractController
 		$form = $form->confirmField();
 		$request = $this->getRequest();
         if ($request->isPost()) {
+            $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('_');
 			$formData = $this->getRequest()->getPost();
-			$form->setInputFilter($user->getPasswordInputFilter($this->getIdentity(), $hash));
+			$form->setInputFilter($user->getPasswordInputFilter($this->getIdentity(), $hash, true, $translate));
 			$form->setData($formData);
 			if ($form->isValid($formData)) {
 				if($user->changePassword($this->identity, $formData['new_password'])){
@@ -143,7 +145,8 @@ class AccountController extends AbstractController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $formData = $this->getRequest()->getPost();
-            $form->setInputFilter($user->getEmailInputFilter($this->identity, $hash));
+            $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('_');
+            $form->setInputFilter($user->getEmailInputFilter($this->identity, $hash, $translate));
             $form->setData($formData);
             if ($form->isValid($formData)) {
                 if($user->changeEmail($this->getIdentity(), $formData['new_email'])){

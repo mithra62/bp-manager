@@ -70,7 +70,7 @@ class Login extends AbstractModel
      * 
      * @return object
      */
-    public function getInputFilter()
+    public function getInputFilter($translator)
     {
         if (! $this->inputFilter) {
             $inputFilter = new InputFilter();
@@ -78,7 +78,7 @@ class Login extends AbstractModel
             
             $inputFilter->add($factory->createInput(array(
                 'name' => 'email',
-                'required' => true,
+                'required' => true,            
                 'filters' => array(
                     array(
                         'name' => 'StripTags'
@@ -88,15 +88,35 @@ class Login extends AbstractModel
                     )
                 ),
                 'validators' => array(
+                    
                     array(
-                        'name' => 'EmailAddress'
-                    ),
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
+                    ),  
+                    array(
+                        'name' => 'EmailAddress',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'emailAddressInvalidFormat' => $translator('invalid_email_address', 'app')
+                            ),
+                        ),
+                    ),                  
                     array(
                         'name' => 'Db\RecordExists',
+                        'break_chain_on_failure' => true,
                         'options' => array(
                             'table' => 'users',
                             'field' => 'email',
-                            'adapter' => $this->authAdapter
+                            'adapter' => $this->authAdapter,
+                            'messages' => array(
+                                'noRecordFound' => $translator('enter_registered_email', 'app')
+                            )
                         )
                     )
                 )
@@ -111,6 +131,18 @@ class Login extends AbstractModel
                     ),
                     array(
                         'name' => 'StringTrim'
+                    )
+                ),
+                'validators' => array(
+                    
+                    array(
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
                     )
                 )
             )));

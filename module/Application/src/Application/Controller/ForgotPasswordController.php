@@ -44,11 +44,12 @@ class ForgotPasswordController extends AbstractController
     {
         $fp = $this->getServiceLocator()->get('Application\Model\User\ForgotPassword');
         $form = $this->getServiceLocator()->get('Application\Model\ForgotPasswordForm');
+        $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('_');
         $request = $this->getRequest();
         
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
-            $form->setInputFilter($fp->getInputFilter());
+            $form->setInputFilter($fp->getInputFilter($translate));
             $form->setData($request->getPost());
             if ($form->isValid($formData)) {
                 $mail = $this->getServiceLocator()->get('Application\Model\Mail');

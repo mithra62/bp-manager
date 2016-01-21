@@ -176,4 +176,11 @@ return array(
     'edit_ip_address' => 'Edit IP Address',
     'view_ip_address' => 'View IP Address',
     
+    //form validation 
+    'required' => 'Required',
+    'invalid_email_address' => 'Please Enter a Valid Email Address',
+    'enter_registered_email' => 'Please Enter a Registered Email',
+    'register_email_found' => 'That Email is Already Registered',
+    'passwords_must_match' => 'Passwords Must Match',
+    
 );
