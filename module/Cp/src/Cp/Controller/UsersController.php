@@ -177,7 +177,9 @@ class UsersController extends AbstractCpController
         if ($request->isPost()) {
             
             $formData = $request->getPost();
-            $user_form->setInputFilter($user->getRegistrationInputFilter());
+            $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('_');
+            $inputFilter = $user->getRegistrationInputFilter($translate)->merge($user->getRolesInputFilter($translate));
+            $user_form->setInputFilter($inputFilter);
             $user_form->setData($request->getPost());
             if ($user_form->isValid($formData)) {
                 $user_id = $id = $user->addCpUser($formData->toArray(), $hash, $this->getServiceLocator()->get('Application\Model\Mail'));

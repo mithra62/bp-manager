@@ -148,7 +148,7 @@ class Users extends AbstractModel
                             'break_chain_on_failure' => true,
                             'options' => array(
                                 'messages' => array(
-                                    'isEmpty' => $translator('required', 'app')
+                                    'isEmpty' => $translator('old_password_required', 'app')
                                 ),
                             ),
                         ),  
@@ -181,7 +181,7 @@ class Users extends AbstractModel
                         'break_chain_on_failure' => true,
                         'options' => array(
                             'messages' => array(
-                                'isEmpty' => $translator('required', 'app')
+                                'isEmpty' => $translator('new_password_required', 'app')
                             ),
                         ),
                     ),  
@@ -215,7 +215,7 @@ class Users extends AbstractModel
                         'break_chain_on_failure' => true,
                         'options' => array(
                             'messages' => array(
-                                'isEmpty' => $translator('required', 'app')
+                                'isEmpty' => $translator('confirm_password_required', 'app')
                             ),
                         ),
                     )
@@ -257,7 +257,7 @@ class Users extends AbstractModel
                         'break_chain_on_failure' => true,
                         'options' => array(
                             'messages' => array(
-                                'isEmpty' => $translator('required', 'app')
+                                'isEmpty' => $translator('email_required', 'app')
                             ),
                         ),
                     ),                    
@@ -301,7 +301,7 @@ class Users extends AbstractModel
                         'break_chain_on_failure' => true,
                         'options' => array(
                             'messages' => array(
-                                'isEmpty' => $translator('required', 'app')
+                                'isEmpty' => $translator('password_required', 'app')
                             ),
                         ),
                     ),
@@ -325,7 +325,7 @@ class Users extends AbstractModel
                         'break_chain_on_failure' => true,
                         'options' => array(
                             'messages' => array(
-                                'isEmpty' => $translator('required', 'app')
+                                'isEmpty' => $translator('confirm_password_required', 'app')
                             ),
                         ),
                     ),                    
@@ -346,6 +346,42 @@ class Users extends AbstractModel
         }
         
         return $this->registrationInputFilter;
+    }
+    
+    public function getRolesInputFilter($translator)
+    {
+        if (! $this->rolesInputFilter) {
+            
+            $inputFilter = new InputFilter();
+            $factory = new InputFactory();            
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'user_roles',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StripTags'
+                    ),
+                    array(
+                        'name' => 'StringTrim'
+                    )
+                ),
+                'validators' => array(
+                    array(
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('required', 'app')
+                            ),
+                        ),
+                    )
+                )
+            )));
+            
+            $this->rolesInputFilter = $inputFilter;
+        }
+        
+        return $this->rolesInputFilter;
     }
     
     /**
@@ -377,7 +413,7 @@ class Users extends AbstractModel
                         'break_chain_on_failure' => true,
                         'options' => array(
                             'messages' => array(
-                                'isEmpty' => $translator('required', 'app')
+                                'isEmpty' => $translator('email_required', 'app')
                             ),
                         ),
                     ),                
@@ -421,7 +457,7 @@ class Users extends AbstractModel
                         'break_chain_on_failure' => true,
                         'options' => array(
                             'messages' => array(
-                                'isEmpty' => $translator('required', 'app')
+                                'isEmpty' => $translator('password_required', 'app')
                             ),
                         ),
                     ),  
@@ -440,37 +476,6 @@ class Users extends AbstractModel
         }
         
         return $this->emailInputFilter;
-    }
-
-    /**
-     * Returns the InputFilter for validation
-     * 
-     * @return object
-     */
-    public function getRolesInputFilter()
-    {
-        if (! $this->rolesInputFilter) {
-            
-            $inputFilter = new InputFilter();
-            $factory = new InputFactory();
-            
-            $inputFilter->add($factory->createInput(array(
-                'name' => 'user_roles',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StripTags'
-                    ),
-                    array(
-                        'name' => 'StringTrim'
-                    )
-                )
-            )));
-            
-            $this->rolesInputFilter = $inputFilter;
-        }
-        
-        return $this->rolesInputFilter;
     }
 
     /**

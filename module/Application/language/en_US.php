@@ -148,6 +148,7 @@ return array(
     'auto_verify' => 'Auto Verify Email',
     'user_added' => 'User Added',
     'user_updated' => 'User Updated',
+    'verified' => 'Verified',
     
     //user role manage
     'view_user_roles' => 'View User Roles',
@@ -178,9 +179,14 @@ return array(
     
     //form validation 
     'required' => 'Required',
-    'invalid_email_address' => 'Please Enter a Valid Email Address',
-    'enter_registered_email' => 'Please Enter a Registered Email',
-    'register_email_found' => 'That Email is Already Registered',
-    'passwords_must_match' => 'Passwords Must Match',
+    'email_required' => 'A valid email address is required',
+    'password_required' => 'A password is required',
+    'confirm_password_required' => 'You have to confirm your password',
+    'invalid_email_address' => 'Please enter a valid email address',
+    'enter_registered_email' => 'Please enter a registered email',
+    'register_email_found' => 'That email is already registered',
+    'passwords_must_match' => 'Passwords must match',
+    'new_password_required' => 'A new password is required',
+    'old_password_required' => 'Your old password is required',
     
 );

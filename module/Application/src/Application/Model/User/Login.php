@@ -94,7 +94,7 @@ class Login extends AbstractModel
                         'break_chain_on_failure' => true,
                         'options' => array(
                             'messages' => array(
-                                'isEmpty' => $translator('required', 'app')
+                                'isEmpty' => $translator('email_required', 'app')
                             ),
                         ),
                     ),  
@@ -140,7 +140,7 @@ class Login extends AbstractModel
                         'break_chain_on_failure' => true,
                         'options' => array(
                             'messages' => array(
-                                'isEmpty' => $translator('required', 'app')
+                                'isEmpty' => $translator('password_required', 'app')
                             ),
                         ),
                     )
