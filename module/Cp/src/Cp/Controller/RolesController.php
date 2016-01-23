@@ -47,13 +47,13 @@ class RolesController extends AbstractCpController
     {
         $id = $this->params()->fromRoute('role_id');
         if (! $id) {
-            return $this->redirect()->toRoute('roles');
+            return $this->redirect()->toRoute('manage_roles');
         }
         
-        $roles = $this->getServiceLocator()->get('Application\Model\Roles');
+        $roles = $this->getServiceLocator()->get('Application\Model\User\Roles');
         $view['role'] = $roles->getRoleById($id);
         if (! $view['role']) {
-            return $this->redirect()->toRoute('roles');
+            return $this->redirect()->toRoute('manage_roles');
         }
         
         $view['users'] = $roles->getUsersOnRole($id);
@@ -74,10 +74,10 @@ class RolesController extends AbstractCpController
     {
         $id = $this->params()->fromRoute('role_id');
         if (! $id) {
-            return $this->redirect()->toRoute('roles');
+            return $this->redirect()->toRoute('manage_roles');
         }
         
-        $role = $this->getServiceLocator()->get('Application\Model\Roles');
+        $role = $this->getServiceLocator()->get('Application\Model\User\Roles');
         $form = $this->getServiceLocator()->get('Application\Form\RolesForm');
         
         $role_data = $role->getRoleById($id);
@@ -94,20 +94,20 @@ class RolesController extends AbstractCpController
             if ($form->isValid($formData)) {
                 $formData = $formData->toArray();
                 if ($role->updateRole($formData, $formData['id'])) {
-                    $this->flashMessenger()->addMessage($this->translate('role_updated', 'pm'));
-                    return $this->redirect()->toRoute('roles/view', array(
+                    $this->flashMessenger()->addSuccessMessage($this->translate('role_updated', 'app'));
+                    return $this->redirect()->toRoute('manage_roles/view', array(
                         'role_id' => $id
                     ));
                 } else {
                     $view['errors'] = array(
-                        $this->translate('update_role_fail', 'pm')
+                        $this->translate('update_role_fail', 'app')
                     );
                     $this->layout()->setVariable('errors', $view['errors']);
                     $form->setData($formData);
                 }
             } else {
                 $view['errors'] = array(
-                    $this->translate('please_fix_the_errors_below', 'pm')
+                    $this->translate('please_fix_the_errors_below', 'app')
                 );
                 $this->layout()->setVariable('errors', $view['errors']);
                 $form->setData($formData);
@@ -140,19 +140,19 @@ class RolesController extends AbstractCpController
                 $formData = $formData->toArray();
                 $role_id = $id = $role->addRole($formData);
                 if ($role_id) {
-                    $this->flashMessenger()->addMessage($this->translate('role_added', 'pm'));
-                    return $this->redirect()->toRoute('roles/view', array(
+                    $this->flashMessenger()->addSuccessMessage($this->translate('role_added', 'app'));
+                    return $this->redirect()->toRoute('manage_roles/view', array(
                         'role_id' => $role_id
                     ));
                 } else {
                     $view['errors'] = array(
-                        $this->translate('something_went_wrong', 'pm')
+                        $this->translate('something_went_wrong', 'app')
                     );
                     $this->layout()->setVariable('errors', $view['errors']);
                 }
             } else {
                 $view['errors'] = array(
-                    $this->translate('please_fix_the_errors_below', 'pm')
+                    $this->translate('please_fix_the_errors_below', 'app')
                 );
                 $this->layout()->setVariable('errors', $view['errors']);
             }
@@ -167,11 +167,11 @@ class RolesController extends AbstractCpController
 
     public function removeAction()
     {
-        $role = $this->getServiceLocator()->get('Application\Model\Roles');
-        $form = $this->getServiceLocator()->get('PM\Form\ConfirmForm');
+        $role = $this->getServiceLocator()->get('Application\Model\User\Roles');
+        $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
         $id = $this->params()->fromRoute('role_id');
         if (! $id) {
-            return $this->redirect()->toRoute('roles');
+            return $this->redirect()->toRoute('manage_roles');
         }
         
         // don't allow deletion of the user or administrator permissions.
@@ -183,7 +183,7 @@ class RolesController extends AbstractCpController
         
         $view['role'] = $role->getRoleById($id);
         if (! $view['role']) {
-            return $this->redirect()->toRoute('roles');
+            return $this->redirect()->toRoute('manage_roles');
         }
         
         $request = $this->getRequest();
@@ -193,14 +193,14 @@ class RolesController extends AbstractCpController
             if ($form->isValid($formData)) {
                 $formData = $formData->toArray();
                 if (! empty($formData['fail'])) {
-                    return $this->redirect()->toRoute('roles/view', array(
+                    return $this->redirect()->toRoute('manage_roles/view', array(
                         'role_id' => $id
                     ));
                 }
                 
                 if ($role->removeRole($id)) {
-                    $this->flashMessenger()->addMessage($this->translate('role_removed', 'pm'));
-                    return $this->redirect()->toRoute('roles');
+                    $this->flashMessenger()->addSuccessMessage($this->translate('role_removed', 'app'));
+                    return $this->redirect()->toRoute('manage_roles');
                 }
             }
         }

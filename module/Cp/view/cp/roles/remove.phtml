@@ -1,26 +1,32 @@
-<div class="content_headers" style="padding-top:0px;">
-	<div class="user_role_header"><?php echo $this->_('remove_user_role', 'pm'); ?></div>	
-</div>
+<?php $this->headTitle()->append( $this->_('delete_user', 'app') )->append( $this->_('admin', 'app') ); ?>
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('admin', 'cp'); ?> <small><?php echo $this->_('users', 'cp'); ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('cp/global/_sidebar'); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+      <h2><?php echo $this->_('delete_user_role', 'app'); ?></h2>
+        <a class="btn btn-primary  pull-right" href="<?php echo $this->url('manage_users/add'); ?>" role="button"><?php echo $this->glyphicon('plus'); ?> <?php echo $this->_('add_user', 'app'); ?></a>
+      <?php echo $this->render('cp/users/partials/_tabs'); ?> 
 
-<?php if($this->deny_remove): ?>
-<div class="fail png_bg"><?php echo $this->_('cant_remove_role', 'pm'); ?></div>
-<?php else: ?>
-
-<div class="attention png_bg">
-Are you sure you want to remove the "<?php echo $this->role['name']?>" role? This can not be undone...
-</div>
-<p>
 <?php 
 $form = $this->form;
 $form->setAttribute('id', 'user_form');
-$form->setAttribute('action', $this->url('roles/remove', array('role_id' => $this->role['id'])));
 $form->prepare();
 echo $this->form()->openTag($form);
 $csrf = $form->get('_x');
 echo $this->formRow($csrf);
-?>
-	<?php $field = $form->get('confirm'); echo $this->formRow($field); ?> <?php $field = $form->get('fail'); echo $this->formRow($field); ?>
-<?php echo $this->form()->closeTag() ?>
-</p>
 
-<?php endif; ?>
+$url = $this->url('manage_roles/view', array('role_id' => $role['id']));
+echo sprintf($this->_('remove_role_question', 'app'), $role['name'], $url);
+?>
+<br clear="all" /><br clear="all" />
+<input type="submit" class="btn btn-primary" value="<?php echo $this->_('delete_user_role', 'app'); ?>" />
+<?php echo $this->form()->closeTag() ?> 
+      </div>
+
+    </div>
+</div> 

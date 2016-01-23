@@ -8,29 +8,43 @@ echo $this->formRow($csrf);
 	if($this->id > 0)
 		echo '<input type="hidden" value="'.$this->id.'" name="id" />';
 ?>	
+    <div class="form-group">
+    	<label for="name" class="control-label col-xs-3"><?php echo $this->_('name', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $field = $form->get('name');
+        echo $this->formRow($field);
+        ?>
+        </div>
+    </div>
+    
 
+    <div class="form-group">
+    	<label for="description" class="control-label col-xs-3"><?php echo $this->_('description', 'app'); ?></label>
+    	<div class="col-xs-9">
+        <?php
+        $field = $form->get('description');
+        echo $this->formRow($field);
+        ?>
+        </div>
+    </div>    			
 		
-		<p>
-			<label for="name">Name</label>
-			<?php $field = $form->get('name'); echo $this->formRow($field); ?>
-		</p>
-		
-		<p>
-			<label for="description">Description</label>
-			<?php $field = $form->get('description'); echo $this->formRow($field); ?>
-		</p>			
-		
-	
+    <div class="form-group">
+    	<div class="col-xs-9 col-xs-offset-3">	
 	<?php foreach($this->permissions AS $perm): ?>
 		<p>
-			<label for="<?php echo $perm['name']; ?>"><?php $field = $form->get($perm['name']); echo $this->formRow($field); ?> <?php echo $this->_('permission_'.$perm['name'], 'pm'); ?></label>
+			<label for="<?php echo $perm['name']; ?>"><?php $field = $form->get($perm['name']); echo $this->formRow($field); ?> <?php echo $this->_('permission_'.$perm['name'], 'app'); ?></label>
 			
 		</p>
 	<?php endforeach; ?>
+        </div>
+    </div> 
 		
-		<p>
-			<input type="submit" class="submit" value="Submit" />
-		</p>			
+    <div class="form-group">
+    	<div class="col-xs-offset-2 col-xs-10">
+    		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('add_user_role', 'app'); ?></button>
+    	</div>
+    </div>		
 
 <?php echo $this->ConfirmPageUnload('#role_form')?>
 <?php echo $this->form()->closeTag() ?>

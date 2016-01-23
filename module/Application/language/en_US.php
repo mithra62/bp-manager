@@ -45,6 +45,8 @@ return array(
     'register' => 'Register',
     'login' => 'Login',
     'settings' => 'Settings',
+    'name' => 'Name',
+    'description' => 'Description',
     
     // forgot password
     'forgot_password' => 'Forgot Password',
@@ -153,6 +155,11 @@ return array(
     //user role manage
     'view_user_roles' => 'View User Roles',
     'add_user_role' => 'Add User Role',
+    'delete_user_role' => 'Delete User Role',
+    'role_removed' => 'Role Removed',
+    'role_added' => 'Role Added',
+    'role_removed' => 'Role Removed',
+    'remove_role_question' => 'Are you sure you want to remove the user role <a href="%2$s">%1$s</a>? This can not be undone...',
     
     //ip locker
 	'ip_locker_disabled' => 'Ip Blocking Disabled!',
@@ -188,5 +195,14 @@ return array(
     'passwords_must_match' => 'Passwords must match',
     'new_password_required' => 'A new password is required',
     'old_password_required' => 'Your old password is required',
+
+    //user role permissions
+    'permission_admin_access' => 'Can the user access the admin area? Required for all admin modules.',
+    'permission_manage_ips' => 'Can the user manage allowable IP addresses?',
+    'permission_manage_roles' => 'Can the user manage user roles and permissions?',
+    'permission_manage_users' => 'Can the user manage other users?',
+    'permission_view_users_data' => 'Can the user view other users data?',
+    'permission_access_rest_api' => 'Can the user access the REST API?',
+    'permission_self_allow_ip' => 'Can the user allow their own IP Address?',
     
 );
