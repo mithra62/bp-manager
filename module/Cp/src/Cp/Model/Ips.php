@@ -9,7 +9,7 @@
  * @version		2.0
  * @filesource 	./module/PM/src/PM/Model/Ips.php
  */
-namespace PM\Model;
+namespace Cp\Model;
 
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;

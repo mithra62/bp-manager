@@ -2,16 +2,64 @@
 return array(
     'router' => array(
         'routes' => array(
-            'sites' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/sites',
-                    'defaults' => array(
-                        'controller' => 'Sites\Controller\Index',
-                        'action' => 'index'
-                    )
-                )
-            ),
+            'sites' => array( //User Routes
+        		'type' => 'segment',
+        		'options' => array(
+        			'route' => '/sites',
+        			'defaults' => array(
+        				'controller' => 'Sites\Controller\Index',
+        				'action' => 'index'
+        			),
+        		),
+        		'may_terminate' => true,
+        		'child_routes' => array(
+        			'view' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/[:user_id]',
+        					'constraints' => array(
+        						'user_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'view'
+        					)
+        				)
+        			),
+        			'remove' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/remove/:user_id',
+        					'constraints' => array(
+        						'user_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'remove'
+        					)
+        				)
+        			),
+        			'add' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/add',
+        					'defaults' => array(
+        						'action' => 'add'
+        					)
+        				)
+        			),
+        			'edit' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/edit[/:user_id]',
+        					'constraints' => array(
+        						'user_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'edit'
+        					)
+        				)
+        			)
+        		)
+        	), //End User Routes 
         )
 
     ),

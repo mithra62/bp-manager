@@ -95,9 +95,7 @@ class RolesController extends AbstractCpController
                 $formData = $formData->toArray();
                 if ($role->updateRole($formData, $formData['id'])) {
                     $this->flashMessenger()->addSuccessMessage($this->translate('role_updated', 'app'));
-                    return $this->redirect()->toRoute('manage_roles/view', array(
-                        'role_id' => $id
-                    ));
+                    return $this->redirect()->toRoute('manage_roles');
                 } else {
                     $view['errors'] = array(
                         $this->translate('update_role_fail', 'app')

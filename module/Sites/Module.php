@@ -1,6 +1,8 @@
 <?php
 namespace Sites;
 
+use Sites\Model\Sites;
+
 class Module
 {
     public function getConfig()
@@ -18,4 +20,20 @@ class Module
             ),
         );
     }
+    
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+    
+                // setting up the Authentication stuff
+                'Sites\Model\Sites' => function ($sm) {
+                    $adapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $db = $sm->get('SqlObject');
+                    
+                    return new Sites($adapter, $db, $roles, $ud);
+                },
+            )
+        );
+    }  
 }

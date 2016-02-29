@@ -68,6 +68,11 @@ body {
                 <li class="<?php echo ($this->active_nav == 'admin' ? 'active' : ''); ?>"><a href="<?php echo $this->url('cp');?>"><?php echo $this->_('admin', 'app'); ?></a></li>
             </ul>
             <?php endif; ?>
+			<?php if( $this->CheckPermission('view_sites') ): ?>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="<?php echo ($this->active_nav == 'sites' ? 'active' : ''); ?>"><a href="<?php echo $this->url('sites');?>"><?php echo $this->_('sites', 'app'); ?></a></li>
+            </ul>
+            <?php endif; ?>
 		</div>
 		<!--/.nav-collapse -->
 	</div>

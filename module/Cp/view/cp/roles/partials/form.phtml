@@ -42,7 +42,7 @@ echo $this->formRow($csrf);
 		
     <div class="form-group">
     	<div class="col-xs-offset-2 col-xs-10">
-    		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('add_user_role', 'app'); ?></button>
+    		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo ($this->id ? $this->_('edit_user_role', 'app') : $this->_('add_user_role', 'app')); ?></button>
     	</div>
     </div>		
 

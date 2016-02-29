@@ -159,6 +159,8 @@ return array(
     'role_removed' => 'Role Removed',
     'role_added' => 'Role Added',
     'role_removed' => 'Role Removed',
+    'edit_user_role' => 'Edit User Role',
+    'role_updated' => 'Role Updated',
     'remove_role_question' => 'Are you sure you want to remove the user role <a href="%2$s">%1$s</a>? This can not be undone...',
     
     //ip locker
