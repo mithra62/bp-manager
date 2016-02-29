@@ -9,22 +9,22 @@ return array(
     'modules' => array(
         'Base',
         'Application',
+        'Sites',
         'Cp',
         'Api',
-        // 'HostManager',
         'ZF\\ApiProblem',
         'BjyProfiler',
         'ZendDeveloperTools',
         'ZfSimpleMigrations',
-        'TwbBundle'
+        'TwbBundle',
     ),
     'module_listener_options' => array(
         'module_paths' => array(
             './module',
-            './vendor'
+            './vendor',
         ),
         'config_glob_paths' => array(
-            'config/autoload/{,*.}{global,local}.php'
-        )
-    )
+            'config/autoload/{,*.}{global,local}.php',
+        ),
+    ),
 );
