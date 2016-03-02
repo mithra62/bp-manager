@@ -1,11 +1,11 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
  * @link		http://mojitrac.com/
- * @version		2.0
+ * @version		1.0
  * @filesource 	./module/Cp/src/Cp/Controller/UsersController.php
  */
 namespace Cp\Controller;

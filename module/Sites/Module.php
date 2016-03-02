@@ -3,6 +3,8 @@ namespace Sites;
 
 use Sites\Model\Sites;
 
+use Sites\Form\SiteForm;
+
 class Module
 {
     public function getConfig()
@@ -31,8 +33,11 @@ class Module
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
                     
-                    return new Sites($adapter, $db, $roles, $ud);
+                    return new Sites($adapter, $db);
                 },
+				'Sites\Form\SiteForm' => function($sm) {
+					return new SiteForm('site_form');
+				},
             )
         );
     }  

@@ -1,1 +1,45 @@
-<?php
+<?php $this->headTitle()->append( $this->_('email_settings', 'app') )->append( $this->_('account', 'app') ); ?>
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('account', 'app'); ?> <small><?php echo $this->_('email_settings', 'app'); ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('partials/_sidebar'); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+
+
+        <?php
+        $form = $this->form;
+        $form->setAttribute('id', 'registerForm');
+        $form->setAttribute('class', 'form-horizontal');
+        $form->prepare();
+        
+        echo $this->form()->openTag($form);
+        $csrf = $form->get('_x');
+        echo $this->formRow($csrf);
+        ?>     
+        
+        <div class="form-group">
+        	<label for="new_email" class="control-label col-xs-3"><?php echo $this->_('api_endpoint_url', 'app'); ?></label>
+        	<div class="col-xs-9">
+                <?php
+                $email = $form->get('api_endpoint_url');
+                echo $this->formRow($email);
+                
+                ?>
+            </div>
+        </div>
+        
+        <div class="form-group">
+        	<div class="col-xs-offset-2 col-xs-10">
+        		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('change_email', 'app'); ?></button>
+        	</div>
+        </div>      
+      
+      
+      </div>
+
+    </div>
+</div>    
