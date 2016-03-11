@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -20,7 +20,7 @@ use Base\Traits\Controller as ControllerTrait;
  * Contains all the global logic for Controllers
  * <br /><strong>The Base Controller should be the parent of any Controllers within the system</strong>
  *
- * @package MojiTrac\Controller
+ * @package BackupProServer\Controller
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/Base/src/Base/Controller/BaseController.php
  */

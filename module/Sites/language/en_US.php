@@ -14,5 +14,14 @@
 return array(
     'site_required_to_begin' => 'You must have at least 1 site configured to continue...',
     'sites' => 'Sites',
+    'add_site' => 'Add Site',
+    
+    'api_endpoint_url' => 'API Endpoint URL',
+    'api_key' => 'API Key',
+    'api_secret' => 'API Secret',
+    
+    'api_endpoint_url_required' => 'An API Endpoint URL is required',
+    'api_key_required' => 'An API Key is required',
+    'api_secret_required' => 'An API Secret is required',
 )
 ;

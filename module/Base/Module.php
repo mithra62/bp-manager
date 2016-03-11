@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -16,7 +16,7 @@ namespace Base;
  * Sets up all the global configuration data and focuses on Translations.
  * <br /><strong>Note that nothing in here should be considered callable</strong>
  *
- * @package MojiTrac
+ * @package BackupProServer
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/Base/Module.php
  */

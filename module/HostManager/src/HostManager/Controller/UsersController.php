@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
  * @link		http://mojitrac.com/

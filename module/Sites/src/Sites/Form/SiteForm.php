@@ -43,5 +43,23 @@ class SiteForm extends BaseForm
                 'id' => 'api_endpoint_url'
             )
         ));
+
+        $this->add(array(
+            'name' => 'api_key',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'api_key'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'api_secret',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'api_secret'
+            )
+        ));
     }
 }

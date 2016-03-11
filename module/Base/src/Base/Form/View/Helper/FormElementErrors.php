@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -17,7 +17,7 @@ use Zend\Form\View\Helper\FormElementErrors as OriginalFormElementErrors;
  *
  * Sets the styling to use for ZF form errors
  *
- * @package MojiTrac\Form\ElementErrors
+ * @package BackupProServer\Form\ElementErrors
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/Base/src/Base/Form/View/Helper/FormElementErrors.php
  */

@@ -52,7 +52,7 @@ class IndexController extends AbstractSitesController
             
             $formData = $request->getPost();
             $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('_');
-            $inputFilter = $site->getRegistrationInputFilter($translate)->merge($user->getRolesInputFilter($translate));
+            $inputFilter = $site->getInputFilter($translate);
             $site_form->setInputFilter($inputFilter);
             $site_form->setData($request->getPost());
             if ($site_form->isValid($formData)) {

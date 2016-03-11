@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -17,7 +17,7 @@ use Application\Controller\AbstractController;
  *
  * Just placeholder and redirect
  *
- * @package MojiTrac
+ * @package BackupProServer
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/Application/src/Application/Controller/IndexController.php
  */

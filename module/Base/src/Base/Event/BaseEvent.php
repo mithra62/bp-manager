@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -18,7 +18,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Contains all the global logic for Events
  * <br /><strong>The Base Event should be the parent of any Events within the system</strong>
  *
- * @package MojiTrac\Events
+ * @package BackupProServer\Events
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/Base/src/Base/Event/BaseEvent.php
  */

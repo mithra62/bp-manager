@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -18,7 +18,7 @@ namespace Base\Model;
  * 
  * @see \PM\Model\Settings for an example</strong>
  *     
- * @package MojiTrac\Model
+ * @package BackupProServer\Model
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/Base/src/Base/Model/KeyValue.php
  */

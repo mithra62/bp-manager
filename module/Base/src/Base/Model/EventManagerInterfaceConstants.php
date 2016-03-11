@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -17,7 +17,7 @@ use Zend\EventManager\EventManagerAwareInterface;
  *
  * Contains all the Event Hook Names used within the Moji Models
  *
- * @package MojiTrac\Model
+ * @package BackupProServer\Model
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/Base/src/Base/Model/EventManagerInterfaceConstants.php
  */

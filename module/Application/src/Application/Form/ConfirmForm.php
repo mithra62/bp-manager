@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
 *
 * @package		mithra62:Mojitrac
 * @author		Eric Lamb

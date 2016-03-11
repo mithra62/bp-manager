@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -50,7 +50,7 @@ use Application\Event\NotificationEvent;
 /**
  * Application - Module Loader
  *
- * @package MojiTrac
+ * @package BackupProServer
  * @author Eric Lamb
  * @filesource ./module/Application/Module.php
  */

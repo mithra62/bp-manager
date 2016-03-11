@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
  * @link		http://mojitrac.com/
@@ -20,7 +20,7 @@ use DateTime;
  * if database access and/or Event interactivity is required.
  * <br /><strong>Note that if a key => value style interface is needed, use the KeyValue Model instead (it extends BaseModel).</strong>
  *
- * @package MojiTrac\Model
+ * @package BackupProServer\Model
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/Base/src/Base/Model/BaseModel.php
  */

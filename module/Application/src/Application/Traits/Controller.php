@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -15,7 +15,7 @@ namespace Application\Traits;
  *
  * Contains the global goodies for the PM module
  *
- * @package MojiTrac\Traits
+ * @package BackupProServer\Traits
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/PM/src/PM/Traits/Controller.php
  */

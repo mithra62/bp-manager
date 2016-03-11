@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
@@ -21,7 +21,7 @@ use DateTime, IntlDateFormatter, DateInterval;
  * Contains all the global logic for ViewHelpers
  * <br /><strong>The Base View Helper should be the parent of any ViewHelpers within the system</strong>
  *
- * @package MojiTrac\ViewHelper
+ * @package BackupProServer\ViewHelper
  * @author Eric Lamb <eric@mithra62.com>
  * @filesource ./module/Base/src/Base/View//Helper/BaseViewHelper.php
  */

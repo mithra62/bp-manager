@@ -1,6 +1,6 @@
 <?php
 /**
- * mithra62 - MojiTrac
+ * mithra62 - Backup Pro Server
  *
  * @package		mithra62:Mojitrac
  * @author		Eric Lamb
@@ -42,6 +42,96 @@ class Sites extends AbstractModel
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
+    }
+    
+    public function getInputFilter($translator)
+    {
+        if (! $this->inputFilter) {
+            $inputFilter = new InputFilter();
+            $factory = new InputFactory();
+        
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'api_endpoint_url',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StripTags'
+                    ),
+                    array(
+                        'name' => 'StringTrim'
+                    )
+                ),
+                'validators' => array(
+                    array(
+                        'name' => '\Zend\Validator\Hostname',
+                        'options' => array(
+                            'allow' => \Zend\Validator\Hostname::ALLOW_IP
+                        )
+                    ),
+                    array(
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('api_endpoint_url_required', 'sites')
+                            ),
+                        ),
+                    ),
+                )
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'api_key',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StripTags'
+                    ),
+                    array(
+                        'name' => 'StringTrim'
+                    )
+                ),
+                'validators' => array(
+                    array(
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('api_key_required', 'sites')
+                            ),
+                        ),
+                    ),
+                )
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'api_secret',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StripTags'
+                    ),
+                    array(
+                        'name' => 'StringTrim'
+                    )
+                ),
+                'validators' => array(
+                    array(
+                        'name' =>'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options' => array(
+                            'messages' => array(
+                                'isEmpty' => $translator('api_secret_required', 'sites')
+                            ),
+                        ),
+                    ),
+                )
+            )));
+        
+            $this->inputFilter = $inputFilter;
+        }
+        
+        return $this->inputFilter;
     }
     
     /**
