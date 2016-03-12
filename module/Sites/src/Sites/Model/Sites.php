@@ -39,12 +39,22 @@ class Sites extends AbstractModel
         parent::__construct($adapter, $db);
     }
 
+    /**
+     * Sets the input filter
+     * @param InputFilterInterface $inputFilter
+     * @throws \Exception
+     */
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
     }
     
-    public function getInputFilter($translator)
+    /**
+     * Returns an instance of the input filter
+     * @param \Zend\I18n\View\Helper\Translate $translator
+     * @return \Zend\InputFilter\InputFilter
+     */
+    public function getInputFilter(\Zend\I18n\View\Helper\Translate $translator)
     {
         if (! $this->inputFilter) {
             $inputFilter = new InputFilter();
@@ -100,7 +110,13 @@ class Sites extends AbstractModel
                                 'isEmpty' => $translator('api_key_required', 'sites')
                             ),
                         ),
-                    ),
+                    ), 
+                    array(
+                        'name' => '\Sites\Validate\Site\Connect',
+                        'options' => array(
+                            'site' => $this,
+                        )
+                    )
                 )
             )));
 
