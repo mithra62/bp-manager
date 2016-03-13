@@ -73,12 +73,6 @@ class Sites extends AbstractModel
                 ),
                 'validators' => array(
                     array(
-                        'name' => '\Zend\Validator\Hostname',
-                        'options' => array(
-                            'allow' => \Zend\Validator\Hostname::ALLOW_IP
-                        )
-                    ),
-                    array(
                         'name' =>'NotEmpty',
                         'break_chain_on_failure' => true,
                         'options' => array(
