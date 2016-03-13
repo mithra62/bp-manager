@@ -10,8 +10,6 @@
  */
 namespace Sites\Validate\Site;
 
-require_once 'D:\ProjectFiles\mithra62\product-dev\backup-pro-rest-client\vendor\autoload.php';
-
 use Zend\Validator\AbstractValidator;
 use \mithra62\BpApiClient\Client;
 use \mithra62\BpApiClient\ApiProblem;
