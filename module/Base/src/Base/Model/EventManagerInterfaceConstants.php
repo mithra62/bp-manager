@@ -93,4 +93,7 @@ interface EventManagerInterfaceConstants extends EventManagerAwareInterface
     const EventDbRemovePre = 'db.remove.pre';
 
     const EventDbRemovePost = 'db.remove.post';
+    
+    const EventSiteAddPre = 'site.insert.pre';
+    const EventSiteAddPost = 'site.insert.post';
 }

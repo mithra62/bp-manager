@@ -25,7 +25,7 @@ abstract class AbstractModel extends BaseModel
 {
 
     /**
-     * Moji Abstract Model
+     * Abstract Model
      * 
      * @param \Zend\Db\Adapter\Adapter $adapter            
      * @param \Zend\Db\Sql\Sql $sql            

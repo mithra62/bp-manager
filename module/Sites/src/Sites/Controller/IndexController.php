@@ -34,6 +34,9 @@ class IndexController extends AbstractSitesController
             'total_pages' => $users->total_pages,
             'total_results' => $users->total_results
         );
+        
+        $view['section'] = 'view_sites';
+        $view['active_sidebar'] = 'manage_sites';
         return $view;
     }
     
@@ -45,6 +48,7 @@ class IndexController extends AbstractSitesController
         
         $site = $this->getServiceLocator()->get('Sites\Model\Sites');
         $site_form = $this->getServiceLocator()->get('Sites\Form\SiteForm');
+        $hash = $this->getServiceLocator()->get('Application\Model\Hash');
         
         $view['form'] = $site_form;
         $request = $this->getRequest();
@@ -56,11 +60,11 @@ class IndexController extends AbstractSitesController
             $site_form->setInputFilter($inputFilter);
             $site_form->setData($request->getPost());
             if ($site_form->isValid($formData)) {
-                $user_id = $id = $site->addCpUser($formData->toArray(), $hash, $this->getServiceLocator()->get('Application\Model\Mail'));
-                if ($user_id) {
-                    $this->flashMessenger()->addSuccessMessage($this->translate('user_added', 'app'));
-                    return $this->redirect()->toRoute('manage_users/view', array(
-                        'user_id' => $id
+                $site_id = $id = $site->addSite($formData->toArray(), $hash);
+                if ($site_id) {
+                    $this->flashMessenger()->addSuccessMessage($this->translate('site_added', 'sites'));
+                    return $this->redirect()->toRoute('sites/view', array(
+                        'site_id' => $id
                     ));
                 } else {
                     $view['errors'] = array(
@@ -78,10 +82,14 @@ class IndexController extends AbstractSitesController
         }
         
         $view['section'] = 'view_sites';
-        $view['active_sidebar'] = 'manage_users';
+        $view['active_sidebar'] = 'manage_sites';
         return $view;
     }
 
+    public function viewAction()
+    {
+        
+    }
 
 }
 

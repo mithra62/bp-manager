@@ -15,6 +15,12 @@ return array(
     'site_required_to_begin' => 'You must have at least 1 site configured to continue...',
     'sites' => 'Sites',
     'add_site' => 'Add Site',
+    'edit_site' => 'Edit Site',
+    'view_site' => 'View Site',
+    'remove_site' => 'Remove Site',
+    'site_added' => 'Site Added',
+    'manage_sites' => 'Manage Sites',
+    'existing_sites' => 'Existing Sites',
     
     'api_endpoint_url' => 'API Endpoint URL',
     'api_key' => 'API Key',

@@ -16,7 +16,7 @@ return array(
         			'view' => array(
         				'type' => 'segment',
         				'options' => array(
-        					'route' => '/[:user_id]',
+        					'route' => '/[:site_id]',
         					'constraints' => array(
         						'user_id' => '[0-9]+'
         					),
@@ -28,7 +28,7 @@ return array(
         			'remove' => array(
         				'type' => 'segment',
         				'options' => array(
-        					'route' => '/remove/:user_id',
+        					'route' => '/remove/:site_id',
         					'constraints' => array(
         						'user_id' => '[0-9]+'
         					),
@@ -49,7 +49,7 @@ return array(
         			'edit' => array(
         				'type' => 'segment',
         				'options' => array(
-        					'route' => '/edit[/:user_id]',
+        					'route' => '/edit/:site_id',
         					'constraints' => array(
         						'user_id' => '[0-9]+'
         					),

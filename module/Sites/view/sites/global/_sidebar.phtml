@@ -1,0 +1,6 @@
+<div class="list-group">
+    <a class="list-group-item <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>"><?php echo $this->_('manage_sites', 'sites'); ?></a>   
+    
+    
+    <a class="list-group-item <?php echo ($this->active_sidebar == 'system_settings' ? 'active' : ''); ?>" href="<?php echo $this->url('system_settings'); ?>"><?php echo $this->_('settings', 'app'); ?></a>
+</div>

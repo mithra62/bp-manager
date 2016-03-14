@@ -2,11 +2,10 @@
 /**
  * mithra62 - Backup Pro Server
  *
- * @package		mithra62:Mojitrac
  * @author		Eric Lamb
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
  * @link		http://mojitrac.com/
- * @version		2.0
+ * @version		1.0
  * @filesource 	./module/Sites/src/Sites/Model/Sites.php
  */
 namespace Sites\Model;
@@ -27,6 +26,8 @@ class Sites extends AbstractModel
 {
 
     protected $inputFilter;
+    
+    protected $api = null;
 
     /**
      * The Sites Model
@@ -37,6 +38,45 @@ class Sites extends AbstractModel
     public function __construct(\Zend\Db\Adapter\Adapter $adapter, \Zend\Db\Sql\Sql $db)
     {
         parent::__construct($adapter, $db);
+    }
+    
+    /**
+     * Returns an array for modifying $_name
+     *
+     * @param
+     *            $data
+     * @return array
+     */
+    public function getSQL($data)
+    {
+        return array(
+            'api_endpoint_url' => (! empty($data['api_endpoint_url']) ? $data['api_endpoint_url'] : ''),
+            'site_name' => (! empty($data['site_name']) ? $data['site_name'] : ''),
+            'platform' => (! empty($data['platform']) ? $data['platform'] : ''),
+            'api_key' => (! empty($data['api_key']) ? $data['api_key'] : ''),
+            'api_secret' => (! empty($data['api_secret']) ? $data['api_secret'] : ''),
+            'last_modified' => new \Zend\Db\Sql\Expression('NOW()')
+        );
+    }
+    
+    /**
+     * Sets the API object
+     * @param Api $api
+     * @return \Sites\Model\Sites
+     */
+    public function setApi(Api $api)
+    {
+        $this->api = $api;
+        return $this;
+    }
+    
+    /**
+     * Returns the API object
+     * @return Api
+     */
+    public function getApi()
+    {
+        return $this->api;
     }
 
     /**
@@ -162,5 +202,36 @@ class Sites extends AbstractModel
     
         return $this->getRows($sql);
     }
+    
+    /**
+     * Creates a member
+     *
+     * @param array $data
+     * @param \Application\Model\Hash $hash
+     * @return int
+     */
+    public function addSite(array $data, \Application\Model\Hash $hash)
+    {
+        $ext = $this->trigger(self::EventSiteAddPre, $this, compact('data'), $this->setXhooks($data));
+        if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $data = $ext->last();
+        
+        if(empty($data['site_name']))
+        {
+            $api_data = $this->getApi()->getSiteDetails($data['api_key'], $data['api_secret'], $data['api_endpoint_url']);
+            $data += $api_data;
+        }
+        
+        $sql = $this->getSQL($data);
+        $sql['created_date'] = new \Zend\Db\Sql\Expression('NOW()');
+        $sql['api_secret'] = $hash->encrypt($data['api_secret']);
+        $site_id = $data['site_id'] = $this->insert('sites', $sql);
+        if ($site_id) {
+    
+            $ext = $this->trigger(self::EventSiteAddPost, $this, compact('site_id', 'data'), $this->setXhooks($data));
+            if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $site_id = $ext->last();
+    
+            return $site_id;
+        }
+    }    
     
 }

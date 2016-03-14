@@ -2,6 +2,7 @@
 namespace Sites;
 
 use Sites\Model\Sites;
+use Sites\Model\Api;
 
 use Sites\Form\SiteForm;
 
@@ -28,12 +29,17 @@ class Module
         return array(
             'factories' => array(
     
+                'Sites\Model\Api' => function ($sm) {
+                    return new Api();
+                },
                 // setting up the Authentication stuff
                 'Sites\Model\Sites' => function ($sm) {
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
                     
-                    return new Sites($adapter, $db);
+                    $site = new Sites($adapter, $db);
+                    $site->setApi($sm->get('Sites\Model\Api'));
+                    return $site;
                 },
 				'Sites\Form\SiteForm' => function($sm) {
 					return new SiteForm('site_form');
