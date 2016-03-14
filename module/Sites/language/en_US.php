@@ -21,6 +21,8 @@ return array(
     'site_added' => 'Site Added',
     'manage_sites' => 'Manage Sites',
     'existing_sites' => 'Existing Sites',
+    'site_name' => 'Site Name',
+    'platform' => 'Platform',
     
     'api_endpoint_url' => 'API Endpoint URL',
     'api_key' => 'API Key',

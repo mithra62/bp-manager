@@ -206,5 +206,7 @@ return array(
     'permission_view_users_data' => 'Can the user view other users data?',
     'permission_access_rest_api' => 'Can the user access the REST API?',
     'permission_self_allow_ip' => 'Can the user allow their own IP Address?',
+    'permission_view_sites' => 'Can the user view sites?',
+    'permission_manage_sites' => 'Can the user manage sites?',
     
 );

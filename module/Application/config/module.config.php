@@ -4,9 +4,9 @@
  *
  * @package		Default
  * @author		Eric Lamb
- * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
- * @link		http://mithra62.com/
- * @version		2.0
+ * @copyright	Copyright (c) 2016, mithra62, Eric Lamb.
+ * @link		http://backup-pro.com/
+ * @version		1.0
  * @filesource 	./module/Application/config/module.config.php
  */
 return array(

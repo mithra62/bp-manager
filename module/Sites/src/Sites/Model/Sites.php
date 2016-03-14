@@ -105,37 +105,77 @@ class Sites extends AbstractModel
     /**
      * Returns an instance of the input filter
      * @param \Zend\I18n\View\Helper\Translate $translator
+     * @param bool $unique Whether unique entries should verified
      * @return \Zend\InputFilter\InputFilter
      */
-    public function getInputFilter(\Zend\I18n\View\Helper\Translate $translator)
+    public function getInputFilter(\Zend\I18n\View\Helper\Translate $translator, $site_id = false)
     {
         if (! $this->inputFilter) {
             $inputFilter = new InputFilter();
             $factory = new InputFactory();
         
-            $inputFilter->add($factory->createInput(array(
-                'name' => 'api_endpoint_url',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StripTags'
+            if($site_id)
+            {
+                $inputFilter->add($factory->createInput(array(
+                    'name' => 'api_endpoint_url',
+                    'required' => true,
+                    'filters' => array(
+                        array(
+                            'name' => 'StripTags'
+                        ),
+                        array(
+                            'name' => 'StringTrim'
+                        )
                     ),
-                    array(
-                        'name' => 'StringTrim'
-                    )
-                ),
-                'validators' => array(
-                    array(
-                        'name' =>'NotEmpty',
-                        'break_chain_on_failure' => true,
-                        'options' => array(
-                            'messages' => array(
-                                'isEmpty' => $translator('api_endpoint_url_required', 'sites')
+                    'validators' => array(
+                        array(
+                            'name' =>'NotEmpty',
+                            'break_chain_on_failure' => true,
+                            'options' => array(
+                                'messages' => array(
+                                    'isEmpty' => $translator('api_endpoint_url_required', 'sites')
+                                ),
                             ),
                         ),
+                        array(
+                            'name' => 'Sites\Validate\Site\ChangeEndpointUrl',
+                            'options' => array(
+                                'table' => 'sites',
+                                'field' => 'api_endpoint_url',
+                                'adapter' => $this->adapter,
+                                'site' => $this,
+                                'id' => $site_id
+                            )
+                        )
+                    )
+                )));
+            }
+            else 
+            {
+                $inputFilter->add($factory->createInput(array(
+                    'name' => 'api_endpoint_url',
+                    'required' => true,
+                    'filters' => array(
+                        array(
+                            'name' => 'StripTags'
+                        ),
+                        array(
+                            'name' => 'StringTrim'
+                        )
                     ),
-                )
-            )));
+                    'validators' => array(
+                        array(
+                            'name' =>'NotEmpty',
+                            'break_chain_on_failure' => true,
+                            'options' => array(
+                                'messages' => array(
+                                    'isEmpty' => $translator('api_endpoint_url_required', 'sites')
+                                ),
+                            ),
+                        ),
+                    )
+                )));
+            }
 
             $inputFilter->add($factory->createInput(array(
                 'name' => 'api_key',
@@ -214,6 +254,50 @@ class Sites extends AbstractModel
         }
     
         return $this->getRows($sql);
+    }
+    
+    /**
+     * Returns a site by its ID
+     * @param int $id
+     * @param \Application\Model\Hash $hash
+     * @return array
+     */
+    public function getSiteById($id, \Application\Model\Hash $hash = null) 
+    {
+        $sql = $this->db->select()->from('sites');
+        $sql = $sql->where(array(
+            'id' => $id
+        ));
+        
+        $data = $this->getRow($sql);
+        if($data && !is_null($hash))
+        {
+            $data['api_secret'] = $hash->decrypt($data['api_secret']);
+        }
+        
+        return $data;
+    }
+    
+    /**
+     * Returns a site by its ID
+     * @param int $id
+     * @param \Application\Model\Hash $hash
+     * @return array
+     */
+    public function getSiteByEndpointUrl($url, \Application\Model\Hash $hash = null) 
+    {
+        $sql = $this->db->select()->from('sites');
+        $sql = $sql->where(array(
+            'api_endpoint_url' => $url
+        ));
+        
+        $data = $this->getRow($sql);
+        if($data && !is_null($hash))
+        {
+            $data['api_secret'] = $hash->decrypt($data['api_secret']);
+        }
+        
+        return $data;
     }
     
     /**

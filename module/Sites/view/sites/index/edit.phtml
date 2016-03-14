@@ -1,7 +1,7 @@
 <?php $this->headTitle()->append( $this->_('add_site', 'sites') )->append( $this->_('sites', 'sites') ); ?>
 <div class="container">
     <div class="page-header">
-    	<h1><?php echo $this->_('add_site', 'sites'); ?> <small><?php echo $this->_('sites', 'sites'); ?></small></h1>
+    	<h1><?php echo $this->_('edit_site', 'sites'); ?> <small><?php echo $this->_('sites', 'sites'); ?></small></h1>
     </div>
       <div class="row">
         <div class="col-sm-3 col-md-3 sidebar">
@@ -12,7 +12,7 @@
 
         <?php
         $form = $this->form;
-        $form->setAttribute('id', 'add_site_form');
+        $form->setAttribute('id', 'edit_site_form');
         $form->setAttribute('class', 'form-horizontal');
         $form->prepare();
         
@@ -22,7 +22,27 @@
         ?>     
         
         <div class="form-group">
-        	<label for="new_email" class="control-label col-xs-3"><?php echo $this->_('api_endpoint_url', 'sites'); ?></label>
+        	<label for="site_name" class="control-label col-xs-3"><?php echo $this->_('site_name', 'sites'); ?></label>
+        	<div class="col-xs-9">
+                <?php
+                echo $site_data['site_name'];
+                
+                ?>
+            </div>
+        </div> 
+        
+        <div class="form-group">
+        	<label for="site_platform" class="control-label col-xs-3"><?php echo $this->_('platform', 'sites'); ?></label>
+        	<div class="col-xs-9">
+                <?php
+                echo $site_data['platform'];
+                
+                ?>
+            </div>
+        </div>          
+        
+        <div class="form-group">
+        	<label for="api_endpoint_url" class="control-label col-xs-3"><?php echo $this->_('api_endpoint_url', 'sites'); ?></label>
         	<div class="col-xs-9">
                 <?php
                 $field = $form->get('api_endpoint_url');
@@ -54,7 +74,7 @@
         
         <div class="form-group">
         	<div class="col-xs-offset-2 col-xs-10">
-        		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('add_site', 'sites'); ?></button>
+        		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('edit_site', 'sites'); ?></button>
         	</div>
         </div>      
       
