@@ -2,10 +2,10 @@
 /**
  * mithra62 - Backup Pro Server
  *
- * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
- * @link		http://mojitrac.com/
- * @version		2.0
- * @filesource 	./module/Base/src/Base/Model/
+ * @copyright	Copyright (c) 2016, mithra62, Eric Lamb.
+ * @link		http://backup-pro.com/
+ * @version		1.0
+ * @filesource ./module/Base/src/Base/Model/BaseModel.php
  */
 namespace Base\Model;
 
@@ -16,13 +16,12 @@ use DateTime;
 /**
  * Base - Model
  *
- * General Moji Model Methods. The Base Model should be the parent of any Models within the system
+ * General Model Methods. The Base Model should be the parent of any Models within the system
  * if database access and/or Event interactivity is required.
  * <br /><strong>Note that if a key => value style interface is needed, use the KeyValue Model instead (it extends BaseModel).</strong>
  *
  * @package BackupProServer\Model
  * @author Eric Lamb <eric@mithra62.com>
- * @filesource ./module/Base/src/Base/Model/BaseModel.php
  */
 abstract class BaseModel implements EventManagerInterfaceConstants
 {

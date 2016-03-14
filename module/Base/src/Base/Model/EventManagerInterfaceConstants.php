@@ -2,24 +2,22 @@
 /**
  * mithra62 - Backup Pro Server
  *
- * @author		Eric Lamb <eric@mithra62.com>
- * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
- * @link		http://mojitrac.com/
- * @version		2.0
- * @filesource 	./module/Base/src/Base/Model/
+ * @copyright	Copyright (c) 2016, mithra62, Eric Lamb.
+ * @link		http://backup-pro.com/
+ * @version		1.0
+ * @filesource ./module/Base/src/Base/Model/EventManagerInterfaceConstants.php
  */
 namespace Base\Model;
 
 use Zend\EventManager\EventManagerAwareInterface;
 
 /**
- * Event Manager Interaface Constants
+ * Event Manager Interface Constants
  *
- * Contains all the Event Hook Names used within the Moji Models
+ * Contains all the Event Hook Names used within the Models
  *
  * @package BackupProServer\Model
  * @author Eric Lamb <eric@mithra62.com>
- * @filesource ./module/Base/src/Base/Model/EventManagerInterfaceConstants.php
  */
 interface EventManagerInterfaceConstants extends EventManagerAwareInterface
 {

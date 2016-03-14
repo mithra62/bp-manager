@@ -3,10 +3,10 @@
  * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
- * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
- * @link		http://mojitrac.com/
- * @version		2.0
- * @filesource 	./module/Base/src/Base/Model/
+ * @copyright	Copyright (c) 2016, mithra62, Eric Lamb.
+ * @link		http://backup-pro.com/
+ * @version		1.0
+ * @filesource ./module/Base/src/Base/Model/KeyValue.php
  */
 namespace Base\Model;
 
@@ -16,11 +16,10 @@ namespace Base\Model;
  * Abstracts handling of key => value style database tables
  * <br /><strong>This Model is only useful for data stores that use a key => value style storage mechanism.
  * 
- * @see \PM\Model\Settings for an example</strong>
+ * @see \Application\Model\Settings for an example</strong>
  *     
  * @package BackupProServer\Model
  * @author Eric Lamb <eric@mithra62.com>
- * @filesource ./module/Base/src/Base/Model/KeyValue.php
  */
 abstract class KeyValue extends BaseModel
 {

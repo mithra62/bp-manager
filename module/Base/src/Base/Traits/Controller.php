@@ -3,9 +3,9 @@
  * mithra62 - Backup Pro Server
  *
  * @author		Eric Lamb <eric@mithra62.com>
- * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
- * @link		http://mojitrac.com/
- * @version		2.0
+ * @copyright	Copyright (c) 2016, mithra62, Eric Lamb.
+ * @link		http://backup-pro.com/
+ * @version		1.0
  * @filesource 	./module/Base/src/Base/Traits/Controller.php
  */
 namespace Base\Traits;
@@ -17,7 +17,6 @@ namespace Base\Traits;
  *
  * @package BackupProServer\Traits
  * @author Eric Lamb
- * @filesource ./module/Base/src/Base/Traits/Controller.php
  */
 trait Controller
 {

@@ -18,12 +18,15 @@ use Application\Traits\Controller;
  *
  * @package BackupProServer\Controller
  * @author Eric Lamb <eric@mithra62.com>
- * @filesource ./module/Application/src/Application/Controllers/AbstractController.php
  */
 abstract class AbstractController extends BaseController
 {
     use Controller;
     
+    /**
+     * Flag to set admin permissions
+     * @var bool
+     */
     protected $admin_only = false;
     
     /**

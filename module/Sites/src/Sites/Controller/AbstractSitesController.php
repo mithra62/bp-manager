@@ -2,28 +2,34 @@
 /**
  * mithra62 - Backup Pro Server
  *
- * @author		Eric Lamb <eric@mithra62.com>
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
  * @link		http://mojitrac.com/
- * @version		2.0
- * @filesource 	./module/Cp/src/Cp/Controller/AbstractPmController.php
+ * @version		1.0
+ * @filesource 	./module/Sites/src/Sites/Controller/AbstractSitesController.php
  */
 namespace Sites\Controller;
 
 use Application\Controller\AbstractController;
 
 /**
- * Cp - AbstractCpController Controller
+ * Sites - Abstract Sites Controller
  *
  * @package BackupProServer\Controller
- * @author Eric Lamb <eric@mithra62.com>
- * @filesource ./module/Cp/src/Cp/Controller/AbstractCpController.php
+ * @author	Eric Lamb <eric@mithra62.com>
  */
 abstract class AbstractSitesController extends AbstractController
 {
 
-    protected $admin_only = true;
+    /**
+     * Mark all requests as requiring login
+     * @var bool
+     */
+    protected $admin_only = false;
     
+    /**
+     * (non-PHPdoc)
+     * @see \Application\Controller\AbstractController::onDispatch()
+     */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
         $this->layout()->setVariable('active_nav', 'sites');
