@@ -88,7 +88,7 @@ class IndexController extends AbstractSitesController
 
     public function viewAction()
     {
-        
+        $site = $this->getServiceLocator()->get('Sites\Model\Sites');
     }
 
 }

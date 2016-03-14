@@ -41,6 +41,15 @@ class Module
                     $site->setApi($sm->get('Sites\Model\Api'));
                     return $site;
                 },
+                // setting up the Authentication stuff
+                'Sites\Model\Site\Teams' => function ($sm) {
+                    $adapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $db = $sm->get('SqlObject');
+                    
+                    $site = new Sites($adapter, $db);
+                    $site->setApi($sm->get('Sites\Model\Api'));
+                    return $site;
+                },
 				'Sites\Form\SiteForm' => function($sm) {
 					return new SiteForm('site_form');
 				},

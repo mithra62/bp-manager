@@ -27,6 +27,10 @@ abstract class AbstractSitesController extends AbstractController
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
         $this->layout()->setVariable('active_nav', 'sites');
+        
+        $sites = $this->getServiceLocator()->get('Sites\Model\Sites');
+        $sites_data = $sites->getAllSites();     
+        $this->layout()->setVariable('site_menu', $sites_data);
         return parent::onDispatch($e);
     }
 }

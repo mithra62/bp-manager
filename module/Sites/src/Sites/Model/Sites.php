@@ -28,6 +28,8 @@ class Sites extends AbstractModel
     protected $inputFilter;
     
     protected $api = null;
+    
+    protected $team = null;
 
     /**
      * The Sites Model
@@ -77,6 +79,17 @@ class Sites extends AbstractModel
     public function getApi()
     {
         return $this->api;
+    }
+    
+    public function setTeam($team)
+    {
+        $this->team = $team;
+        return $this;
+    }
+    
+    public function getTeam()
+    {
+        return $this->team;
     }
 
     /**

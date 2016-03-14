@@ -96,6 +96,12 @@ abstract class BaseModel implements EventManagerInterfaceConstants
      * @var int
      */
     protected $offset = null;
+    
+    /**
+     * Flag to determine whether pagination is enabled for queries
+     * @var bool
+     */
+    protected $paginate = false;
 
     /**
      * Moji Abstract Model
@@ -120,6 +126,12 @@ abstract class BaseModel implements EventManagerInterfaceConstants
     {
         return $this->db;
     }
+    
+    public function setPaginate($paginate = false) 
+    {
+        $this->paginate = $paginate;
+        return $this;
+    }
 
     /**
      * Returns single row from $sql
@@ -131,19 +143,13 @@ abstract class BaseModel implements EventManagerInterfaceConstants
     {
         $sql = $this->prepSql($sql);
         $ext = $this->trigger(self::EventDbSelectPre, $this, compact('sql'), array());
-        if ($ext->stopped())
-            return $ext->last();
-        elseif ($ext->last())
-            $sql = $ext->last();
+        if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $sql = $ext->last();
         
         $selectString = $this->db->getSqlStringForSqlObject($sql);
         $result = $this->query($selectString, 'execute')->toArray();
         
         $ext = $this->trigger(self::EventDbSelectPost, $this, compact('result'), array());
-        if ($ext->stopped())
-            return $ext->last();
-        elseif ($ext->last())
-            $result = $ext->last();
+        if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $result = $ext->last();
         
         if (! empty($result['0'])) {
             return $result['0'];
@@ -162,22 +168,22 @@ abstract class BaseModel implements EventManagerInterfaceConstants
     {
         $sql = $this->prepSql($sql);
         $ext = $this->trigger(self::EventDbSelectPre, $this, compact('sql'), array());
-        if ($ext->stopped())
-            return $ext->last();
-        elseif ($ext->last())
-            $sql = $ext->last();
+        if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $sql = $ext->last();
         
         $this->total_results = 0;
         $this->total_pages = 0;
         $selectString = $this->db->getSqlStringForSqlObject($sql);
         $result = $this->query($selectString, 'execute')->toArray();
-        $this->total_results = $this->getTotalResults();
-        $this->total_pages = (!is_null($this->getLimit()) ? ceil($this->total_results / $this->getLimit()) : false );
+        $this->total_results = count($result);
+        $this->total_pages = 1;
+        if($this->paginate) {
+            $this->total_results = $this->getTotalResults();
+            $this->total_pages = (!is_null($this->getLimit()) ? ceil($this->total_results / $this->getLimit()) : false );
+            $this->paginate = false;
+        }
+        
         $ext = $this->trigger(self::EventDbSelectPost, $this, compact('result'), array());
-        if ($ext->stopped())
-            return $ext->last();
-        elseif ($ext->last())
-            $result = $ext->last();
+        if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $result = $ext->last();
         
         if (! empty($result)) {
             return $result;
@@ -349,6 +355,7 @@ abstract class BaseModel implements EventManagerInterfaceConstants
         if ($page && $this->limit) {
             $this->offset = ($page - 1) * $this->limit;
             $this->page = $page;
+            $this->setPaginate(true);
         }
         
         return $this;
