@@ -371,6 +371,11 @@ class Sites extends AbstractModel
         }
     }
     
+    /**
+     * Removes a site entry
+     * @param int $site_id
+     * @return Ambigous <mixed, void>|unknown
+     */
     public function removeSite($site_id)
     {
         $ext = $this->trigger(self::EventSiteRemovePre, $this, compact('site_id'), array());
@@ -384,6 +389,6 @@ class Sites extends AbstractModel
             return $site_id;
         }
     
-    }    
+    }   
     
 }

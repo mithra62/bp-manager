@@ -1,13 +1,107 @@
-<?php $this->headTitle()->append( $this->_('add_site', 'sites') )->append( $this->_('sites', 'sites') ); ?>
+<?php $this->headTitle()->append( $this->_('dashboard', 'sites') )->append( $site_data['site_name'] ); ?>
 <div class="container">
     <div class="page-header">
-    	<h1><?php echo $this->_('add_site', 'sites'); ?> <small><?php echo $this->_('sites', 'sites'); ?></small></h1>
+    	<h1><?php echo $this->_('dashboard', 'sites'); ?> <small><?php echo $site_data['site_name']; ?></small></h1>
     </div>
       <div class="row">
         <div class="col-sm-3 col-md-3 sidebar">
             <?php echo $this->render('sites/global/_sidebar'); ?>
       </div>
-      <div class="col-sm-9 col-md-9">fdsa     
+      <div class="col-sm-9 col-md-9">
+      
+      
+      
+            <div class="panel">
+            	<table border="0" cellspacing="0" cellpadding="0" class="table"  width="100%" >
+            	<thead>
+            	<tr>
+            		<th width="120"><?php echo $this->_('total_backups', 'sites'); ?></th>
+            		<th><?php echo $this->_('total_space_used', 'sites'); ?></th>
+            		<th><?php echo $space_available_header; ?></th>
+            		<th><div style="float:right"><?php echo $this->_('last_backup_taken', 'sites'); ?></div></th>
+            		<th><div style="float:right"><?php echo $this->_('first_backup_taken', 'sites'); ?></div></th>
+            	</tr>
+            	</thead>
+            	<tbody>
+            	<tr>
+            		<td width='120'> <?php echo $backup_meta['global']['total_backups']; ?> </td>
+            		<td width='150'><?php echo $backup_meta['global']['total_space_used']; ?></td>
+            		<td><?php echo ($settings['auto_threshold'] == '0' ? $this->_('unlimited', 'sites') : $available_space['available_space'].' / '.$available_space['max_space']); ?></td>
+            		<td align='right' width='150'><?php echo ($backup_meta['global']['newest_backup_taken'] != '' ? $view_helper->m62DateTime($backup_meta['global']['newest_backup_taken']) : $this->_('na', 'sites')); ?></td>
+            		<td align='right' width='150'><?php echo ($backup_meta['global']['oldest_backup_taken'] != '' ? $view_helper->m62DateTime($backup_meta['global']['oldest_backup_taken']) : $this->_('na', 'sites')); ?></td>
+            	</tr>
+            	</tbody>
+            	</table>
+        	</div>
+        
+        <div class=" panel">
+        
+        	<div class="col-md-6 ">
+        				<table class="table"  width="100%" border="0" cellpadding="0" cellspacing="0">
+        					<thead>
+        						<tr class="odd">
+        							<th width="50%"><?php echo $this->_('database_backups', 'sites'); ?></th>
+        							<th> </th>
+        						</tr>
+        					</thead>
+        					<tbody>
+        					<tr class="even">
+        						<td><strong><?php echo $this->_('total_backups', 'sites'); ?></strong></td>
+        						<td><?php echo $backup_meta['database']['total_backups']; ?></td>
+        					</tr>
+        					<tr class="odd">
+        						<td><strong><?php echo $this->_('total_space_used', 'sites'); ?></strong></td>
+        						<td><?php echo $backup_meta['database']['total_space_used']; ?></td>
+        					</tr>
+        					<tr class="even">
+        						<td><strong><?php echo $this->_('last_backup_taken', 'sites'); ?></strong></td>
+        						<td><?php echo ($backup_meta['database']['newest_backup_taken'] != '' ? $view_helper->m62DateTime($backup_meta['database']['newest_backup_taken']) : $this->_('na', 'sites')); ?></td>
+        					</tr>
+        					</tbody>
+        				</table>	
+        	</div>
+        	<div class="col-md-6 ">
+        	
+        				<table class="table"  width="100%" border="0" cellpadding="0" cellspacing="0">
+        					<thead>
+        						<tr class="odd">
+        							<th width="50%"><?php echo $this->_('file_backups', 'sites'); ?></th>
+        							<th> </th>
+        						</tr>
+        					</thead>
+        					<tbody>
+        						<tr class="even">
+        						<td><strong><?php echo $this->_('total_backups', 'sites'); ?></strong></td>
+        							<td><?php echo $backup_meta['files']['total_backups']; ?></td>
+        						</tr>
+        					<tr class="odd">
+        						<td><strong><?php echo $this->_('total_space_used', 'sites'); ?></strong></td>
+        						<td><?php echo $backup_meta['files']['total_space_used']; ?></td>
+        					<tr class="even">
+        						<td><strong><?php echo $this->_('last_backup_taken', 'sites'); ?></strong></td>
+        						<td><?php echo ($backup_meta['files']['newest_backup_taken'] != '' ? $view_helper->m62DateTime($backup_meta['files']['newest_backup_taken']) : $this->_('na', 'sites')); ?></td>
+        					</tr>
+        				</tbody>
+        				</table>		
+        	
+        	</div>
+        
+        </div>
+        
+        <div class=" panel">
+        
+        	<?php 
+        		if(count($backups) > 0):
+        			$options = array('enable_type' => 'yes', 'enable_editable_note' => 'yes', 'enable_actions' => 'yes', 'enable_delete' => 'no');
+                    extract($options);
+        			include '_includes/_backup_table.php';
+        	?>
+        	<?php else: ?>
+        		<div class="no_backup_found"><?php echo $this->_('no_backups_exist', 'sites')?> <a href="<?php //echo $this->url('/dashboard/backup_pro/backup_database'); ?>"><?php echo $this->_('would_you_like_to_backup_database_now', 'sites')?></a></div>
+        	<?php endif; ?>
+        
+        </div>      
+      
       
       
       </div>

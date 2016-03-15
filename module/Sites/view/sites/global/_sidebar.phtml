@@ -2,6 +2,15 @@
     <a class="list-group-item <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>"><?php echo $this->_('manage_sites', 'sites'); ?></a>   
     
     <?php foreach($this->layout()->site_menu AS $site): ?>
-    <a class="list-group-item <?php echo ($this->active_sidebar == 'system_settings' ? 'active' : ''); ?>" href="<?php echo $this->url('dashboard', array('site_id' => $site['id'])); ?>"><?php echo $site['site_name']; ?></a>
+    <a class="list-group-item <?php echo ($this->active_sidebar == 'site_nav_'.$site['id'] ? 'active' : ''); ?>" href="<?php echo $this->url('dashboard', array('site_id' => $site['id'])); ?>"><?php echo $site['site_name']; ?></a>
+    <?php if($this->active_sidebar == 'site_nav_'.$site['id']): ?>
+    <ul>
+        <li><a class=" <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>"><?php echo $this->_('dashboard', 'sites'); ?></a>  </li> 
+        <li><a class=" <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>"><?php echo $this->_('backup_database', 'sites'); ?></a>  </li>
+        <li><a class=" <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>"><?php echo $this->_('backup_files', 'sites'); ?></a>  </li>
+        <li><a class=" <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>"><?php echo $this->_('settings', 'sites'); ?></a>   </li>
+   </ul>
+    <?php endif; ?>
+    
     <?php endforeach; ?>
 </div>
