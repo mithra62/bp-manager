@@ -23,7 +23,7 @@ class ChangeEndpointUrl extends AbstractValidator
     const MATCH = 'connect';
     
     protected $messageTemplates = array(
-        self::MATCH=> 'Can\'t connect with the API key'
+        self::MATCH=> 'That API is ready being monitored'
     );
     
     public function isValid($value, $context = null)

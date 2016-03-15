@@ -19,6 +19,7 @@ return array(
     'view_site' => 'View Site',
     'remove_site' => 'Remove Site',
     'site_added' => 'Site Added',
+    'site_updated' => 'Site Updated',
     'manage_sites' => 'Manage Sites',
     'existing_sites' => 'Existing Sites',
     'site_name' => 'Site Name',
@@ -31,5 +32,6 @@ return array(
     'api_endpoint_url_required' => 'An API Endpoint URL is required',
     'api_key_required' => 'An API Key is required',
     'api_secret_required' => 'An API Secret is required',
+    'create_site_exist_error' => 'That API is already being monitored',
 )
 ;

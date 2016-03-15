@@ -173,6 +173,17 @@ class Sites extends AbstractModel
                                 ),
                             ),
                         ),
+                        array(
+                            'name' => 'Db\NoRecordExists',
+                            'options' => array(
+                                'table' => 'sites',
+                                'field' => 'api_endpoint_url',
+                                'adapter' => $this->adapter,
+                                'messages' => array(
+                                    'recordFound' => $translator('create_site_exist_error', 'sites')
+                                )
+                            )
+                        )
                     )
                 )));
             }
@@ -309,7 +320,7 @@ class Sites extends AbstractModel
      */
     public function addSite(array $data, \Application\Model\Hash $hash)
     {
-        $ext = $this->trigger(self::EventSiteAddPre, $this, compact('data'), $this->setXhooks($data));
+        $ext = $this->trigger(self::EventSiteAddPre, $this, compact('data', 'hash'), $this->setXhooks($data));
         if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $data = $ext->last();
         
         if(empty($data['site_name']))
@@ -324,11 +335,40 @@ class Sites extends AbstractModel
         $site_id = $data['site_id'] = $this->insert('sites', $sql);
         if ($site_id) {
     
-            $ext = $this->trigger(self::EventSiteAddPost, $this, compact('site_id', 'data'), $this->setXhooks($data));
+            $ext = $this->trigger(self::EventSiteAddPost, $this, compact('site_id', 'data', 'hash'), $this->setXhooks($data));
             if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $site_id = $ext->last();
     
             return $site_id;
         }
     }    
+    
+    /**
+     * Updates a site entry
+     * @param int $id
+     * @param array $data
+     * @param \Application\Model\Hash $hash
+     */
+    public function updateSite($site_id, array $data, \Application\Model\Hash $hash)
+    {
+        $ext = $this->trigger(self::EventSiteUpdatePre, $this, compact('site_id', 'data', 'hash'), $this->setXhooks($data));
+        if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $data = $ext->last();
+        
+        if(empty($data['site_name']))
+        {
+            $api_data = $this->getApi()->getSiteDetails($data['api_key'], $data['api_secret'], $data['api_endpoint_url']);
+            $data += $api_data;
+        }
+        
+        $sql = $this->getSQL($data);
+        $sql['created_date'] = new \Zend\Db\Sql\Expression('NOW()');
+        $sql['api_secret'] = $hash->encrypt($data['api_secret']);
+        if ($this->update('sites', $sql, array('id' => $site_id))) {
+    
+            $ext = $this->trigger(self::EventSiteUpdatePost, $this, compact('site_id', 'data', 'hash'), $this->setXhooks($data));
+            if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $site_id = $ext->last();
+    
+            return $site_id;
+        }
+    }
     
 }

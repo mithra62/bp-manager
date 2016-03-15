@@ -109,6 +109,10 @@ class IndexController extends AbstractSitesController
         return $view;
     }
     
+    /**
+     * Update a site action
+     * @return \Zend\Http\Response|multitype:
+     */
     public function editAction()
     {
         if (! $this->perm->check($this->identity, 'manage_sites')) {
@@ -138,7 +142,7 @@ class IndexController extends AbstractSitesController
             $site_form->setData($request->getPost());
             if ($site_form->isValid($formData)) {
                 $formData = $formData->toArray();
-                if ($site->updateUser($formData, $id)) {
+                if ($site->updateSite($id, $formData, $hash)) {
                     $this->flashMessenger()->addSuccessMessage($this->translate('site_updated', 'sites'));
                     return $this->redirect()->toRoute('sites/view', array(
                         'site_id' => $id

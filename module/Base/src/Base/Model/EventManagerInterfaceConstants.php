@@ -94,4 +94,7 @@ interface EventManagerInterfaceConstants extends EventManagerAwareInterface
     
     const EventSiteAddPre = 'site.insert.pre';
     const EventSiteAddPost = 'site.insert.post';
+    
+    const EventSiteUpdatePre = 'site.update.pre';
+    const EventSiteUpdatePost = 'site.update.post';
 }
