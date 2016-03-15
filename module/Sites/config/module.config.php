@@ -2,7 +2,7 @@
 return array(
     'router' => array(
         'routes' => array(
-            'sites' => array( //User Routes
+            'sites' => array( //Sites Routes
         		'type' => 'segment',
         		'options' => array(
         			'route' => '/sites',
@@ -59,13 +59,77 @@ return array(
         				)
         			)
         		)
-        	), //End User Routes 
+        	), //End Sites Routes 
+            'dashboard' => array( //Dashboard Routes
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/dashboard/:site_id',
+                    'constraints' => array(
+                        'site_id' => '[0-9]+'
+                    ),                    
+                    'defaults' => array(
+        				'controller' => 'Sites\Controller\Dashboard',
+        				'action' => 'index'
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'view' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        				    'route' => '/[:site_id]',
+        				    'constraints' => array(
+        				        'user_id' => '[0-9]+'
+        				    ),
+        				    'defaults' => array(
+        				        'action' => 'view'
+        				    )
+        				)
+                    ),
+                    'remove' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        				    'route' => '/remove/:site_id',
+        				    'constraints' => array(
+        				        'user_id' => '[0-9]+'
+        				    ),
+        				    'defaults' => array(
+        				        'action' => 'remove'
+        				    )
+        				)
+                    ),
+                    'add' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        				    'route' => '/add',
+        				    'defaults' => array(
+        				        'action' => 'add'
+        				    )
+        				)
+                    ),
+                    'edit' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        				    'route' => '/edit/:site_id',
+        				    'constraints' => array(
+        				        'user_id' => '[0-9]+'
+        				    ),
+        				    'defaults' => array(
+        				        'action' => 'edit'
+        				    )
+        				)
+                    )
+                )
+            ), //End User Routes
         )
 
     ),
     'controllers' => array(
         'invokables' => array(
             'Sites\Controller\Index' => 'Sites\Controller\IndexController',
+            'Sites\Controller\Dashboard' => 'Sites\Controller\DashboardController',
+            'Sites\Controller\Settings' => 'Sites\Controller\SettingsController',
+            'Sites\Controller\Backup' => 'Sites\Controller\BackupController',
         )
     ),
     'view_manager' => array(

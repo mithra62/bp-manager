@@ -2,6 +2,6 @@
     <a class="list-group-item <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>"><?php echo $this->_('manage_sites', 'sites'); ?></a>   
     
     <?php foreach($this->layout()->site_menu AS $site): ?>
-    <a class="list-group-item <?php echo ($this->active_sidebar == 'system_settings' ? 'active' : ''); ?>" href="<?php echo $this->url('sites/view', array('site_id' => $site['id'])); ?>"><?php echo $site['site_name']; ?></a>
+    <a class="list-group-item <?php echo ($this->active_sidebar == 'system_settings' ? 'active' : ''); ?>" href="<?php echo $this->url('dashboard', array('site_id' => $site['id'])); ?>"><?php echo $site['site_name']; ?></a>
     <?php endforeach; ?>
 </div>
