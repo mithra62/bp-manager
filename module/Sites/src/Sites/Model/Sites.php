@@ -371,4 +371,19 @@ class Sites extends AbstractModel
         }
     }
     
+    public function removeSite($site_id)
+    {
+        $ext = $this->trigger(self::EventSiteRemovePre, $this, compact('site_id'), array());
+        if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $site_id = $ext->last();
+    
+        if ($this->remove('sites', array('id' => $site_id))) {
+    
+            $ext = $this->trigger(self::EventSiteRemovePost, $this, compact('site_id'), array());
+            if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $site_id = $ext->last();
+            
+            return $site_id;
+        }
+    
+    }    
+    
 }

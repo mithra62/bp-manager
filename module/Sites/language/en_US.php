@@ -20,6 +20,7 @@ return array(
     'remove_site' => 'Remove Site',
     'site_added' => 'Site Added',
     'site_updated' => 'Site Updated',
+    'site_removed' => 'Site Removed',
     'manage_sites' => 'Manage Sites',
     'existing_sites' => 'Existing Sites',
     'site_name' => 'Site Name',

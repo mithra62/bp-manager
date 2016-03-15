@@ -181,7 +181,42 @@ class IndexController extends AbstractSitesController
 
     public function removeAction()
     {
+        if (! $this->perm->check($this->identity, 'manage_sites')) {
+            return $this->redirect()->toRoute('sites');
+        }
         
+        $view = array();
+        $site = $this->getServiceLocator()->get('Sites\Model\Sites');
+        $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
+        $id = $this->params()->fromRoute('site_id');
+        if (! $id) {
+            return $this->redirect()->toRoute('sites');
+        }
+        
+        $view['site_data'] = $site->getSiteById($id);
+        
+        if (! $view['site_data']) {
+            return $this->redirect()->toRoute('sites');
+        }
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            $form->setData($request->getPost());
+            if ($form->isValid($formData)) {
+                $formData = $formData->toArray();
+                if ($site->removeSite($id)) {
+                    $this->flashMessenger()->addSuccessMessage($this->translate('site_removed', 'sites'));
+                    return $this->redirect()->toRoute('sites');
+                }
+            }
+        }
+        
+        $view['id'] = $id;
+        $view['form'] = $form;
+        $view['section'] = 'view_sites';
+        $view['active_sidebar'] = 'manage_sites';
+        return $this->ajaxOutput($view);
     }
 }
 
