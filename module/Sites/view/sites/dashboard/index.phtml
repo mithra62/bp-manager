@@ -27,8 +27,8 @@
             		<td width='120'> <?php echo $backup_meta['global']['total_backups']; ?> </td>
             		<td width='150'><?php echo $backup_meta['global']['total_space_used']; ?></td>
             		<td><?php echo ($settings['auto_threshold'] == '0' ? $this->_('unlimited', 'sites') : $available_space['available_space'].' / '.$available_space['max_space']); ?></td>
-            		<td align='right' width='150'><?php echo ($backup_meta['global']['newest_backup_taken'] != '' ? $view_helper->m62DateTime($backup_meta['global']['newest_backup_taken']) : $this->_('na', 'sites')); ?></td>
-            		<td align='right' width='150'><?php echo ($backup_meta['global']['oldest_backup_taken'] != '' ? $view_helper->m62DateTime($backup_meta['global']['oldest_backup_taken']) : $this->_('na', 'sites')); ?></td>
+            		<td align='right' width='150'><?php echo ($backup_meta['global']['newest_backup_taken'] != '' ? $this->m62DateTime($backup_meta['global']['newest_backup_taken']) : $this->_('na', 'sites')); ?></td>
+            		<td align='right' width='150'><?php echo ($backup_meta['global']['oldest_backup_taken'] != '' ? $this->m62DateTime($backup_meta['global']['oldest_backup_taken']) : $this->_('na', 'sites')); ?></td>
             	</tr>
             	</tbody>
             	</table>
@@ -55,7 +55,7 @@
         					</tr>
         					<tr class="even">
         						<td><strong><?php echo $this->_('last_backup_taken', 'sites'); ?></strong></td>
-        						<td><?php echo ($backup_meta['database']['newest_backup_taken'] != '' ? $view_helper->m62DateTime($backup_meta['database']['newest_backup_taken']) : $this->_('na', 'sites')); ?></td>
+        						<td><?php echo ($backup_meta['database']['newest_backup_taken'] != '' ? $this->m62DateTime($backup_meta['database']['newest_backup_taken']) : $this->_('na', 'sites')); ?></td>
         					</tr>
         					</tbody>
         				</table>	
@@ -79,7 +79,7 @@
         						<td><?php echo $backup_meta['files']['total_space_used']; ?></td>
         					<tr class="even">
         						<td><strong><?php echo $this->_('last_backup_taken', 'sites'); ?></strong></td>
-        						<td><?php echo ($backup_meta['files']['newest_backup_taken'] != '' ? $view_helper->m62DateTime($backup_meta['files']['newest_backup_taken']) : $this->_('na', 'sites')); ?></td>
+        						<td><?php echo ($backup_meta['files']['newest_backup_taken'] != '' ? $this->m62DateTime($backup_meta['files']['newest_backup_taken']) : $this->_('na', 'sites')); ?></td>
         					</tr>
         				</tbody>
         				</table>		

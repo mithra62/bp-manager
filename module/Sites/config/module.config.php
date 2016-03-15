@@ -148,6 +148,11 @@ return array(
             __DIR__ . '/../view'
         )
     ),
+    'view_helpers' => array(
+        'invokables' => array(
+            'm62DateTime' => 'Sites\View\Helper\m62DateTime',
+        )
+    ),
     'translator' => array(
         'translation_file_patterns' => array(
             array(
