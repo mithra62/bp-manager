@@ -9,7 +9,7 @@
       </div>
       <div class="col-sm-9 col-md-9">
       
-      
+      <?php echo $this->render('partials/_tabs'); ?>
       
             <div class="panel">
             	<table border="0" cellspacing="0" cellpadding="0" class="table"  width="100%" >
@@ -94,7 +94,7 @@
         		if(count($backups) > 0):
         			$options = array('enable_type' => 'yes', 'enable_editable_note' => 'yes', 'enable_actions' => 'yes', 'enable_delete' => 'no');
                     extract($options);
-        			include '_includes/_backup_table.php';
+        			//include '_includes/_backup_table.php';
         	?>
         	<?php else: ?>
         		<div class="no_backup_found"><?php echo $this->_('no_backups_exist', 'sites')?> <a href="<?php //echo $this->url('/dashboard/backup_pro/backup_database'); ?>"><?php echo $this->_('would_you_like_to_backup_database_now', 'sites')?></a></div>

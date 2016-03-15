@@ -55,10 +55,13 @@ class DashboardController extends AbstractSitesController
             $view_backups = $filtered_backups;
         }        
         
+        $resources = $backup_data->getResources();
+        $backups = (isset($resources['backups']) ? $resources['backups'] : array());
         //$view['backups'] = $backups;
         $view['backup_meta'] = $backup_data->getData();
+        $view['backups'] = $backups;
         $view['site_data'] = $site_data;
-        $view['section'] = 'view_sites';
+        $view['section'] = 'dashboard';
         $view['active_sidebar'] = 'site_nav_'.$id;
         return $view;
     }
