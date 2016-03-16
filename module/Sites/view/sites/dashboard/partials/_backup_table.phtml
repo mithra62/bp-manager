@@ -74,9 +74,9 @@
 	<?php if(isset($enable_type) && $enable_type == 'yes' ): ?>
 	<td><?php echo $this->_($backup['backup_type']); ?></td>
 	<?php endif; ?>
-	<td style="white-space: nowrap"><!-- <?php echo $this->escapehtmlattr($backup['compressed_size']); ?> --><?php //echo $view_helper->m62FileSize($backup['compressed_size']); ?></td>
+	<td style="white-space: nowrap"><!-- <?php echo $this->escapehtmlattr($backup['compressed_size']); ?> --><?php echo $this->m62FileSize($backup['compressed_size']); ?></td>
 	<td style="white-space: nowrap"><!-- <?php echo $this->escapehtmlattr($backup['time_taken']); ?> --><?php //echo $view_helper->m62TimeFormat($backup['time_taken']); ?></td>
-	<td style="white-space: nowrap"><!-- <?php echo $this->escapehtmlattr($backup['max_memory']); ?> --><?php //echo $view_helper->m62FileSize($backup['max_memory']); ?></td>
+	<td style="white-space: nowrap"><!-- <?php echo $this->escapehtmlattr($backup['max_memory']); ?> --><?php echo $this->m62FileSize($backup['max_memory']); ?></td>
 		<?php if(isset($enable_actions) && $enable_actions == 'yes' ): ?>
 	<td align="right" style="width:40px; white-space: nowrap">
 		<div style="float:right">

@@ -55,15 +55,17 @@ class m62DateTime extends BaseViewHelper
 		    $time_diff = time() - $str_date;
 		    	
 		    
+		    /*
 		    if ( ($time_diff > 0 && $time_diff < (24*60*60)*7) || ($time_diff < 0 && $time_diff < (24*60*60)*7))
 		    {
 		        $return = $this->c($str_date).$this->relativeDateTime($date);
 		    }
 		    else
 		    {
-		        $return = $this->c($str_date).$this->formatDate($date, $prefs['date_format']);
+		        $return = $this->c($str_date).$this->formatDate($date, $this->getView()->settings['date_format']);
 		    }
-		    	
+		    */
+		    $return = $this->c($str_date).$this->relativeDateTime($date);
 		    return '<time datetime="'.date('r', $str_date).'" title="'.date('r', $str_date).'">'.$return.'</time>';		 	    
 		}
 	}

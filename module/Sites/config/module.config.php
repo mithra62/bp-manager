@@ -151,6 +151,7 @@ return array(
     'view_helpers' => array(
         'invokables' => array(
             'm62DateTime' => 'Sites\View\Helper\m62DateTime',
+            'm62FileSize' => 'Sites\View\Helper\m62FileSize',
         )
     ),
     'translator' => array(
