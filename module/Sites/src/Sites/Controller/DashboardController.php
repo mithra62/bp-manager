@@ -36,14 +36,15 @@ class DashboardController extends AbstractSitesController
         $setting_data = $site->getApi()->getSettings($site_data);
         $backup_data = $site->getApi()->getBackups($site_data);
         
-        
+        $backups = $backup_data['backups'];
+        $backup_meta = $backup_data['backup_meta'];
         $view['settings'] = $setting_data->getData();
-        if(count($backup_data->getResources()) > $view['settings']['dashboard_recent_total'])
+        if(count($backups) > $view['settings']['dashboard_recent_total'])
         {
             //we have to remove a few
             $count = 1;
             $view_backups = array();
-            foreach($backup_data->getResources() AS $time => $backup)
+            foreach($backups AS $time => $backup)
             {
                 $filtered_backups[$time] = $backup;
                 if($count >= $this->settings['dashboard_recent_total'])
@@ -55,10 +56,7 @@ class DashboardController extends AbstractSitesController
             $view_backups = $filtered_backups;
         }        
         
-        $resources = $backup_data->getResources();
-        $backups = (isset($resources['backups']) ? $resources['backups'] : array());
-        //$view['backups'] = $backups;
-        $view['backup_meta'] = $backup_data->getData();
+        $view['backup_meta'] = $backup_meta;
         $view['backups'] = $backups;
         $view['site_data'] = $site_data;
         $view['section'] = 'dashboard';

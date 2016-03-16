@@ -75,7 +75,13 @@ class Api
         return array();
     }
     
-    public function getBackups(array $site_details)
+    /**
+     * Returns the backups data in a usable format array
+     * @param array $site_details
+     * @param string $type
+     * @return array
+     */
+    public function getBackups(array $site_details, $type = 'all')
     {
         $config = array(
             'api_key' => $site_details['api_key'],
@@ -84,10 +90,10 @@ class Api
         );
         
         $client = $this->getClient($config);
-        $backups = $client->get('/backups');
+        $backups = $client->get('/backups');        
         if($backups instanceof Hal)
         {
-            return $backups;
+            return $this->normalizeBackups($backups, $type);
         }
         
         return array();
@@ -107,5 +113,37 @@ class Api
         }
         
         return $this->client;
+    }
+    
+    protected function normalizeBackups(Hal $backups)
+    {
+        $resources = $backups->getResources();
+        if(is_array($resources['backups']))
+        {
+            $return_backups = array();
+            foreach($resources['backups'] As $key => $value)
+            {
+                $storage_resource = $value->getResources();
+                $return_backups[$key] = $value->getData();
+                $return_backups[$key]['storage'] = $this->normalizeStorage($storage_resource['storage']);
+            }
+        }
+        
+        $return = array(
+            'backup_meta' => $backups->getData(),
+            'backups' => $return_backups
+        );
+        
+        return $return;
+    }
+    
+    protected function normalizeStorage(array $storage = array())
+    {
+        $return = array();
+        foreach($storage AS $key => $value)
+        {
+            $return[] = $value->getData();
+        }
+        return $return;
     }
 }

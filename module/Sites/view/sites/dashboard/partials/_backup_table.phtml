@@ -1,1 +1,110 @@
-<?php
+<?php if(isset($enable_delete) && $enable_delete != 'yes' ): ?>
+	<?php 
+	foreach($backups AS $backup):  ?>
+		<input type="hidden" name="backups[]" value="<?php //echo urlencode($view_helper->m62Encode($backup['file_name'])); ?>" />
+	<?php endforeach; ?>
+<?php endif; ?>
+<input type="hidden" value="<?php //echo $this->url('/dashboard/backup_pro/manage/update_backup_note'); ?>" name="__note_url" id="__note_url" />
+<table width="100%" class="data existing_backups table" id="mainTable" border="0" cellpadding="0" cellspacing="0">
+<thead>
+	<tr class="odd">
+		<th></th>
+	
+		<?php if(isset($enable_delete) && $enable_delete == 'yes' ): ?>
+		<th><input name="bp_toggle_all" value="1" type="checkbox" class="bp_toggle_all" /></th>
+		<?php endif; ?>
+		<th></th>
+		<th></th>
+		<th class=""><?php echo $this->_('taken', 'sites'); ?></th>
+		<?php if(isset($enable_type) && $enable_type == 'yes' ): ?>
+		<th class=""><?php echo $this->_('type', 'sites'); ?></th>
+		<?php endif; ?>
+		<th class=""><?php echo $this->_('file_size', 'sites'); ?></th>
+		<th class=""><?php echo $this->_('time', 'sites'); ?></th>
+		<th><?php echo $this->_('memory', 'sites'); ?></th>
+		<?php if(isset($enable_actions) && $enable_actions == 'yes' ): ?>
+		<th class=""></th>
+		<?php endif; ?>
+	</tr>
+</thead>
+<tbody>
+<?php 
+
+    $count = 0;
+    foreach($backups AS $backup): 
+	if($backup['verified'] == '0')
+	{
+		$status_class = 'backup_pro_backup_warn';
+	}
+	elseif($backup['verified'] == 'success')
+	{
+		$status_class = 'backup_pro_backup_success';
+	}
+	elseif($backup['verified'] == 'fail')
+	{
+		$status_class = 'backup_pro_backup_fail';
+	}
+?>
+<tr class="odd">
+	<td class=" backup_pro_backup_status <?php echo $status_class; ?>"></td>
+	<?php if(isset($enable_delete) && $enable_delete == 'yes' ): ?>
+	<td><input name="backups[]" id="backup_check_<?php echo $count; ?>" value="<?php echo urlencode($view_helper->m62Encode($backup['file_name'])); ?>" type="checkbox" class="bp_toggle_check">
+	
+	</td>
+	<?php endif; ?>
+	<td style="white-space: nowrap">
+    	<?php if(isset($backup['storage_locations']) && is_array($backup['storage_locations']) ): ?>
+    		<?php foreach($backup['storage_locations'] AS $location_id => $storage): ?>
+    			<img src="<?php echo $bp_static_path.'/images/storage/'.$view_helper->m62Escape($storage['storage_location_driver']); ?>.png" class="" title="<?php echo $view_helper->m62Escape($storage['storage_location_name']); ?>">
+    		<?php endforeach; ?>
+    	<?php endif; ?>
+	</td>
+	<td style="width:55%">
+		<?php if(isset($enable_editable_note) && $enable_editable_note == 'yes' ): ?>
+		<div class="bp_editable" rel="<?php echo $this->escapehtmlattr($backup['hash']); ?>" id="note_div_<?php echo $backup['hash']; ?>"><?php if($backup['note'] == ''): ?><?php echo $this->_('click_to_add_note', 'sites');?><?php else: ?><?php echo $this->escapehtmlattr($backup['note']); ?> <?php endif; ?></div>
+		<input name="note_<?php echo $this->escapehtmlattr($backup['hash']); ?>" value="<?php echo $backup['note']; ?>" id="note_<?php echo $this->escapehtmlattr($backup['hash']); ?>" data-backup-type="<?php echo $this->escapehtmlattr($backup['backup_type']); ?>" class="note_container" rel="<?php //echo urlencode($view_helper->m62Encode($backup['file_name'])); ?>" style="display:none; width:100%" type="text">
+		
+		<?php else: ?>
+            <?php echo ($backup['note'] == '' ? $this->_('na') : $backup['note']); ?>
+		<?php endif; ?>
+	</td>
+	<td style="white-space: nowrap">
+		<!-- <?php echo $backup['created_date']; ?> --><?php echo $this->m62DateTime($backup['created_date']); ?>
+	</td>
+	<?php if(isset($enable_type) && $enable_type == 'yes' ): ?>
+	<td><?php echo $this->_($backup['backup_type']); ?></td>
+	<?php endif; ?>
+	<td style="white-space: nowrap"><!-- <?php echo $this->escapehtmlattr($backup['compressed_size']); ?> --><?php //echo $view_helper->m62FileSize($backup['compressed_size']); ?></td>
+	<td style="white-space: nowrap"><!-- <?php echo $this->escapehtmlattr($backup['time_taken']); ?> --><?php //echo $view_helper->m62TimeFormat($backup['time_taken']); ?></td>
+	<td style="white-space: nowrap"><!-- <?php echo $this->escapehtmlattr($backup['max_memory']); ?> --><?php //echo $view_helper->m62FileSize($backup['max_memory']); ?></td>
+		<?php if(isset($enable_actions) && $enable_actions == 'yes' ): ?>
+	<td align="right" style="width:40px; white-space: nowrap">
+		<div style="float:right">
+            <?php if( $backup['backup_type'] == 'database'): ?> 
+            
+            <?php if( $backup['can_restore'] ): ?>
+    			<a href="<?php //echo $this->url('/dashboard/backup_pro/dashboard/restore?id='.urlencode($view_helper->m62Encode($backup['details_file_name'])).'&type='.$backup['backup_type']); ?>" title="<?php echo $this->_('restore', 'sites'); ?>" id="restore_link_<?php echo $count; ?>">
+    				<img src="<?php echo $bp_static_path; ?>/images/restore.png" alt="<?php echo $this->_('restore', 'sites'); ?>" class="">
+    			</a> 
+            <?php else: ?>
+                <img src="<?php echo $bp_static_path; ?>/images/restore.png" alt="<?php echo $this->_('restore'); ?>" class="desaturate">
+            <?php endif; ?>
+			
+		<?php endif; ?>
+        <?php if( $backup['can_download'] ): 
+        $encoded_name = urlencode($view_helper->m62Encode($backup['details_file_name']));
+        $download_url = $this->url('/dashboard/backup_pro/manage/download?id='.$encoded_name.'&type='.$backup['backup_type']);// wp_nonce_url($url_base.'download&noheader=true&id='.$encoded_name.'&type='.$backup['backup_type'], $encoded_name);
+        ?>
+    		<a href="<?php echo $download_url;?>" title="<?php echo $this->_('download', 'sites'); ?>" id="download_link_<?php echo $count; ?>">
+    			<img src="<?php echo $bp_static_path; ?>/images/download.png" alt="<?php echo $this->_('download', 'sites'); ?>" class="">
+    		</a> 
+		<?php else: ?>
+			<img src="<?php echo $bp_static_path; ?>/images/download.png" alt="<?php echo $this->_('download', 'sites'); ?>" class="desaturate">
+		<?php endif; ?>
+		</div>
+	</td>
+	<?php endif; ?>	
+</tr>
+<?php $count++; endforeach; ?>
+</tbody>
+</table>

@@ -2,9 +2,9 @@
     <a class="list-group-item <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>"><?php echo $this->_('manage_sites', 'sites'); ?></a>   
     
     <?php foreach($this->layout()->site_menu AS $site): ?>
-    <a class="list-group-item <?php echo ($this->active_sidebar == 'site_nav_'.$site['id'] ? 'active' : ''); ?>" href="<?php echo $this->url('dashboard', array('site_id' => $site['id'])); ?>"><?php echo $site['site_name']; ?></a>
+    <a class="list-group-item <?php echo ($this->active_sidebar == 'site_nav_'.$site['id'] ? 'active' : ''); ?>" href="<?php echo $this->url('dashboard', array('site_id' => $site['id'])); ?>"><?php echo $site['site_name']; ?> (<?php echo $site['platform']; ?>)</a>
     <?php if($this->active_sidebar == 'site_nav_'.$site['id']): ?>
-    <a style="background-color: #f7f7f9" class=" list-group-item  <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('dashboard', array('site_id' => $site['id'])); ?>">
+    <a style="background-color: #f7f7f9" class=" list-group-item  <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>">
         <?php echo $this->glyphicon('chevron-right'); ?> <?php echo $this->_('dashboard', 'sites'); ?>
     </a>
     <a style="background-color: #f7f7f9" class=" list-group-item <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>">
