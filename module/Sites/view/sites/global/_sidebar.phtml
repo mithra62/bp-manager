@@ -13,7 +13,7 @@
     <a style="background-color: #f7f7f9" class=" list-group-item  <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>">
         <?php echo $this->glyphicon('chevron-right'); ?>  <?php echo $this->_('backup_files', 'sites'); ?>
     </a>
-    <a style="background-color: #f7f7f9" class=" list-group-item <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('site_settings', array('site_id' => $site['id'])); ?>">
+    <a style="background-color: #f7f7f9" class=" list-group-item <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('site_settings', array('site_id' => $site['id'], 'section' => 'general')); ?>">
         <?php echo $this->glyphicon('chevron-right'); ?>  <?php echo $this->_('settings', 'sites'); ?>
     </a> 
    

@@ -44,6 +44,7 @@ class Api
         );
         $client = $this->getClient($config);
         $site_details = $client->get('/info/site');
+        
         if($site_details instanceof Hal) 
         {
             return $site_details->getData();

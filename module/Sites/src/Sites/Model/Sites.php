@@ -57,6 +57,11 @@ class Sites extends AbstractModel
             'platform' => (! empty($data['platform']) ? $data['platform'] : ''),
             'api_key' => (! empty($data['api_key']) ? $data['api_key'] : ''),
             'api_secret' => (! empty($data['api_secret']) ? $data['api_secret'] : ''),
+            'errors' => (! empty($data['_system_errors']) ? json_encode($data['_system_errors']) : ''),
+            'file_backup_total' => (! empty($data['file_backup_total']) ? $data['file_backup_total'] : 0),
+            'database_backup_total' => (! empty($data['database_backup_total']) ? $data['database_backup_total'] : 0),
+            'first_backup' => (! empty($data['first_backup']) ? $data['first_backup'] : ''),
+            'last_backup' => (! empty($data['last_backup']) ? $data['last_backup'] : ''),
             'last_modified' => new \Zend\Db\Sql\Expression('NOW()')
         );
     }

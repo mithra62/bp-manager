@@ -115,7 +115,7 @@ return array(
             'site_settings' => array( //Site Setings Routes
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/sites/settings/:site_id',
+                    'route' => '/sites/settings/:section/:site_id',
                     'constraints' => array(
                         'site_id' => '[0-9]+'
                     ),                    
