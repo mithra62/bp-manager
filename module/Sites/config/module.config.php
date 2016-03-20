@@ -63,7 +63,7 @@ return array(
             'dashboard' => array( //Dashboard Routes
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/dashboard/:site_id',
+                    'route' => '/dashboard',
                     'constraints' => array(
                         'site_id' => '[0-9]+'
                     ),                    
@@ -77,40 +77,31 @@ return array(
                     'view' => array(
         				'type' => 'segment',
         				'options' => array(
-        				    'route' => '/[:site_id]',
+        				    'route' => '/:site_id',
         				    'constraints' => array(
         				        'user_id' => '[0-9]+'
         				    ),
         				    'defaults' => array(
-        				        'action' => 'view'
+        				        'action' => 'index'
         				    )
         				)
                     ),
-                    'remove' => array(
+                    'database' => array(
         				'type' => 'segment',
         				'options' => array(
-        				    'route' => '/remove/:site_id',
+        				    'route' => '/database/:site_id',
         				    'constraints' => array(
-        				        'user_id' => '[0-9]+'
+        				        'site_id' => '[0-9]+'
         				    ),
         				    'defaults' => array(
-        				        'action' => 'remove'
+        				        'action' => 'database'
         				    )
         				)
                     ),
-                    'add' => array(
+                    'files' => array(
         				'type' => 'segment',
         				'options' => array(
-        				    'route' => '/add',
-        				    'defaults' => array(
-        				        'action' => 'add'
-        				    )
-        				)
-                    ),
-                    'edit' => array(
-        				'type' => 'segment',
-        				'options' => array(
-        				    'route' => '/edit/:site_id',
+        				    'route' => '/files/:site_id',
         				    'constraints' => array(
         				        'user_id' => '[0-9]+'
         				    ),

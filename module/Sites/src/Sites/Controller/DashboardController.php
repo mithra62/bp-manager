@@ -61,6 +61,54 @@ class DashboardController extends AbstractSitesController
         $view['site_data'] = $site_data;
         $view['section'] = 'dashboard';
         $view['active_sidebar'] = 'site_nav_'.$id;
+        $this->layout()->setVariable('active_sidebar', $view['active_sidebar']);
+        return $view;
+    }
+    
+    public function databaseAction()
+    {
+        $id = $this->params()->fromRoute('site_id');
+        if (! $id ) {
+            return $this->redirect()->toRoute('sites');
+        }
+        
+        $site = $this->getServiceLocator()->get('Sites\Model\Sites');
+        $hash = $this->getServiceLocator()->get('Application\Model\Hash');
+        $site_data = $site->getSiteById($id, $hash);
+        if (! $site_data ) {
+            return $this->redirect()->toRoute('sites');
+        }
+        
+        $view = array();
+        $setting_data = $site->getApi()->getSettings($site_data);
+        $backup_data = $site->getApi()->getBackups($site_data);
+        
+        $backups = $backup_data['backups'];
+        $backup_meta = $backup_data['backup_meta'];
+        $view['settings'] = $setting_data->getData();
+        if(count($backups) > $view['settings']['dashboard_recent_total'])
+        {
+            //we have to remove a few
+            $count = 1;
+            $view_backups = array();
+            foreach($backups AS $time => $backup)
+            {
+                $filtered_backups[$time] = $backup;
+                if($count >= $this->settings['dashboard_recent_total'])
+                {
+                    break;
+                }
+                $count++;
+            }
+            $view_backups = $filtered_backups;
+        }
+        
+        $view['backup_meta'] = $backup_meta;
+        $view['backups'] = $backups;
+        $view['site_data'] = $site_data;
+        $view['section'] = 'dashboard';
+        $view['active_sidebar'] = 'site_nav_'.$id;
+        $this->layout()->setVariable('active_sidebar', $view['active_sidebar']);
         return $view;
     }
 }

@@ -1,0 +1,56 @@
+<?php $this->headTitle()->append( $this->_('dashboard', 'sites') )->append( $site_data['site_name'] ); ?>
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('dashboard', 'sites'); ?> <small><?php echo $site_data['site_name']; ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('sites/global/_sidebar', array('site_data' => $site_data)); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+      
+      <?php echo $this->render('partials/_tabs'); ?>
+      
+        <div class="panel">
+        	<table class="table"  width="100%"  border="0" cellpadding="0" cellspacing="0">
+        	<thead>
+        		<tr class="even">
+        			<th><?php echo $this->_('total_backups')?></th>
+        			<th style="width:65%"><?php echo $this->_('total_space_used'); ?></th>
+        			<th><div style="float:right"><?php echo $this->_('last_backup_taken'); ?></div></th>
+        			<th><div style="float:right"><?php echo $this->_('first_backup_taken'); ?></div></th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr class="odd">
+        			<td><?php echo $backup_meta['database']['total_backups']; ?></td>
+        			<td><?php echo $backup_meta['database']['total_space_used']; ?></td>
+        			<td><div style="float:right"><?php echo ($backup_meta['database']['newest_backup_taken'] != '' ? $this->m62DateTime($backup_meta['database']['newest_backup_taken']) : $this->_('na')); ?></div></td>
+        			<td><div style="float:right"><?php echo ($backup_meta['database']['oldest_backup_taken'] != '' ? $this->m62DateTime($backup_meta['database']['oldest_backup_taken']) : $this->_('na')); ?></div></td>
+        		</tr>
+        	</tbody>
+        	</table>
+        </div>   
+        
+        
+        
+        <div class=" panel">
+        
+        	<?php 
+        		if(count($backups) > 0):
+        			$options = array('enable_type' => 'yes', 'enable_editable_note' => 'yes', 'enable_actions' => 'yes', 'enable_delete' => 'no', 'backups' => $backups);
+                    echo $this->render('partials/_backup_table', $options);
+        			//include '_includes/_backup_table.php';
+        	?>
+        	<?php else: ?>
+        		<div class="no_backup_found"><?php echo $this->_('no_backups_exist', 'sites')?> <a href="<?php //echo $this->url('/dashboard/backup_pro/backup_database'); ?>"><?php echo $this->_('would_you_like_to_backup_database_now', 'sites')?></a></div>
+        	<?php endif; ?>
+        
+        </div>      
+      
+      
+      
+      </div>
+
+    </div>
+</div>    
