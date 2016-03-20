@@ -48,14 +48,14 @@
 <tr class="odd">
 	<td class=" backup_pro_backup_status <?php echo $status_class; ?>"></td>
 	<?php if(isset($enable_delete) && $enable_delete == 'yes' ): ?>
-	<td><input name="backups[]" id="backup_check_<?php echo $count; ?>" value="<?php echo urlencode($view_helper->m62Encode($backup['file_name'])); ?>" type="checkbox" class="bp_toggle_check">
+	<td><input name="backups[]" id="backup_check_<?php echo $count; ?>" value="<?php //echo urlencode($view_helper->m62Encode($backup['file_name'])); ?>" type="checkbox" class="bp_toggle_check">
 	
 	</td>
 	<?php endif; ?>
 	<td style="white-space: nowrap">
     	<?php if(isset($backup['storage_locations']) && is_array($backup['storage_locations']) ): ?>
     		<?php foreach($backup['storage_locations'] AS $location_id => $storage): ?>
-    			<img src="<?php echo $bp_static_path.'/images/storage/'.$view_helper->m62Escape($storage['storage_location_driver']); ?>.png" class="" title="<?php echo $view_helper->m62Escape($storage['storage_location_name']); ?>">
+    			<img src="<?php echo $bp_static_path.'/images/storage/'.$this->escapehtmlattr($storage['storage_location_driver']); ?>.png" class="" title="<?php echo $this->escapehtmlattr($storage['storage_location_name']); ?>">
     		<?php endforeach; ?>
     	<?php endif; ?>
 	</td>

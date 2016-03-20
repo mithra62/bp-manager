@@ -98,19 +98,33 @@ return array(
         				    )
         				)
                     ),
-                    'files' => array(
+                    'file' => array(
         				'type' => 'segment',
         				'options' => array(
-        				    'route' => '/files/:site_id',
+        				    'route' => '/file/:site_id',
         				    'constraints' => array(
-        				        'user_id' => '[0-9]+'
+        				        'site_id' => '[0-9]+'
         				    ),
         				    'defaults' => array(
-        				        'action' => 'edit'
+        				        'action' => 'file'
         				    )
         				)
                     )
                 )
+            ), //End User Routes
+            'site_settings' => array( //Site Setings Routes
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/sites/settings/:site_id',
+                    'constraints' => array(
+                        'site_id' => '[0-9]+'
+                    ),                    
+                    'defaults' => array(
+        				'controller' => 'Sites\Controller\Settings',
+        				'action' => 'index'
+                    ),
+                ),
+                'may_terminate' => true
             ), //End User Routes
         )
 

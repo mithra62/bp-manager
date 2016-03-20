@@ -89,8 +89,22 @@ class Api
             'site_url' => $site_details['api_endpoint_url'],
         );
         
+        $route = '/backups';
+        $payload = array();
+        switch($type)
+        {
+            case 'database':
+                $payload = array('type' => 'db');
+            break;
+            
+            case 'file':
+                $payload = array('type' => 'file');
+            break;
+        }
+        
         $client = $this->getClient($config);
-        $backups = $client->get('/backups');        
+        $backups = $client->get($route, $payload);
+        
         if($backups instanceof Hal)
         {
             return $this->normalizeBackups($backups, $type);
@@ -125,7 +139,7 @@ class Api
             {
                 $storage_resource = $value->getResources();
                 $return_backups[$key] = $value->getData();
-                $return_backups[$key]['storage'] = $this->normalizeStorage($storage_resource['storage']);
+                $return_backups[$key]['storage_locations'] = $this->normalizeStorage($storage_resource['storage']);
             }
         }
         
