@@ -10,6 +10,7 @@
       <div class="col-sm-9 col-md-9">
       
       <?php echo $this->render('partials/_tabs', array('active_tab' => 'dashboard', 'site_data' => $site_data)); ?>
+      <?php echo $this->render('sites/global/_errors', array('site_data' => $site_data)); ?>  
       
             <div class="panel">
             	<table border="0" cellspacing="0" cellpadding="0" class="table"  width="100%" >

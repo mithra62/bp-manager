@@ -1,0 +1,14 @@
+<?php 
+if($site_data['errors'] != '') :
+    $errors = json_decode($site_data['errors']); 
+    if($errors):
+        foreach($errors AS $error) :
+?>
+<div class="alert alert-warning" role="alert">
+	<?php echo $error; ?>
+</div>
+<?php 
+        endforeach;
+    endif;
+endif;
+?>  

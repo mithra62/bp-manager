@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 <?php foreach($sites AS $site):?>
-                <tr class="<?php echo ($site['active'] == '0' ? 'warning' : ''); ?>">
+                <tr class="<?php echo ($site['errors'] != '' ? 'warning' : ''); ?>">
                     <td><?php echo $site['id']; ?></td>
                     <td><?php echo $site['site_name']; ?></td>
                     <td><?php echo $site['platform']; ?></td>
