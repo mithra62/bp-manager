@@ -34,6 +34,13 @@ class DashboardController extends AbstractSitesController
         
         $view = array();
         $setting_data = $site->getApi()->getSettings($site_data);
+        if(!$setting_data) {
+            //we can't get data so we have to update keys most likely
+            $this->flashMessenger()->addErrorMessage($this->translate('api_access_invlaid', 'sites'));
+            return $this->redirect()->toRoute('sites/edit', array('site_id' => $id));
+        }
+        
+        
         $backup_data = $site->getApi()->getBackups($site_data);
         
         $backups = $backup_data['backups'];

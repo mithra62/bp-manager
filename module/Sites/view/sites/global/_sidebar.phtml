@@ -7,10 +7,10 @@
     <a style="background-color: #f7f7f9" class=" list-group-item  <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('dashboard/view', array('site_id' => $site['id'])); ?>">
         <?php echo $this->glyphicon('chevron-right'); ?> <?php echo $this->_('dashboard', 'sites'); ?>
     </a>
-    <a style="background-color: #f7f7f9" class=" list-group-item <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>">
+    <a style="background-color: #f7f7f9" class=" list-group-item <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('backup', array('site_id' => $site['id'], 'type' => 'database')); ?>">
         <?php echo $this->glyphicon('chevron-right'); ?>  <?php echo $this->_('backup_database', 'sites'); ?>
     </a>
-    <a style="background-color: #f7f7f9" class=" list-group-item  <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('sites'); ?>">
+    <a style="background-color: #f7f7f9" class=" list-group-item  <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('backup', array('site_id' => $site['id'], 'type' => 'files')); ?>">
         <?php echo $this->glyphicon('chevron-right'); ?>  <?php echo $this->_('backup_files', 'sites'); ?>
     </a>
     <a style="background-color: #f7f7f9" class=" list-group-item <?php echo ($this->active_sidebar == 'manage_sites' ? 'active' : ''); ?>" href="<?php echo $this->url('site_settings', array('site_id' => $site['id'], 'section' => 'general')); ?>">

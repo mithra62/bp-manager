@@ -353,7 +353,7 @@ class Sites extends AbstractModel
      * @param array $data
      * @param \Application\Model\Hash $hash
      */
-    public function updateSite($site_id, array $data, \Application\Model\Hash $hash)
+    public function updateSite($site_id, array $data, \Application\Model\Hash $hash = null)
     {
         $ext = $this->trigger(self::EventSiteUpdatePre, $this, compact('site_id', 'data', 'hash'), $this->setXhooks($data));
         if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $data = $ext->last();
@@ -366,7 +366,15 @@ class Sites extends AbstractModel
         
         $sql = $this->getSQL($data);
         $sql['created_date'] = new \Zend\Db\Sql\Expression('NOW()');
-        $sql['api_secret'] = $hash->encrypt($data['api_secret']);
+        if(!is_null($hash))
+        {
+            $sql['api_secret'] = $hash->encrypt($data['api_secret']);
+        }
+        else
+        {
+            unset($sql['api_secret']);
+        }
+        
         if ($this->update('sites', $sql, array('id' => $site_id))) {
     
             $ext = $this->trigger(self::EventSiteUpdatePost, $this, compact('site_id', 'data', 'hash'), $this->setXhooks($data));
@@ -393,7 +401,15 @@ class Sites extends AbstractModel
             
             return $site_id;
         }
-    
     }   
     
+    public function execBackup(array $site_details, $type = 'database')
+    {
+        if($this->getApi()->execBackup($site_details, $type))
+        {
+            unset($site_details['site_name']);
+            $this->updateSite($site_details['id'], $site_details);
+            return true;
+        }
+    }
 }

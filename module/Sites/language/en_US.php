@@ -38,7 +38,7 @@ return array(
     'api_key_required' => 'An API Key is required',
     'api_secret_required' => 'An API Secret is required',
     'create_site_exist_error' => 'That API is already being monitored',
-    
+    'api_access_invlaid' => 'For some reason we can\'t access your site anymore; update your connection detais to continue.',
     
     
     

@@ -1,0 +1,39 @@
+<?php $this->headTitle()->append( $this->_('manage_sites', 'sites') )->append( $this->_('sites', 'sites') ); ?>
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('backup', 'sites'); ?> <small><?php echo $site_data['site_name']; ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('sites/global/_sidebar', array('site_data' => $site_data)); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+       
+      <h2><?php echo $this->_('backup', 'sites'); ?></h2>
+      
+		<div id="backup_instructions">
+			<?php echo $this->_('backup_in_progress_instructions', 'sites'); ?>
+		</div>	
+		<div id="backup_running_details"  style="display:none" ><br /><br />
+		<?php echo $this->_('backup_in_progress', 'sites'); ?>
+		<img src="<?php echo $bp_static_path; ?>/images/indicator.gif" id="animated_image" />
+		</div><br />
+				
+<?php 
+$form = $this->form;
+$form->setAttribute('id', 'ip_form');
+$form->prepare();
+echo $this->form()->openTag($form);
+$csrf = $form->get('_x');
+echo $this->formRow($csrf);
+?>
+<button type="submit" value="1"	id="_backup_direct" name="submitAddprofile" class="btn btn-primary">
+<?php echo $this->_('start_backup', 'sites'); ?>
+</button>
+<?php echo $this->form()->closeTag() ?>					
+
+              
+      </div>
+
+    </div>
+</div>    

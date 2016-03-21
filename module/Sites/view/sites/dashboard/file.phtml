@@ -24,10 +24,10 @@
         	</thead>
         	<tbody>
         		<tr class="odd">
-        			<td><?php echo $backup_meta['database']['total_backups']; ?></td>
-        			<td><?php echo $backup_meta['database']['total_space_used']; ?></td>
-        			<td><div style="float:right"><?php echo ($backup_meta['database']['newest_backup_taken'] != '' ? $this->m62DateTime($backup_meta['database']['newest_backup_taken']) : $this->_('na', 'sites')); ?></div></td>
-        			<td><div style="float:right"><?php echo ($backup_meta['database']['oldest_backup_taken'] != '' ? $this->m62DateTime($backup_meta['database']['oldest_backup_taken']) : $this->_('na', 'sites')); ?></div></td>
+        			<td><?php echo $backup_meta['files']['total_backups']; ?></td>
+        			<td><?php echo $backup_meta['files']['total_space_used']; ?></td>
+        			<td><div style="float:right"><?php echo ($backup_meta['files']['newest_backup_taken'] != '' ? $this->m62DateTime($backup_meta['files']['newest_backup_taken']) : $this->_('na', 'sites')); ?></div></td>
+        			<td><div style="float:right"><?php echo ($backup_meta['files']['oldest_backup_taken'] != '' ? $this->m62DateTime($backup_meta['files']['oldest_backup_taken']) : $this->_('na', 'sites')); ?></div></td>
         		</tr>
         	</tbody>
         	</table>

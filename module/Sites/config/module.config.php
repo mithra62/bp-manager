@@ -126,6 +126,20 @@ return array(
                 ),
                 'may_terminate' => true
             ), //End User Routes
+            'backup' => array( //Dashboard Routes
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/backup/:type/:site_id',
+                    'constraints' => array(
+                        'site_id' => '[0-9]+'
+                    ),                    
+                    'defaults' => array(
+        				'controller' => 'Sites\Controller\Backup',
+        				'action' => 'index'
+                    ),
+                ),
+                'may_terminate' => true
+            ), //End User Routes
         )
 
     ),

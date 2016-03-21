@@ -115,6 +115,25 @@ class Api
     }
     
     /**
+     * Executes a backup against $site_details
+     * @param array $site_details
+     * @param string $type
+     * @return bool
+     */
+    public function execBackup(array $site_details, $type)
+    {
+        $config = array(
+            'api_key' => $site_details['api_key'],
+            'api_secret' => $site_details['api_secret'],
+            'site_url' => $site_details['api_endpoint_url'],
+        );
+        
+        $route = '/backups';
+        $client = $this->getClient($config);
+        return $client->post($route);        
+    }
+    
+    /**
      * Returns an instance of the client object
      * @param array $config
      * @param string $force
@@ -130,6 +149,11 @@ class Api
         return $this->client;
     }
     
+    /**
+     * Takes the backup data and returns it into a standard format
+     * @param Hal $backups
+     * @return array
+     */
     protected function normalizeBackups(Hal $backups)
     {
         $resources = $backups->getResources();
@@ -152,6 +176,11 @@ class Api
         return $return;
     }
     
+    /**
+     * Takes the storage details and returns an array
+     * @param array $storage
+     * @return array
+     */
     protected function normalizeStorage(array $storage = array())
     {
         $return = array();
