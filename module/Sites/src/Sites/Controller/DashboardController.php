@@ -54,17 +54,17 @@ class DashboardController extends AbstractSitesController
             foreach($backups AS $time => $backup)
             {
                 $filtered_backups[$time] = $backup;
-                if($count >= $this->settings['dashboard_recent_total'])
+                if($count >= $view['settings']['dashboard_recent_total'])
                 {
                     break;
                 }
                 $count++;
             }
             $view_backups = $filtered_backups;
-        }      
+        }    
         
         $view['backup_meta'] = $backup_meta;
-        $view['backups'] = $backups;
+        $view['backups'] = $view_backups;
         $view['site_data'] = $site_data;
         $view['section'] = 'dashboard';
         $view['active_sidebar'] = 'site_nav_'.$id;
