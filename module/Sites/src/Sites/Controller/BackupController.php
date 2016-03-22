@@ -40,8 +40,8 @@ class BackupController extends AbstractSitesController
             $form->setData($request->getPost());
             if ($form->isValid($formData)) {
                 if ($site->execBackup($site_data, $type)) {
-                    $this->flashMessenger()->addSuccessMessage($this->translate('user_removed', 'app'));
-                    return $this->redirect()->toRoute('manage_users');
+                    $this->flashMessenger()->addSuccessMessage($this->translate('backup_progress_bar_stop', 'sites'));
+                    return $this->redirect()->toRoute('dashboard/view', array('site_id' => $id));
                 }
             }
         }        
