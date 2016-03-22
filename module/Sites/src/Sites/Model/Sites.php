@@ -25,10 +25,22 @@ use Application\Model\AbstractModel;
 class Sites extends AbstractModel
 {
 
+    /**
+     * The InputFilter object
+     * @var InputFilter
+     */
     protected $inputFilter;
     
+    /**
+     * The API object
+     * @var Api
+     */
     protected $api = null;
     
+    /**
+     * An instance of the Sites\Team object
+     * @var Sites\Team
+     */
     protected $team = null;
 
     /**
@@ -86,12 +98,21 @@ class Sites extends AbstractModel
         return $this->api;
     }
     
-    public function setTeam($team)
+    /**
+     * Sets the Team instance
+     * @param Sites\Team $team
+     * @return \Sites\Model\Sites
+     */
+    public function setTeam(Sites\Team $team)
     {
         $this->team = $team;
         return $this;
     }
     
+    /**
+     * Returns an instance of Team
+     * @return Sites\Team
+     */
     public function getTeam()
     {
         return $this->team;
@@ -403,6 +424,12 @@ class Sites extends AbstractModel
         }
     }   
     
+    /**
+     * Executes a backup
+     * @param array $site_details
+     * @param string $type
+     * @return boolean
+     */
     public function execBackup(array $site_details, $type = 'database')
     {
         if($this->getApi()->execBackup($site_details, $type))

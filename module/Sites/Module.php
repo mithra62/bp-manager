@@ -3,6 +3,7 @@ namespace Sites;
 
 use Sites\Model\Sites;
 use Sites\Model\Api;
+use Sites\Model\Sites\Team;
 
 use Sites\Form\SiteForm;
 
@@ -39,16 +40,16 @@ class Module
                     
                     $site = new Sites($adapter, $db);
                     $site->setApi($sm->get('Sites\Model\Api'));
+                    $site->setTeam($sm->get('Sites\Model\Sites\Team'));
                     return $site;
                 },
                 // setting up the Authentication stuff
-                'Sites\Model\Site\Teams' => function ($sm) {
+                'Sites\Model\Sites\Team' => function ($sm) {
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $db = $sm->get('SqlObject');
                     
-                    $site = new Sites($adapter, $db);
-                    $site->setApi($sm->get('Sites\Model\Api'));
-                    return $site;
+                    $team = new Team($adapter, $db);
+                    return $team;
                 },
 				'Sites\Form\SiteForm' => function($sm) {
 					return new SiteForm('site_form');
