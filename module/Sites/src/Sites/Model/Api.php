@@ -70,7 +70,7 @@ class Api
         $settings = $client->get('/settings');
         if($settings instanceof Hal)
         {
-            return $settings;
+            return $settings->getData();
         }
         
         return array();
