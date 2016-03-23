@@ -30,10 +30,6 @@ class IndexController extends AbstractSitesController
      */
     public function indexAction()
     {
-        if (! $this->perm->check($this->identity, 'view_sites')) {
-            return $this->redirect()->toRoute('home');
-        }
-        
         $order = $this->getRequest()->getQuery('order', false);
         $order_dir = $this->getRequest()->getQuery('order_dir', false);
         $limit = $this->getRequest()->getQuery('limit', 10);

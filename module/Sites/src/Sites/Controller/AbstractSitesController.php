@@ -38,12 +38,6 @@ abstract class AbstractSitesController extends AbstractController
     protected $site_data = array();
     
     /**
-     * The backup data return from the site
-     * @var array
-     */
-    protected $backup_data = array();
-    
-    /**
      * The actions that will require site_id processing
      * @var array
      */
@@ -55,6 +49,11 @@ abstract class AbstractSitesController extends AbstractController
      */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
+        if( !$this->getIdentity() )
+        {
+            return $this->redirect()->toRoute('home');
+        }
+        
         $this->prepareSitesData();
         $this->layout()->setVariable('active_nav', 'sites');
         $sites = $this->getServiceLocator()->get('Sites\Model\Sites');
@@ -69,6 +68,10 @@ abstract class AbstractSitesController extends AbstractController
      */
     protected function prepareSitesData()
     {
+        $this->site = $this->getServiceLocator()->get('Sites\Model\Sites');
+        $this->hash = $this->getServiceLocator()->get('Application\Model\Hash');
+        
+        //does this controller action require a site_id?
         if(in_array($this->params('action'), $this->bypass_id)) {
             return;
         }
@@ -77,22 +80,18 @@ abstract class AbstractSitesController extends AbstractController
         if (! $this->site_id ) {
             return $this->redirect()->toRoute('sites');
         }
-        
-        $site = $this->getServiceLocator()->get('Sites\Model\Sites');
-        $hash = $this->getServiceLocator()->get('Application\Model\Hash');
-        $this->site_data = $site->getSiteById($this->site_id, $hash);
+
+        //ok, we're looking at a site,
+        $this->site_data = $this->site->getSiteById($this->site_id, $this->hash);
         if (! $this->site_data ) {
             return $this->redirect()->toRoute('sites');
         }
         
-        $this->site_data['settings'] = $site->getApi()->getSettings($this->site_data);
+        $this->site_data['settings'] = $this->site->getApi()->getSettings($this->site_data);
         if(!$this->site_data['settings']) {
             //we can't get data so we have to update keys most likely
             $this->flashMessenger()->addErrorMessage($this->translate('api_access_invlaid', 'sites'));
             return $this->redirect()->toRoute('sites/edit', array('site_id' => $this->site_id));
         }
-        
-        
-        $this->backup_data = $site->getApi()->getBackups($this->site_data);
     }
 }
