@@ -57,7 +57,7 @@ abstract class AbstractSitesController extends AbstractController
         $this->prepareSitesData();
         $this->layout()->setVariable('active_nav', 'sites');
         $sites = $this->getServiceLocator()->get('Sites\Model\Sites');
-        $sites_data = $sites->getAllSites();     
+        $sites_data = $sites->getAllUserSites( $this->getIdentity() );
         $this->layout()->setVariable('site_menu', $sites_data);
         return parent::onDispatch($e);
     }
@@ -84,6 +84,10 @@ abstract class AbstractSitesController extends AbstractController
         //ok, we're looking at a site,
         $this->site_data = $this->site->getSiteById($this->site_id, $this->hash);
         if (! $this->site_data ) {
+            return $this->redirect()->toRoute('sites');
+        }
+        
+        if(! $this->site->getTeam()->userOnTeam($this->getIdentity(), $this->site_id) ){ 
             return $this->redirect()->toRoute('sites');
         }
         

@@ -14,6 +14,7 @@ use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 use Application\Model\AbstractModel;
+use \DateTime;
 
 /**
  * Sites - Sites Locker Model
@@ -275,20 +276,18 @@ class Sites extends AbstractModel
     }
     
     /**
-     * Returns all the system users
+     * Returns all the sites a user can view
      *
-     * @param string $status
+     * @param int $user_id
      * @return array
      */
-    public function getAllSites($status = FALSE)
+    public function getAllUserSites($user_id)
     {
-        $sql = $this->db->select()->from('sites');
-    
-        if ($status != '') {
-            $sql = $sql->where(array(
-                'user_status' => $status
-            ));
-        }
+        $sql = $this->db->select()->from(array('st' => 'site_teams'));
+        $sql->join(array('s' => 'sites'), 'st.site_id = s.id');
+        $sql = $sql->where(array(
+            'user_id' => $user_id
+        ));
     
         return $this->getRows($sql);
     }
@@ -312,7 +311,7 @@ class Sites extends AbstractModel
             $data['api_secret'] = $hash->decrypt($data['api_secret']);
         }
         
-        return $data;
+        return $this->refreshSiteData($id, $data);
     }
     
     /**
@@ -323,7 +322,7 @@ class Sites extends AbstractModel
      */
     public function getSiteByEndpointUrl($url, \Application\Model\Hash $hash = null) 
     {
-        $sql = $this->db->select()->from('sites');
+        $sql = $this->db->select()->from(array('s' => 'sites'));
         $sql = $sql->where(array(
             'api_endpoint_url' => $url
         ));
@@ -334,11 +333,34 @@ class Sites extends AbstractModel
             $data['api_secret'] = $hash->decrypt($data['api_secret']);
         }
         
+        return $this->refreshSiteData($data['id'], $data);
+    }
+    
+    /**
+     * Will update the Site data from the API if within an hour of last refresh
+     * @param int $id The site ID we're updating
+     * @param array $data The site info we're connecting with
+     * @return array The refreshed site data (if any)
+     */
+    protected function refreshSiteData($id, array $data)
+    {
+        $date1 = new DateTime($data['last_modified']);
+        $date2 = new DateTime(date('Y-m-d H:i:s'));
+        
+        $diff = $date2->diff($date1)->format("%a");
+        if($diff >= 1) {
+            $api_data = $this->getApi()->getSiteDetails($data['api_key'], $data['api_secret'], $data['api_endpoint_url']);
+            if($api_data) {
+                $data += $api_data;
+                $this->updateSite($id, $data);
+            }
+        }
+        
         return $data;
     }
     
     /**
-     * Creates a member
+     * Creates a Site
      *
      * @param array $data
      * @param \Application\Model\Hash $hash
@@ -358,9 +380,10 @@ class Sites extends AbstractModel
         $sql = $this->getSQL($data);
         $sql['created_date'] = new \Zend\Db\Sql\Expression('NOW()');
         $sql['api_secret'] = $hash->encrypt($data['api_secret']);
+        $sql['owner_id'] = $data['owner_id'];
         $site_id = $data['site_id'] = $this->insert('sites', $sql);
         if ($site_id) {
-    
+            $this->team->addTeamMember($site_id, $data['owner_id']);
             $ext = $this->trigger(self::EventSiteAddPost, $this, compact('site_id', 'data', 'hash'), $this->setXhooks($data));
             if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $site_id = $ext->last();
     
@@ -386,7 +409,6 @@ class Sites extends AbstractModel
         }
         
         $sql = $this->getSQL($data);
-        $sql['created_date'] = new \Zend\Db\Sql\Expression('NOW()');
         if(!is_null($hash))
         {
             $sql['api_secret'] = $hash->encrypt($data['api_secret']);
@@ -416,7 +438,7 @@ class Sites extends AbstractModel
         if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $site_id = $ext->last();
     
         if ($this->remove('sites', array('id' => $site_id))) {
-    
+            $this->remove('site_teams', array('site_id' => $site_id));
             $ext = $this->trigger(self::EventSiteRemovePost, $this, compact('site_id'), array());
             if ($ext->stopped()) return $ext->last(); elseif ($ext->last()) $site_id = $ext->last();
             

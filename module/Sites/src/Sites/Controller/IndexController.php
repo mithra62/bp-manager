@@ -36,7 +36,7 @@ class IndexController extends AbstractSitesController
         $page = $this->getRequest()->getQuery('page', 1);
         
         $sites = $this->getServiceLocator()->get('Sites\Model\Sites');
-        $sites_data = $sites->setLimit($limit)->setOrderDir($order_dir)->setOrder($order)->setPage($page)->getAllSites();
+        $sites_data = $sites->setLimit($limit)->setOrderDir($order_dir)->setOrder($order)->setPage($page)->getAllUserSites( $this->getIdentity() );
         if(!$sites_data) {
             $this->flashMessenger()->addMessage($this->translate('site_required_to_begin', 'sites'));
             return $this->redirect()->toRoute('sites/add');
@@ -84,7 +84,9 @@ class IndexController extends AbstractSitesController
             $site_form->setInputFilter($inputFilter);
             $site_form->setData($request->getPost());
             if ($site_form->isValid($formData)) {
-                $site_id = $id = $site->addSite($formData->toArray(), $hash);
+                $data = $formData->toArray();
+                $data['owner_id'] = $this->getIdentity();
+                $site_id = $id = $site->addSite($data, $hash);
                 if ($site_id) {
                     $this->flashMessenger()->addSuccessMessage($this->translate('site_added', 'sites'));
                     return $this->redirect()->toRoute('sites/view', array(
