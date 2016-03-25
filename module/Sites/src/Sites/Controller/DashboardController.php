@@ -69,29 +69,16 @@ class DashboardController extends AbstractSitesController
     
     public function fileAction()
     {
-        $id = $this->params()->fromRoute('site_id');
-        if (! $id ) {
-            return $this->redirect()->toRoute('sites');
-        }
-        
-        $site = $this->getServiceLocator()->get('Sites\Model\Sites');
-        $hash = $this->getServiceLocator()->get('Application\Model\Hash');
-        $site_data = $site->getSiteById($id, $hash);
-        if (! $site_data ) {
-            return $this->redirect()->toRoute('sites');
-        }
-        
         $view = array();
-        $setting_data = $site->getApi()->getSettings($site_data);
-        $backup_data = $site->getApi()->getBackups($site_data, 'file');
+        $backup_data = $this->site->getApi()->getBackups($this->site_data, 'file');
         
         $backups = $backup_data['backups'];
         $backup_meta = $backup_data['backup_meta'];
-        $view['settings'] = $setting_data->getData();
+        $view['settings'] = $this->site_data['settings'];
         $view['backup_meta'] = $backup_meta;
         $view['backups'] = $backups;
-        $view['site_data'] = $site_data;
-        $view['active_sidebar'] = 'site_nav_'.$id;
+        $view['site_data'] = $this->site_data;
+        $view['active_sidebar'] = 'site_nav_'.$this->site_id;
         $this->layout()->setVariable('active_sidebar', $view['active_sidebar']);
         return $view;
     }
