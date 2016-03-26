@@ -98,7 +98,7 @@
         			//include '_includes/_backup_table.php';
         	?>
         	<?php else: ?>
-        		<div class="no_backup_found"><?php echo $this->_('no_backups_exist', 'sites')?> <a href="<?php //echo $this->url('/dashboard/backup_pro/backup_database'); ?>"><?php echo $this->_('would_you_like_to_backup_database_now', 'sites')?></a></div>
+        		<div class="no_backup_found"><?php echo $this->_('no_backups_exist', 'sites')?> <a href="<?php echo $this->url('backup', array('site_id' => $site_data['id'], 'type' => 'database')); ?>"><?php echo $this->_('would_you_like_to_backup_database_now', 'sites')?></a></div>
         	<?php endif; ?>
         
         </div>      

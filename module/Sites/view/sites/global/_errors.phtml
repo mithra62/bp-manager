@@ -2,10 +2,56 @@
 if($site_data['errors'] != '') :
     $errors = json_decode($site_data['errors']); 
     if($errors):
-        foreach($errors AS $error) :
+        foreach($errors AS $key => $error) :
 ?>
 <div class="alert alert-warning" role="alert">
-	<?php echo $error; ?>
+	<?php 
+	echo $error; 
+	if( $key == 'no_storage_locations_setup' )
+	{
+	    echo ' <a href="'.$this->url('site_settings', array('site_id' => $site_data['id'], 'section' => 'storage')).'">'.$this->_('setup_storage_location', 'sites').'</a>';
+	}
+	elseif( $key == 'license_number' )
+	{
+	    echo ' <a href="'.$context->url('/dashboard/backup_pro/settings/license').'">'.$view_helper->m62Lang('enter_license').'</a> or <a href="https://mithra62.com/projects/view/backup-pro">'.$this->_('purchase_a_license', 'sites').'</a>';
+	}
+	elseif( $key == 'invalid_working_directory' )
+	{
+	    echo ' <a href="'.$this->url('site_settings', array('site_id' => $site_data['id'], 'section' => 'general')).'">'.$this->_('check_working_dir', 'sites').'</a>';
+	}
+	elseif( $_error == 'no_db_backups_exist_yet' )
+	{
+	    echo ' <a href="'.$context->url('/dashboard/backup_pro/backup_database').'">'.$view_helper->m62Lang('would_you_like_to_backup_database_now').'</a>';
+	}
+	elseif( $_error == 'no_file_backups_exist_yet' )
+	{
+	    echo ' <a href="'.$context->url('/dashboard/backup_pro/backup_files').'">'.$view_helper->m62Lang('would_you_like_to_backup_files_now').'</a>';
+	}
+	elseif( $_error == 'no_backup_file_location' )
+	{
+	    echo ' <a href="'.$context->url('/dashboard/backup_pro/settings/files').'">Set File Backup Locations</a>';
+	}
+	elseif( $_error == 'db_backup_past_expectation_stub' || $_error == 'file_backup_past_expectation_stub' )
+	{
+	    if( $_error == 'db_backup_past_expectation_stub' )
+	    {
+	        $lang = sprintf(
+	            $view_helper->m62Lang('db_backup_past_expectation'),
+	            $view_helper->getRelativeDateTime($backup_meta['database']['newest_backup_taken_raw'], false),
+	            $context->url('/dashboard/backup_pro/backup_database')
+	        );
+	    }
+	    else if ( $error == 'file_backup_past_expectation_stub' )
+	    {
+	        $lang = sprintf(
+	            $view_helper->m62Lang('files_backup_past_expectation'),
+	            $view_helper->getRelativeDateTime($backup_meta['files']['newest_backup_taken_raw'], false),
+	            $context->url('/dashboard/backup_pro/backup_files')
+	        );
+	    }
+	    echo $lang;
+	}	
+	?>
 </div>
 <?php 
         endforeach;
