@@ -91,6 +91,12 @@ abstract class AbstractSitesController extends AbstractController
             return $this->redirect()->toRoute('sites');
         }
         
+        $backup_data = $this->site->getApi()->getBackups($this->site_data, 'database');
+        
+        $backups = $backup_data['backups'];
+        $backup_meta = $backup_data['backup_meta'];
+        $this->layout()->setVariable('backup_meta', $backup_meta);
+        
         $this->site_data['settings'] = $this->site->getApi()->getSettings($this->site_data);
         if(!$this->site_data['settings']) {
             //we can't get data so we have to update keys most likely

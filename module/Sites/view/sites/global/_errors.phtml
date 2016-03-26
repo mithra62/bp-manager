@@ -6,7 +6,32 @@ if($site_data['errors'] != '') :
 ?>
 <div class="alert alert-warning" role="alert">
 	<?php 
-	echo $error; 
+	
+	if( $key == 'db_backup_past_expectation' || $key == 'file_backup_past_expectation' )
+	{
+	    if( $key == 'db_backup_past_expectation' )
+	    {
+	        $lang = sprintf(
+	            $error,
+	            $this->m62RelativeDateTime($this->layout()->backup_meta['database']['newest_backup_taken_raw']),
+	            $this->url('backup', array('type' => 'database', 'site_id' => $site_data['id']))
+	        );
+	    }
+	    else if ( $key == 'file_backup_past_expectation' )
+	    {
+	        $lang = sprintf(
+	            $error,
+	            $this->m62RelativeDateTime($this->layout()->backup_meta['files']['newest_backup_taken_raw']),
+	            $this->url('backup', array('type' => 'files', 'site_id' => $site_data['id']))
+	        );
+	    }
+	    echo $lang;
+	}
+	else{
+
+	    echo $error;
+	}
+	
 	if( $key == 'no_storage_locations_setup' )
 	{
 	    echo ' <a href="'.$this->url('site_settings', array('site_id' => $site_data['id'], 'section' => 'storage')).'">'.$this->_('setup_storage_location', 'sites').'</a>';
@@ -31,26 +56,6 @@ if($site_data['errors'] != '') :
 	{
 	    echo ' <a href="'.$this->url('site_settings', array('site_id' => $site_data['id'], 'section' => 'files')).'">Set File Backup Locations</a>';
 	}
-	elseif( $key == 'db_backup_past_expectation' || $key == 'file_backup_past_expectation_stub' )
-	{
-	    if( $key == 'db_backup_past_expectation' )
-	    {
-	        $lang = sprintf(
-	            $error,
-	            $this->m62DateTime($backup_meta['database']['newest_backup_taken_raw']),
-	            $this->url('backup', array('type' => 'database', 'site_id' => $site_data['id']))
-	        );
-	    }
-	    else if ( $error == 'file_backup_past_expectation_stub' )
-	    {
-	        $lang = sprintf(
-	            $view_helper->m62Lang('files_backup_past_expectation'),
-	            $view_helper->getRelativeDateTime($backup_meta['files']['newest_backup_taken_raw'], false),
-	            $context->url('/dashboard/backup_pro/backup_files')
-	        );
-	    }
-	    echo $lang;
-	}	
 	?>
 </div>
 <?php 
