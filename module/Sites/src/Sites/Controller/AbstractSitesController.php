@@ -103,5 +103,6 @@ abstract class AbstractSitesController extends AbstractController
             $this->flashMessenger()->addErrorMessage($this->translate('api_access_invlaid', 'sites'));
             return $this->redirect()->toRoute('sites/edit', array('site_id' => $this->site_id));
         }
+        $this->layout()->setVariable('site_data', $this->site_data);
     }
 }

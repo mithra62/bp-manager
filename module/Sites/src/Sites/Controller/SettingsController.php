@@ -18,5 +18,15 @@ namespace Sites\Controller;
  */
 class SettingsController extends AbstractSitesController
 {
+    public function indexAction()
+    {
+
     
+        $view = array();
+        $view['settings'] = $this->site_data['settings'];
+        $view['section'] = 'dashboard';
+        $view['active_sidebar'] = 'site_nav_'.$this->site_id;
+        $this->layout()->setVariable('active_sidebar', $view['active_sidebar']);
+        return $view;
+    }
 }

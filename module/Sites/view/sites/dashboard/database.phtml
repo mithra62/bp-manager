@@ -9,8 +9,9 @@
       </div>
       <div class="col-sm-9 col-md-9">
       
+      <?php echo $this->render('sites/global/_errors', array('site_data' => $site_data)); ?>
       <?php echo $this->render('partials/_tabs', array('active_tab' => 'database_backups', 'site_data' => $site_data)); ?>
-      <?php echo $this->render('sites/global/_errors', array('site_data' => $site_data)); ?> 
+       
       
         <div class="panel">
         	<table class="table"  width="100%"  border="0" cellpadding="0" cellspacing="0">
