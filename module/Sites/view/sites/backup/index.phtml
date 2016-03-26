@@ -11,6 +11,11 @@
        
       <h2><?php echo $this->_('backup', 'sites'); ?></h2>
       
+        <?php if($backup_prevention_errors): ?>
+        	<h4><?php echo $this->_('pre_backup_setting_issue_blurb', 'sites'); ?>:</h4>
+	        <?php $site_data['errors'] = json_encode($backup_prevention_errors); echo $this->render('sites/global/_errors', array('site_data' => $site_data)); ?> 
+        <?php else: ?>
+      
 		<div id="backup_instructions">
 			<?php echo $this->_('backup_in_progress_instructions', 'sites'); ?>
 		</div>	
@@ -19,19 +24,20 @@
 		<img src="<?php echo $bp_static_path; ?>/images/indicator.gif" id="animated_image" />
 		</div><br />
 				
-<?php 
-$form = $this->form;
-$form->setAttribute('id', 'ip_form');
-$form->prepare();
-echo $this->form()->openTag($form);
-$csrf = $form->get('_x');
-echo $this->formRow($csrf);
-?>
-<button type="submit" value="1"	id="_backup_direct" name="submitAddprofile" class="btn btn-primary">
-<?php echo $this->_('start_backup', 'sites'); ?>
-</button>
-<?php echo $this->form()->closeTag() ?>					
-
+        <?php 
+        $form = $this->form;
+        $form->setAttribute('id', 'ip_form');
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        $csrf = $form->get('_x');
+        echo $this->formRow($csrf);
+        ?>
+        <button type="submit" value="1"	id="_backup_direct" name="submitAddprofile" class="btn btn-primary">
+        <?php echo $this->_('start_backup', 'sites'); ?>
+        </button>
+        <?php echo $this->form()->closeTag() ?>					
+        
+        <?php endif; ?>
               
       </div>
 

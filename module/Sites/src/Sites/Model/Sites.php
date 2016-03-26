@@ -360,6 +360,22 @@ class Sites extends AbstractModel
     }
     
     /**
+     * Hits the API in realtime to get any issues with taking a backup
+     * @param string $backup_type The type of backup we want to take
+     * @param array $data The site connection details
+     * @return array
+     */
+    public function getBackupPreventionErrors($backup_type, array $data) 
+    {
+        $api_data = $this->getApi()->getSiteDetails($data['api_key'], $data['api_secret'], $data['api_endpoint_url']);
+        if($backup_type == 'database' && isset($api_data['backup_prevention_errors']['no_backup_file_location'])) {
+            //we don't care about file backup issues on database backups
+            unset($api_data['backup_prevention_errors']['no_backup_file_location']);
+        }
+        return ($api_data['backup_prevention_errors'] ? $api_data['backup_prevention_errors'] : array());
+    }
+    
+    /**
      * Creates a Site
      *
      * @param array $data

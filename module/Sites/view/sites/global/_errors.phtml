@@ -27,18 +27,18 @@ if($site_data['errors'] != '') :
 	{
 	    echo ' <a href="'.$context->url('/dashboard/backup_pro/backup_files').'">'.$view_helper->m62Lang('would_you_like_to_backup_files_now').'</a>';
 	}
-	elseif( $_error == 'no_backup_file_location' )
+	elseif( $key == 'no_backup_file_location' )
 	{
-	    echo ' <a href="'.$context->url('/dashboard/backup_pro/settings/files').'">Set File Backup Locations</a>';
+	    echo ' <a href="'.$this->url('site_settings', array('site_id' => $site_data['id'], 'section' => 'files')).'">Set File Backup Locations</a>';
 	}
-	elseif( $_error == 'db_backup_past_expectation_stub' || $_error == 'file_backup_past_expectation_stub' )
+	elseif( $key == 'db_backup_past_expectation' || $key == 'file_backup_past_expectation_stub' )
 	{
-	    if( $_error == 'db_backup_past_expectation_stub' )
+	    if( $key == 'db_backup_past_expectation' )
 	    {
 	        $lang = sprintf(
-	            $view_helper->m62Lang('db_backup_past_expectation'),
-	            $view_helper->getRelativeDateTime($backup_meta['database']['newest_backup_taken_raw'], false),
-	            $context->url('/dashboard/backup_pro/backup_database')
+	            $error,
+	            $this->m62DateTime($backup_meta['database']['newest_backup_taken_raw']),
+	            $this->url('backup', array('type' => 'database', 'site_id' => $site_data['id']))
 	        );
 	    }
 	    else if ( $error == 'file_backup_past_expectation_stub' )

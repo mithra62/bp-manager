@@ -30,12 +30,13 @@ class BackupController extends AbstractSitesController
         $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
         $hash = $this->getServiceLocator()->get('Application\Model\Hash');
         $site_data = $site->getSiteById($id, $hash);
+        $backup_prevention_errors = $site->getBackupPreventionErrors($type, $site_data);
         if (! $site_data ) {
             return $this->redirect()->toRoute('sites');
         }
         
         $request = $this->getRequest();
-        if ($request->isPost()) {
+        if (!$backup_prevention_errors && $request->isPost()) {
             $formData = $this->getRequest()->getPost();
             $form->setData($request->getPost());
             if ($form->isValid($formData)) {
@@ -48,6 +49,7 @@ class BackupController extends AbstractSitesController
         
         $view = array();
         $view['form'] = $form;
+        $view['backup_prevention_errors'] = $backup_prevention_errors;
         $view['backup_type'] = $type;
         $view['site_data'] = $site_data;
         $view['section'] = 'dashboard';
