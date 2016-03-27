@@ -1,18 +1,49 @@
 <?php $this->headTitle()->append( $this->_('manage_sites', 'sites') )->append( $this->_('sites', 'sites') ); ?>
 <div class="container">
     <div class="page-header">
-    	<h1><?php echo $this->_('backup', 'sites'); ?> <small><?php echo $this->layout()->site_data['site_name']; ?></small></h1>
+    	<h1><?php echo $this->_('settings', 'sites'); ?> <small><?php echo $this->layout()->site_data['site_name']; ?></small></h1>
     </div>
       <div class="row">
         <div class="col-sm-3 col-md-3 sidebar">
             <?php echo $this->render('sites/global/_sidebar', array('site_data' => $this->layout()->site_data)); ?>
       </div>
       <div class="col-sm-9 col-md-9">
-       
-      <h2><?php echo $this->_('settings', 'sites'); ?></h2>
       
-      <?php echo $this->render('partials/_tabs', array('active_tab' => 'database_backups', 'site_data' => $this->layout()->site_data)); ?>
       <?php echo $this->render('sites/global/_errors', array('site_data' => $this->layout()->site_data)); ?> 
+      <?php echo $this->render('partials/_tabs', array('active_tab' => $this->section, 'site_data' => $this->layout()->site_data)); ?>
+      <?php 
+      $form = $this->form;
+      $form->prepare();
+      
+      echo $this->form()->openTag($form);
+      $csrf = $form->get('_x');
+      echo $this->formRow($csrf);
+      
+      $vars = array('form' => $form);
+      switch($section)
+      {
+          case 'cron':
+          case 'db':
+          case 'files':
+          case 'license':
+          case 'api':
+          case 'integrity_agent':
+              echo $this->render('form/_'.$section, $vars);
+              break;
+      
+          default:
+              echo $this->render('form/_general', $vars);
+              break;
+      } 
+      ?>
+    <div class="form-group">
+    	<div class="col-xs-offset-2 col-xs-10">
+    		<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $this->_('update_settings', 'sites'); ?></button>
+    	</div>
+    </div>      
+      <?php 
+      echo $this->form()->closeTag();
+      ?>
               
       </div>
 

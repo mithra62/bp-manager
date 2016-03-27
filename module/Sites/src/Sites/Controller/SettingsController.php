@@ -20,11 +20,13 @@ class SettingsController extends AbstractSitesController
 {
     public function indexAction()
     {
-
-    
+        $section = $this->params()->fromRoute('section');
+        $form = $this->getServiceLocator()->get('Sites\Form\SettingsForm');
+        
         $view = array();
+        $view['form'] = $form;
         $view['settings'] = $this->site_data['settings'];
-        $view['section'] = 'dashboard';
+        $view['section'] = $section;
         $view['active_sidebar'] = 'site_nav_'.$this->site_id;
         $this->layout()->setVariable('active_sidebar', $view['active_sidebar']);
         return $view;

@@ -129,8 +129,10 @@ class Api
         );
         
         $route = '/backups';
+        $payload = array('type' => $type);
+        
         $client = $this->getClient($config);
-        return $client->post($route);        
+        return $client->post($route, $payload);        
     }
     
     /**

@@ -6,6 +6,7 @@ use Sites\Model\Api;
 use Sites\Model\Sites\Team;
 
 use Sites\Form\SiteForm;
+use Sites\Form\SettingsForm;
 
 class Module
 {
@@ -53,6 +54,9 @@ class Module
                 },
 				'Sites\Form\SiteForm' => function($sm) {
 					return new SiteForm('site_form');
+				},
+				'Sites\Form\SettingsForm' => function($sm) {
+					return new SettingsForm('settings_form');
 				},
             )
         );

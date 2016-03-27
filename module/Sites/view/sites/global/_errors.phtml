@@ -13,7 +13,7 @@ if($site_data['errors'] != '') :
 	    {
 	        $lang = sprintf(
 	            $error,
-	            $this->m62RelativeDateTime($this->layout()->backup_meta['database']['newest_backup_taken_raw']),
+	            $this->m62RelativeDateTime($this->layout()->backup_meta['database']['newest_backup_taken_raw'], false),
 	            $this->url('backup', array('type' => 'database', 'site_id' => $site_data['id']))
 	        );
 	    }
@@ -21,7 +21,7 @@ if($site_data['errors'] != '') :
 	    {
 	        $lang = sprintf(
 	            $error,
-	            $this->m62RelativeDateTime($this->layout()->backup_meta['files']['newest_backup_taken_raw']),
+	            $this->m62RelativeDateTime($this->layout()->backup_meta['files']['newest_backup_taken_raw'], false),
 	            $this->url('backup', array('type' => 'files', 'site_id' => $site_data['id']))
 	        );
 	    }
