@@ -1,0 +1,20 @@
+<?php $this->headTitle()->append( $this->_('database_backups', 'sites') )->append( $site_data['site_name'] ); ?>
+<div class="container">
+    <div class="page-header">
+    	<h1><?php echo $this->_('dashboard', 'sites'); ?> <small><?php echo $site_data['site_name']; ?></small></h1>
+    </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+            <?php echo $this->render('sites/global/_sidebar', array('site_data' => $site_data)); ?>
+      </div>
+      <div class="col-sm-9 col-md-9">
+      
+      <?php echo $this->render('sites/global/_errors', array('site_data' => $site_data)); ?>
+      <?php echo $this->render('sites/dashboard/partials/_tabs', array('active_tab' => 'database_backups', 'site_data' => $site_data)); ?>
+      
+      
+      
+      </div>
+
+    </div>
+</div>    

@@ -53,12 +53,15 @@ class DashboardController extends AbstractSitesController
     
     public function databaseAction()
     {   
+        $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
+        
         $view = array();
         $backup_data = $this->site->getApi()->getBackups($this->site_data, 'database');
         
         $backups = $backup_data['backups'];
         $backup_meta = $backup_data['backup_meta'];
         $view['settings'] = $this->site_data['settings'];
+        $view['form'] = $form;
         $view['backup_meta'] = $backup_meta;
         $view['backups'] = $backups;
         $view['site_data'] = $this->site_data;
@@ -69,11 +72,13 @@ class DashboardController extends AbstractSitesController
     
     public function fileAction()
     {
+        $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
         $view = array();
         $backup_data = $this->site->getApi()->getBackups($this->site_data, 'file');
         
         $backups = $backup_data['backups'];
         $backup_meta = $backup_data['backup_meta'];
+        $view['form'] = $form;
         $view['settings'] = $this->site_data['settings'];
         $view['backup_meta'] = $backup_meta;
         $view['backups'] = $backups;

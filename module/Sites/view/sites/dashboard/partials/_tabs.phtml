@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs">
-    <li class="<?php echo ($this->active_tab == 'dashboard' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('dashboard/view', array('site_id' => $site_data['id'])); ?>"><?php echo $this->_('dashboard', 'sites'); ?></a></li>
-    <li class="<?php echo ($this->active_tab == 'database_backups' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('dashboard/database', array('site_id' => $site_data['id'])); ?>"><?php echo $this->_('database_backups', 'sites'); ?></a></li>
-    <li class="<?php echo ($this->active_tab == 'file_backups' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('dashboard/file', array('site_id' => $site_data['id'])); ?>"><?php echo $this->_('file_backups', 'sites'); ?></a></li>    
+    <li class="<?php echo ($this->active_tab == 'dashboard' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('dashboard/view', array('site_id' => $this->layout()->site_data['id'])); ?>"><?php echo $this->_('dashboard', 'sites'); ?></a></li>
+    <li class="<?php echo ($this->active_tab == 'database_backups' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('dashboard/database', array('site_id' => $this->layout()->site_data['id'])); ?>"><?php echo $this->_('database_backups', 'sites'); ?></a></li>
+    <li class="<?php echo ($this->active_tab == 'file_backups' ? 'active"' : '') ; ?>"><a href="<?php echo $this->url('dashboard/file', array('site_id' => $this->layout()->site_data['id'])); ?>"><?php echo $this->_('file_backups', 'sites'); ?></a></li>    
 </ul>  
 
 <br />

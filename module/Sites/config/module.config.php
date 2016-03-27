@@ -111,7 +111,7 @@ return array(
         				)
                     )
                 )
-            ), //End User Routes
+            ), //End Dashboard Routes
             'site_settings' => array( //Site Setings Routes
                 'type' => 'segment',
                 'options' => array(
@@ -139,7 +139,59 @@ return array(
                     ),
                 ),
                 'may_terminate' => true
-            ), //End User Routes
+            ), //End Site Settings Routes
+            'manage_backups' => array( //Dashboard Routes
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/dashboard/manage',
+                    'constraints' => array(
+                        'site_id' => '[0-9]+'
+                    ),                    
+                    'defaults' => array(
+        				'controller' => 'Sites\Controller\Manage',
+        				'action' => 'index'
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'remove' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        				    'route' => '/remove/:site_id',
+        				    'constraints' => array(
+        				        'site_id' => '[0-9]+'
+        				    ),
+        				    'defaults' => array(
+        				        'action' => 'remove'
+        				    )
+        				)
+                    ),
+                    'database' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        				    'route' => '/database/:site_id',
+        				    'constraints' => array(
+        				        'site_id' => '[0-9]+'
+        				    ),
+        				    'defaults' => array(
+        				        'action' => 'database'
+        				    )
+        				)
+                    ),
+                    'file' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        				    'route' => '/file/:site_id',
+        				    'constraints' => array(
+        				        'site_id' => '[0-9]+'
+        				    ),
+        				    'defaults' => array(
+        				        'action' => 'file'
+        				    )
+        				)
+                    )
+                )
+            ), //End Dashboard Routes
         )
 
     ),
@@ -149,6 +201,7 @@ return array(
             'Sites\Controller\Dashboard' => 'Sites\Controller\DashboardController',
             'Sites\Controller\Settings' => 'Sites\Controller\SettingsController',
             'Sites\Controller\Backup' => 'Sites\Controller\BackupController',
+            'Sites\Controller\Manage' => 'Sites\Controller\ManageController',
         )
     ),
     'view_manager' => array(

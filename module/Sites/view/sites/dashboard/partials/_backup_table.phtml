@@ -1,7 +1,7 @@
 <?php if(isset($enable_delete) && $enable_delete != 'yes' ): ?>
 	<?php 
 	foreach($backups AS $backup):  ?>
-		<input type="hidden" name="backups[]" value="<?php //echo urlencode($view_helper->m62Encode($backup['file_name'])); ?>" />
+		<input type="hidden" name="backups[]" value="<?php echo urlencode($backup['file_name']); ?>" />
 	<?php endforeach; ?>
 <?php endif; ?>
 <input type="hidden" value="<?php //echo $this->url('/dashboard/backup_pro/manage/update_backup_note'); ?>" name="__note_url" id="__note_url" />
@@ -48,7 +48,7 @@
 <tr class="odd">
 	<td class=" backup_pro_backup_status <?php echo $status_class; ?>"></td>
 	<?php if(isset($enable_delete) && $enable_delete == 'yes' ): ?>
-	<td><input name="backups[]" id="backup_check_<?php echo $count; ?>" value="<?php //echo urlencode($view_helper->m62Encode($backup['file_name'])); ?>" type="checkbox" class="bp_toggle_check">
+	<td><input name="backups[]" id="backup_check_<?php echo $count; ?>" value="<?php echo urlencode($backup['file_name']); ?>" type="checkbox" class="bp_toggle_check">
 	
 	</td>
 	<?php endif; ?>
@@ -61,8 +61,8 @@
 	</td>
 	<td style="width:55%">
 		<?php if(isset($enable_editable_note) && $enable_editable_note == 'yes' ): ?>
-		<div class="bp_editable" rel="<?php echo $this->escapehtmlattr($backup['hash']); ?>" id="note_div_<?php echo $backup['hash']; ?>"><?php if($backup['note'] == ''): ?><?php echo $this->_('click_to_add_note', 'sites');?><?php else: ?><?php echo $this->escapehtmlattr($backup['note']); ?> <?php endif; ?></div>
-		<input name="note_<?php echo $this->escapehtmlattr($backup['hash']); ?>" value="<?php echo $backup['note']; ?>" id="note_<?php echo $this->escapehtmlattr($backup['hash']); ?>" data-backup-type="<?php echo $this->escapehtmlattr($backup['backup_type']); ?>" class="note_container" rel="<?php //echo urlencode($view_helper->m62Encode($backup['file_name'])); ?>" style="display:none; width:100%" type="text">
+		<div class="bp_editable" rel="<?php echo $this->escapehtmlattr($backup['md5_hash']); ?>" id="note_div_<?php echo $backup['md5_hash']; ?>"><?php if($backup['note'] == ''): ?><?php echo $this->_('click_to_add_note', 'sites');?><?php else: ?><?php echo $this->escapehtmlattr($backup['note']); ?> <?php endif; ?></div>
+		<input name="note_<?php echo $this->escapehtmlattr($backup['md5_hash']); ?>" value="<?php echo $backup['note']; ?>" id="note_<?php echo $this->escapehtmlattr($backup['md5_hash']); ?>" data-backup-type="<?php echo $this->escapehtmlattr($backup['backup_type']); ?>" class="note_container" rel="<?php echo urlencode($backup['file_name']); ?>" style="display:none; width:100%" type="text">
 		
 		<?php else: ?>
             <?php echo ($backup['note'] == '' ? $this->_('na') : $backup['note']); ?>
