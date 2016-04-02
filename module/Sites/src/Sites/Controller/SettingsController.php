@@ -22,6 +22,28 @@ class SettingsController extends AbstractSitesController
     {
         $section = $this->params()->fromRoute('section');
         $form = $this->getServiceLocator()->get('Sites\Form\SettingsForm');
+        $options = $this->site->getApi()->getOptions($this->site_data);
+        
+        print_r($options);
+        exit;
+        
+        switch($section)
+        {
+            case 'cron':
+            case 'db':
+            case 'files':
+            case 'license':
+            case 'api':
+            case 'integrity_agent':
+                echo $this->render('form/_'.$section, $vars);
+                break;
+        
+            default:
+                $form = $form->getGeneralForm();
+                break;
+        }
+        
+        $form->setData($this->site_data['settings']);
         
         $view = array();
         $view['form'] = $form;

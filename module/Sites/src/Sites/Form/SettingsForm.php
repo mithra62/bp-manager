@@ -71,5 +71,6 @@ class SettingsForm extends BaseForm
             )
         ));
         
+        return $this;
     }
 }

@@ -52,6 +52,24 @@ class Api
         
         return array();
     }
+
+    public function getOptions(array $site_details)
+    {
+        $config = array(
+            'api_key' => $site_details['api_key'],
+            'api_secret' => $site_details['api_secret'],
+            'site_url' => $site_details['api_endpoint_url'],
+        );
+        
+        $client = $this->getClient($config);
+        $settings = $client->get('/info/options');
+        if($settings instanceof Hal)
+        {
+            return $settings->getData();
+        }
+        
+        return array();
+    }
     
     /**
      * Returns a site's Backup Pro settings
