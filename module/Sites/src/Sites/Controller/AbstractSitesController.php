@@ -44,6 +44,18 @@ abstract class AbstractSitesController extends AbstractController
     protected $bypass_id = array();
     
     /**
+     * The Backup Pro Site objevt
+     * @var Sites\Model\Sites
+     */
+    protected $site = null;
+    
+    /**
+     * Our hash object
+     * @var Application\Model\Hash
+     */
+    protected $hash = null;
+    
+    /**
      * (non-PHPdoc)
      * @see \Application\Controller\AbstractController::onDispatch()
      */
