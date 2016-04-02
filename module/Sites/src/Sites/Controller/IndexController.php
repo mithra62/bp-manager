@@ -22,7 +22,7 @@ class IndexController extends AbstractSitesController
      * The actions that will require site_id processing
      * @var array
      */
-    protected $bypass_id = array('index', 'add');
+    protected $bypass_id = array('index', 'add', 'edit');
     
     /**
      * (non-PHPdoc)
