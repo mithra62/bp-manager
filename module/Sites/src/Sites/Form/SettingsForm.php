@@ -22,7 +22,12 @@ use Base\Form\BaseForm;
  */
 class SettingsForm extends BaseForm
 {
-
+    /**
+     * Contains the various data pieces to replicate Backup Pro forms
+     * @var array
+     */
+    protected $platform_options = array();
+    
     /**
      * Returns the Settings form
      *
@@ -31,6 +36,12 @@ class SettingsForm extends BaseForm
     public function __construct($name)
     {
         parent::__construct($name);
+    }
+    
+    public function setPlatformOptions(array $options)
+    {
+        $this->platform_options = $options;
+        return $this;
     }
     
     public function getGeneralForm()

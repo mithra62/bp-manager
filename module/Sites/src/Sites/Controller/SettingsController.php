@@ -24,9 +24,6 @@ class SettingsController extends AbstractSitesController
         $form = $this->getServiceLocator()->get('Sites\Form\SettingsForm');
         $options = $this->site->getApi()->getOptions($this->site_data);
         
-        print_r($options);
-        exit;
-        
         switch($section)
         {
             case 'cron':
@@ -43,7 +40,39 @@ class SettingsController extends AbstractSitesController
                 break;
         }
         
-        $form->setData($this->site_data['settings']);
+        $form->setPlatformOptions($options)->setData($this->site_data['settings']);
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+        
+            $formData = $request->getPost();
+            $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('_');
+            $inputFilter = $site->getInputFilter($translate);
+            $form->setInputFilter($inputFilter);
+            $form->setData($request->getPost());
+            if ($form->isValid($formData)) {
+                $data = $formData->toArray();
+                $data['owner_id'] = $this->getIdentity();
+                $site_id = $id = $site->addSite($data, $hash);
+                if ($site_id) {
+                    $this->flashMessenger()->addSuccessMessage($this->translate('site_added', 'sites'));
+                    return $this->redirect()->toRoute('sites/view', array(
+                        'site_id' => $id
+                    ));
+                } else {
+                    $view['errors'] = array(
+                        $this->translate('something_went_wrong', 'app')
+                    );
+                    $this->layout()->setVariable('errors', $view['errors']);
+                }
+            } else {
+                $view['errors'] = array(
+                    $this->translate('please_fix_the_errors_below', 'app')
+                );
+                $this->layout()->setVariable('errors', $view['errors']);
+                $site_form->setData($formData);
+            }
+        }        
+        
         
         $view = array();
         $view['form'] = $form;
