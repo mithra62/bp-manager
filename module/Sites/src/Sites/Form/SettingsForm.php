@@ -44,6 +44,65 @@ class SettingsForm extends BaseForm
         return $this;
     }
     
+    public function getPlatformOptions($key = false)
+    {
+        if($key) {
+            return (isset($this->platform_options[$key]) ? $this->platform_options[$key] : array());
+        }
+        
+        return $this->platform_options;
+    }
+    
+    public function getDbForm()
+    {
+
+        $this->add(array(
+            'name' => 'max_db_backups',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'max_db_backups'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'db_backup_alert_threshold',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'db_backup_alert_threshold'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'php_backup_method_select_chunk_limit',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'php_backup_method_select_chunk_limit'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'mysqldump_command',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'mysqldump_command'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'mysqlcli_command',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'mysqlcli_command'
+            )
+        ));
+        return $this;
+    }
+    
     public function getGeneralForm()
     {
         $this->add(array(
@@ -72,6 +131,26 @@ class SettingsForm extends BaseForm
                 'id' => 'dashboard_recent_total'
             )
         ));
+
+		$this->add(array(
+			'name' => 'auto_threshold',
+			'type' => 'Select',
+			'attributes' => array(
+				'class' => 'select input',
+			),
+			'options' => array(
+				'value_options' => $this->getPlatformOptions('threshold_options'),
+			)
+		));
+        
+        $this->add(array(
+            'name' => 'auto_threshold_custom',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'auto_threshold_custom'
+            )
+        ));
         
         $this->add(array(
             'name' => 'date_format',
@@ -81,6 +160,32 @@ class SettingsForm extends BaseForm
                 'id' => 'date_format'
             )
         ));
+		
+		$this->add(array(
+			'name' => 'allow_duplicates',
+			'type' => 'Checkbox',
+			'attributes' => array(
+				'class' => 'checkbox',
+				'id' => 'allow_duplicates',
+			),
+			'options' => array(
+				'checked_value' => '1',
+				'unchecked_value' => '0'
+			)
+		));
+		
+		$this->add(array(
+			'name' => 'relative_time',
+			'type' => 'Checkbox',
+			'attributes' => array(
+				'class' => 'checkbox',
+				'id' => 'relative_time',
+			),
+			'options' => array(
+				'checked_value' => '1',
+				'unchecked_value' => '0'
+			)
+		));
         
         return $this;
     }

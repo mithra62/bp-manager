@@ -1,1 +1,40 @@
-<?php
+<?php $settings_form = $form; ?>
+<fieldset>
+<div class="row">
+	<div class="form-group">
+		<label for="max_db_backups" class="control-label col-sm-3"><?php echo $this->_('max_db_backups', 'sites')?></label>
+		<div class="col-sm-9">
+            <?php
+            $field = $form->get('max_db_backups');
+            echo $this->formRow($field);
+            ?>
+			<div class="help-block small"><?php echo $this->_('max_db_backups_instructions', 'sites'); ?></div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group">
+		<label for="db_backup_alert_threshold" class="control-label col-sm-3"><?php echo $this->_('db_backup_alert_threshold', 'sites')?></label>
+		<div class="col-sm-9">
+            <?php
+            $field = $form->get('db_backup_alert_threshold');
+            echo $this->formRow($field);
+            ?>
+			<div class="help-block small"><?php echo $this->_('db_backup_alert_threshold_instructions', 'sites'); ?></div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group">
+		<label for="db_backup_alert_threshold" class="control-label col-sm-3"><?php echo $this->_('db_backup_alert_threshold', 'sites')?></label>
+		<div class="col-sm-9">
+            <?php
+            $field = $form->get('db_backup_alert_threshold');
+            echo $this->formRow($field);
+            ?>
+			<div class="help-block small"><?php echo $this->_('db_backup_alert_threshold_instructions', 'sites'); ?></div>
+		</div>
+	</div>
+</div>
+
+</fieldset>

@@ -3,7 +3,7 @@
 <input type="hidden" name="allow_duplicates" value="0" />
 <input type="hidden" name="relative_time" value="0" />
 <div class="row">
-	<div class="form-group <?php if($form_errors['working_directory']): ?>has-error<?php endif; ?>">
+	<div class="form-group">
 		<label for="working_directory" class="control-label col-sm-3"><?php echo $this->_('working_directory', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -11,13 +11,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('working_directory_instructions', 'sites'); ?></div>
-			<?php //echo $view_helper->m62FormErrors($form_errors['working_directory']); ?>
 		</div>
 	</div>
 </div>
 
 <div class="row">
-	<div class="form-group <?php if($form_errors['cron_query_key']): ?>has-error<?php endif; ?>">
+	<div class="form-group">
 		<label for="cron_query_key" class="control-label col-sm-3"><?php echo $this->_('cron_query_key', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -25,13 +24,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('cron_query_key_instructions', 'sites'); ?></div>
-			<?php //echo $view_helper->m62FormErrors($form_errors['cron_query_key']); ?>
 		</div>
 	</div>
 </div>
 
 <div class="row">
-	<div class="form-group <?php if($form_errors['dashboard_recent_total']): ?>has-error<?php endif; ?>">
+	<div class="form-group">
 		<label for="dashboard_recent_total" class="control-label col-sm-3"><?php echo $this->_('dashboard_recent_total', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -39,18 +37,19 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('dashboard_recent_total_instructions', 'sites'); ?></div>
-			<?php //echo $view_helper->m62FormErrors($form_errors['dashboard_recent_total']); ?>
 		</div>
 	</div>
 </div>
 
 <div class="row">
-	<div class="form-group <?php if($form_errors['auto_threshold']): ?>has-error<?php endif; ?>">
+	<div class="form-group">
 		<label for="auto_threshold" class="control-label col-sm-3"><?php echo $this->_('auto_threshold', 'sites')?></label>
 		<div class="col-sm-9">
-		<?php //echo $form->select('auto_threshold', $threshold_options, $form_data['auto_threshold']); ?>
+            <?php
+            $field = $form->get('auto_threshold');
+            echo $this->formRow($field);
+            ?>
 		<div class="help-block small"><?php echo $this->_('auto_threshold_instructions', 'sites'); ?></div>
-		<?php //echo $view_helper->m62FormErrors($form_errors['auto_threshold']); ?>
 		</div>
 	</div>
 </div>
@@ -59,10 +58,10 @@
 	<div class="form-group <?php if($form_errors['auto_threshold_custom']): ?>has-error<?php endif; ?>">
 		<label for="auto_threshold_custom" class="control-label col-sm-3"><?php echo $this->_('auto_threshold_custom', 'sites')?></label>
 		<div class="col-sm-9">
-			<div class="input-group">
-			<?php //echo $form->text('auto_threshold_custom', $form_data['auto_threshold_custom'])?>
-			<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-			</div>
+            <?php
+            $field = $form->get('auto_threshold_custom');
+            echo $this->formRow($field);
+            ?>
 			<div class="help-block small"><?php echo $this->_('auto_threshold_custom_instructions', 'sites'); ?></div>
 			<?php //echo $view_helper->m62FormErrors($form_errors['auto_threshold_custom']); ?>
 		</div>
@@ -70,18 +69,20 @@
 </div>
 
 <div class="row">
-	<div class="form-group <?php if($form_errors['allow_duplicates']): ?>has-error<?php endif; ?>">
+	<div class="form-group">
     	<label class="control-label col-sm-3" for="allow_duplicates"><?php echo $this->_('allow_duplicates', 'sites')?></label>
     	<div class="col-sm-9">
-            <?php //echo $form->checkbox('allow_duplicates', 1, $form_data['allow_duplicates'])?>
+            <?php
+            $field = $form->get('allow_duplicates');
+            echo $this->formRow($field);
+            ?>
             <span class="small"><?php echo $this->_('allow_duplicates_instructions', 'sites'); ?></span>
-            <?php //echo $view_helper->m62FormErrors($form_errors['allow_duplicates']); ?>
         </div>
     </div>
 </div>
 
 <div class="row">
-	<div class="form-group <?php if($form_errors['date_format']): ?>has-error<?php endif; ?>">
+	<div class="form-group">
 		<label for="date_format" class="control-label col-sm-3"><?php echo $this->_('date_format', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -89,18 +90,19 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small">fdsa<?php echo $this->_('date_format_instructions', 'sites'); ?></div>
-			<?php //echo $view_helper->m62FormErrors($form_errors['date_format']); ?>
 		</div>
 	</div>
 </div>
 
 <div class="row">
-	<div class="form-group <?php if($form_errors['relative_time']): ?>has-error<?php endif; ?>">
+	<div class="form-group">
     	<label class="control-label col-sm-3" for="relative_time"><?php echo $this->_('relative_time', 'sites'); ?></label>
     	<div class="col-sm-9">
-            <?php //echo $form->checkbox('relative_time', 1, $form_data['relative_time'])?>
-            <span class="small"><?php echo $this->_('relative_time_instructions', 'sites'); ?></span>
-            <?php //echo $view_helper->m62FormErrors($form_errors['relative_time']); ?>
+            <label class="small"><?php
+            $field = $form->get('relative_time');
+            echo $this->formRow($field);
+            ?>
+            <?php echo $this->_('relative_time_instructions', 'sites'); ?></label>
         </div>
     </div>
 </div>

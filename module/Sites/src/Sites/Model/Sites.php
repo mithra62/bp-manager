@@ -14,6 +14,7 @@ use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 use Application\Model\AbstractModel;
+use Sites\InputFilter\Sites\Settings AS SettingsInputFilter;
 use \DateTime;
 
 /**
@@ -273,6 +274,11 @@ class Sites extends AbstractModel
         }
         
         return $this->inputFilter;
+    }
+    
+    public function getSettingsInputFilter()
+    {
+        return new SettingsInputFilter();
     }
     
     /**

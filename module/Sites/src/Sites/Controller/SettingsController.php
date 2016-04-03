@@ -24,15 +24,27 @@ class SettingsController extends AbstractSitesController
         $form = $this->getServiceLocator()->get('Sites\Form\SettingsForm');
         $options = $this->site->getApi()->getOptions($this->site_data);
         
+        $form->setPlatformOptions($options);
+        
         switch($section)
         {
             case 'cron':
+                $form = $form->getGeneralForm();
+                break;
             case 'db':
+                $form = $form->getDbForm();
+                break;
             case 'files':
+                $form = $form->getGeneralForm();
+                break;
             case 'license':
+                $form = $form->getGeneralForm();
+                break;
             case 'api':
+                $form = $form->getGeneralForm();
+                break;
             case 'integrity_agent':
-                echo $this->render('form/_'.$section, $vars);
+                $form = $form->getGeneralForm();
                 break;
         
             default:
@@ -40,19 +52,21 @@ class SettingsController extends AbstractSitesController
                 break;
         }
         
-        $form->setPlatformOptions($options)->setData($this->site_data['settings']);
+        $form->setData($this->site_data['settings']);
         $request = $this->getRequest();
         if ($request->isPost()) {
         
             $formData = $request->getPost();
             $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('_');
-            $inputFilter = $site->getInputFilter($translate);
+            $inputFilter = $this->site->getSettingsInputFilter();
             $form->setInputFilter($inputFilter);
             $form->setData($request->getPost());
             if ($form->isValid($formData)) {
                 $data = $formData->toArray();
                 $data['owner_id'] = $this->getIdentity();
-                $site_id = $id = $site->addSite($data, $hash);
+                
+                echo 'fdsa';
+                exit;
                 if ($site_id) {
                     $this->flashMessenger()->addSuccessMessage($this->translate('site_added', 'sites'));
                     return $this->redirect()->toRoute('sites/view', array(
