@@ -49,6 +49,11 @@ class SettingsForm extends BaseForm
         return $this;
     }
     
+    /**
+     * Returns the Platform options
+     * @param string $key
+     * @return Ambigous <multitype:, array>|array
+     */
     public function getPlatformOptions($key = false)
     {
         if($key) {
@@ -58,6 +63,71 @@ class SettingsForm extends BaseForm
         return $this->platform_options;
     }
     
+    /**
+     * Sets up the Files Settings form
+     * @return \Sites\Form\SettingsForm
+     */
+    public function getFilesForm()
+    {
+
+        $this->add(array(
+            'name' => 'max_file_backups',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'max_file_backups'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'file_backup_alert_threshold',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'file_backup_alert_threshold'
+            )
+        ));
+        
+        $this->add(array(
+            'type' => 'Textarea',
+            'name' => 'backup_file_location',
+            'attributes' => array(
+                'class' => 'styled_textarea',
+                'rows' => '7',
+                'cols' => '40'
+            )
+        ));
+        
+        $this->add(array(
+            'type' => 'Textarea',
+            'name' => 'exclude_paths',
+            'attributes' => array(
+                'class' => 'styled_textarea',
+                'rows' => '7',
+                'cols' => '40'
+            )
+        ));    
+		
+		$this->add(array(
+			'name' => 'regex_file_exclude',
+			'type' => 'Checkbox',
+			'attributes' => array(
+				'class' => 'checkbox',
+				'id' => 'regex_file_exclude',
+			),
+			'options' => array(
+				'checked_value' => '1',
+				'unchecked_value' => '0'
+			)
+		));    
+        
+        return $this;
+    }
+    
+    /**
+     * Sets up the Database Settings form 
+     * @return \Sites\Form\SettingsForm
+     */
     public function getDbForm()
     {
 
@@ -195,6 +265,10 @@ class SettingsForm extends BaseForm
         return $this;
     }
     
+    /**
+     * Sets up the General Settings form fields
+     * @return \Sites\Form\SettingsForm
+     */
     public function getGeneralForm()
     {
         $this->add(array(

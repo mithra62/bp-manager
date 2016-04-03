@@ -34,7 +34,7 @@ class SettingsController extends AbstractSitesController
                 $form = $form->getDbForm();
                 break;
             case 'files':
-                $form = $form->getGeneralForm();
+                $form = $form->getFilesForm();
                 break;
             case 'license':
                 $form = $form->getGeneralForm();
