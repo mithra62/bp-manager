@@ -348,13 +348,13 @@ class Sites extends AbstractModel
      * @param array $data The site info we're connecting with
      * @return array The refreshed site data (if any)
      */
-    protected function refreshSiteData($id, array $data)
+    protected function refreshSiteData($id, array $data, $force = false)
     {
         $date1 = new DateTime($data['last_modified']);
         $date2 = new DateTime(date('Y-m-d H:i:s'));
         
         $diff = $date2->diff($date1)->format("%a");
-        if($diff >= 1) {
+        if($diff >= 1 || $force) {
             $api_data = $this->getApi()->getSiteDetails($data['api_key'], $data['api_secret'], $data['api_endpoint_url']);
             if($api_data) {
                 $data += $api_data;
@@ -479,7 +479,7 @@ class Sites extends AbstractModel
         if($this->getApi()->execBackup($site_details, $type))
         {
             unset($site_details['site_name']);
-            $this->updateSite($site_details['id'], $site_details);
+            $this->refreshSiteData($site_details['id'], $site_details, true);
             return true;
         }
     }

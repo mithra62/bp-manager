@@ -55,6 +55,8 @@ abstract class AbstractSitesController extends AbstractController
      */
     protected $hash = null;
     
+    protected $backup_data = array();
+    
     /**
      * (non-PHPdoc)
      * @see \Application\Controller\AbstractController::onDispatch()
@@ -110,10 +112,49 @@ abstract class AbstractSitesController extends AbstractController
             return $this->redirect()->toRoute('sites/edit', array('site_id' => $this->site_id));
         }
 
-        $backup_data = $this->site->getApi()->getBackups($this->site_data, 'database');
-        $backups = $backup_data['backups'];
-        $backup_meta = $backup_data['backup_meta'];
+        $this->backup_data = $this->site->getApi()->getBackups($this->site_data, 'database');
+        $backups = $this->backup_data['backups'];
+        $backup_meta = $this->backup_data['backup_meta'];
         $this->layout()->setVariable('backup_meta', $backup_meta);
         $this->layout()->setVariable('site_data', $this->site_data);
     }
+    
+    /**
+     * Validates the POST'd backup data and returns the clean array
+     * @param array $delete_backups
+     * @param string $type
+     * @return multitype:array
+     */
+    protected function validateBackups(array $delete_backups, $type)
+    {
+        if(!$delete_backups || count($delete_backups) == 0)
+        {
+            $this->redirect('/dashboard/backup_pro/dashboard?backups_not_found=yes');
+            exit;
+        }
+        
+        $backups = array();
+        foreach($delete_backups AS $file_name)
+        {
+            $file_name = urldecode(urldecode($file_name));
+            if( $file_name != '' )
+            {
+                foreach($this->backup_data['backups'] AS $backup)
+                {
+                    if($backup['file_name'] == $file_name) 
+                    {
+                        $backups[] = $backup;
+                    }
+                }
+            }
+        }
+         
+        if(count($backups) == 0)
+        {
+            $this->redirect('/dashboard/backup_pro/dashboard?backups_not_found=yes');
+            exit;
+        }
+         
+        return $backups;
+    }    
 }

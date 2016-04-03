@@ -44,7 +44,8 @@
         echo $this->form()->openTag($form);
         $csrf = $form->get('_x');
         echo $this->formRow($csrf);
-        ?>        
+        ?>
+        <input type="hidden" name="backup_type" value="database" />
         <div class=" panel">
         
         	<?php 

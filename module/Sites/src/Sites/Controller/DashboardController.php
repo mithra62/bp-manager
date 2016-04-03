@@ -38,7 +38,11 @@ class DashboardController extends AbstractSitesController
                 $count++;
             }
             $view_backups = $filtered_backups;
-        }    
+        }   
+        else
+        {
+            $view_backups = $backups;
+        }
         
         $view = array();
         $view['settings'] = $this->site_data['settings'];

@@ -1,19 +1,44 @@
-<?php $this->headTitle()->append( $this->_('database_backups', 'sites') )->append( $site_data['site_name'] ); ?>
+<?php $this->headTitle()->append( $this->_('database_backups', 'sites') )->append( $this->layout()->site_data['site_name'] ); ?>
 <div class="container">
     <div class="page-header">
-    	<h1><?php echo $this->_('dashboard', 'sites'); ?> <small><?php echo $site_data['site_name']; ?></small></h1>
+    	<h1><?php echo $this->_('dashboard', 'sites'); ?> <small><?php echo $this->layout()->site_data['site_name']; ?></small></h1>
     </div>
       <div class="row">
         <div class="col-sm-3 col-md-3 sidebar">
-            <?php echo $this->render('sites/global/_sidebar', array('site_data' => $site_data)); ?>
+            <?php echo $this->render('sites/global/_sidebar'); ?>
       </div>
       <div class="col-sm-9 col-md-9">
       
-      <?php echo $this->render('sites/global/_errors', array('site_data' => $site_data)); ?>
-      <?php echo $this->render('sites/dashboard/partials/_tabs', array('active_tab' => 'database_backups', 'site_data' => $site_data)); ?>
+            <?php echo $this->render('sites/global/_errors', array('site_data' => $site_data)); ?>
+            <?php echo $this->render('sites/dashboard/partials/_tabs', array('active_tab' => 'database_backups', 'site_data' => $this->layout()->site_data)); ?>
+            <?php echo $this->_('delete_backup_confirm', 'sites'); ?>
+            <p class="notice"><?php echo $this->_('action_can_not_be_undone', 'sites'); ?></p>
       
-      
-      
+            <?php 
+            $form = $this->form;
+            $form->setAttribute('id', 'ip_form');
+            $form->setAttribute('action', $this->url('manage_backups/remove', array('site_id' => $this->layout()->site_data['id'], 'type' => 'database')));
+            $form->prepare();
+            echo $this->form()->openTag($form);
+            $csrf = $form->get('_x');
+            echo $this->formRow($csrf);
+            ?>
+            <input type="hidden" name="backup_type" value="database" />
+            <div class=" panel">
+            
+            	<?php 
+            		if(count($backups) > 0):
+            			$options = array('enable_type' => 'yes', 'enable_editable_note' => 'no', 'enable_actions' => 'no', 'enable_delete' => 'no', 'backups' => $backups);
+                        echo $this->render('sites/dashboard/partials/_backup_table', $options);
+            			//include '_includes/_backup_table.php';
+            	?>
+            	<input type="submit" name="_remove_backup_button" id="_remove_backup_button" value="<?php echo $this->_('delete_selected', 'sites'); ?>" class="btn btn-primary pull-right">
+            	<?php else: ?>
+            		<div class="no_backup_found"><?php echo $this->_('no_backups_exist', 'sites')?> <a href="<?php echo $this->url('backup', array('site_id' => $this->layout()->site_data['id'], 'type' => 'database')); ?>"><?php echo $this->_('would_you_like_to_backup_database_now', 'sites')?></a></div>
+            	<?php endif; ?>
+            
+            </div>      
+            <?php echo $this->form()->closeTag() ?>      
       </div>
 
     </div>

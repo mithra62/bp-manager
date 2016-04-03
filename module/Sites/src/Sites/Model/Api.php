@@ -184,6 +184,28 @@ class Api
     }
     
     /**
+     * Returns the created storage location data
+     * @param array $site_details
+     * @return multitype:
+     */
+    public function getStorageLocations(array $site_details)
+    {
+        $config = array(
+            'api_key' => $site_details['api_key'],
+            'api_secret' => $site_details['api_secret'],
+            'site_url' => $site_details['api_endpoint_url'],
+        );
+        
+        $client = $this->getClient($config);
+        $storage = $client->get('/storage');
+        
+        if($storage instanceof Hal)
+        {
+            return $storage;
+        }
+    }
+    
+    /**
      * Executes a backup against $site_details
      * @param array $site_details
      * @param string $type
