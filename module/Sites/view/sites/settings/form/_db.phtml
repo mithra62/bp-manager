@@ -26,13 +26,13 @@
 </div>
 <div class="row">
 	<div class="form-group">
-		<label for="db_backup_alert_threshold" class="control-label col-sm-3"><?php echo $this->_('db_backup_alert_threshold', 'sites')?></label>
+		<label for="db_backup_method" class="control-label col-sm-3"><?php echo $this->_('db_backup_method', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
-            $field = $form->get('db_backup_alert_threshold');
+            $field = $form->get('db_backup_method');
             echo $this->formRow($field);
             ?>
-			<div class="help-block small"><?php echo $this->_('db_backup_alert_threshold_instructions', 'sites'); ?></div>
+			<div class="help-block small"><?php echo $this->_('db_backup_method_instructions', 'sites'); ?></div>
 		</div>
 	</div>
 </div>

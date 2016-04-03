@@ -74,6 +74,17 @@ class SettingsForm extends BaseForm
             )
         ));
 
+		$this->add(array(
+			'name' => 'db_backup_method',
+			'type' => 'Select',
+			'attributes' => array(
+				'class' => 'select input',
+			),
+			'options' => array(
+				'value_options' => $this->getPlatformOptions('available_db_backup_engines'),
+			)
+		));
+
         $this->add(array(
             'name' => 'php_backup_method_select_chunk_limit',
             'type' => 'Text',

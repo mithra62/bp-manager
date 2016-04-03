@@ -25,7 +25,6 @@ class SettingsController extends AbstractSitesController
         $options = $this->site->getApi()->getOptions($this->site_data);
         
         $form->setPlatformOptions($options);
-        
         switch($section)
         {
             case 'cron':
@@ -56,21 +55,15 @@ class SettingsController extends AbstractSitesController
         $request = $this->getRequest();
         if ($request->isPost()) {
         
-            $formData = $request->getPost();
-            $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('_');
-            $inputFilter = $this->site->getSettingsInputFilter();
-            $form->setInputFilter($inputFilter);
-            $form->setData($request->getPost());
-            if ($form->isValid($formData)) {
-                $data = $formData->toArray();
-                $data['owner_id'] = $this->getIdentity();
-                
-                echo 'fdsa';
-                exit;
-                if ($site_id) {
-                    $this->flashMessenger()->addSuccessMessage($this->translate('site_added', 'sites'));
+            $form_data = $request->getPost();
+            $form->setData($form_data);
+            $validate = $this->site->getApi()->validateSettings($this->site_data, $form_data->toArray());
+            
+            if ($validate['total_failures'] == '0') {
+                if ($this->site->getApi()->updateSettings($this->site_data, $form_data->toArray())) {
+                    $this->flashMessenger()->addSuccessMessage($this->translate('settings_updated', 'sites'));
                     return $this->redirect()->toRoute('sites/view', array(
-                        'site_id' => $id
+                        'site_id' => $this->site_id
                     ));
                 } else {
                     $view['errors'] = array(
@@ -82,13 +75,12 @@ class SettingsController extends AbstractSitesController
                 $view['errors'] = array(
                     $this->translate('please_fix_the_errors_below', 'app')
                 );
-                $this->layout()->setVariable('errors', $view['errors']);
-                $site_form->setData($formData);
+                $this->layout()->setVariable('errors', $validate['failures']);
             }
         }        
         
         
-        $view = array();
+        $view = $options;
         $view['form'] = $form;
         $view['settings'] = $this->site_data['settings'];
         $view['section'] = $section;

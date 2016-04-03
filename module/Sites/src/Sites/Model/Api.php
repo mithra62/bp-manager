@@ -52,7 +52,58 @@ class Api
         
         return array();
     }
+    
+    /**
+     * Updates a Site's Backup Pro Settings
+     * @param array $site_details
+     * @param array $form_data
+     * @return bool
+     */
+    public function updateSettings(array $site_details, array $form_data)
+    {
+        $config = array(
+            'api_key' => $site_details['api_key'],
+            'api_secret' => $site_details['api_secret'],
+            'site_url' => $site_details['api_endpoint_url'],
+        );
+        $client = $this->getClient($config);
+        $site_details = $client->put('/settings', $form_data);
+        if($site_details instanceof Hal)
+        {
+            return $site_details->getData();
+        }
+        
+        return array();
+    }
+    
+    /**
+     * Validates the settings data without updating anything
+     * @param array $site_details
+     * @param array $form_data
+     * @return multitype:
+     */
+    public function validateSettings(array $site_details, array $form_data)
+    {
+        $config = array(
+            'api_key' => $site_details['api_key'],
+            'api_secret' => $site_details['api_secret'],
+            'site_url' => $site_details['api_endpoint_url'],
+        );
+        $client = $this->getClient($config);
+        $site_details = $client->post('/validate', $form_data);
+        if($site_details instanceof Hal)
+        {
+            return $site_details->getData();
+        }
+        
+        return array();
+    }
 
+    /**
+     * Returns the option arrays for settings form
+     * @param array $site_details
+     * @return multitype:
+     */
     public function getOptions(array $site_details)
     {
         $config = array(
