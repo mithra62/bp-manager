@@ -166,15 +166,15 @@ return array(
         				    )
         				)
                     ),
-                    'database' => array(
+                    'remove_backups' => array(
         				'type' => 'segment',
         				'options' => array(
-        				    'route' => '/database/:site_id',
+        				    'route' => '/remove_backups/:site_id',
         				    'constraints' => array(
         				        'site_id' => '[0-9]+'
         				    ),
         				    'defaults' => array(
-        				        'action' => 'database'
+        				        'action' => 'removeBackups'
         				    )
         				)
                     ),

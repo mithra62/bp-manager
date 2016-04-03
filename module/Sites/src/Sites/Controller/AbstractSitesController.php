@@ -127,17 +127,11 @@ abstract class AbstractSitesController extends AbstractController
      */
     protected function validateBackups(array $delete_backups, $type)
     {
-        if(!$delete_backups || count($delete_backups) == 0)
-        {
-            $this->redirect('/dashboard/backup_pro/dashboard?backups_not_found=yes');
-            exit;
-        }
-        
         $backups = array();
         foreach($delete_backups AS $file_name)
         {
             $file_name = urldecode(urldecode($file_name));
-            if( $file_name != '' )
+            if( $file_name != '' && !empty($this->backup_data['backups']))
             {
                 foreach($this->backup_data['backups'] AS $backup)
                 {
@@ -147,12 +141,6 @@ abstract class AbstractSitesController extends AbstractController
                     }
                 }
             }
-        }
-         
-        if(count($backups) == 0)
-        {
-            $this->redirect('/dashboard/backup_pro/dashboard?backups_not_found=yes');
-            exit;
         }
          
         return $backups;

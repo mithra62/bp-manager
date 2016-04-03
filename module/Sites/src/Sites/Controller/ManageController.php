@@ -46,4 +46,38 @@ class ManageController extends AbstractSitesController
         $this->layout()->setVariable('active_sidebar', $view['active_sidebar']);
         return $view;
     }
+    
+    public function removeBackupsAction()
+    {
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return $this->redirect()->toRoute('dashboard/view', array('site_id' => $this->site_id));
+        }
+        
+        $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
+        $form_data = $this->getRequest()->getPost();
+        $form->setData($request->getPost());
+        if (!$form->isValid($form_data) || !isset($form_data['backups']) || !$form_data['backups']) {
+            return $this->redirect()->toRoute('dashboard/view', array('site_id' => $this->site_id));
+        }
+        
+        $backups = $this->validateBackups($form_data['backups'], $form_data['backup_type']);
+        if (!$backups) {
+            return $this->redirect()->toRoute('dashboard/view', array('site_id' => $this->site_id));
+        }    
+        
+        $remove = array();
+        foreach($backups AS $backup) {
+            $remove[] = $backup['file_name'];
+        }
+        
+        if(!$this->site->getApi()->removeBackups($this->site_data, $remove, $form_data['backup_type'])) {
+            $this->flashMessenger()->addSuccessMessage($this->translate('backups_remove_failed', 'sites'));
+            return $this->redirect()->toRoute('dashboard/view', array('site_id' => $this->site_id));
+        }
+        
+        $this->flashMessenger()->addSuccessMessage($this->translate('backups_removed', 'sites'));
+        return $this->redirect()->toRoute('dashboard/view', array('site_id' => $this->site_id));        
+        
+    }
 }

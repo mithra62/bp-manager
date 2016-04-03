@@ -183,6 +183,26 @@ class Api
         return array();
     }
     
+    public function removeBackups(array $site_details, array $remove, $type = 'database')
+    {
+        $config = array(
+            'api_key' => $site_details['api_key'],
+            'api_secret' => $site_details['api_secret'],
+            'site_url' => $site_details['api_endpoint_url'],
+        );
+        
+        $payload = array('id' => $remove, 'type' => $type);
+        $client = $this->getClient($config);
+        $backups = $client->delete('/backups', $payload);
+        
+        if($backups instanceof Hal)
+        {
+            return $this->normalizeBackups($backups, $type);
+        }
+        
+        return array();
+    }
+    
     /**
      * Returns the created storage location data
      * @param array $site_details

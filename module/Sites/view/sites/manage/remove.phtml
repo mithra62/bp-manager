@@ -17,7 +17,7 @@
             <?php 
             $form = $this->form;
             $form->setAttribute('id', 'ip_form');
-            $form->setAttribute('action', $this->url('manage_backups/remove', array('site_id' => $this->layout()->site_data['id'], 'type' => 'database')));
+            $form->setAttribute('action', $this->url('manage_backups/remove_backups', array('site_id' => $this->layout()->site_data['id'])));
             $form->prepare();
             echo $this->form()->openTag($form);
             $csrf = $form->get('_x');
