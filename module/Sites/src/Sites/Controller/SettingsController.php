@@ -60,10 +60,11 @@ class SettingsController extends AbstractSitesController
             $validate = $this->site->getApi()->validateSettings($this->site_data, $form_data->toArray());
             
             if ($validate['total_failures'] == '0') {
-                if ($this->site->getApi()->updateSettings($this->site_data, $form_data->toArray())) {
+                if ($this->site->updateSettings($this->site_data, $form_data->toArray())) {
                     $this->flashMessenger()->addSuccessMessage($this->translate('settings_updated', 'sites'));
-                    return $this->redirect()->toRoute('sites/view', array(
-                        'site_id' => $this->site_id
+                    return $this->redirect()->toRoute('site_settings', array(
+                        'site_id' => $this->site_id,
+                        'section' => $section
                     ));
                 } else {
                     $view['errors'] = array(

@@ -38,6 +38,11 @@ class SettingsForm extends BaseForm
         parent::__construct($name);
     }
     
+    /**
+     * Sets the Platform dropbox options 
+     * @param array $options
+     * @return Sites\Form\SettingsForm
+     */
     public function setPlatformOptions(array $options)
     {
         $this->platform_options = $options;
@@ -103,6 +108,17 @@ class SettingsForm extends BaseForm
             )
         ));
 
+		$this->add(array(
+			'name' => 'db_restore_method',
+			'type' => 'Select',
+			'attributes' => array(
+				'class' => 'select input',
+			),
+			'options' => array(
+				'value_options' => $this->getPlatformOptions('available_db_restore_engines'),
+			)
+		));
+
         $this->add(array(
             'name' => 'mysqlcli_command',
             'type' => 'Text',
@@ -111,6 +127,71 @@ class SettingsForm extends BaseForm
                 'id' => 'mysqlcli_command'
             )
         ));
+
+		$this->add(array(
+			'name' => 'db_backup_ignore_tables',
+			'type' => 'Select',
+			'attributes' => array(
+				'class' => 'select input',
+			    'multiple' => true
+			),
+			'options' => array(
+				'value_options' => $this->getPlatformOptions('db_tables'),
+			)
+		));
+
+		$this->add(array(
+			'name' => 'db_backup_ignore_table_data',
+			'type' => 'Select',
+			'attributes' => array(
+				'class' => 'select input',
+			    'multiple' => true
+			),
+			'options' => array(
+				'value_options' => $this->getPlatformOptions('db_tables'),
+			)
+		));
+        
+        $this->add(array(
+            'type' => 'Textarea',
+            'name' => 'db_backup_archive_pre_sql',
+            'attributes' => array(
+                'class' => 'styled_textarea',
+                'rows' => '7',
+                'cols' => '40'
+            )
+        ));
+        
+        $this->add(array(
+            'type' => 'Textarea',
+            'name' => 'db_backup_archive_post_sql',
+            'attributes' => array(
+                'class' => 'styled_textarea',
+                'rows' => '7',
+                'cols' => '40'
+            )
+        ));
+        
+        $this->add(array(
+            'type' => 'Textarea',
+            'name' => 'db_backup_execute_pre_sql',
+            'attributes' => array(
+                'class' => 'styled_textarea',
+                'rows' => '7',
+                'cols' => '40'
+            )
+        ));
+        
+        $this->add(array(
+            'type' => 'Textarea',
+            'name' => 'db_backup_execute_post_sql',
+            'attributes' => array(
+                'class' => 'styled_textarea',
+                'rows' => '7',
+                'cols' => '40'
+            )
+        ));
+		
         return $this;
     }
     

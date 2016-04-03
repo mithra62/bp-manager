@@ -483,4 +483,13 @@ class Sites extends AbstractModel
             return true;
         }
     }
+    
+    public function updateSettings(array $site_details, array $data)
+    {
+        if($this->getApi()->updateSettings($site_details, $data))
+        {
+            $this->refreshSiteData($site_details['id'], $site_details, true);
+            return true;
+        }
+    }
 }

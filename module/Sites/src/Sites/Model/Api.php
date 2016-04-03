@@ -42,9 +42,8 @@ class Api
             'api_secret' => $secret,
             'site_url' => $url
         );
-        $client = $this->getClient($config);
+        $client = $this->getClient($config, true);
         $site_details = $client->get('/info/site');
-        
         if($site_details instanceof Hal) 
         {
             return $site_details->getData();
