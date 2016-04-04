@@ -112,7 +112,7 @@ abstract class AbstractSitesController extends AbstractController
             return $this->redirect()->toRoute('sites/edit', array('site_id' => $this->site_id));
         }
 
-        $this->backup_data = $this->site->getApi()->getBackups($this->site_data, 'database');
+        $this->backup_data = $this->site->getApi()->getBackups($this->site_data, 'all');
         $backups = $this->backup_data['backups'];
         $backup_meta = $this->backup_data['backup_meta'];
         $this->layout()->setVariable('backup_meta', $backup_meta);

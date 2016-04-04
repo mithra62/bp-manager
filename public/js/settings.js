@@ -49,10 +49,9 @@ jQuery(document).ready(function() {
 		}
 	});	
 
-	var def_assign = "php";
 	jQuery("#db_backup_method").change(function(){
 		var new_assign = jQuery("#db_backup_method").val();
-		if(new_assign == def_assign)
+		if(new_assign == 'php')
 		{
 			jQuery("#mysqldump_command_wrap").hide();
 			jQuery("#php_backup_method_select_chunk_limit_wrap").show();
@@ -66,7 +65,7 @@ jQuery(document).ready(function() {
 
 	jQuery("#db_restore_method").change(function(){
 		var new_assign = jQuery("#db_restore_method").val();
-		if(new_assign == def_assign)
+		if(new_assign == 'php')
 		{
 			jQuery("#mysqlcli_command_wrap").hide();
 		}

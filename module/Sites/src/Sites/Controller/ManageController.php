@@ -22,6 +22,7 @@ class ManageController extends AbstractSitesController
     {   
         $request = $this->getRequest();
         if (!$request->isPost()) {
+            $this->flashMessenger()->addErrorMessage($this->translate('backups_remove_failed', 'sites'));
             return $this->redirect()->toRoute('dashboard/view', array('site_id' => $this->site_id));
         }
 
@@ -34,6 +35,7 @@ class ManageController extends AbstractSitesController
         
         $backups = $this->validateBackups($form_data['backups'], $form_data['backup_type']);
         if (!$backups) {
+            $this->flashMessenger()->addErrorMessage($this->translate('backups_remove_failed', 'sites'));
             return $this->redirect()->toRoute('dashboard/view', array('site_id' => $this->site_id));
         }
         
@@ -41,6 +43,7 @@ class ManageController extends AbstractSitesController
         $view['backups'] = $backups;
         $view['form'] = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
         $view['settings'] = $this->site_data['settings'];
+        $view['backup_type'] = $form_data['backup_type'];
         $view['section'] = $form_data['backup_type'];
         $view['active_sidebar'] = 'site_nav_'.$this->site_id;
         $this->layout()->setVariable('active_sidebar', $view['active_sidebar']);
@@ -72,12 +75,17 @@ class ManageController extends AbstractSitesController
         }
         
         if(!$this->site->getApi()->removeBackups($this->site_data, $remove, $form_data['backup_type'])) {
-            $this->flashMessenger()->addSuccessMessage($this->translate('backups_remove_failed', 'sites'));
+            $this->flashMessenger()->addErrorMessage($this->translate('backups_remove_failed', 'sites'));
             return $this->redirect()->toRoute('dashboard/view', array('site_id' => $this->site_id));
         }
         
         $this->flashMessenger()->addSuccessMessage($this->translate('backups_removed', 'sites'));
         return $this->redirect()->toRoute('dashboard/view', array('site_id' => $this->site_id));        
         
+    }
+    
+    public function backupNoteAction()
+    {
+        exit;
     }
 }

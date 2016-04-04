@@ -23,7 +23,7 @@
             $csrf = $form->get('_x');
             echo $this->formRow($csrf);
             ?>
-            <input type="hidden" name="backup_type" value="database" />
+            <input type="hidden" name="backup_type" value="<?php echo $backup_type; ?>" />
             <div class=" panel">
             
             	<?php 

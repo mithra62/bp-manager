@@ -178,15 +178,15 @@ return array(
         				    )
         				)
                     ),
-                    'file' => array(
+                    'backup_note' => array(
         				'type' => 'segment',
         				'options' => array(
-        				    'route' => '/file/:site_id',
+        				    'route' => '/backup_note/:site_id',
         				    'constraints' => array(
         				        'site_id' => '[0-9]+'
         				    ),
         				    'defaults' => array(
-        				        'action' => 'file'
+        				        'action' => 'backupNote'
         				    )
         				)
                     )

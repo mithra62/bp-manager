@@ -4,7 +4,7 @@
 		<input type="hidden" name="backups[]" value="<?php echo urlencode($backup['file_name']); ?>" />
 	<?php endforeach; ?>
 <?php endif; ?>
-<input type="hidden" value="<?php //echo $this->url('/dashboard/backup_pro/manage/update_backup_note'); ?>" name="__note_url" id="__note_url" />
+<input type="hidden" value="<?php echo $this->url('manage_backups/backup_note', array('site_id' => $this->layout()->site_data['id'])); ?>" name="__note_url" id="__note_url" />
 <table width="100%" class="data existing_backups table" id="mainTable" border="0" cellpadding="0" cellspacing="0">
 <thead>
 	<tr class="odd">
