@@ -63,6 +63,51 @@ class SettingsForm extends BaseForm
         return $this->platform_options;
     }
     
+    public function getCronForm()
+    {
+        $this->add(array(
+            'type' => 'Textarea',
+            'name' => 'cron_notify_emails',
+            'attributes' => array(
+                'class' => 'styled_textarea',
+                'rows' => '7',
+                'cols' => '40'
+            )
+        ));
+
+		$this->add(array(
+			'name' => 'cron_notify_email_mailtype',
+			'type' => 'Select',
+			'attributes' => array(
+				'class' => 'select input',
+			),
+			'options' => array(
+				'value_options' => array('text' => 'Plain Text', 'html' => 'HTML'),
+			)
+		));
+
+        $this->add(array(
+            'name' => 'cron_notify_email_subject',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'cron_notify_email_subject'
+            )
+        ));
+        
+        $this->add(array(
+            'type' => 'Textarea',
+            'name' => 'cron_notify_email_message',
+            'attributes' => array(
+                'class' => 'styled_textarea',
+                'rows' => '7',
+                'cols' => '40'
+            )
+        ));
+        
+        return $this;
+    }
+    
     /**
      * Sets up the Files Settings form
      * @return \Sites\Form\SettingsForm

@@ -1,0 +1,77 @@
+<table class="table" border="0" cellspacing="0" cellpadding="0">
+<thead>
+	<tr>
+		<th width='30%'></th>
+		<th width='50%'><?php echo $this->_('cron_commands', 'sites'); ?></th>
+		<th width='20%'><?php echo $this->_('test', 'sites'); ?></th>
+	</tr>
+</thead>
+<tbody>
+<?php foreach($backup_cron_commands AS $key => $cron): ?>
+<tr class="even">
+	<td width='50%' style="width:50%;"><?php echo $this->_($key, 'sites'); ?></td>
+	<td style="width:50%;">
+		<div class="select_all"><?php echo 'curl '.$cron['url']; ?></div>
+	</td>
+	<td style="width:50%;">
+		<a href="<?php echo ($cron['url']); ?>" class="test_cron" rel="<?php echo $key; ?>">
+			<img src="<?php echo $bp_static_path; ?>/images/test.png" />
+		</a> <img src="<?php echo $bp_static_path; ?>/images/indicator.gif" id="animated_<?php echo $key; ?>" style="display:none" />
+	</td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+</table>
+
+<fieldset>
+<legend><?php echo $this->_('configure_cron_notification', 'sites')?></legend>
+<div class="row">
+	<div class="form-group">
+		<label for="cron_notify_emails" class="control-label col-sm-3"><?php echo $this->_('cron_notify_emails', 'sites')?></label>
+		<div class="col-sm-9">
+            <?php
+            $field = $form->get('cron_notify_emails');
+            echo $this->formRow($field);
+            ?>
+			<div class="help-block small"><?php echo $this->_('cron_notify_emails_instructions', 'sites'); ?></div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group">
+		<label for="cron_notify_email_mailtype" class="control-label col-sm-3"><?php echo $this->_('cron_notify_email_mailtype', 'sites')?></label>
+		<div class="col-sm-9">
+            <?php
+            $field = $form->get('cron_notify_email_mailtype');
+            echo $this->formRow($field);
+            ?>
+			<div class="help-block small"><?php echo $this->_('cron_notify_email_mailtype_instructions', 'sites'); ?></div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group">
+		<label for="cron_notify_email_subject" class="control-label col-sm-3"><?php echo $this->_('cron_notify_email_subject', 'sites')?></label>
+		<div class="col-sm-9">
+            <?php
+            $field = $form->get('cron_notify_email_subject');
+            echo $this->formRow($field);
+            ?>
+			<div class="help-block small"><?php echo $this->_('cron_notify_email_subject_instructions', 'sites'); ?></div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group">
+		<label for="cron_notify_email_message" class="control-label col-sm-3"><?php echo $this->_('cron_notify_email_message', 'sites')?></label>
+		<div class="col-sm-9">
+            <?php
+            $field = $form->get('cron_notify_email_message');
+            echo $this->formRow($field);
+            ?>
+			<div class="help-block small"><?php echo $this->_('cron_notify_email_message_instructions', 'sites'); ?></div>
+		</div>
+	</div>
+</div>
+
+</fieldset>

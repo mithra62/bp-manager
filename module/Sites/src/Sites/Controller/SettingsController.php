@@ -28,7 +28,7 @@ class SettingsController extends AbstractSitesController
         switch($section)
         {
             case 'cron':
-                $form = $form->getGeneralForm();
+                $form = $form->getCronForm();
                 break;
             case 'db':
                 $form = $form->getDbForm();
