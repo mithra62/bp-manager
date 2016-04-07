@@ -26,7 +26,7 @@
 <fieldset>
 <legend><?php echo $this->_('configure_cron_notification', 'sites')?></legend>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['cron_notify_emails']): ?>has-error<?php endif; ?>">
 		<label for="cron_notify_emails" class="control-label col-sm-3"><?php echo $this->_('cron_notify_emails', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -34,11 +34,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('cron_notify_emails_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['cron_notify_emails']); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['cron_notify_email_mailtype']): ?>has-error<?php endif; ?>">
 		<label for="cron_notify_email_mailtype" class="control-label col-sm-3"><?php echo $this->_('cron_notify_email_mailtype', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -46,11 +47,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('cron_notify_email_mailtype_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['cron_notify_email_mailtype']); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['cron_notify_email_subject']): ?>has-error<?php endif; ?>">
 		<label for="cron_notify_email_subject" class="control-label col-sm-3"><?php echo $this->_('cron_notify_email_subject', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -58,11 +60,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('cron_notify_email_subject_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['cron_notify_email_subject']); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['cron_notify_email_message']): ?>has-error<?php endif; ?>">
 		<label for="cron_notify_email_message" class="control-label col-sm-3"><?php echo $this->_('cron_notify_email_message', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -70,6 +73,7 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('cron_notify_email_message_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['cron_notify_email_message']); ?>
 		</div>
 	</div>
 </div>

@@ -1,7 +1,7 @@
 <?php $settings_form = $form; ?>
 <fieldset>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['max_file_backups']): ?>has-error<?php endif; ?>">
 		<label for="max_file_backups" class="control-label col-sm-3"><?php echo $this->_('max_file_backups', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -9,11 +9,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('max_file_backups_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['max_file_backups']); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['file_backup_alert_threshold']): ?>has-error<?php endif; ?>">
 		<label for="file_backup_alert_threshold" class="control-label col-sm-3"><?php echo $this->_('file_backup_alert_threshold', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -21,11 +22,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('file_backup_alert_threshold_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['file_backup_alert_threshold']); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['backup_file_location']): ?>has-error<?php endif; ?>">
 		<label for="backup_file_location" class="control-label col-sm-3"><?php echo $this->_('backup_file_location', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -33,11 +35,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('backup_file_location_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['backup_file_location']); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['exclude_paths']): ?>has-error<?php endif; ?>">
 		<label for="exclude_paths" class="control-label col-sm-3"><?php echo $this->_('exclude_paths', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -45,11 +48,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('exclude_paths_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['exclude_paths']); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['regex_file_exclude']): ?>has-error<?php endif; ?>">
 		<label for="regex_file_exclude" class="control-label col-sm-3"><?php echo $this->_('regex_file_exclude', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -57,6 +61,7 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('regex_file_exclude_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['regex_file_exclude']); ?>
 		</div>
 	</div>
 </div>

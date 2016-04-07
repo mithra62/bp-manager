@@ -19,7 +19,7 @@
       $csrf = $form->get('_x');
       echo $this->formRow($csrf);
       
-      $vars = array('form' => $form, 'backup_cron_commands' => $backup_cron_commands);
+      $vars = array('form' => $form, 'backup_cron_commands' => $backup_cron_commands, 'form_errors' => $form_errors);
       switch($section)
       {
           case 'cron':

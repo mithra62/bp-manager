@@ -79,4 +79,20 @@ abstract class BaseController extends AbstractActionController
         
         return $this->identity;
     }
+    
+    /**
+     * Takes an array and returns an empty key => value set
+     *
+     * @param array $data
+     * @return array
+     */
+    public function returnEmpty(array $data)
+    {
+        $return = array();
+        foreach ($data as $key => $value) {
+            $return[$key] = '';
+        }
+    
+        return $return;
+    }
 }

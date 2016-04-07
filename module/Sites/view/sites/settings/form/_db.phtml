@@ -1,7 +1,7 @@
 <?php $settings_form = $form; ?>
 <fieldset>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['max_db_backups']): ?>has-error<?php endif; ?>">
 		<label for="max_db_backups" class="control-label col-sm-3"><?php echo $this->_('max_db_backups', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -9,11 +9,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('max_db_backups_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['max_db_backups']); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['db_backup_alert_threshold']): ?>has-error<?php endif; ?>">
 		<label for="db_backup_alert_threshold" class="control-label col-sm-3"><?php echo $this->_('db_backup_alert_threshold', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -21,11 +22,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('db_backup_alert_threshold_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['db_backup_alert_threshold']); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['db_backup_method']): ?>has-error<?php endif; ?>">
 		<label for="db_backup_method" class="control-label col-sm-3"><?php echo $this->_('db_backup_method', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -33,11 +35,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('db_backup_method_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['db_backup_method']); ?>
 		</div>
 	</div>
 </div>
 <div class="row" id="mysqldump_command_wrap" style="display:none;">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['mysqldump_command']): ?>has-error<?php endif; ?>">
 		<label for="mysqldump_command" class="control-label col-sm-3"><?php echo $this->_('mysqldump_command', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -45,11 +48,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('mysqldump_command_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['mysqldump_command']); ?>
 		</div>
 	</div>
 </div>
 <div class="row" id="php_backup_method_select_chunk_limit_wrap" style="display:none;">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['php_backup_method_select_chunk_limit']): ?>has-error<?php endif; ?>">
 		<label for="php_backup_method_select_chunk_limit" class="control-label col-sm-3"><?php echo $this->_('php_backup_method_select_chunk_limit', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -57,11 +61,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('php_backup_method_select_chunk_limit_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['php_backup_method_select_chunk_limit']); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['db_restore_method']): ?>has-error<?php endif; ?>">
 		<label for="db_restore_method" class="control-label col-sm-3"><?php echo $this->_('db_restore_method', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -69,11 +74,12 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('db_restore_method_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['db_restore_method']); ?>
 		</div>
 	</div>
 </div>
 <div class="row" id="mysqlcli_command_wrap" style="display:none;">
-	<div class="form-group">
+	<div class="form-group <?php if($form_errors['mysqlcli_command']): ?>has-error<?php endif; ?>">
 		<label for="mysqlcli_command" class="control-label col-sm-3"><?php echo $this->_('mysqlcli_command', 'sites')?></label>
 		<div class="col-sm-9">
             <?php
@@ -81,6 +87,7 @@
             echo $this->formRow($field);
             ?>
 			<div class="help-block small"><?php echo $this->_('mysqlcli_command_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['mysqlcli_command']); ?>
 		</div>
 	</div>
 </div>
@@ -91,7 +98,7 @@
     <legend><?php echo $this->_('config_ignore_sql', 'sites')?></legend>
     
     <div class="row">
-    	<div class="form-group">
+    	<div class="form-group <?php if($form_errors['db_backup_ignore_tables']): ?>has-error<?php endif; ?>">
     		<label for="db_backup_ignore_tables" class="control-label col-sm-3"><?php echo $this->_('db_backup_ignore_tables', 'sites')?></label>
     		<div class="col-sm-9">
                 <?php
@@ -99,12 +106,13 @@
                 echo $this->formRow($field);
                 ?>
     			<div class="help-block small"><?php echo $this->_('db_backup_ignore_tables_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['db_backup_ignore_tables']); ?>
     		</div>
     	</div>
     </div>
     
     <div class="row">
-    	<div class="form-group">
+    	<div class="form-group <?php if($form_errors['db_backup_ignore_table_data']): ?>has-error<?php endif; ?>">
     		<label for="db_backup_ignore_table_data" class="control-label col-sm-3"><?php echo $this->_('db_backup_ignore_table_data', 'sites')?></label>
     		<div class="col-sm-9">
                 <?php
@@ -112,6 +120,7 @@
                 echo $this->formRow($field);
                 ?>
     			<div class="help-block small"><?php echo $this->_('db_backup_ignore_table_data_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['db_backup_ignore_table_data']); ?>
     		</div>
     	</div>
     </div>    
@@ -120,7 +129,7 @@
 <fieldset>
     <legend><?php echo $this->_('config_extra_archive_sql', 'sites')?></legend>
     <div class="row">
-    	<div class="form-group">
+    	<div class="form-group <?php if($form_errors['db_backup_archive_pre_sql']): ?>has-error<?php endif; ?>">
     		<label for="db_backup_archive_pre_sql" class="control-label col-sm-3"><?php echo $this->_('db_backup_archive_pre_sql', 'sites')?></label>
     		<div class="col-sm-9">
                 <?php
@@ -128,12 +137,13 @@
                 echo $this->formRow($field);
                 ?>
     			<div class="help-block small"><?php echo $this->_('db_backup_archive_pre_sql_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['db_backup_archive_pre_sql']); ?>
     		</div>
     	</div>
     </div>
     
     <div class="row">
-    	<div class="form-group">
+    	<div class="form-group <?php if($form_errors['db_backup_archive_post_sql']): ?>has-error<?php endif; ?>">
     		<label for="db_backup_archive_post_sql" class="control-label col-sm-3"><?php echo $this->_('db_backup_archive_post_sql', 'sites')?></label>
     		<div class="col-sm-9">
                 <?php
@@ -141,6 +151,7 @@
                 echo $this->formRow($field);
                 ?>
     			<div class="help-block small"><?php echo $this->_('db_backup_archive_post_sql_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['db_backup_archive_post_sql']); ?>
     		</div>
     	</div>
     </div>  
@@ -149,7 +160,7 @@
 <fieldset>
     <legend><?php echo $this->_('config_execute_sql', 'sites')?></legend>
     <div class="row">
-    	<div class="form-group">
+    	<div class="form-group <?php if($form_errors['db_backup_execute_pre_sql']): ?>has-error<?php endif; ?>">
     		<label for="db_backup_execute_pre_sql" class="control-label col-sm-3"><?php echo $this->_('db_backup_execute_pre_sql', 'sites')?></label>
     		<div class="col-sm-9">
                 <?php
@@ -157,12 +168,13 @@
                 echo $this->formRow($field);
                 ?>
     			<div class="help-block small"><?php echo $this->_('db_backup_execute_pre_sql_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['db_backup_execute_pre_sql']); ?>
     		</div>
     	</div>
     </div>
     
     <div class="row">
-    	<div class="form-group">
+    	<div class="form-group <?php if($form_errors['db_backup_execute_post_sql']): ?>has-error<?php endif; ?>">
     		<label for="db_backup_execute_post_sql" class="control-label col-sm-3"><?php echo $this->_('db_backup_execute_post_sql', 'sites')?></label>
     		<div class="col-sm-9">
                 <?php
@@ -170,6 +182,7 @@
                 echo $this->formRow($field);
                 ?>
     			<div class="help-block small"><?php echo $this->_('db_backup_execute_post_sql_instructions', 'sites'); ?></div>
+			<?php echo $this->m62FormErrors($form_errors['db_backup_execute_post_sql']); ?>
     		</div>
     	</div>
     </div>  

@@ -22,7 +22,8 @@ class SettingsController extends AbstractSitesController
     {
         $section = $this->params()->fromRoute('section');
         $form = $this->getServiceLocator()->get('Sites\Form\SettingsForm');
-        $options = $this->site->getApi()->getOptions($this->site_data);
+        $view = $options = $this->site->getApi()->getOptions($this->site_data);
+        $view['form_errors'] = $this->returnEmpty($this->site_data['settings']);
         
         $form->setPlatformOptions($options);
         switch($section)
@@ -76,12 +77,11 @@ class SettingsController extends AbstractSitesController
                 $view['errors'] = array(
                     $this->translate('please_fix_the_errors_below', 'app')
                 );
-                $this->layout()->setVariable('errors', $validate['failures']);
+                
+                $view['form_errors'] = array_merge($view['form_errors'], $validate['failures']);
             }
         }        
         
-        
-        $view = $options;
         $view['form'] = $form;
         $view['settings'] = $this->site_data['settings'];
         $view['section'] = $section;

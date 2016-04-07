@@ -224,7 +224,8 @@ return array(
         'invokables' => array(
             'm62DateTime' => 'Sites\View\Helper\m62DateTime',
             'm62FileSize' => 'Sites\View\Helper\m62FileSize',
-            'm62RelativeDateTime' => 'Sites\View\Helper\m62RelativeDateTime'
+            'm62RelativeDateTime' => 'Sites\View\Helper\m62RelativeDateTime',
+            'm62FormErrors' => 'Sites\View\Helper\m62FormErrors'
         )
     ),
     'translator' => array(
