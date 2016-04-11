@@ -60,6 +60,64 @@ return array(
         			)
         		)
         	), //End Sites Routes 
+            'site_storage' => array( //Sites Routes
+        		'type' => 'segment',
+        		'options' => array(
+        			'route' => '/sites/storage',
+        			'defaults' => array(
+        				'controller' => 'Sites\Controller\Storage',
+        				'action' => 'index'
+        			),
+        		),
+        		'may_terminate' => true,
+        		'child_routes' => array(
+        			'view' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/[:site_id]',
+        					'constraints' => array(
+        						'user_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'view'
+        					)
+        				)
+        			),
+        			'remove' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/remove/:site_id',
+        					'constraints' => array(
+        						'user_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'remove'
+        					)
+        				)
+        			),
+        			'add' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/add',
+        					'defaults' => array(
+        						'action' => 'add'
+        					)
+        				)
+        			),
+        			'edit' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        					'route' => '/edit/:site_id',
+        					'constraints' => array(
+        						'user_id' => '[0-9]+'
+        					),
+        					'defaults' => array(
+        						'action' => 'edit'
+        					)
+        				)
+        			)
+        		)
+        	), //End Sites Routes 
             'dashboard' => array( //Dashboard Routes
                 'type' => 'segment',
                 'options' => array(
@@ -202,6 +260,7 @@ return array(
             'Sites\Controller\Settings' => 'Sites\Controller\SettingsController',
             'Sites\Controller\Backup' => 'Sites\Controller\BackupController',
             'Sites\Controller\Manage' => 'Sites\Controller\ManageController',
+            'Sites\Controller\Storage' => 'Sites\Controller\StorageController',
         )
     ),
     'view_manager' => array(
