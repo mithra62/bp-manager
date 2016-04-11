@@ -44,7 +44,7 @@ class SettingsController extends AbstractSitesController
                 $form = $form->getGeneralForm();
                 break;
             case 'integrity_agent':
-                $form = $form->getGeneralForm();
+                $form = $form->getIntegrityForm();
                 break;
         
             default:
@@ -52,7 +52,17 @@ class SettingsController extends AbstractSitesController
                 break;
         }
         
-        $form->setData($this->site_data['settings']);
+        $default_data = $this->site_data['settings'];
+        $default_data['cron_notify_emails'] = implode("\n", $this->site_data['settings']['cron_notify_emails']);
+        $default_data['exclude_paths'] = implode("\n", $this->site_data['settings']['exclude_paths']);
+        $default_data['backup_file_location'] = implode("\n", $this->site_data['settings']['backup_file_location']);
+        $default_data['db_backup_archive_pre_sql'] = implode("\n", $this->site_data['settings']['db_backup_archive_pre_sql']);
+        $default_data['db_backup_archive_post_sql'] = implode("\n", $this->site_data['settings']['db_backup_archive_post_sql']);
+        $default_data['db_backup_execute_pre_sql'] = implode("\n", $this->site_data['settings']['db_backup_execute_pre_sql']);
+        $default_data['db_backup_execute_post_sql'] = implode("\n", $this->site_data['settings']['db_backup_execute_post_sql']);
+        $default_data['backup_missed_schedule_notify_emails'] = implode("\n", $this->site_data['settings']['backup_missed_schedule_notify_emails']);
+        
+        $form->setData($default_data);
         $request = $this->getRequest();
         if ($request->isPost()) {
         
@@ -80,7 +90,7 @@ class SettingsController extends AbstractSitesController
                 
                 $view['form_errors'] = array_merge($view['form_errors'], $validate['failures']);
             }
-        }        
+        } 
         
         $view['form'] = $form;
         $view['settings'] = $this->site_data['settings'];

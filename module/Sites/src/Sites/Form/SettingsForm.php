@@ -63,6 +63,11 @@ class SettingsForm extends BaseForm
         return $this->platform_options;
     }
     
+    public function getIntegrityForm()
+    {
+        return $this;
+    }
+    
     public function getCronForm()
     {
         $this->add(array(

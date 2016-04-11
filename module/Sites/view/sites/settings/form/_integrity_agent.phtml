@@ -1,1 +1,24 @@
-<?php
+<table class="table" border="0" cellspacing="0" cellpadding="0">
+<thead>
+	<tr>
+		<th width='30%'></th>
+		<th width='50%'><?php echo $this->_('cron_commands', 'sites'); ?></th>
+		<th width='20%'><?php echo $this->_('test', 'sites'); ?></th>
+	</tr>
+</thead>
+<tbody>
+<?php foreach($ia_cron_commands AS $key => $cron): ?>
+<tr class="even">
+	<td width='50%' style="width:50%;"><?php echo $this->_($key, 'sites'); ?></td>
+	<td style="width:50%;">
+		<div class="select_all"><?php echo $cron['cmd']; ?></div>
+	</td>
+	<td style="width:50%;">
+		<a href="<?php echo ($cron['url']); ?>" class="test_cron" rel="<?php echo $key; ?>">
+			<img src="<?php echo $bp_static_path; ?>/images/test.png" />
+		</a> <img src="<?php echo $bp_static_path; ?>/images/indicator.gif" id="animated_<?php echo $key; ?>" style="display:none" />
+	</td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+</table>
