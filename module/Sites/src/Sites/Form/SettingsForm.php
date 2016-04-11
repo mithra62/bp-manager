@@ -65,6 +65,85 @@ class SettingsForm extends BaseForm
     
     public function getIntegrityForm()
     {
+        $this->add(array(
+            'name' => 'db_verification_db_name',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'db_verification_db_name'
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'total_verifications_per_execution',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'total_verifications_per_execution'
+            )
+        ));
+		
+		$this->add(array(
+			'name' => 'check_backup_state_cp_login',
+			'type' => 'Checkbox',
+			'attributes' => array(
+				'class' => 'checkbox',
+				'id' => 'check_backup_state_cp_login',
+			),
+			'options' => array(
+				'checked_value' => '1',
+				'unchecked_value' => '0'
+			)
+		));    
+		
+        $this->add(array(
+            'name' => 'backup_missed_schedule_notify_email_interval',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'backup_missed_schedule_notify_email_interval'
+            )
+        ));
+
+        $this->add(array(
+            'type' => 'Textarea',
+            'name' => 'backup_missed_schedule_notify_emails',
+            'attributes' => array(
+                'rows' => '7',
+                'cols' => '40'
+            )
+        ));
+
+		$this->add(array(
+			'name' => 'backup_missed_schedule_notify_email_mailtype',
+			'type' => 'Select',
+			'attributes' => array(
+				'class' => 'select input',
+			),
+			'options' => array(
+				'value_options' => array('text' => 'Plain Text', 'html' => 'HTML'),
+			)
+		));
+        
+        $this->add(array(
+            'name' => 'backup_missed_schedule_notify_email_subject',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'backup_missed_schedule_notify_email_subject'
+            )
+        ));
+
+        $this->add(array(
+            'type' => 'Textarea',
+            'name' => 'backup_missed_schedule_notify_email_message',
+            'attributes' => array(
+                'class' => 'styled_textarea',
+                'rows' => '7',
+                'cols' => '40'
+            )
+        ));
+        
         return $this;
     }
     

@@ -22,3 +22,102 @@
 <?php endforeach; ?>
 </tbody>
 </table>
+
+<fieldset>
+<legend><?php echo $this->_('configure_integrity_agent_verification', 'sites')?></legend>
+    <div class="row">
+    	<div class="form-group <?php if($form_errors['db_verification_db_name']): ?>has-error<?php endif; ?>">
+    		<label for="db_verification_db_name" class="control-label col-sm-3"><?php echo $this->_('db_verification_db_name', 'sites')?></label>
+    		<div class="col-sm-9">
+                <?php
+                $field = $form->get('db_verification_db_name');
+                echo $this->formRow($field);
+                ?>
+    			<div class="help-block small"><?php echo $this->_('db_verification_db_name_instructions', 'sites'); ?></div>
+    			<?php echo $this->m62FormErrors($form_errors['db_verification_db_name']); ?>
+    		</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="form-group <?php if($form_errors['total_verifications_per_execution']): ?>has-error<?php endif; ?>">
+    		<label for="total_verifications_per_execution" class="control-label col-sm-3"><?php echo $this->_('total_verifications_per_execution', 'sites')?></label>
+    		<div class="col-sm-9">
+                <?php
+                $field = $form->get('total_verifications_per_execution');
+                echo $this->formRow($field);
+                ?>
+    			<div class="help-block small"><?php echo $this->_('total_verifications_per_execution_instructions', 'sites'); ?></div>
+    			<?php echo $this->m62FormErrors($form_errors['total_verifications_per_execution']); ?>
+    		</div>
+    	</div>
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend><?php echo $this->_('configure_integrity_agent_backup_missed_schedule', 'sites')?></legend>
+    <div class="row">
+    	<div class="form-group <?php if($form_errors['backup_missed_schedule_notify_email_interval']): ?>has-error<?php endif; ?>">
+    		<label for="backup_missed_schedule_notify_email_interval" class="control-label col-sm-3"><?php echo $this->_('backup_missed_schedule_notify_email_interval', 'sites')?></label>
+    		<div class="col-sm-9">
+                <?php
+                $field = $form->get('backup_missed_schedule_notify_email_interval');
+                echo $this->formRow($field);
+                ?>
+    			<div class="help-block small"><?php echo $this->_('backup_missed_schedule_notify_email_interval_instructions', 'sites'); ?></div>
+    			<?php echo $this->m62FormErrors($form_errors['backup_missed_schedule_notify_email_interval']); ?>
+    		</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="form-group <?php if($form_errors['backup_missed_schedule_notify_emails']): ?>has-error<?php endif; ?>">
+    		<label for="backup_missed_schedule_notify_emails" class="control-label col-sm-3"><?php echo $this->_('backup_missed_schedule_notify_emails', 'sites')?></label>
+    		<div class="col-sm-9">
+                <?php
+                $field = $form->get('backup_missed_schedule_notify_emails');
+                echo $this->formRow($field);
+                ?>
+    			<div class="help-block small"><?php echo $this->_('backup_missed_schedule_notify_emails_instructions', 'sites'); ?></div>
+    			<?php echo $this->m62FormErrors($form_errors['backup_missed_schedule_notify_emails']); ?>
+    		</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="form-group <?php if($form_errors['backup_missed_schedule_notify_email_mailtype']): ?>has-error<?php endif; ?>">
+    		<label for="backup_missed_schedule_notify_email_mailtype" class="control-label col-sm-3"><?php echo $this->_('backup_missed_schedule_notify_email_mailtype', 'sites')?></label>
+    		<div class="col-sm-9">
+                <?php
+                $field = $form->get('backup_missed_schedule_notify_email_mailtype');
+                echo $this->formRow($field);
+                ?>
+    			<div class="help-block small"><?php echo $this->_('backup_missed_schedule_notify_email_mailtype_instructions', 'sites'); ?></div>
+    			<?php echo $this->m62FormErrors($form_errors['backup_missed_schedule_notify_email_mailtype']); ?>
+    		</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="form-group <?php if($form_errors['backup_missed_schedule_notify_email_subject']): ?>has-error<?php endif; ?>">
+    		<label for="backup_missed_schedule_notify_email_subject" class="control-label col-sm-3"><?php echo $this->_('backup_missed_schedule_notify_email_subject', 'sites')?></label>
+    		<div class="col-sm-9">
+                <?php
+                $field = $form->get('backup_missed_schedule_notify_email_subject');
+                echo $this->formRow($field);
+                ?>
+    			<div class="help-block small"><?php echo $this->_('backup_missed_schedule_notify_email_subject_instructions', 'sites'); ?></div>
+    			<?php echo $this->m62FormErrors($form_errors['backup_missed_schedule_notify_email_subject']); ?>
+    		</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="form-group <?php if($form_errors['backup_missed_schedule_notify_email_message']): ?>has-error<?php endif; ?>">
+    		<label for="backup_missed_schedule_notify_email_message" class="control-label col-sm-3"><?php echo $this->_('backup_missed_schedule_notify_email_message', 'sites')?></label>
+    		<div class="col-sm-9">
+                <?php
+                $field = $form->get('backup_missed_schedule_notify_email_message');
+                echo $this->formRow($field);
+                ?>
+    			<div class="help-block small"><?php echo $this->_('backup_missed_schedule_notify_email_message_instructions', 'sites'); ?></div>
+    			<?php echo $this->m62FormErrors($form_errors['backup_missed_schedule_notify_email_message']); ?>
+    		</div>
+    	</div>
+    </div>                    
+</fieldset>    
