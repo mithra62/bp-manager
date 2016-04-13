@@ -18,41 +18,25 @@ namespace Sites\Controller;
  */
 class StorageController extends AbstractSitesController
 {
-    /**
-     * The actions that will require site_id processing
-     * @var array
-     */
-    protected $bypass_id = array('index', 'add', 'edit');
-    
+   
     /**
      * (non-PHPdoc)
      * @see \Zend\Mvc\Controller\AbstractActionController::indexAction()
      */
     public function indexAction()
     {
-        $order = $this->getRequest()->getQuery('order', false);
-        $order_dir = $this->getRequest()->getQuery('order_dir', false);
-        $limit = $this->getRequest()->getQuery('limit', 10);
-        $page = $this->getRequest()->getQuery('page', 1);
+        $storage = $this->site->getApi()->getStorageLocations($this->site_data);
+        $storage_details = $storage->getData();
+        $resources = $storage->getResources();
         
-        $sites = $this->getServiceLocator()->get('Sites\Model\Sites');
-        $sites_data = $sites->setLimit($limit)->setOrderDir($order_dir)->setOrder($order)->setPage($page)->getAllUserSites( $this->getIdentity() );
-        if(!$sites_data) {
-            $this->flashMessenger()->addMessage($this->translate('site_required_to_begin', 'sites'));
-            return $this->redirect()->toRoute('sites/add');
+        $view = array();
+        $view['can_remove'] = true;
+        $view['storage_locations'] = array();
+        if( $storage_details['total_locations'] <= 1 )
+        {
+            $view['can_remove'] = false;
+            $view['storage_locations'] = $resources['storage'];
         }
-        
-        $view = array(
-            'section' => 'view_sites',
-            'active_sidebar' => 'manage_sites',
-            'sites' => $sites_data,
-            'order' => $order,
-            'order_dir' => $order_dir,
-            'limit' => $limit,
-            'page' => $page,
-            'total_pages' => $users->total_pages,
-            'total_results' => $users->total_results
-        );
         
         $view['section'] = 'view_sites';
         $view['active_sidebar'] = 'manage_sites';

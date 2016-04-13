@@ -63,7 +63,7 @@ return array(
             'site_storage' => array( //Sites Routes
         		'type' => 'segment',
         		'options' => array(
-        			'route' => '/sites/storage',
+        			'route' => '/sites/storage/:site_id',
         			'defaults' => array(
         				'controller' => 'Sites\Controller\Storage',
         				'action' => 'index'
