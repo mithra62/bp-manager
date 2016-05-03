@@ -86,6 +86,21 @@ class ManageController extends AbstractSitesController
     
     public function backupNoteAction()
     {
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return $this->redirect()->toRoute('dashboard/view', array('site_id' => $this->site_id));
+        }
+        
+        $form_data = $this->getRequest()->getPost();
+        $file_name =  $form_data['backup'];
+        $backup_type = $form_data['backup_type'];
+        $note_text = $form_data['note_text'];
+        if($note_text && $file_name)
+        {
+            if( $this->site->getApi()->updateBackupNote($this->site_data, $note_text, $file_name, $form_data['backup_type']) ) {
+                echo json_encode(array('success'));
+            }
+        }        
         exit;
     }
 }

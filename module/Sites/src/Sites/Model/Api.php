@@ -181,6 +181,12 @@ class Api
         return array();
     }
     
+    /**
+     * Remotes a set of backups
+     * @param array $site_details
+     * @param array $remove
+     * @param string $type
+     */
     public function removeBackups(array $site_details, array $remove, $type = 'database')
     {
         $config = array(
@@ -192,6 +198,26 @@ class Api
         $payload = array('id' => $remove, 'type' => $type);
         $client = $this->getClient($config);
         $backups = $client->delete('/backups', $payload);
+        
+        if($backups instanceof Hal)
+        {
+            return $this->normalizeBackups($backups, $type);
+        }
+        
+        return array();
+    }
+    
+    public function updateBackupNote(array $site_details, $note_text, $file_name, $type = 'database')
+    {
+        $config = array(
+            'api_key' => $site_details['api_key'],
+            'api_secret' => $site_details['api_secret'],
+            'site_url' => $site_details['api_endpoint_url'],
+        );
+        
+        $payload = array('id' => $file_name, 'type' => $type, 'backup_note' => $note_text);
+        $client = $this->getClient($config);
+        $backups = $client->put('/backups', $payload);
         
         if($backups instanceof Hal)
         {
