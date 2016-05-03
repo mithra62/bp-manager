@@ -173,7 +173,6 @@ class Api
         
         $client = $this->getClient($config);
         $backups = $client->get($route, $payload);
-        
         if($backups instanceof Hal)
         {
             return $this->normalizeBackups($backups, $type);
@@ -276,7 +275,7 @@ class Api
             {
                 $storage_resource = $value->getResources();
                 $return_backups[$key] = $value->getData();
-                $return_backups[$key]['storage_locations'] = $this->normalizeStorage($storage_resource['storage']);
+                $return_backups[$key]['storage_locations'] = (isset($storage_resource['storage']) ? $this->normalizeStorage($storage_resource['storage']) : array());
             }
         }
         
