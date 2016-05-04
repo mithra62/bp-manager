@@ -31,15 +31,18 @@ class StorageController extends AbstractSitesController
         
         $view = array();
         $view['can_remove'] = true;
-        $view['storage_locations'] = array();
+        $view['storage_locations'] = (!empty($resources['storage']) ? $resources['storage'] : array());
         if( $storage_details['total_locations'] <= 1 )
         {
             $view['can_remove'] = false;
             $view['storage_locations'] = $resources['storage'];
         }
         
-        $view['section'] = 'view_sites';
-        $view['active_sidebar'] = 'manage_sites';
+        $options = $this->site->getApi()->getOptions($this->site_data);
+        $view['available_storage_drivers'] = $options['available_storage_drivers'];
+        $view['section'] = 'storage_locations';
+        $view['active_sidebar'] = 'site_nav_'.$this->site_id;
+        $this->layout()->setVariable('active_sidebar', $view['active_sidebar']);
         return $view;
     }
     

@@ -8,9 +8,9 @@
             <?php echo $this->render('sites/global/_sidebar'); ?>
       </div>
       <div class="col-sm-9 col-md-9">
-       
-      <h2><?php echo $this->_('existing_sites', 'sites'); ?></h2>
-        <a class="btn btn-primary  pull-right" href="<?php echo $this->url('sites/add'); ?>" role="button"><?php echo $this->glyphicon('plus'); ?> <?php echo $this->_('add_site', 'sites'); ?></a>
+      <?php echo $this->render('sites/global/_errors', array('site_data' => $this->layout()->site_data)); ?> 
+      <?php echo $this->render('sites/settings/partials/_tabs', array('active_tab' => $this->section, 'site_data' => $this->layout()->site_data)); ?>
+      <?php echo $this->render('partials/_add_menu', array('available_storage_drivers' => $available_storage_drivers, 'site_data' => $this->layout()->site_data)); ?>
       <?php //echo $this->render('partials/_tabs'); ?>  
         <table class="table table-hover table-striped">
             <thead>
@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($sites AS $site):?>
+                <?php foreach($storage_locations AS $storage):?>
                 <tr class="<?php echo ($site['errors'] != '' ? 'warning' : ''); ?>">
                     <td><?php echo $site['id']; ?></td>
                     <td><?php echo $site['site_name']; ?></td>
@@ -35,11 +35,11 @@
                             
                             <span class="caret"></span>
                           </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu<?php echo $site['id']; ?>">
-                            <li><a href="<?php echo $this->url('sites/edit', array('site_id' => $site['id'])); ?>"><?php echo $this->glyphicon('pencil'); ?> <?php echo $this->_('edit_site', 'sites'); ?></a></li>
-                            <li><a href="<?php echo $this->url('sites/view', array('site_id' => $site['id'])); ?>"><?php echo $this->glyphicon('eye-open'); ?> <?php echo $this->_('view_site', 'sites'); ?></a></li>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu<?php echo $this->layout()->site_data['id']; ?>">
+                            <li><a href="<?php echo $this->url('sites/edit', array('site_id' => $this->layout()->site_data['id'])); ?>"><?php echo $this->glyphicon('pencil'); ?> <?php echo $this->_('edit_site', 'sites'); ?></a></li>
+                            <li><a href="<?php echo $this->url('sites/view', array('site_id' => $this->layout()->site_data['id'])); ?>"><?php echo $this->glyphicon('eye-open'); ?> <?php echo $this->_('view_site', 'sites'); ?></a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="<?php echo $this->url('sites/remove', array('site_id' => $site['id'])); ?>"><?php echo $this->glyphicon('remove'); ?> <?php echo $this->_('remove_site', 'sites'); ?></a></li>
+                            <li><a href="<?php echo $this->url('sites/remove', array('site_id' => $this->layout()->site_data['id'])); ?>"><?php echo $this->glyphicon('remove'); ?> <?php echo $this->_('remove_site', 'sites'); ?></a></li>
                           </ul>
                         </div>                
                     </td>
