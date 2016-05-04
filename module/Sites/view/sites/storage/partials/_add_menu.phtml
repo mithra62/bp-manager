@@ -6,7 +6,7 @@
   </button>
   <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
     <?php foreach($available_storage_drivers AS $section): ?>
-    <li><a href="<?php //echo $context->action('new_storage', $section['short_name']); ?>">
+    <li><a href="<?php echo $this->url('site_storage/add', array('site_id' => $this->layout()->site_data['id'], 'engine' => $section['short_name'])); ?>">
     	<img src="<?php echo $bp_static_path.'/images/storage/'.$this->escapehtmlattr($section['icon']); ?>.png" />
     	<?php echo $this->_($section['name'], 'sites'); ?>
     </a></li>

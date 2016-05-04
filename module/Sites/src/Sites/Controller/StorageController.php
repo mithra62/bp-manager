@@ -26,16 +26,13 @@ class StorageController extends AbstractSitesController
     public function indexAction()
     {
         $storage = $this->site->getApi()->getStorageLocations($this->site_data);
-        $storage_details = $storage->getData();
-        $resources = $storage->getResources();
         
         $view = array();
         $view['can_remove'] = true;
-        $view['storage_locations'] = (!empty($resources['storage']) ? $resources['storage'] : array());
-        if( $storage_details['total_locations'] <= 1 )
+        $view['storage_locations'] = $storage;
+        if( count($view['storage_locations']) <= 1 )
         {
             $view['can_remove'] = false;
-            $view['storage_locations'] = $resources['storage'];
         }
         
         $options = $this->site->getApi()->getOptions($this->site_data);

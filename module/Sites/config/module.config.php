@@ -71,24 +71,12 @@ return array(
         		),
         		'may_terminate' => true,
         		'child_routes' => array(
-        			'view' => array(
-        				'type' => 'segment',
-        				'options' => array(
-        					'route' => '/[:site_id]',
-        					'constraints' => array(
-        						'user_id' => '[0-9]+'
-        					),
-        					'defaults' => array(
-        						'action' => 'view'
-        					)
-        				)
-        			),
         			'remove' => array(
         				'type' => 'segment',
         				'options' => array(
-        					'route' => '/remove/:site_id',
+        					'route' => '/remove/:storage_id',
         					'constraints' => array(
-        						'user_id' => '[0-9]+'
+        						'storage_id' => '[0-9]+'
         					),
         					'defaults' => array(
         						'action' => 'remove'
@@ -98,7 +86,7 @@ return array(
         			'add' => array(
         				'type' => 'segment',
         				'options' => array(
-        					'route' => '/add',
+        					'route' => '/add/:engine',
         					'defaults' => array(
         						'action' => 'add'
         					)
@@ -107,7 +95,7 @@ return array(
         			'edit' => array(
         				'type' => 'segment',
         				'options' => array(
-        					'route' => '/edit/:site_id',
+        					'route' => '/edit/:storage_id',
         					'constraints' => array(
         						'user_id' => '[0-9]+'
         					),

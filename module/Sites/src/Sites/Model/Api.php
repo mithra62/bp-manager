@@ -245,7 +245,14 @@ class Api
         
         if($storage instanceof Hal)
         {
-            return $storage;
+            $storage_locations = $storage->getResources();
+            $return = array();
+            foreach($storage_locations['storage'] AS $location) {
+                $return[] = $location->getData();
+                
+            }
+            
+            return $return;
         }
     }
     

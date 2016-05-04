@@ -15,33 +15,24 @@
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th><?php echo $this->_('id', 'app'); ?></th>
-                    <th><?php echo $this->_('site_name', 'sites'); ?></th>
-                    <th><?php echo $this->_('platform', 'sites'); ?></th>
-                    <th><?php echo $this->_('created_date', 'app'); ?></th>
+                    <th><?php echo $this->_('storage_location_name', 'sites'); ?></th>
+                    <th><?php echo $this->_('type', 'sites'); ?></th>
+                    <th><?php echo $this->_('status', 'sites'); ?></th>
+                    <th><?php echo $this->_('created_date', 'sites'); ?></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($storage_locations AS $storage):?>
-                <tr class="<?php echo ($site['errors'] != '' ? 'warning' : ''); ?>">
-                    <td><?php echo $site['id']; ?></td>
-                    <td><?php echo $site['site_name']; ?></td>
-                    <td><?php echo $site['platform']; ?></td>
-                    <td><?php echo $this->FormatDate($site['created_date']); ?></td>
+                <?php foreach($storage_locations AS $storage): ?>
+                <tr class="">
+                    <td><a href="<?php echo $this->url('site_storage/edit', array('site_id' => $this->layout()->site_data['id'], 'storage_id' => $storage['storage_location_id'])); ?>"><?php echo $storage['storage_location_name']; ?></a></td>
+                    <td><img src="<?php echo $bp_static_path.'/images/storage/'.$this->escapehtmlattr($storage['storage_location_driver']); ?>.png" /></td>
+                    <td><?php if ($storage['storage_location_status'] == '1'):?>Active<?php else: ?>Inactive<?php endif;?></td>
+                    <td><?php echo $this->m62DateTime($storage['storage_location_create_date']); ?></td>
                     <td>
-                        <div class="dropdown pull-right">
-                          <button class="btn btn-default dropdown-toggle" style="height:12px;" type="button" id="dropdownMenu<?php echo $user['id']; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu<?php echo $this->layout()->site_data['id']; ?>">
-                            <li><a href="<?php echo $this->url('sites/edit', array('site_id' => $this->layout()->site_data['id'])); ?>"><?php echo $this->glyphicon('pencil'); ?> <?php echo $this->_('edit_site', 'sites'); ?></a></li>
-                            <li><a href="<?php echo $this->url('sites/view', array('site_id' => $this->layout()->site_data['id'])); ?>"><?php echo $this->glyphicon('eye-open'); ?> <?php echo $this->_('view_site', 'sites'); ?></a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="<?php echo $this->url('sites/remove', array('site_id' => $this->layout()->site_data['id'])); ?>"><?php echo $this->glyphicon('remove'); ?> <?php echo $this->_('remove_site', 'sites'); ?></a></li>
-                          </ul>
-                        </div>                
+            			<?php if($can_remove): ?>
+            			<a href="<?php echo $this->url('site_storage/remove', array('site_id' => $this->layout()->site_data['id'], 'storage_id' => $storage['storage_location_id'])); ?>" class="delete icon" title="Delete" role="button">Delete</a>
+            			<?php endif; ?>                    
                     </td>
                 </tr>
                 <?php endforeach; ?>
