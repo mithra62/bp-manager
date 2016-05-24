@@ -7,6 +7,7 @@ use Sites\Model\Sites\Team;
 
 use Sites\Form\SiteForm;
 use Sites\Form\SettingsForm;
+use Sites\Form\StorageForm;
 
 class Module
 {
@@ -57,6 +58,9 @@ class Module
 				},
 				'Sites\Form\SettingsForm' => function($sm) {
 					return new SettingsForm('settings_form');
+				},
+				'Sites\Form\StorageForm' => function($sm) {
+					return new StorageForm('storage_form');
 				},
             )
         );

@@ -27,7 +27,7 @@
                 <tr class="">
                     <td><a href="<?php echo $this->url('site_storage/edit', array('site_id' => $this->layout()->site_data['id'], 'storage_id' => $storage['storage_location_id'])); ?>"><?php echo $storage['storage_location_name']; ?></a></td>
                     <td><img src="<?php echo $bp_static_path.'/images/storage/'.$this->escapehtmlattr($storage['storage_location_driver']); ?>.png" /></td>
-                    <td><?php if ($storage['storage_location_status'] == '1'):?>Active<?php else: ?>Inactive<?php endif;?></td>
+                    <td><?php if ($storage['storage_location_status'] === '1'):?>Active<?php else: ?>Inactive<?php endif;?></td>
                     <td><?php echo $this->m62DateTime($storage['storage_location_create_date']); ?></td>
                     <td>
             			<?php if($can_remove): ?>

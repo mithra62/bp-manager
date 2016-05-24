@@ -49,15 +49,13 @@ class StorageController extends AbstractSitesController
      */
     public function addAction()
     {
-        if (! $this->perm->check($this->identity, 'manage_sites')) {
-            return $this->redirect()->toRoute('sites');
-        }
+        $options = $this->site->getApi()->getOptions($this->site_data);
+        $view['available_storage_drivers'] = $options['available_storage_drivers'];
         
-        $site = $this->getServiceLocator()->get('Sites\Model\Sites');
-        $site_form = $this->getServiceLocator()->get('Sites\Form\SiteForm');
-        $hash = $this->getServiceLocator()->get('Application\Model\Hash');
+        $site_form = $this->getServiceLocator()->get('Sites\Form\StorageForm');
+        $view = $options = $this->site->getApi()->getOptions($this->site_data);
+        $view['form_errors'] = $this->returnEmpty($this->site_data['settings']);
         
-        $view = array();
         $view['form'] = $site_form;
         $request = $this->getRequest();
         if ($request->isPost()) {

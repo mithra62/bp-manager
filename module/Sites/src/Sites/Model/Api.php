@@ -242,7 +242,6 @@ class Api
         
         $client = $this->getClient($config);
         $storage = $client->get('/storage');
-        
         if($storage instanceof Hal)
         {
             $storage_locations = $storage->getResources();
