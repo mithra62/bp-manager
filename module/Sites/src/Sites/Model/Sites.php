@@ -427,7 +427,9 @@ class Sites extends AbstractModel
         if(empty($data['site_name']))
         {
             $api_data = $this->getApi()->getSiteDetails($data['api_key'], $data['api_secret'], $data['api_endpoint_url']);
-            $data += $api_data;
+            if(is_array($api_data)) {
+                $data += $api_data;
+            }
         }
         
         $sql = $this->getSQL($data);
