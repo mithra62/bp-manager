@@ -11,7 +11,6 @@ return array(
         'Application',
         'Sites',
         'Cp',
-        'Api',
         'ZF\\ApiProblem',
         'BjyProfiler',
         'ZendDeveloperTools',
