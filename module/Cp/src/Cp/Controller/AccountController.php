@@ -3,7 +3,7 @@
  * mithra62 - Backup Pro Server
  *
  * @copyright	Copyright (c) 2014, mithra62, Eric Lamb.
- * @link		http://mojitrac.com/
+ * @link		http://backup-pro.com/
  * @version		2.0
  * @filesource 	./module/PM/src/PM/Controller/AccountController.php
  */
