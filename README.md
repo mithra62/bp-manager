@@ -1,3 +1,7 @@
 # Backup Pro Manager #
 
-Simple Zend Framework 2 based system that allows for remote control over multiple Backup Pro websites. 
+The Backup Pro Manager allows for remote control over multiple Backup Pro installations. 
+
+![](data/bp-manager.png)
+
+## About ##
