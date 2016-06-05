@@ -20,7 +20,6 @@ For the most part, Backup Pro Manager is just like any other installed software:
 
 1. Setup vhost to install.YOURDOMAIN.com
 2. Create MySQL database, username, and password
-	1. Import `data\moji.sql` to your database
 3. Configure code to connect to the database
 	1. Rename `config/local.php.dist` to `config/local.php` and modify settings within
 4. Run `composer update` from console in installation directory

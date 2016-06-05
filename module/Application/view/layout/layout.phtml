@@ -44,7 +44,7 @@ body {
 			<ul class="nav navbar-nav">
 				<li class="<?php echo ($this->active_nav == 'home' ? 'active' : ''); ?>"><a href="<?php echo $this->url('home');?>"><?php echo $this->_('home', 'app'); ?></a></li>
             <?php if( $this->GetIdentity() ): ?>
-                <li class="<?php echo ($this->active_nav == 'account' ? 'active' : ''); ?>"><a href="<?php echo $this->url('account'); ?>"><?php echo $this->_('account', 'app'); ?></a></li>
+                <li class="<?php echo ($this->active_nav == 'account' ? 'active' : ''); ?>"><a href="<?php echo $this->url('account/email_settings'); ?>"><?php echo $this->_('account', 'app'); ?></a></li>
 				<li><a href="<?php echo $this->url('account/logout');?>"><?php echo $this->_('logout', 'app'); ?></a></li>
             <?php else: ?>
                 <li class="<?php echo ($this->active_nav == 'login' ? 'active' : ''); ?>"><a href="<?php echo $this->url('login');?>"><?php echo $this->_('login', 'app'); ?></a></li>
@@ -53,7 +53,7 @@ body {
 			
 			<?php if( $this->CheckPermission('admin_access') ): ?>
             <ul class="nav navbar-nav navbar-right">
-                <li class="<?php echo ($this->active_nav == 'admin' ? 'active' : ''); ?>"><a href="<?php echo $this->url('cp');?>"><?php echo $this->_('admin', 'app'); ?></a></li>
+                <li class="<?php echo ($this->active_nav == 'admin' ? 'active' : ''); ?>"><a href="<?php echo $this->url('manage_users');?>"><?php echo $this->_('admin', 'app'); ?></a></li>
             </ul>
             <?php endif; ?>
             
