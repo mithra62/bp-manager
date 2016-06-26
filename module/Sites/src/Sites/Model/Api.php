@@ -255,6 +255,22 @@ class Api
         }
     }
     
+    public function getStorageLocation(array $site_details, $storage_id)
+    {
+        $config = array(
+            'api_key' => $site_details['api_key'],
+            'api_secret' => $site_details['api_secret'],
+            'site_url' => $site_details['api_endpoint_url'],
+        );
+        
+        $client = $this->getClient($config);
+        $storage = $client->get('/storage/'.$storage_id);
+        if($storage instanceof Hal)
+        {
+            return $storage->getData();
+        }
+    }
+    
     /**
      * Executes a backup against $site_details
      * @param array $site_details
