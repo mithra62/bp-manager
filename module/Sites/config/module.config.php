@@ -76,7 +76,7 @@ return array(
         				'options' => array(
         					'route' => '/remove/:storage_id',
         					'constraints' => array(
-        						'storage_id' => '[0-9]+'
+        						'storage_id' => '[a-zA-Z0-9_-]+'
         					),
         					'defaults' => array(
         						'action' => 'remove'
@@ -97,7 +97,7 @@ return array(
         				'options' => array(
         					'route' => '/edit/:storage_id',
         					'constraints' => array(
-        						'user_id' => '[0-9]+'
+        						'storage_id' => '[a-zA-Z0-9_-]+'
         					),
         					'defaults' => array(
         						'action' => 'edit'
