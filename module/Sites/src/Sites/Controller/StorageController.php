@@ -167,22 +167,28 @@ class StorageController extends AbstractSitesController
     public function removeAction()
     {
         if (! $this->perm->check($this->identity, 'manage_sites')) {
+            //return $this->redirect()->toRoute('site_storage');
+        }
+        
+        $storage = $this->site->getApi()->getStorageLocations($this->site_data);
+        if( count($storage) <= 1 ) {
+            ee()->session->set_flashdata('message_error', $this->services['lang']->__('min_storage_location_needs'));
+            $this->platform->redirect(ee('CP/URL', 'addons/settings/backup_pro/view_storage'));
+            return $this->redirect()->toRoute('site_storage');
+        }
+        
+        $storage_id = $this->params()->fromRoute('storage_id');
+        if (! $storage_id) {
+            return $this->redirect()->toRoute('site_storage');
+        }
+        
+        $storage_location = $this->site->getApi()->getStorageLocation($this->site_data, $storage_id);
+        if( !$storage_location ) {
             return $this->redirect()->toRoute('sites');
         }
         
         $view = array();
-        $site = $this->getServiceLocator()->get('Sites\Model\Sites');
         $form = $this->getServiceLocator()->get('Application\Form\ConfirmForm');
-        $id = $this->params()->fromRoute('site_id');
-        if (! $id) {
-            return $this->redirect()->toRoute('sites');
-        }
-        
-        $view['site_data'] = $site->getSiteById($id);
-        
-        if (! $view['site_data']) {
-            return $this->redirect()->toRoute('sites');
-        }
         
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -197,7 +203,7 @@ class StorageController extends AbstractSitesController
             }
         }
         
-        $view['id'] = $id;
+        $view['storage_id'] = $storage_id;
         $view['form'] = $form;
         $view['section'] = 'view_sites';
         $view['active_sidebar'] = 'manage_sites';
