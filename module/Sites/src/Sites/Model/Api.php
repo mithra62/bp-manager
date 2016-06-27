@@ -207,6 +207,13 @@ class Api
         return array();
     }
     
+    /**
+     * Updates a backup note
+     * @param array $site_details
+     * @param string $note_text
+     * @param string $file_name
+     * @param string $type
+     */
     public function updateBackupNote(array $site_details, $note_text, $file_name, $type = 'database')
     {
         $config = array(
@@ -253,8 +260,16 @@ class Api
             
             return $return;
         }
+        
+        return array();
     }
     
+    /**
+     * Returns a single Storage Loccation
+     * @param array $site_details
+     * @param string $storage_id
+     * @return multitype:
+     */
     public function getStorageLocation(array $site_details, $storage_id)
     {
         $config = array(
@@ -269,6 +284,27 @@ class Api
         {
             return $storage->getData();
         }
+        
+        return array();
+    }
+    
+    public function deleteStorageLocation(array $site_details, $storage_id)
+    {
+        $config = array(
+            'api_key' => $site_details['api_key'],
+            'api_secret' => $site_details['api_secret'],
+            'site_url' => $site_details['api_endpoint_url'],
+        );
+        
+        $client = $this->getClient($config);
+        $storage = $client->delete('/storage/'.$storage_id);
+        
+        if($storage instanceof Hal)
+        {
+            return $storage->getData();
+        }
+        
+        return array();
     }
     
     /**

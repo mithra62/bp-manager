@@ -195,18 +195,23 @@ class StorageController extends AbstractSitesController
             $formData = $this->getRequest()->getPost();
             $form->setData($request->getPost());
             if ($form->isValid($formData)) {
+                
                 $formData = $formData->toArray();
-                if ($site->removeSite($id)) {
+                if ($this->site->getApi()->deleteStorageLocation($this->site_data, $storage_id)) {
                     $this->flashMessenger()->addSuccessMessage($this->translate('site_removed', 'sites'));
-                    return $this->redirect()->toRoute('sites');
+                    return $this->redirect()->toRoute('site_storage');
                 }
             }
         }
-        
+
+        $options = $this->site->getApi()->getOptions($this->site_data);
+        $view['available_storage_drivers'] = $options['available_storage_drivers'];
         $view['storage_id'] = $storage_id;
         $view['form'] = $form;
-        $view['section'] = 'view_sites';
-        $view['active_sidebar'] = 'manage_sites';
+        $view['section'] = 'storage_locations';
+        $view['active_sidebar'] = 'site_nav_'.$this->site_id;
+        $view['storage_location'] = $storage_location;
+        $this->layout()->setVariable('active_sidebar', $view['active_sidebar']);
         return $this->ajaxOutput($view);
     }
 }
